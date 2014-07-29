@@ -1,0 +1,23 @@
+{
+  "name": "javascript-battle-website",
+  "version": "0.0.0",
+  "description": "> Pithy project description",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesyothers/javascript-battle-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesyothers/javascript-battle-website/issues"
+  },
+  "homepage": "https://github.com/jamesyothers/javascript-battle-website",
+  "dependencies": {
+    "express": "^4.7.2"
+  }
+}
