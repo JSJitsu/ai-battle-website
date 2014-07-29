@@ -1,35 +1,34 @@
 
 # Project Name
 
-> Pithy project description
+Every day there is an epic battle between legendary heroes.  Control your hero with your own pre-submitted javascript function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
+
+Sign up is as easy as logging into your github account, forking a “starter” repository, and opting in to the daily battle at javascriptbattle.com.  Learn from your past mistakes and make your hero smarter by customizing your code, and feel the power as your hero dominates the battlefield.
+
+Such is the power of javascript.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  Product Owner: Greg Trowbridge
+  Scrum Master: Forrest Thomas
+  Development Team Members: James Yothers and Jakob Harclerode
 
 ## Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Development](#development)
+2. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+3. [Team](#team)
+4. [Contributing](#contributing)
 
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 
+- Express
+- MongoDB
+- Mongoose
 
 ## Development
 
@@ -38,15 +37,8 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
-
-### Tasks
-
-See the projects backlog in asana [here](https://LINKTOYOURASANA.com)
-
 
 ## Contributing
 
