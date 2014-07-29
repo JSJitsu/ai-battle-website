@@ -24,11 +24,11 @@ Coding can ALWAYS be more fun.
 
 Javascript Battle is:
 
-Easy to enter
-Really Fun
-A great way to:
--Practice/improve your javascript skills
--Get exposure to AI
+1. Easy to enter
+2. Really Fun
+3. A great way to:
+  * Practice/improve your javascript skills
+  * Get exposure to AI
 
 
 
