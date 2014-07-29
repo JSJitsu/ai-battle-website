@@ -26,9 +26,9 @@ Javascript Battle is:
 
 Easy to enter
 Really Fun
-A great way to learn
--practice/improve your javascript skills
--get exposure to AI
+A great way to:
+<li>Practice/improve your javascript skills</li>
+<li>Get exposure to AI</li>
 
 
 ## Quote from You ##
@@ -37,9 +37,9 @@ A great way to learn
 
 ## How to Get Started ##
 
-1) Sign up with your github credentials at javascriptbattle.com
-2) Fork our starter repository
-3) Save your repository name to your user profile
+<li>Sign up with your github credentials at javascriptbattle.com</li>
+<li>Fork our starter repository</li>
+<li>Save your repository name to your user profile</li>
 
 That’s it!
 
