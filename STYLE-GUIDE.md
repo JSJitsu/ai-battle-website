@@ -1,3 +1,39 @@
+###Pull Requests and Commits
+
+When making pull requests, be sure to format the message in the following manner:
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*request-type(filename): description of changes*
+
+
+For example, for a change to documentation:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*docs(README): Update Readme.md*
+
+Or, an added feature:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*feature(INDEX): Add images to index.html*
+
+Sections include:
+  1. docs - Documentation
+  2. test - Testing
+  3. feature - Added new content
+  4. fix - Fixed a bug
+  5. refactor - Refactored code
+  6. style - Altered styling
+  7. chore - Grunt
+
+When making commits, be sure to format the messages in the following manner:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Present tense verb - description of change - location*
+
+
+For example, if a function was refactored in a js file:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Refactor move() in server/helpers.js*
+
+Commit often and atmoically and use the present tense in all messages.
+
 ### Indentation
 
 When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
