@@ -1,38 +1,3 @@
-###Pull Requests and Commits
-
-When making pull requests, be sure to format the message in the following manner:
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*request-type(filename): description of changes*
-
-
-For example, for a change to documentation:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*docs(README): Update Readme.md*
-
-Or, an added feature:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*feature(INDEX): Add images to index.html*
-
-Sections include:
-  1. docs - Documentation
-  2. test - Testing
-  3. feature - Added new content
-  4. fix - Fixed a bug
-  5. refactor - Refactored code
-  6. style - Altered styling
-  7. chore - Grunt
-
-When making commits, be sure to format the messages in the following manner:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Present tense verb - description of change - location*
-
-
-For example, if a function was refactored in a js file:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Refactor move() in server/helpers.js*
-
-Commit often and atmoically and use the present tense in all messages.
 
 ### Indentation
 
@@ -106,16 +71,6 @@ When writing any block of code that is logically subordinate to the line immedia
     var animal = ['cat', 'dog', 'fish'];
     ```
 
-* Name your variables after their purpose, not their structure
-
-    ```javascript
-    // good:
-    var animals = ['cat', 'dog', 'fish'];
-
-    // bad:
-    var array = ['cat', 'dog', 'fish'];
-    ```
-
 
 ### Language constructs
 
@@ -163,16 +118,6 @@ When writing any block of code that is logically subordinate to the line immedia
     if(0 == ''){
       alert('looks like they\'re equal');
     }
-    ```
-
-* Don't use function statements for the entire first half of the course. They introduce a slew of subtle new rules to how the language behaves, and without a clear benefit. Once you and all your peers are expert level in the second half, you can start to use the more (needlessly) complicated option if you like.
-
-    ```javascript
-    // good:
-    var go = function(){...};
-
-    // bad:
-    function stop(){...};
     ```
 
 
@@ -234,8 +179,7 @@ When writing any block of code that is logically subordinate to the line immedia
 
 ### Padding & additional whitespace
 
-* Generally, we don't care where you put extra spaces, provided they are not distracting.
-* You may use it as padding for visual clarity. If you do though, make sure it's balanced on both sides.
+* You may use spaces as padding for visual clarity. If you do though, make sure it's balanced on both sides.
 
     ```javascript
     // optional:
@@ -243,14 +187,6 @@ When writing any block of code that is logically subordinate to the line immedia
 
     // bad:
     alert( "I only put visual padding on one side of this string");
-    ```
-
-* You may use it to align two similar lines, but it is not recommended. This pattern usually leads to unnecessary edits of many lines in your code every time you change a variable name.
-
-    ```javascript
-    // discouraged:
-    var firstItem  = getFirst ();
-    var secondItem = getSecond();
     ```
 
 * Put `else` and `else if` statements on the same line as the ending curly brace for the preceding `if` block
@@ -276,7 +212,7 @@ When writing any block of code that is logically subordinate to the line immedia
 ### Working with files
 
 * Do not end a file with any character other than a newline.
-* Don't use the -a or -m flags for `git commit` for the first half of the class, since they conceal what is actually happening (and do slightly different things than most people expect).
+* Don't use the -a or -m flags for `git commit,` since they conceal what is actually happening.
 
     ```shell
     # good:
@@ -337,7 +273,6 @@ When writing any block of code that is logically subordinate to the line immedia
 
 * Some people choose to use capitalization of the first letter in their variable names to indicate that they contain a [class](http://en.wikipedia.org/wiki/Class_(computer_science\)). This capitalized variable might contain a function, a prototype, or some other construct that acts as a representative for the whole class.
 * Optionally, some people use a capital letter only on functions that are written to be run with the keyword `new`.
-* Do not use all-caps for any variables. Some people use this pattern to indicate an intended "constant" variable, but the language does not offer true constants, only mutable variables.
 
 
 ### Minutia
