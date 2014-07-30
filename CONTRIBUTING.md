@@ -3,28 +3,56 @@
 ## General Workflow
 
 1. Fork the repo
-1. Cut a namespaced feature branch from master
+2. Cut a namespaced feature branch from master
   - bug/...
   - feat/...
   - test/...
   - doc/...
   - refactor/...
-1. Make commits to your feature branch. Prefix each commit like so:
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
-   directly to master. Include a description of your changes.
-1. Your pull request will be reviewed by another maintainer. The point of code
+3. Make commits to your feature branch. When making commits, be sure to format the messages in the following manner:
+  
+  **Present tense verb - description of change - location**
+
+  For example, if a function was refactored in a js file:
+
+  **Refactor move() in server/helpers.js**
+
+  Commit often and atomically and use the present tense in all messages.
+
+4. When you've finished with your fix or feature, Rebase upstream changes into your branch, like so:
+
+  ```bash
+  git pull --rebase upstream master
+  ```
+
+5. Push your feature branch to your forked repo and submit a [pull request][]directly to master. Include a description of your changes. When making pull requests, be sure to format the message in the following manner:
+
+  **request-type(filename): description of changes**
+
+  For example, for a change to documentation:
+
+  **docs(README): Update Readme.md**
+
+  Or, an added feature:
+
+  **feature(INDEX): Add images to index.html**
+
+  Sections include:
+  1. docs - Documentation
+  2. test - Testing
+  3. feature - Added new content
+  4. fix - Fixed a bug
+  5. refactor - Refactored code
+  6. style - Altered styling
+  7. chore - Grunt
+
+6. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
    requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviwer, and push your fixes as a single
+7. Fix any issues raised by your code reviwer, and push your fixes as a single
    new commit.
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+8. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ## Detailed Workflow
 
@@ -56,12 +84,7 @@ git checkout -b `your-branch-name`
 ### Make commits to your feature branch. 
 
 Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Refactor move() in server/helpers.js*
 
 Make changes and commits on your branch, and make sure that you
 only make changes that are relevant to this branch. If you find
