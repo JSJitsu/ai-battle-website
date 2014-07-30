@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mocha Spec Runner</title>
+  <link rel="stylesheet" href="lib/mocha/mocha.css">
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="lib/jquery/jquery.js"></script>
+  <script src="lib/underscore/underscore.js"></script>
+  <script src="lib/chai/chai.js"></script>
+  <script src="lib/sinon/sinon.js"></script>
+  <script src="lib/sinon/sinon-chai.js"></script>
+  <script src="lib/mocha/mocha.js"></script>
+  <script src="lib/backbone.js"></script>
+  <script>mocha.setup('')</script>
+  <script>
+    var assert = chai.assert;
+    var expect = chai.expect;
+    var should = chai.should();
+  </script>
+
+  <!-- include source files here... -->
+  <script src="../public/scripts/replay.js"></script>
+  <scirpt src="../pulblic/scripts/slider.js"></scirpt>
+
+  <!-- include spec files here... -->
+  <script src="spec/ClientSpec.js"></script>
+
+  <script>mocha.run()</script>
+</body>
+</html>
