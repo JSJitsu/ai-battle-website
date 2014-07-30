@@ -10,8 +10,9 @@ var router = express.Router();
 
 router.get('/gameBoardData', function(req, res){
 	var gameData = {};
-  
-  gameData.board = [
+  gameData.board = {};
+  gameData.board.length = 5;
+  gameData.board.tiles = [
 	  [1,0,0,0,0],
 	  [0,1,0,0,0],
 	  [0,0,1,0,0],
