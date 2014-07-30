@@ -8,16 +8,16 @@ app.use('/', express.static(__dirname + '/public'));
 
 var router = express.Router();
 
-router.get('/gameBoardData', function(req, res){
+router.get('/gameBoardData/:turn', function(req, res){
 	var gameData = {};
   gameData.board = {};
   gameData.board.length = 5;
   gameData.board.tiles = [
-	  [1,0,0,0,0],
-	  [0,1,0,0,0],
-	  [0,0,1,0,0],
-	  [0,0,0,1,0],
-	  [0,0,0,0,1]
+	  [req.params.turn,0,0,0,0],
+	  [0,req.params.turn,0,0,0],
+	  [0,0,req.params.turn,0,0],
+	  [0,0,0,req.params.turn,0],
+	  [0,0,0,0,req.params.turn]
   ];
 
 	res.json(gameData);
