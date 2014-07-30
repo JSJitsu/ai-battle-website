@@ -27,3 +27,6 @@ app.use('/api', router);
 
 app.listen(port);
 console.log('Listening on port: ', port);
+
+// for ServerSpec.js to work must export app
+module.exports = app;
