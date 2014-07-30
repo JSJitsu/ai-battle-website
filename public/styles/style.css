@@ -27,6 +27,14 @@
   margin: 1px auto;
   width: 47.5% !important; }
 
+.battle-map {
+  margin: 0px auto; }
+
+.battle-tile {
+  height: 120px;
+  width: 130px;
+  border: 1px solid black; }
+
 .range-handle {
   height: 30px;
   width: 29px;

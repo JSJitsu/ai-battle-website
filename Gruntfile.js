@@ -40,11 +40,20 @@ module.exports = function(grunt) {
           './public/styles/style.css': './public/scss/style.scss'
         }
       }
+    },
+    watch: {
+      files: [
+        './public/scss/*.scss'
+      ],
+      tasks: [
+        'sass'
+      ] 
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-sass');
 

@@ -21,6 +21,7 @@ var GameBoard = Backbone.Collection.extend({
 });
 var GameBoardTileView = Backbone.View.extend({
   tagName: 'td',
+  className: 'battle-tile',
   initialize: function(){
   	this.render();
     this.model.on('change', this.render());
@@ -32,6 +33,7 @@ var GameBoardTileView = Backbone.View.extend({
 
 var GameBoardView = Backbone.View.extend({
   tagName: 'table',
+  className: 'battle-map',
   initialize: function() {
     this.updateTurn(1);
   },
@@ -54,7 +56,7 @@ var GameBoardView = Backbone.View.extend({
       var $tr = $('<tr>');
     	for(var j = 0; j < boardLength; j++){
     		var tileView = new GameBoardTileView({
-    			model: this.collection.at(i * boardLength + j)
+    			model: this.collection.at(i * boardLength + j)          
     		});
     	  $tr.append(tileView.$el);
     	}
@@ -67,4 +69,4 @@ window.app = {};
 app.gameBoard = new GameBoard();
 app.gameBoardView = new GameBoardView({ collection: app.gameBoard });
 
-$('body').append(app.gameBoardView.$el)
+$('.container').append(app.gameBoardView.$el)
