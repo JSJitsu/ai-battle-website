@@ -11,5 +11,8 @@
     "public/lib",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap-css-only": "~3.2.0"
+  }
 }
