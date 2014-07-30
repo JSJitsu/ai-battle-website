@@ -9,9 +9,11 @@ Such is the power of javascript.
 
 ## Team
 
-  Product Owner: Greg Trowbridge
-  Scrum Master: Forrest Thomas
-  Development Team Members: James Yothers and Jakob Harclerode
+&nbsp;&nbsp;&nbsp;&nbsp;Product Owner: Greg Trowbridge
+
+&nbsp;&nbsp;&nbsp;&nbsp;Scrum Master: Forrest Thomas
+
+&nbsp;&nbsp;&nbsp;&nbsp;Development Team Members: James Yothers and Jakob Harclerode
 
 ## Table of Contents
 
