@@ -1,3 +1,27 @@
+var request = require('supertest');
+var express = require('express');
+var expect = require('chai').expect;
+var app = require('../server.js');
+
+// not a useful test but shows basic structure of server tests
+describe('/', function() {
+  it('is connecting locally', function(done) {
+    // pass in our server to supertest to make an object we can interact with
+    request(app)
+      .get('/')
+      // test returns true if statusCode is 200
+      .expect(200, function(err, data) {
+        // if there is an error connecting to the server
+        console.log('error: ', err);
+        // data is everything we get back from the server
+        console.log('data: ', data);
+      })
+      // test will timeout without end
+      .end(done);
+  });
+});
+
+
 // var request = require('supertest');
 // var express = require('express');
 // var expect = require('chai').expect;
