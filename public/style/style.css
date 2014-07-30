@@ -1,10 +1,46 @@
 .content {
   text-align: center;
-};
-/*.indexbtns{
-  margin-left: 51px;
 }
-*/
-#indexbtn{
-  width:300px;
+.content .btn-nav {
+	width:300px; margin-left: 51px;"
+}
+
+.content img {
+  max-height: 476px;
+  max-width: 47.5%;
+}
+
+.replay-options {
+  margin-left: -4px;
+  border-radius: 0px;
+  border-color:black;
+}
+
+.scroll {
+	width: 20px; 
+	height:30px; 
+
+	border:1px solid black;
+	overflow:auto;
+}
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+.range-bar {
+	margin: 1px auto;
+	width: 47.5% !important;
+}
+
+.range-handle{
+  height:30px;
+  width:29px;
+  background-color:transparent;
+  top: -13px;
+  position: absolute;
+  background-image: url('../resources/sword.png');
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0; 
 }
