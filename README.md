@@ -26,11 +26,19 @@ Such is the power of javascript.
 
 
 ## Requirements
-
+### NPM Modules
 - Node 
 - Express
 - MongoDB
 - Mongoose
+
+### Bower Dependencies
+- Backbone
+- Bootsrap
+- jQuery
+- Modernizr
+- Powerange
+- Underscore
 
 ## Development
 
@@ -40,6 +48,7 @@ From within the root directory:
 
 ```sh
 npm install
+bower install
 ```
 
 ## Contributing
