@@ -39,9 +39,10 @@
 }
 
 .battle-tile {
-  height: 120px;
-  width: 130px;
-  border: 1px solid black;
+  height: 128px;
+  width: 128px;
+  border: 2px solid black;
+  background-image: url('../resources/tile.png');
 }
 
 .range-handle{
