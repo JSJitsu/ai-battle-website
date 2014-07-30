@@ -5,36 +5,48 @@ var GameTile = Backbone.Model.extend({
 });
 var GameBoard = Backbone.Collection.extend({
   model: GameTile,
-  url: '/api/gameBoardData',
+  updateTurn: function(turn) {
+    this.url = '/api/gameBoardData/' + turn;
+  },
   parse: function(response) {
   	this.boardLength = response.board.length;
     var flatBoard = _.flatten(response.board.tiles);
+
     flatBoard = _.map(flatBoard, function(value, key, list) {
       return new GameTile(value);
     });
+
     return flatBoard;
   }
 });
 var GameBoardTileView = Backbone.View.extend({
   tagName: 'td',
   initialize: function(){
-  	this.$el.append(this.model.get('value'));
+  	this.render();
+    this.model.on('change', this.render());
+  },
+  render: function() {
+    this.$el.html(this.model.get('value'));
   }
 });
 
 var GameBoardView = Backbone.View.extend({
   tagName: 'table',
   initialize: function() {
+    this.updateTurn(1);
+  },
+  updateTurn: function(turn) {
+    this.collection.updateTurn(turn); 
     this.collection.fetch({
-      success: this.createBoardView.bind(this),
+      success: this.render.bind(this),
       error: function(collection, response, options){
         console.log('something went wrong');
       }
     });
-    this.render();
   },
   render: function() {
-    this.$el.append('Hi Jake and Greg!');
+    this.$el.html('');
+    this.createBoardView();
   },
   createBoardView: function() {
   	var boardLength = this.collection.boardLength;
