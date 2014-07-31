@@ -5,8 +5,11 @@ var GameTile = Backbone.Model.extend({
 });
 var GameBoard = Backbone.Collection.extend({
   model: GameTile,
+  turn: 1,
+  url: '/api/gameBoardData/' + this.turn,
   updateTurn: function(turn) {
-    this.url = '/api/gameBoardData/' + turn;
+    this.turn = turn;
+    this.url = '/api/gameBoardData/' + this.turn;
   },
   parse: function(response) {
   	this.boardLength = response.board.length;
@@ -69,4 +72,4 @@ window.app = {};
 app.gameBoard = new GameBoard();
 app.gameBoardView = new GameBoardView({ collection: app.gameBoard });
 
-$('.container').append(app.gameBoardView.$el)
+$('.container').append(app.gameBoardView.$el);
