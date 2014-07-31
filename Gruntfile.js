@@ -79,7 +79,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'sass'
+    ''
   ]);
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
