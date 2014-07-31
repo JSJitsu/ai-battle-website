@@ -38,6 +38,7 @@ var GameBoardView = Backbone.View.extend({
   tagName: 'table',
   className: 'battle-map',
   initialize: function() {
+    $('#report').on('click',this.showReport.bind(this));
     this.updateTurn(1);
   },
   updateTurn: function(turn) {
@@ -65,6 +66,10 @@ var GameBoardView = Backbone.View.extend({
     	}
     	this.$el.append($tr);
     }
+  },
+  showReport: function(){
+    this.$el.html('');
+    $('.slide').hide();
   }
 });
 
