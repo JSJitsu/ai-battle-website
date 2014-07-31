@@ -1,12 +1,38 @@
 .content {
   text-align: center;
+  position: inline-block;
   .btn-nav {
     width:300px;
     margin-left: 51px;
   }
+  .panel {
+    width:300px;
+  }
 }
 
+.red-team {
+  width: 400px;
+  float: left;
+  .score {
+    background-color: #E7E7E7;
+    color: black;
+    border-color:grey;
+  }
+}
  
+.blue-team {
+  width: 400px;
+  float: right;
+  .score {
+    background-color: #E7E7E7;
+    color: black;
+    border-color:grey;
+  }
+}
+
+.panel-player {
+  width: 100px;
+} 
 
 .content img {
   max-height: 476px;
