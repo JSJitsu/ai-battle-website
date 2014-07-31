@@ -12,7 +12,7 @@ app.use('/tests', express.static(__dirname + '/test'));
 
 var router = express.Router();
 
-router.get('/gameBoardData/:turn', function(req, res){
+router.get('/gameData/:turn', function(req, res){
 	var gameData = {};
   gameData.board = {};
   gameData.board.length = 5;
