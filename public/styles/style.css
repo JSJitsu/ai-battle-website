@@ -1,8 +1,30 @@
 .content {
-  text-align: center; }
+  text-align: center;
+  position: inline-block; }
   .content .btn-nav {
     width: 300px;
     margin-left: 51px; }
+  .content .panel {
+    width: 300px; }
+
+.red-team {
+  width: 400px;
+  float: left; }
+  .red-team .score {
+    background-color: #E7E7E7;
+    color: black;
+    border-color: grey; }
+
+.blue-team {
+  width: 400px;
+  float: right; }
+  .blue-team .score {
+    background-color: #E7E7E7;
+    color: black;
+    border-color: grey; }
+
+.panel-player {
+  width: 100px; }
 
 .content img {
   max-height: 476px;
