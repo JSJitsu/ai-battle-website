@@ -19,10 +19,12 @@ router.get('/gameBoardData/:turn', function(req, res){
 	  [0,0,0,req.params.turn,0],
 	  [0,0,0,0,req.params.turn]
   ];
-
+  
+  // respond with gameData in JSON format
 	res.json(gameData);
 });
 
+// set root route for app's data
 app.use('/api', router);
 
 app.listen(port);
