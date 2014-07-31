@@ -6,6 +6,10 @@ var port = process.env.port || 8080;
 // serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
+// if ( !process.env.mode ) {
+app.use('/tests', express.static(__dirname + '/test'));
+// }
+
 var router = express.Router();
 
 router.get('/gameBoardData/:turn', function(req, res){

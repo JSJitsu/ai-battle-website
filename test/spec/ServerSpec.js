@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var app = require('../../server.js');
 
 // not a useful test but shows basic structure of server tests
-describe('/', function() {
+describe('information at different urls', function() {
   it('is connecting locally', function(done) {
     // pass in our server to supertest to make an object we can interact with
     request(app)
@@ -19,6 +19,17 @@ describe('/', function() {
       // test will timeout without end
       .end(done);
   });
+
+  it('has replay url', function(done) {
+    request(app)
+      .get('/replay.html')
+      .expect(200, function(err, data) {
+        console.log('data: ', data);
+      })
+      .end(done);
+
+  });
+
 });
 
 
