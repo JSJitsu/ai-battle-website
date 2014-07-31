@@ -89,7 +89,6 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    ''
   ]);
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
