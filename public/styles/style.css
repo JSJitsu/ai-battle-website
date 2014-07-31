@@ -1,9 +1,8 @@
 .content {
   text-align: center; }
-
-.content .btn-nav {
-  width: 300px;
-  margin-left: 51px; }
+  .content .btn-nav {
+    width: 300px;
+    margin-left: 51px; }
 
 .content img {
   max-height: 476px;
@@ -26,6 +25,15 @@
 .range-bar {
   margin: 1px auto;
   width: 47.5% !important; }
+
+.battle-map {
+  margin: 0px auto; }
+
+.battle-tile {
+  height: 128px;
+  width: 128px;
+  border: 2px solid black;
+  background-image: url("../resources/tile.png"); }
 
 .range-handle {
   height: 30px;
