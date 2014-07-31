@@ -63,7 +63,7 @@ var GameBoardView = Backbone.View.extend({
     		});
     	  $tr.append(tileView.$el);
     	}
-    	this.$el.append($tr)
+    	this.$el.append($tr);
     }
   }
 });

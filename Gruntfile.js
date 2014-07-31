@@ -84,7 +84,7 @@ module.exports = function(grunt) {
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['']);
 
 
   // grunt.registerTask('upload', function(n) {
