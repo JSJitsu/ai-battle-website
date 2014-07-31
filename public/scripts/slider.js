@@ -33,7 +33,7 @@ $(document).keydown(function(e){
   	  parseInt($('.range-handle').css('left',
 		  parseInt($('.range-handle').css('left')) - 1));
 		  parseInt($('.range-quantity').css('width',
-		  parseInt($('.range-quantity').css('width')) - 1));
+		  parseInt($('.range-quantity').css('width')) - 1)); 
     }
 
   }
