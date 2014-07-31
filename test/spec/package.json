@@ -1,0 +1,19 @@
+{
+  "name": "spec",
+  "version": "0.0.0",
+  "main": "ClientSpec.js",
+  "config": {
+    "blanket": {
+      "pattern": "../server.js"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blanket": "~1.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  }
+}

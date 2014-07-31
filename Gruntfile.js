@@ -12,6 +12,15 @@ module.exports = function(grunt) {
       }
     },
 
+    // blanket: {
+    //   options: {
+
+    //   }, 
+    //   files: {
+
+    //   },
+    // },
+
     nodemon: {
       dev: {
         script: 'server.js'
@@ -52,6 +61,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-blanket');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');

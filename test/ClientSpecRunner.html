@@ -15,7 +15,14 @@
   <script src="lib/sinon/sinon-chai.js"></script>
   <script src="lib/mocha/mocha.js"></script>
   <script src="lib/backbone.js"></script>
-  <script>mocha.setup('')</script>
+  <script src="lib/blanket.min.js"></script>
+  <script src="../lib/powerange/dist/powerange.js"></script>
+
+  <!-- using Chais BDD Expect API (bdd) -->
+  <script>
+    mocha.setup('bdd');
+  </script>
+  
   <script>
     var assert = chai.assert;
     var expect = chai.expect;
@@ -23,8 +30,7 @@
   </script>
 
   <!-- include source files here... -->
-  <script src="../public/scripts/replay.js"></script>
-  <scirpt src="../pulblic/scripts/slider.js"></scirpt>
+  <script src="../scripts/replay.js" data-cover></script>
 
   <!-- include spec files here... -->
   <script src="spec/ClientSpec.js"></script>
