@@ -1,5 +1,6 @@
-window.app = {};
-app.gameBoard = new Board();
-app.gameBoardView = new BoardView({ collection: app.gameBoard });
 
-$('.container').append(app.gameBoardView.$el);
+window.app = {};
+app.game = new Game();
+app.gameView = new GameView({ model: app.game });
+$('.container').append(app.gameView.$el);
+

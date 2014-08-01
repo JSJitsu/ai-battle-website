@@ -1,0 +1,27 @@
+
+var Game = Backbone.Model.extend({
+	url: 'api/gameData/1',
+  initialize: function() {
+  },
+  
+  parse: function(response) {
+    console.log(response.board.tiles);
+    this.set('turn', response.turn);
+    
+    console.log(response.turn);
+
+    var board = new Board();
+    board.lengthOfSide = response.board.lengthOfSide;
+
+    _.each(_.flatten(response.board.tiles), function(value, key, list) {
+    	var tile = new BoardTile(value);
+      board.add(tile);
+    });
+
+    this.set('board', board);
+  },
+  updateTurn: function(turn) {
+    this.url = '/api/gameData/' + turn;
+  }
+});
+

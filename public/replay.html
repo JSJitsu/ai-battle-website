@@ -11,12 +11,52 @@
   </head>
   <body>
 
+   <script id="turn" type="text/x-handlebars-template">
     <div class="panel panel-primary turn">
-      <div class="panel-heading">Round</div>
-        <div class="panel-body turn-content">
-          1/300
+        <div class="panel-heading">Round</div>
+          <div class="panel-body turn-content">
+            {{round}}
         </div>
-    </div>
+      </div>
+   </script>
+
+   <script id="results" type="text/x-handlebars-template">
+     <div class="content"> 
+        <h1>Battle Results</h1>
+        <div class="container">
+          <div class="panel red-team panel-danger">
+            <div class="panel-heading scores">Red Team</div>
+            <div class="panel-body">
+              This is the MVP dawwwwg
+            </div> 
+            <div class="panel-heading score">Hola</div>
+            <div class="panel-body">
+              Hey put stats here!
+            </div> 
+            <div class="panel-heading score">this.this.this.this[this]</div>
+            <div class="panel-body">
+              Were done
+            </div> 
+          </div>
+          <div class="panel blue-team panel-primary">
+            <div class="panel-heading scores">Blue Team</div>
+            <div class="panel-body">
+              JK
+            </div> 
+            <div class="panel-heading score">What did the baby</div>
+            <div class="panel-body">
+              baby computer call his father
+            </div> 
+            <div class="panel-heading score">DATA</div>
+            <div class="panel-body">
+               LOL
+            </div> 
+          </div>
+        </div>
+      </div>
+    </script>
+      
+
     <div class="content">
       <h1>SOME TEAM WON!</h1>
       <nav>
@@ -36,13 +76,16 @@
     </div>
 
     <script src="./lib/jquery/dist/jquery.js"></script>
-    <script src="./lib/underscore/underscore.js"></script>
+    <script src="./lib/lodash/dist/lodash.min.js"></script>
     <script src="./lib/backbone/backbone.js"></script>
     <script src="./lib/powerange/dist/powerange.min.js"></script>
+    <script src="./lib/handlebars/handlebars.min.js"></script>
     <script src="./scripts/BoardTile.js"></script>
     <script src="./scripts/Board.js"></script>
     <script src="./scripts/BoardTileView.js"></script>
     <script src="./scripts/BoardView.js"></script>
+    <script src="./scripts/Game.js"></script>
+    <script src="./scripts/GameView.js"></script>
     <script src="./scripts/app.js"></script>
     <script src="./scripts/slider.js"></script>
   </body>

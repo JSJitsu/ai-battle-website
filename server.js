@@ -15,7 +15,8 @@ var router = express.Router();
 router.get('/gameData/:turn', function(req, res){
 	var gameData = {};
   gameData.board = {};
-  gameData.board.length = 5;
+  gameData.board.lengthOfSide = 5;
+  gameData.turn = req.params.turn;
   gameData.board.tiles = [
 	  [req.params.turn,0,0,0,0],
 	  [0,req.params.turn,0,0,0],
