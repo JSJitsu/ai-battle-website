@@ -1,4 +1,3 @@
-
 //query slider
 var slider = document.querySelector('.slider');
 //intialize new slider

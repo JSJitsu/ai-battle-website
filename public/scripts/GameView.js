@@ -12,8 +12,6 @@ var GameView = Backbone.View.extend({
   	this.$el.html('')
   	var boardView = new BoardView({collection: this.model.get("board")});
     this.$el.append(boardView.$el);
-    this.$el.append('<div class="slide"><input class="slider" step="1"/></div>');
-    
     var html = this.template(this.context);
     this.$el.append(html);
   },
