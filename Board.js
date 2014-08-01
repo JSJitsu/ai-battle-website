@@ -1,3 +1,5 @@
+var Unoccupied = require('./Unoccupied.js');
+
 var Board = function(length) {
   this.tiles = [];
   this.length = length;
@@ -9,9 +11,9 @@ Board.prototype.inspect = function() {
   for (var i=0; i<this.length; i++) {
     var line = '|';
     for (var j=0; j<this.length; j++) {
-      line += this.tiles[i][j] + '|';
+      line += this.tiles[i][j].getCode() + '|';
       if (i === 0) {
-        horizontalDivide += '-|';
+        horizontalDivide += '---|';
       }
     }
     if (i === 0) {
@@ -26,7 +28,7 @@ Board.prototype.initializeBoard = function() {
   for (var i=0; i<this.length; i++) {
     this.tiles.push([]);
     for (var j=0; j<this.length; j++) {
-      this.tiles[i].push('x');
+      this.tiles[i].push(new Unoccupied(i, j));
     }
   }
 };
