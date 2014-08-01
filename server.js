@@ -1,7 +1,12 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 
 var port = process.env.port || 8080;
+
+//Defines mongo connection for azure deploy (or, failing that, for local deploy)
+var mongooseConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
+mongoose.connect(mongooseConnectionURL);
 
 // serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));

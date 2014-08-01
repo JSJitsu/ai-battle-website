@@ -16,7 +16,7 @@
   <script src="lib/mocha/mocha.js"></script>
   <script src="lib/backbone.js"></script>
   <script src="lib/blanket.min.js"></script>
-  <script src="../lib/powerange/dist/powerange.js"></script>
+<!--   <script src="../public/lib/powerange/lib/powerange.js"></script> -->
 
   <!-- using Chais BDD Expect API (bdd) -->
   <script>
@@ -34,7 +34,10 @@
 
   <!-- include spec files here... -->
   <script src="spec/ClientSpec.js"></script>
-
-  <script>mocha.run()</script>
+  <script>
+    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+    else { mocha.run(); }
+  </script>
+  <!-- <script>mocha.run()</script> -->
 </body>
 </html>
