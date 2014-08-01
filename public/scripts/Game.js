@@ -5,10 +5,7 @@ var Game = Backbone.Model.extend({
   },
   
   parse: function(response) {
-    console.log(response.board.tiles);
     this.set('turn', response.turn);
-    
-    console.log(response.turn);
 
     var board = new Board();
     board.lengthOfSide = response.board.lengthOfSide;

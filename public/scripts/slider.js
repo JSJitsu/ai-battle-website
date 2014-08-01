@@ -5,7 +5,7 @@ var init = new Powerange(slider, { hideRange: false, min: 1, max: 300, start: 1}
 //listens for slider changes and renders backbone view accordingly
 slider.onchange = function() {
 	$('.turn-content').text(slider.value + "/300");
-	app.gameBoardView.updateTurn(slider.value);
+	app.gameView.updateTurn(slider.value);
 
 };
 
@@ -18,7 +18,7 @@ $(document).keydown(function(e){
     slider.value--;
   }
   $('.turn-content').text(slider.value + "/300");
-  app.gameBoardView.updateTurn(slider.value);
+  app.gameView.updateTurn(slider.value);
   $('.range-handle').css('left',parseInt(slider.value));
 	$('.range-quantity').css('width',parseInt(slider.value));
 });

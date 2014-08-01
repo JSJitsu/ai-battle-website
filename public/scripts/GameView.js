@@ -6,6 +6,7 @@ var GameView = Backbone.View.extend({
   },
 
   render: function(){
+  	this.$el.html('')
   	var boardView = new BoardView({collection: this.model.get("board")});
     this.$el.append(boardView.$el);
     var source = $("#turn").html();
