@@ -11,12 +11,15 @@
   </head>
   <body>
 
+   <script id="turn" type="text/x-handlebars-template">
     <div class="panel panel-primary turn">
-      <div class="panel-heading">Round</div>
-        <div class="panel-body turn-content">
-          1/300
+        <div class="panel-heading">Round</div>
+          <div class="panel-body turn-content">
+            {{round}}
         </div>
-    </div>
+      </div>
+   </script>
+      
     <div class="content">
       <h1>SOME TEAM WON!</h1>
       <nav>
@@ -30,19 +33,20 @@
       <div class="container">
 
       </div>
-      <div class="slide">
-        <input class="slider" step="1"/>
-      </div>
+
     </div>
 
     <script src="./lib/jquery/dist/jquery.js"></script>
-    <script src="./lib/underscore/underscore.js"></script>
+    <script src="./lib/lodash/dist/lodash.min.js"></script>
     <script src="./lib/backbone/backbone.js"></script>
     <script src="./lib/powerange/dist/powerange.min.js"></script>
+    <script src="./lib/handlebars/handlebars.min.js"></script>
     <script src="./scripts/BoardTile.js"></script>
     <script src="./scripts/Board.js"></script>
     <script src="./scripts/BoardTileView.js"></script>
     <script src="./scripts/BoardView.js"></script>
+    <script src="./scripts/Game.js"></script>
+    <script src="./scripts/GameView.js"></script>
     <script src="./scripts/app.js"></script>
     <script src="./scripts/slider.js"></script>
   </body>
