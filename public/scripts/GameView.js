@@ -3,16 +3,18 @@ var GameView = Backbone.View.extend({
   className: 'game-view',
   initialize: function(){
     this.updateTurn(1);
+    var source = $("#turn").html();
+    this.template = Handlebars.compile(source);
+    this.context = {round: this.model.get("turn")}
   },
 
   render: function(){
   	this.$el.html('')
   	var boardView = new BoardView({collection: this.model.get("board")});
     this.$el.append(boardView.$el);
-    var source = $("#turn").html();
-    var template = Handlebars.compile(source);
-    var context = {round: this.model.get("turn")}
-    var html = template(context);
+    this.$el.append('<div class="slide"><input class="slider" step="1"/></div>');
+    
+    var html = this.template(this.context);
     this.$el.append(html);
   },
   updateTurn: function(turn) {
