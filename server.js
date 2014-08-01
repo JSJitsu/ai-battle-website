@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
-var github = require('./github.js');
 
 var app = express();
 var port = process.env.port || 8080;
@@ -21,20 +20,20 @@ app.use('/tests', express.static(__dirname + '/test'));
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
-	var gameData = {};
+  var gameData = {};
   gameData.board = {};
   gameData.board.lengthOfSide = 5;
   gameData.turn = req.params.turn;
   gameData.board.tiles = [
-	  [req.params.turn,0,0,0,0],
-	  [0,req.params.turn,0,0,0],
-	  [0,0,req.params.turn,0,0],
-	  [0,0,0,req.params.turn,0],
-	  [0,0,0,0,req.params.turn]
+    [req.params.turn,0,0,0,0],
+    [0,req.params.turn,0,0,0],
+    [0,0,req.params.turn,0,0],
+    [0,0,0,req.params.turn,0],
+    [0,0,0,0,req.params.turn]
   ];
   
   // respond with gameData in JSON format
-	res.json(gameData);
+  res.json(gameData);
 });
 
 // set root route for app's data
@@ -42,8 +41,8 @@ app.use('/api', router);
 
 
 // github oath integration with passport
-var GITHUB_CLIENT_ID = github.clientID;
-var GITHUB_CLIENT_SECRET = github.clientSecret;
+var GITHUB_CLIENT_ID = process.env.clientID || 'local no id';
+var GITHUB_CLIENT_SECRET = process.env.clientSecret || 'local no id';
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -67,7 +66,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: github.callback
+    callbackURL: 'http://www.javascriptbattle.com/'
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
@@ -82,9 +81,9 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-app.get('/', function(req, res){
-  res.render('index', { user: req.user });
-});
+// app.get('/', function(req, res){
+//   res.render('index', { user: req.user });
+// });
 
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
