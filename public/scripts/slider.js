@@ -1,7 +1,6 @@
 //query slider
 var slider = document.querySelector('.slider');
 //intialize new slider
-
 var init = new Powerange(slider, { hideRange: false, min: 1, max: 300, start: 1});
 //listens for slider changes and renders backbone view accordingly
 

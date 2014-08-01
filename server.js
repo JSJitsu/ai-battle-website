@@ -25,11 +25,11 @@ router.get('/gameData/:turn', function(req, res){
   gameData.board.lengthOfSide = 5;
   gameData.turn = req.params.turn;
   gameData.board.tiles = [
-    [req.params.turn,0,0,0,0],
-    [0,req.params.turn,0,0,0],
-    [0,0,req.params.turn,0,0],
-    [0,0,0,req.params.turn,0],
-    [0,0,0,0,req.params.turn]
+    [req.params.turn,'5','H01','5','5'],
+    ["5",req.params.turn,"5",'R',"5"],
+    ["5","5",req.params.turn,"5","5"],
+    ["5",'D01',"5",req.params.turn,"5"],
+    ["5","5","5","5",req.params.turn]
   ];
   
   // respond with gameData in JSON format
