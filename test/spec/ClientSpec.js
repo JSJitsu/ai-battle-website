@@ -15,7 +15,7 @@ describe('replay', function () {
   });
 
   it('GameTile exists', function () {
-    expect(typeof new GameTile()).to.equal('object');
+    expect(typeof new GameTile(5)).to.equal('object');
   });
 
   it('does something else', function () {
