@@ -28,3 +28,6 @@ dist/
 node_modules/
 public/lib/
 bower_components
+
+# github oauth variables
+github.js
