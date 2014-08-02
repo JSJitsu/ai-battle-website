@@ -1,5 +1,5 @@
 
-# Project Name
+# Javascript Battle
 
 Every day there is an epic battle between legendary heroes.  Control your hero with your own pre-submitted javascript function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
 
