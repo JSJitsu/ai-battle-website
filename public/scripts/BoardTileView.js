@@ -12,10 +12,12 @@ var BoardTileView = Backbone.View.extend({
     this.model.on('change', this.render());
   },
   render: function() {
-    var propertyCode = this.model.get('value').charAt(0);
-    if(this.assets[propertyCode]){
-      var $icon = '<img src="' +this.assets[propertyCode] + '">';
-      this.$el.html($icon);
+    var propertyCode = this.model.get('tile')
+    if(this.assets[propertyCode.id.charAt(0)]){
+      var $icon = '<img src="' +this.assets[propertyCode.id.charAt(0)] + '">';
+      if(propertyCode.id.charAt(0) === 'H'){
+        $icon += '<div class="heroname">'+ "hero:" + propertyCode.id.charAt(3) + '</div>';
+      }
     }
   }
 });

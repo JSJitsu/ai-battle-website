@@ -1,5 +1,5 @@
 var BoardTile = Backbone.Model.extend({
-  initialize: function(value) {
-    this.set({value: value});
+  initialize: function(tile) {
+    this.set({tile: tile});
   }
 });
