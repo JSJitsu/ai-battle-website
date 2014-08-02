@@ -6,7 +6,7 @@ var BoardTileView = Backbone.View.extend({
       R: "../resources/rock.jpg",
       H: "../resources/bknight.jpg",
       D: "../resources/mine.jpg",
-      W: '../resources/mine.png'
+      W: '../resources/pot.png',
     } 
   	this.render();
     this.model.on('change', this.render());
