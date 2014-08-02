@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Javascript Battle - Replay</title>
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Javascript Battle - Replay</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="./lib/bootstrap-css-only/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="./lib/powerange/dist/powerange.css">
-  	<link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./lib/powerange/dist/powerange.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./resources/favicon.png"/>
   </head>
   <body>
@@ -15,28 +15,22 @@
     <div class="panel panel-primary turn">
         <div class="panel-heading">Round</div>
           <div class="panel-body turn-content">
-            {{round}}
+            {{round}}/300
         </div>
       </div>
    </script>
       
     <div class="content">
       <h1>SOME TEAM WON!</h1>
-      <nav>
-        <div class="btn-group">
-          <button type="button" class="btn btn-success">Watch Todays Carnage</button>
-          <button type="button" id="report" class="btn btn-success">
-            Report From The Battlefield
-          </button>
-        </div>
-      </nav>
-      <div class="container">
-        <div class="slide">
-          <input class="slider" step="1"/>
-        </div>
-      </div>
+      <span>
+        <div class="results-btn" onclick="location.href='./results.html'">Battle Report</div>
+        <div class="results-btn" onclick="location.href='./replay.html'">Replay</div>
+      </span>
+    
     </div>
-
+  <div class="slide">
+        <input class="slider" step="1"/>
+      </div>
     <script src="./lib/jquery/dist/jquery.js"></script>
     <script src="./lib/lodash/dist/lodash.min.js"></script>
     <script src="./lib/backbone/backbone.js"></script>
