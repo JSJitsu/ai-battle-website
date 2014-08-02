@@ -9,6 +9,16 @@ var port = process.env.port || 8080;
 
 //Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
+// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+
+var getDateString = function() {
+  var d = new Date();
+  var result = (d.getMonth() + 1).toString();
+  result += '/' + d.getDate();
+  result += '/' + d.getFullYear();
+  return result;
+};
+
 
 //Connect to mongo
 var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -23,23 +33,20 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/tests', express.static(__dirname + '/test'));
 // }
 
+
+
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
-  var getDateString = function() {
-    var d = new Date();
-    var result = (d.getMonth() + 1).toString();
-    result += '/' + d.getDate();
-    result += '/' + d.getFullYear();
-    return result;
-  };
-
   openMongoCollection.then(function(collection) {
-    return Q.ninvoke(collection, 'find', {
-      turn: req.params.turn, date: getDateString()
-    }).then(function(gameData) {
-      // respond with gameData in JSON format
-      res.json(gameData);
+    collection.find({
+      turn:+req.params.turn,
+      date:getDateString()
+    }).toArray(function(err,results) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(results[0]);
     });
   }).catch(function(err) {
     //If something goes wrong, respond with error
