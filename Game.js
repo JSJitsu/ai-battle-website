@@ -15,7 +15,7 @@ var Game = function() {
   this.heroes = [];
   this.diamondMines = [];
   this.healthWells = [];
-  this.impassable = [];
+  this.impassables = [];
 
   this.turn = 1;
   this.hasStarted = false;

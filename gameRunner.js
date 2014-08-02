@@ -4,7 +4,7 @@ var Game = require('./Game.js');
 var move = require('./hero.js');
 
 // var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI;// || 'mongodb://localhost/javascriptBattle'
-// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -36,8 +36,6 @@ var runGame = function() {
   var game = new Game();
   game.addHero(0,0);
   game.addHero(0,4);
-  game.addHero(4,0);
-  game.addHero(4,4);
 
   game.addHealthWell(2,2);
   
@@ -61,7 +59,7 @@ var runGame = function() {
     var addGameDataPromise = addGameDataToDatabase(collection, game, date);
 
     //Store all remaining turns
-    for (var i=0; i<400; i++) {
+    for (var i=0; i<14; i++) {
       addGameDataPromise = addGameDataPromise.then(function() {
         console.log('Added turn: ' + game.turn);
         
