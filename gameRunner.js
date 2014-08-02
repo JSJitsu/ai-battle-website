@@ -33,17 +33,30 @@ var getDateString = function() {
 };
 
 var resolveGameAndSaveTurnsToDB = function(promiseToWaitFor, mongoCollection, game) {
+  console.log(game.turn);
   if (promiseToWaitFor === undefined) {
+    resolveGameAndSaveTurnsToDB(Q.ninvoke(mongoCollection, 'insert', game), mongoCollection, game);
+  } else {
+    promiseToWaitFor.then(function(collection) {
+      if (!game.ended) {
+        game.handleHeroTurn(move(game));
 
+        //Get today's date in string form
+        var date = getDateString();
+
+        //Manually set the ID so Mongo doesn't just keep writing to the same document
+        game._id = game.turn + '|' + date;
+        
+        promiseToWaitFor.then(function() {
+          setTimeout(function() {
+            resolveGameAndSaveTurnsToDB(Q.ninvoke(mongoCollection, 'insert', game), mongoCollection, game)
+          }, 10000);
+        });
+      }
+    }).catch(function(err) {
+      console.log(err);
+    });
   }
-  promiseToWaitFor.then(function(collection) {
-    if (!game.ended) {
-      game.handleHeroTurn(move(game));
-      promiseToWaitFor.then(Q.ninvoke(mongoCollection, 'insert', game), mongoCollection, game, gameMaxTurn);
-    }
-  }).catch(function(err) {
-    console.log(err);
-  });
 };
 
 var runGame = function() {
@@ -62,12 +75,6 @@ var runGame = function() {
   game.addDiamondMine(4,2);
   game.addDiamondMine(2,4);
 
-  //Get today's date in string form
-  var date = getDateString();
-
-  //Manually set the ID so Mongo doesn't just keep writing to the same document
-  game._id = game.turn + '|' + date;
-
   //Open up the database connection
   var openDatabasePromise = openGameDatabase();
 
@@ -76,21 +83,6 @@ var runGame = function() {
 
     resolveGameAndSaveTurnsToDB(undefined, collection, game);
 
-
-    // //Store 1st turn
-    // var addGameDataPromise = addGameDataToDatabase(collection, game, date);
-
-    // //Store all remaining turns
-    // for (var i=0; i<10; i++) {
-    //   addGameDataPromise = addGameDataPromise.then(function() {
-    //     console.log('Added turn: ' + game.turn);
-        
-    //     game.handleHeroTurn(move(game));
-    //     game._id = game.turn + '|' + date;
-
-    //     return addGameDataToDatabase(collection, game, date);
-    //   });
-    // }
   }).catch(function(err) {
     console.log(err);
   });

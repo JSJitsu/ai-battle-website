@@ -15,7 +15,7 @@
 
 var move = function(gameData, helpers) {
   var choices = ['North', 'East', 'South', 'West'];
-  return choices[Math.floor(Math.random()*5)];
+  return choices[Math.floor(Math.random()*4)];
 };
 
 module.exports = move;

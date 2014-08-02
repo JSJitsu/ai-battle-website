@@ -207,7 +207,6 @@ Game.prototype._resolveHeroAttacks = function(hero) {
       // Our hero (whose turn it is) will auto-hit any heroes in range,
       // so this other hero that is one space away will take damage
       hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
-      console.log("Hero: " + otherHero.id + ', hp: ' + otherHero.health)
       if (otherHero.dead) {
         // Remove dead hero from the board
         this.heroDied(otherHero);
