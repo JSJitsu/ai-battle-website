@@ -1,14 +1,30 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
+var Q = require('q');
+var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var port = process.env.port || 8080;
 
-// //Defines mongo connection for azure deploy (or, failing that, for local deploy)
-// var mongooseConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
-// mongoose.connect(mongooseConnectionURL);
+//Defines mongo connection for azure deploy (or, failing that, for local deploy)
+var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
+// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+
+var getDateString = function() {
+  var d = new Date();
+  var result = (d.getMonth() + 1).toString();
+  result += '/' + d.getDate();
+  result += '/' + d.getFullYear();
+  return result;
+};
+
+
+//Connect to mongo
+var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
+  console.log('open!');
+  return db.collection('jsBattleGameData');
+});
 
 // serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
@@ -17,23 +33,25 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/tests', express.static(__dirname + '/test'));
 // }
 
+
+
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
-  var gameData = {};
-  gameData.board = {};
-  gameData.board.lengthOfSide = 5;
-  gameData.turn = req.params.turn;
-  gameData.board.tiles = [
-    [req.params.turn,'5','H01','5','5'],
-    ["5",req.params.turn,"5",'R',"5"],
-    ["5","5",req.params.turn,"5","5"],
-    ["5",'D01',"5",req.params.turn,"5"],
-    ["5","5","5","5",req.params.turn]
-  ];
-  
-  // respond with gameData in JSON format
-  res.json(gameData);
+  openMongoCollection.then(function(collection) {
+    collection.find({
+      turn:+req.params.turn,
+      date:getDateString()
+    }).toArray(function(err,results) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(results[0]);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
 });
 
 // set root route for app's data
