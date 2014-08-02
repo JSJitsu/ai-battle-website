@@ -3,6 +3,11 @@ var Hero = require('./Hero.js');
 var DiamondMine = require('./DiamondMine.js');
 var Unoccupied = require('./Unoccupied.js');
 var Impassable = require('./Impassable.js');
+var HealthWell = require('./HealthWell.js');
+
+var DIAMOND_MINE_CAPTURE_DAMAGE = 20;
+var HERO_ATTACK_DAMAGE = 30;
+var HEALTH_WELL_HEAL_AMOUNT = 40;
 
 var Game = function() {
   this.board = new Board(5);
@@ -15,38 +20,38 @@ var Game = function() {
 //Adds a new hero to the board
 //but ONLY if the game has not yet
 //started
-Game.prototype.addHero = function(x, y) {
+Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
   if (this.hasStarted) {
     throw new Error('Cannot add heroes after the game has started!')
   }
 
   //Creates new hero object
-  var hero = new Hero(x,y);
+  var hero = new Hero(distanceFromTop, distanceFromLeft);
 
   //Saves hero id
   hero.id = this.heroes.length;
 
   //Puts hero on board
-  this.board.tiles[x][y] = hero;
+  this.board.tiles[distanceFromTop][distanceFromLeft] = hero;
 
   //Adds hero to game data structure
   this.heroes.push(hero);
 };
 
 //Adds a diamond mine to the board
-Game.prototype.addDiamondMine = function(x, y) {
+Game.prototype.addDiamondMine = function(distanceFromTop, distanceFromLeft) {
   if (this.hasStarted) {
     throw new Error('Cannot add diamond mines after the game has started!')
   }
 
   //Creates new diamond mine object
-  var diamondMine = new DiamondMine(x,y);
+  var diamondMine = new DiamondMine(distanceFromTop, distanceFromLeft);
 
   //Saves diamondMines id
   diamondMine.id = this.diamondMines.length;
 
   //Puts diamondMine on board
-  this.board.tiles[x][y] = diamondMine;
+  this.board.tiles[distanceFromTop][distanceFromLeft] = diamondMine;
 
   //Adds diamondMine to game data structure
   this.diamondMines.push(diamondMine);
@@ -59,23 +64,6 @@ Game.prototype.activeHero = function() {
   return this.heroes[activeIndex];
 };
 
-//Returns the tile [direction] (North, South, East, or West) of the given X/Y coordinate
-Game.prototype.getTileNearby = function(startX, startY, direction) {
-  var newX = startX;
-  var newY = startY;
-  if (direction === 'North') {
-    newX -= 1;
-  } else if (direction === 'East') {
-    newY += 1;
-  } else if (direction === 'South') {
-    newX += 1;
-  } else if (direction === 'West') {
-    newY -= 1;
-  }
-
-  return this.board.tiles[newX][newY];
-};
-
 //Resolves the hero's turn:
 //1) The active hero earns diamonds from each mine they own
 //   at the start of their turn
@@ -83,53 +71,139 @@ Game.prototype.getTileNearby = function(startX, startY, direction) {
 Game.prototype.handleHeroTurn = function(direction) {
   var hero = this.activeHero();
 
-  //Resolve diamond mine earnings
-  hero.diamondsEarned += hero.minesOwned.length;
-
-
-  //Move Hero:
-  //Gets the tile at the location that the hero wants to go to
-  var tile = this.getTileNearby(hero.x, hero.y, direction);
-
-  //Move the hero onto the new tile
-  if (tile === undefined) {
-    //Trying to move off end of board...does nothing
-  } else if (tile.type === 'Unoccupied') {
-    //Make the recently vacated tile "unoccupied"
-    this.board.tiles[hero.x][hero.y] = new Unoccupied(hero.x, hero.y);
-    hero.x = tile.x;
-    hero.y = tile.y;
-    this.board.tiles[hero.x][hero.y] = hero;
-  } else {
-    //Doesn't move because the path is blocked
+  //Does nothing if hero is not alive
+  if (hero.dead) {
+    return;
   }
 
-  //Resolve Attacks (if any):
+  //Gives the hero diamonds for each owned mine
+  this._handleHeroEarnings(hero);
 
-  //Resolve Healing (if any):
+  //Attempts to move the hero in the direction indicated
+  this._handleHeroMove(hero, direction);
 
+  //If hero died during their move phase...
+  if (hero.dead) {
+    //Remove hero from board
+    this.heroDied(hero);
+
+  //If hero is still alive after moving...
+  } else {
+    //Resolves all damage given and healing received at the
+    //end of the hero's turn
+    this._resolveHeroAttacksAndHealing(hero);
+  }
+  
   this.turn++;
+};
+
+//Resolve diamond mine earnings
+Game.prototype._handleHeroEarnings = function(hero) {
+  hero.diamondsEarned += hero.minesOwned.length;
+};
+
+//Attempt to move hero in the direction indicated
+Game.prototype._handleHeroMove = function(hero, direction) {
+  //Gets the tile at the location that the hero wants to go to
+  var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, direction);
+
+  //If tile is not on the board (invalid coordinates), don't move
+  if (tile === false) {
+    return;
+
+  //If tile is occupied, move into that tile
+  } else if (tile.type === 'Unoccupied') {
+    //Make the soon-to-be vacated tile "unoccupied"
+    this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = 
+        new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
+
+    //Update hero location (in hero)
+    hero.distanceFromTop = tile.distanceFromTop;
+    hero.distanceFromLeft = tile.distanceFromLeft;
+
+    //Update hero location (on board)
+    this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = hero;
+  
+  //If tile is a diamond mine, the mine is captured, but the hero stays put
+  } else if (tile.type === "DiamondMine") {
+    //Hero attempts to capture mine
+    hero.captureMine(tile, DIAMOND_MINE_CAPTURE_DAMAGE);
+
+    //If capturing the mine takes the hero to 0 HP, he dies
+    if (hero.dead) {
+      this.heroDied(hero);
+      return;
+
+    //If he survives, he is now the owner of the mine
+    } else {
+      tile.owner = hero;
+    }
+  //Running into a health well will heal a certain amount of damage
+  } else if (tile.type === "HealthWell") {
+    hero.healDamage(HEALTH_WELL_HEAL_AMOUNT);
+  }
+};
+
+Game.prototype._resolveHeroAttacks = function(hero) {
+  //Resolve Attacks and Healing (if any):
+  var directions = [
+    'North',
+    'East',
+    'South',
+    'West',
+  ];
+
+  //Loop through all tiles around the hero
+  for (var i=0; i<directions.length; i++) {
+    var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, directions[i]);
+    if (tile === false) {
+      //does nothing if the tile in the given direction
+      //is not on the board
+    } else if (tile.type === 'Hero') {
+      //from the check above, we know 'tile' points to a hero object
+      var otherHero = tile;
+
+      //Our hero (whose turn it is) will auto-hit any heroes in range,
+      //so this other hero that is one space away will take damage
+      hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
+      console.log("Hero: " + otherHero.id + ', hp: ' + otherHero.health)
+      if (otherHero.dead) {
+        //Remove dead hero from the board
+        this.heroDied(otherHero);
+
+        //Tell our hero he killed someone
+        hero.killedHero(otherHero);
+      }
+    }
+  }
+};
+
+Game.prototype.heroDied = function(hero) {
+
+  console.log('HERO DIED: ' + hero.id);
+
+  //Removes a dead hero from the board
+  top = hero.distanceFromTop;
+  left = hero.distanceFromLeft;
+  this.board.tiles[top][left] = new Unoccupied(top, left);
 };
 
 var addGame = function() {
   var game = new Game();
   game.addHero(0,0);
-  game.addHero(0,4);
-  game.addHero(4,0);
-  game.addHero(4,4);
-  game.addDiamondMine(2,0);
-  game.addDiamondMine(2,2);
-  game.addDiamondMine(0,2);
-  game.addDiamondMine(4,2);
-  game.addDiamondMine(2,4);
-  game.handleHeroTurn('South');
-  game.board.inspect();
-  console.log('*******');
-  game.handleHeroTurn('East');
-  game.handleHeroTurn('North');
-  game.handleHeroTurn('South');
-  game.handleHeroTurn('West');
-  game.board.inspect();
+  game.addHero(0,1);
+
+
+  // game.board.inspect();
+  // game.handleHeroTurn('South');
+  // game.board.inspect();
+  // game.handleHeroTurn('East');
+  // game.board.inspect();
+
+  // game.handleHeroTurn('North');
+  // game.handleHeroTurn('South');
+  // game.handleHeroTurn('West');
+  // game.board.inspect();
 
 };
 

@@ -1,11 +1,8 @@
-var DiamondMine = function(x, y) {
+var DiamondMine = function(distanceFromTop, distanceFromLeft) {
   this.id = undefined;
 
-  //horizontal position, left to right
-  this.x = x;
-
-  //vertical position, top to bottom
-  this.y = y;
+  this.distanceFromTop = distanceFromTop;
+  this.distanceFromLeft = distanceFromLeft;
 
   this.type = 'DiamondMine';
 
