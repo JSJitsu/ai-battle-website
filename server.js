@@ -1,14 +1,14 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
+var Q = require('q');
+var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var port = process.env.port || 8080;
 
-// //Defines mongo connection for azure deploy (or, failing that, for local deploy)
-// var mongooseConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
-// mongoose.connect(mongooseConnectionURL);
+//Defines mongo connection for azure deploy (or, failing that, for local deploy)
+var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
 
 // serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
@@ -24,9 +24,15 @@ router.get('/gameData/:turn', function(req, res){
   gameData.board = {};
   gameData.board.lengthOfSide = 5;
   gameData.turn = req.params.turn;
+  var a = 'H01';
+  var b = '5';
+  if (req.params.turn > 6) {
+    b = a;
+    a = '5';
+  }
   gameData.board.tiles = [
-    [req.params.turn,'5','H01','5','5'],
-    ["5",req.params.turn,"5",'R',"5"],
+    [req.params.turn,'5',a,'5','5'],
+    ["5",req.params.turn,b,'R',"5"],
     ["5","5",req.params.turn,"5","5"],
     ["5",'D01',"5",req.params.turn,"5"],
     ["5","5","5","5",req.params.turn]

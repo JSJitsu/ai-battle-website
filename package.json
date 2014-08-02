@@ -19,12 +19,13 @@
   },
   "homepage": "https://github.com/jamesyothers/javascript-battle-website",
   "dependencies": {
-    "express": "^4.7.2",
-    "mongoose": "^3.8.14",
-    "q": "^1.0.1",
     "blanket": "^1.1.6",
+    "express": "^4.7.2",
+    "mongodb": "^1.4.8",
+    "mongoose": "^3.8.14",
+    "passport": "^0.2.0",
     "passport-github": "^0.1.5",
-    "passport": "^0.2.0"
+    "q": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
