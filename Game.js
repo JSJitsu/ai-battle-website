@@ -11,8 +11,12 @@ var HEALTH_WELL_HEAL_AMOUNT = 40;
 
 var Game = function() {
   this.board = new Board(5);
+  
   this.heroes = [];
   this.diamondMines = [];
+  this.healthWells = [];
+  this.impassable = [];
+
   this.turn = 1;
   this.hasStarted = false;
 };
@@ -55,6 +59,38 @@ Game.prototype.addDiamondMine = function(distanceFromTop, distanceFromLeft) {
 
   //Adds diamondMine to game data structure
   this.diamondMines.push(diamondMine);
+};
+
+//Adds a health well to the board
+Game.prototype.addHealthWell = function(distanceFromTop, distanceFromLeft) {
+  if (this.hasStarted) {
+    throw new Error('Cannot add health wells after the game has started!')
+  }
+
+  //Creates new health well object
+  var healthWell = new HealthWell(distanceFromTop, distanceFromLeft);
+
+  //Puts healthWell on board
+  this.board.tiles[distanceFromTop][distanceFromLeft] = healthWell;
+
+  //Adds healthWell to game data structure
+  this.healthWells.push(healthWell);
+};
+
+//Adds an impassable (rock, tree, etc) to the board
+Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
+  if (this.hasStarted) {
+    throw new Error('Cannot add impassables after the game has started!')
+  }
+
+  //Creates new impassable object
+  var impassable = new Impassable(distanceFromTop, distanceFromLeft);
+
+  //Puts impassable on board
+  this.board.tiles[distanceFromTop][distanceFromLeft] = impassable;
+
+  //Adds impassable to game data structure
+  this.impassables.push(impassable);
 };
 
 //Return a reference to the hero whose turn it is
