@@ -1,21 +1,50 @@
 .content {
   text-align: center;
-  position: inline-block;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+
   .btn-nav {
     width:300px;
     margin-left: 51px;
   }
   .panel {
-    width:300px;
+    width:16%;
   }
+  img {
+  max-height: 476px;
+  max-width: 47.5%;
+}
+
+}
+.game-view{
+  height: auto;
+  width:auto;
+}
+.battle-map {
+  margin: 0 auto;
+  width: 55%;
+}
+
+.results-btn {
+  display: inline-block;
+  background-color: #727093;
+  height: 25px;
+  width: 90px;
+  box-shadow: inset 0px -1px 0px rgba(255,255,255,.9),0 2px 3px rgba(0,0,0,0.6);
+  border: 1px solid black;  
+}
+
+.results-btn:active{
+  box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
+  background-color:#727084;
 
 }
 
 .turn {
-  width: 200px;
   position: absolute;
-  right: 100px;
-  top: 50px;
+  right: 3%;
+  top: 16%;
 }
 
 .red-team {
@@ -28,6 +57,11 @@
   }
 }
  
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
 .blue-team {
   width: 400px;
   float: right;
@@ -42,10 +76,6 @@
   width: 100px;
 } 
 
-.content img {
-  max-height: 476px;
-  max-width: 47.5%;
-}
 
 .replay-options {
   margin-left: -4px;
@@ -70,15 +100,11 @@
   width: 321px !important;
 }
 
-.battle-map {
-  margin: 0px auto;
-}
-
 .battle-tile {
-  height: 128px;
-  width: 128px;
+  height: 17vh;
+  width: 16%;
   border: 2px solid black;
-  background-image: url('../resources/tile.png');
+  background-image: url("../resources/tile.png");
 }
 
 .range-handle{
