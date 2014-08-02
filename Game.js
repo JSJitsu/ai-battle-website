@@ -11,8 +11,12 @@ var HEALTH_WELL_HEAL_AMOUNT = 40;
 
 var Game = function() {
   this.board = new Board(5);
+  
   this.heroes = [];
   this.diamondMines = [];
+  this.healthWells = [];
+  this.impassable = [];
+
   this.turn = 1;
   this.hasStarted = false;
 };
@@ -57,6 +61,38 @@ Game.prototype.addDiamondMine = function(distanceFromTop, distanceFromLeft) {
   this.diamondMines.push(diamondMine);
 };
 
+//Adds a health well to the board
+Game.prototype.addHealthWell = function(distanceFromTop, distanceFromLeft) {
+  if (this.hasStarted) {
+    throw new Error('Cannot add health wells after the game has started!')
+  }
+
+  //Creates new health well object
+  var healthWell = new HealthWell(distanceFromTop, distanceFromLeft);
+
+  //Puts healthWell on board
+  this.board.tiles[distanceFromTop][distanceFromLeft] = healthWell;
+
+  //Adds healthWell to game data structure
+  this.healthWells.push(healthWell);
+};
+
+//Adds an impassable (rock, tree, etc) to the board
+Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
+  if (this.hasStarted) {
+    throw new Error('Cannot add impassables after the game has started!')
+  }
+
+  //Creates new impassable object
+  var impassable = new Impassable(distanceFromTop, distanceFromLeft);
+
+  //Puts impassable on board
+  this.board.tiles[distanceFromTop][distanceFromLeft] = impassable;
+
+  //Adds impassable to game data structure
+  this.impassables.push(impassable);
+};
+
 //Return a reference to the hero whose turn it is
 Game.prototype.activeHero = function() {
   var numHeroes = this.heroes.length;
@@ -91,7 +127,7 @@ Game.prototype.handleHeroTurn = function(direction) {
   } else {
     //Resolves all damage given and healing received at the
     //end of the hero's turn
-    this._resolveHeroAttacksAndHealing(hero);
+    this._resolveHeroAttacks(hero);
   }
   
   this.turn++;
@@ -188,23 +224,22 @@ Game.prototype.heroDied = function(hero) {
   this.board.tiles[top][left] = new Unoccupied(top, left);
 };
 
-var addGame = function() {
-  var game = new Game();
-  game.addHero(0,0);
-  game.addHero(0,1);
 
-
-  // game.board.inspect();
-  // game.handleHeroTurn('South');
-  // game.board.inspect();
-  // game.handleHeroTurn('East');
-  // game.board.inspect();
-
-  // game.handleHeroTurn('North');
-  // game.handleHeroTurn('South');
-  // game.handleHeroTurn('West');
-  // game.board.inspect();
-
+var move = function(gameData, helpers) {
+  var choices = ['North', 'East', 'South', 'West', 'Stay'];
+  return choices[Math.floor(Math.random()*5)];
 };
 
-addGame();
+var g = new Game();
+
+var game = new Game();
+game.addHero(3,0);
+game.addHero(0,3);
+game.addDiamondMine(3,3);
+for (var i=0; i<10; i++) {
+  game.handleHeroTurn(move(game));
+  game.board.inspect();
+}
+
+
+module.exports = Game;
