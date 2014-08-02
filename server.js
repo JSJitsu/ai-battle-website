@@ -10,6 +10,12 @@ var port = process.env.port || 8080;
 //Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
 
+//Connect to mongo
+var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
+  console.log('open!');
+  return db.collection('jsBattleGameData');
+});
+
 // serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
@@ -20,26 +26,25 @@ app.use('/tests', express.static(__dirname + '/test'));
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
-  var gameData = {};
-  gameData.board = {};
-  gameData.board.lengthOfSide = 5;
-  gameData.turn = req.params.turn;
-  var a = 'H01';
-  var b = '5';
-  if (req.params.turn > 6) {
-    b = a;
-    a = '5';
-  }
-  gameData.board.tiles = [
-    [req.params.turn,'5',a,'5','5'],
-    ["5",req.params.turn,b,'R',"5"],
-    ["5","5",req.params.turn,"5","5"],
-    ["5",'D01',"5",req.params.turn,"5"],
-    ["5","5","5","5",req.params.turn]
-  ];
-  
-  // respond with gameData in JSON format
-  res.json(gameData);
+  var getDateString = function() {
+    var d = new Date();
+    var result = (d.getMonth() + 1).toString();
+    result += '/' + d.getDate();
+    result += '/' + d.getFullYear();
+    return result;
+  };
+
+  openMongoCollection.then(function(collection) {
+    return Q.ninvoke(collection, 'find', {
+      turn: req.params.turn, date: getDateString()
+    }).then(function(gameData) {
+      // respond with gameData in JSON format
+      res.json(gameData);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
 });
 
 // set root route for app's data
