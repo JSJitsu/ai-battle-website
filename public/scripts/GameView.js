@@ -3,17 +3,20 @@ var GameView = Backbone.View.extend({
   className: 'game-view',
   initialize: function(){
     this.updateTurn(1);
-    
+    //what to operate on
+    var source = $("#turn").html();
+    //compiling handlebars
+    this.template = Handlebars.compile(source);
   },
 
   render: function(){
+    this.context = {round: this.model.get("turn")}
   	this.$el.html('')
   	var boardView = new BoardView({collection: this.model.get("board")});
-    var source = $("#turn").html();
-    this.template = Handlebars.compile(source);
-    this.context = {round: this.model.get("turn")}
     this.$el.append(boardView.$el);
+    //changing the actual handlebars
     var html = this.template(this.context);
+    //apending template
     this.$el.append(html);
   },
   updateTurn: function(turn) {

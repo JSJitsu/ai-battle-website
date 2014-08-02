@@ -28,11 +28,13 @@
 
 .results-btn {
   display: inline-block;
-  background-color: #727093;
   height: 25px;
   width: 90px;
-  box-shadow: inset 0px -1px 0px rgba(255,255,255,.9),0 2px 3px rgba(0,0,0,0.6);
   border: 1px solid black;  
+  box-shadow: inset 0px -1px 0px rgba(255,255,255,.9),0 2px 3px rgba(0,0,0,0.6);
+
+  background-color: #727093;
+  color: white;
 }
 
 .results-btn:active{
