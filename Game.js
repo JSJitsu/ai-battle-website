@@ -91,7 +91,7 @@ Game.prototype.handleHeroTurn = function(direction) {
   } else {
     //Resolves all damage given and healing received at the
     //end of the hero's turn
-    this._resolveHeroAttacksAndHealing(hero);
+    this._resolveHeroAttacks(hero);
   }
   
   this.turn++;
@@ -188,23 +188,22 @@ Game.prototype.heroDied = function(hero) {
   this.board.tiles[top][left] = new Unoccupied(top, left);
 };
 
-var addGame = function() {
-  var game = new Game();
-  game.addHero(0,0);
-  game.addHero(0,1);
 
-
-  // game.board.inspect();
-  // game.handleHeroTurn('South');
-  // game.board.inspect();
-  // game.handleHeroTurn('East');
-  // game.board.inspect();
-
-  // game.handleHeroTurn('North');
-  // game.handleHeroTurn('South');
-  // game.handleHeroTurn('West');
-  // game.board.inspect();
-
+var move = function(gameData, helpers) {
+  var choices = ['North', 'East', 'South', 'West', 'Stay'];
+  return choices[Math.floor(Math.random()*5)];
 };
 
-addGame();
+var g = new Game();
+
+var game = new Game();
+game.addHero(3,0);
+game.addHero(0,3);
+game.addDiamondMine(3,3);
+for (var i=0; i<10; i++) {
+  game.handleHeroTurn(move(game));
+  game.board.inspect();
+}
+
+
+module.exports = Game;
