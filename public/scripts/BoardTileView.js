@@ -14,7 +14,7 @@ var BoardTileView = Backbone.View.extend({
     var propertyCode = this.model.get('value').charAt(0);
     if(this.assets[propertyCode]){
       var $icon = '<img src="' +this.assets[propertyCode] + '">';
-      this.$el.html($icon);
+      this.$el.html('TEST');
     }
   }
 });
