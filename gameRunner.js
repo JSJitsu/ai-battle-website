@@ -61,7 +61,7 @@ var runGame = function() {
     var addGameDataPromise = addGameDataToDatabase(collection, game, date);
 
     //Store all remaining turns
-    for (var i=0; i<10; i++) {
+    for (var i=0; i<400; i++) {
       addGameDataPromise = addGameDataPromise.then(function() {
         console.log('Added turn: ' + game.turn);
         

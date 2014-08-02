@@ -9,3 +9,5 @@ var HealthWell = function(distanceFromTop, distanceFromLeft) {
 HealthWell.prototype.getCode = function() {
   return 'WWW';
 };
+
+module.exports = HealthWell;
