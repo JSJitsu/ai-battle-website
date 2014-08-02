@@ -1,7 +1,7 @@
-var Unoccupied = function(x, y) {
+var Unoccupied = function(distanceFromTop, distanceFromLeft) {
   this.type = "Unoccupied";
-  this.x = x;
-  this.y = y;
+  this.distanceFromTop = distanceFromTop;
+  this.distanceFromLeft = distanceFromLeft;
 };
 
 Unoccupied.prototype.getCode = function() {
