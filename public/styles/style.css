@@ -84,7 +84,17 @@ table {
   border: 2px solid black;
   background-image: url("../resources/tile.png"); }
 
+.heroname {
+  float: right;
+  font-size: 20px;
+  height: 30px;
+  width: 40px;
+  background-color: tan;
+  color: white;
+  margin-top: -64px; }
+
 .range-handle {
+  bottom: 10px;
   height: 30px;
   width: 29px;
   background-color: transparent;

@@ -10,8 +10,8 @@ var Game = Backbone.Model.extend({
     var board = new Board();
     board.lengthOfSide = response.board.lengthOfSide;
 
-    _.each(_.flatten(response.board.tiles), function(value, key, list) {
-    	var tile = new BoardTile(value);
+    _.each(_.flatten(response.board.tiles), function(tileObject, key, list) {
+    	var tile = new BoardTile(tileObject);
       board.add(tile);
     });
 
