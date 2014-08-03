@@ -21,13 +21,14 @@ var BoardTileView = Backbone.View.extend({
         Hero: "../resources/bknight.jpg",
         DiamondMine: "../resources/mine.jpg",
         HealthWell: '../resources/pot.png',
-      } 
-      this.$el.html('<img src="' + assets[tile.type] + '">');
-    // if(this.assets[propertyCode.id.charAt(0)]){
-      // var $icon = '<img src="' +this.assets[propertyCode.id.charAt(0)] + '">';
-    //   if(propertyCode.id.charAt(0) === 'H'){
-    //     $icon += '<div class="heroname">'+ "hero:" + propertyCode.id.charAt(3) + '</div>';
-    //   }
-    // }
+      }
+      var $icon = '<img src="' + assets[tile.type] + '">'
+      if(this.model.get('tile').type === "Hero"){
+        console.log('hero detected')
+        $icon += '<div class="heroname">'+ "hero:" + this.model.get('tile').id + '</div>';
+      }
+      this.$el.html($icon)
+      
+
   }
 });
