@@ -2,8 +2,8 @@ var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./Game.js');
 
-// var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI;// || 'mongodb://localhost/javascriptBattle'
-var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
+// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var move = function(gameData, helpers) {
   var choices = ['North', 'East', 'South', 'West'];
