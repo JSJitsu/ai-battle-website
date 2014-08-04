@@ -6,10 +6,9 @@ var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var port = process.env.port || 8080;
-//Deployment code comment out for local
+
 //Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
-//keep commented out for deployment
 // var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var getDateString = function() {
@@ -20,7 +19,7 @@ var getDateString = function() {
   return result;
 };
 
-//Deployment
+
 //Connect to mongo
 var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
   console.log('open!');
@@ -34,31 +33,8 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/tests', express.static(__dirname + '/test'));
 // }
 
-/* UNCOMMENT FOR LOCAL TESTING
-var router = express.Router();
-
-router.get('/gameData/:turn', function(req, res){
-  var gameData = {};
-  gameData.board = {};
-  gameData.board.lengthOfSide = 5;
-  gameData.turn = req.params.turn;
-  gameData.board.tiles = [
-    [tile = {type:"Hero", id:1,life:30},'5','H01','5','5'],
-    ["5",tile = {type:"Hero", id:7,life:30},"5",'R',"5"],
-    ["5","5",req.params.turn,"5","5"],
-    ["5",'D01',"5",req.params.turn,"5"],
-    ["5","5","5","5",req.params.turn]
-  ];
-  
-
-  res.json(gameData);
-});
 
 
-app.use('/api', router);
-*/
-
-//comment out local test
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
@@ -155,7 +131,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('./');
+    res.redirect('/');
   });
 
 app.get('/logout', function(req, res){
