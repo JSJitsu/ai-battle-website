@@ -46,7 +46,8 @@ module.exports = function(grunt) {
           noCache: true
         },
         files: {
-          './public/styles/style.css': './public/scss/style.scss'
+          './public/css/style.css': './public/scss/style.scss',
+          './public/css/freelancer.css': './public/scss/freelancer.scss'
         }
       }
     },

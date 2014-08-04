@@ -22,17 +22,18 @@
 .results-btn {
   display: inline-block;
   height: 25px;
-  width: 95px;
+  width: 90px;
   border: 1px solid black;
-  box-shadow: inset 0px -1px 0px #4c6075, 0 2px 3px rgba(0, 0, 0, 0.6);
-  background-color: #2c3e50;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.9), 0 2px 3px rgba(0, 0, 0, 0.6);
+  background-color: #727093;
   color: white; }
 
 .results-btn:active {
   box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
-  background-color: #3A5875; }
+  background-color: #727084; }
 
 .turn {
+  position: absolute;
   right: 3%;
   top: 16%; }
 
@@ -89,13 +90,12 @@ table {
 
 .range-handle {
   bottom: 10px;
-  height: 28px;
+  height: 30px;
   width: 29px;
-  right: 20px;
   background-color: transparent;
   top: -13px;
   position: absolute;
-  background-image: url("../img/sword.png");
+  background-image: url("../resources/sword.png");
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0; }

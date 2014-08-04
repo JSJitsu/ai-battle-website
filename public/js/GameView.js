@@ -13,11 +13,11 @@ var GameView = Backbone.View.extend({
     this.context = {round: this.model.get("turn")}
   	this.$el.html('')
   	var boardView = new BoardView({collection: this.model.get("board")});
+    var html = this.template(this.context);
+    this.$el.append(html);
     this.$el.append(boardView.$el);
     //changing the actual handlebars
-    var html = this.template(this.context);
     //apending template
-    this.$el.append(html);
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
