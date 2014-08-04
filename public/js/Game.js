@@ -1,6 +1,6 @@
 
 var Game = Backbone.Model.extend({
-	url: 'api/gameData/1',
+  url: 'api/gameData/1',
   initialize: function() {
   },
   
@@ -11,7 +11,7 @@ var Game = Backbone.Model.extend({
     board.lengthOfSide = response.board.lengthOfSide;
 
     _.each(_.flatten(response.board.tiles), function(tileObject, key, list) {
-    	var tile = new BoardTile(tileObject);
+      var tile = new BoardTile(tileObject);
       board.add(tile);
     });
 
@@ -21,4 +21,3 @@ var Game = Backbone.Model.extend({
     this.url = '/api/gameData/' + turn;
   }
 });
-

@@ -12,7 +12,7 @@
     width:16%;
   }
   img {
-  max-width: 73.5%;
+  max-width: 44.5%;
 }
 
 }
@@ -20,6 +20,7 @@
   height: auto;
   width:auto;
 }
+
 .battle-map {
   margin: 0 auto;
   width: 55%;
@@ -28,22 +29,20 @@
 .results-btn {
   display: inline-block;
   height: 25px;
-  width: 90px;
-  border: 1px solid black;  
-  box-shadow: inset 0px -1px 0px rgba(255,255,255,.9),0 2px 3px rgba(0,0,0,0.6);
-
-  background-color: #727093;
+  width: 95px;
+  border: 1px solid black;
+  box-shadow: inset 0px -1px 0px rgb(76, 96, 117), 0 2px 3px rgba(0, 0, 0, 0.6);
+  background-color: #2c3e50;
   color: white;
 }
 
 .results-btn:active{
   box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
-  background-color:#727084;
+  background-color:#3A5875;
 
 }
 
 .turn {
-  position: absolute;
   right: 3%;
   top: 16%;
 }
@@ -102,30 +101,26 @@ table {
 }
 
 .battle-tile {
-  height: 17vh;
-  width: 16%;
+  height: 8vh;
+  width: 10%;
   border: 2px solid black;
-  background-image: url("../resources/tile.png");
+  background-image: url("../img/tile.png");
 }
 
 .heroname {
-  float: right;
-  font-size: 20px;
-  height: 30px;
-  width: 57px;
-  background-color: tan;
-  color: white;
-  margin-top: -114px;
+  color: white; 
+  opacity: 0.6;
 }
 
 .range-handle{
   bottom: 10px;
-  height:30px;
+  height:28px;
   width:29px;
+  right:20px;
   background-color:transparent;
   top: -13px;
   position: absolute;
-  background-image: url('../resources/sword.png');
+  background-image: url('../img/sword.png');
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0; 

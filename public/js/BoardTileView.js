@@ -17,10 +17,10 @@ var BoardTileView = Backbone.View.extend({
     }
     var tile = this.model.get('tile');
       var assets = {
-        Impassable: "../resources/rock.jpg",
-        Hero: "../resources/bknight.jpg",
-        DiamondMine: "../resources/mine.jpg",
-        HealthWell: '../resources/pot.png',
+        Impassable: "../img/rock.jpg",
+        Hero: "../img/bkknight.png",
+        DiamondMine: "../img/mine.jpg",
+        HealthWell: '../img/pot.png',
       }
       var $icon = '<img src="' + assets[tile.type] + '">'
       if(this.model.get('tile').type === "Hero"){
