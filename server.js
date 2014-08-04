@@ -38,20 +38,22 @@ app.use('/tests', express.static(__dirname + '/test'));
 var router = express.Router();
 
 router.get('/gameData/:turn', function(req, res){
-  var gameData = {};
-  gameData.board = {};
-  gameData.board.lengthOfSide = 10;
-  gameData.turn = req.params.turn;
-  gameData.board.tiles = [
-    [tile = {type:"Hero", id:1,life:30},'5','H01','5','5',tile = {type:"Hero", id:1,life:30},'5','H01','5','5'],
-    ["5",tile = {type:"Hero", id:7,life:30},"5",'R',"5",tile = {type:"Hero", id:1,life:30},'5','H01','5','5'],
-    ["5","5",req.params.turn,"5","5",tile = {type:"DiamondMine", id:8,life:30},'5','H01','5','5'],
-    ["5",'D01',"5",req.params.turn,"5",tile = {type:"Hero", id:5,life:30},'5','H01','5','5'],
-    ["5","5","5","5",req.params.turn,tile = {type:"Hero", id:2,life:30},'5','H01','5','5']
-  ];
-  
-
-  res.json(gameData);
+  openMongoCollection.then(function(collection) {
+    collection.find({
+      '_id':req.params.turn + '|' + getDateString()
+    }).toArray(function(err,results) {
+      if (err) {
+        res.send(err);
+      }
+      for (var i=0; i<10; i++) {
+        console.log(results[0].board.tiles[9][0]);
+      }
+      res.send(results[0]);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
 });
 
 
