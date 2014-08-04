@@ -9,7 +9,7 @@
   .content .panel {
     width: 16%; }
   .content img {
-    max-width: 73.5%; }
+    max-width: 44.5%; }
 
 .game-view {
   height: auto;
@@ -79,19 +79,14 @@ table {
   width: 321px !important; }
 
 .battle-tile {
-  height: 17vh;
-  width: 16%;
+  height: 7vh;
+  width: 10%;
   border: 2px solid black;
   background-image: url("../resources/tile.png"); }
 
 .heroname {
-  float: right;
-  font-size: 20px;
-  height: 30px;
-  width: 57px;
-  background-color: tan;
   color: white;
-  margin-top: -114px; }
+  opacity: 0.6; }
 
 .range-handle {
   bottom: 10px;

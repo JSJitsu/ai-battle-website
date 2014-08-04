@@ -18,7 +18,7 @@ var BoardTileView = Backbone.View.extend({
     var tile = this.model.get('tile');
       var assets = {
         Impassable: "../resources/rock.jpg",
-        Hero: "../resources/bknight.jpg",
+        Hero: "../resources/bkknight.png",
         DiamondMine: "../resources/mine.jpg",
         HealthWell: '../resources/pot.png',
       }
