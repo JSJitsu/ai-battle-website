@@ -7,7 +7,11 @@
     width: 300px;
     margin-left: 51px; }
   .content .panel {
-    width: 16%; }
+    margin-bottom: -84px;
+    width: 16%;
+    left: 2.6%;
+    top: 35vh;
+    position: relative; }
   .content img {
     max-width: 44.5%; }
 
@@ -31,10 +35,6 @@
 .results-btn:active {
   box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
   background-color: #3A5875; }
-
-.turn {
-  right: 3%;
-  top: 16%; }
 
 .red-team {
   width: 400px;
@@ -99,3 +99,6 @@ table {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0; }
+
+.turn-content {
+  color: #2c3e50 !important; }

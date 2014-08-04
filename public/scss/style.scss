@@ -5,11 +5,15 @@
   height: auto;
 
   .btn-nav {
-    width:300px;
+    width: 300px;
     margin-left: 51px;
   }
   .panel {
-    width:16%;
+    margin-bottom: -84px;
+    width: 16%;
+    left: 2.6%;
+    top: 35vh;
+    position: relative;
   }
   img {
   max-width: 44.5%;
@@ -18,7 +22,7 @@
 }
 .game-view{
   height: auto;
-  width:auto;
+  width: auto;
 }
 
 .battle-map {
@@ -40,11 +44,6 @@
   box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
   background-color:#3A5875;
 
-}
-
-.turn {
-  right: 3%;
-  top: 16%;
 }
 
 .red-team {
@@ -80,15 +79,14 @@ table {
 .replay-options {
   margin-left: -4px;
   border-radius: 0px;
-  border-color:black;
+  border-color: black;
 }
 
 .scroll {
   width: 20px; 
-  height:30px; 
-
-  border:1px solid black;
-  overflow:auto;
+  height: 30px; 
+  border: 1px solid black;
+  overflow: auto;
 }
 
 #ex1Slider .slider-selection {
@@ -114,14 +112,18 @@ table {
 
 .range-handle{
   bottom: 10px;
-  height:28px;
-  width:29px;
-  right:20px;
-  background-color:transparent;
+  height: 28px;
+  width: 29px;
+  right: 20px;
+  background-color: transparent;
   top: -13px;
   position: absolute;
   background-image: url('../img/sword.png');
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0; 
+}
+
+.turn-content {
+  color: #2c3e50 !important;
 }

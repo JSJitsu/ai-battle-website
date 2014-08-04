@@ -454,9 +454,9 @@ footer .footer-below {
   border-color: #2c3e50 !important;
 }
 
- a:hover, a:focus, a:active, a.active {
-outline: 0 !important;
-color: #18bc9c !important;
+a:hover, a:focus, a:active, a.active {
+  outline: 0 !important;
+  color: #18bc9c !important;
 }
 
 .navbar-default {
@@ -472,9 +472,9 @@ color: #18bc9c !important;
 }
 
 .btn-success {
-color: #ffffff;
-background-color: #18bc9c;
-border-color: #18bc9c;
+  color: #ffffff;
+  background-color: #18bc9c;
+  border-color: #18bc9c;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -482,4 +482,18 @@ border-color: #18bc9c;
 .navbar-default .navbar-nav > .active > a:focus {
   color: #ffffff;
   background-color: #1a242f;
+}
+
+.panel-primary>.panel-heading {
+  color: #ffffff;
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+body {
+  color: #2c3e50 !important;
 }
