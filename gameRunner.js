@@ -57,6 +57,7 @@ var runGame = function() {
   game.addDiamondMine(2,0);
   game.addDiamondMine(4,2);
   game.addDiamondMine(2,4);
+  game.maxTurn = 2000;
 
   //Get today's date in string form
   var date = getDateString();

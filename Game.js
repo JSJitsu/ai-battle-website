@@ -19,7 +19,7 @@ var Game = function() {
   this.ended = false;
 
   this.turn = 0;
-  this.maxTurn = 2000;
+  this.maxTurn = 300;
   this.hasStarted = false;
 };
 
@@ -116,7 +116,7 @@ Game.prototype.handleHeroTurn = function(direction) {
   var hero = this.activeHero();
 
   // Only resolves the turn if the hero is not dead
-  if (hero.dead) {
+  if (!hero.dead) {
 
     // Gives the hero diamonds for each owned mine
     this._handleHeroEarnings(hero);
