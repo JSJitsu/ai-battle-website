@@ -31,17 +31,21 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
     throw new Error('Cannot add heroes after the game has started!')
   }
 
-  // Creates new hero object
-  var hero = new Hero(distanceFromTop, distanceFromLeft);
+  //Can only add a hero to unoccupied spaces
+  if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
+    // Creates new hero object
+    var hero = new Hero(distanceFromTop, distanceFromLeft);
 
-  // Saves hero id
-  hero.id = this.heroes.length;
+    // Saves hero id
+    hero.id = this.heroes.length;
 
-  // Puts hero on board
-  this.board.tiles[distanceFromTop][distanceFromLeft] = hero;
+    // Puts hero on board
+    this.board.tiles[distanceFromTop][distanceFromLeft] = hero;
 
-  // Adds hero to game data structure
-  this.heroes.push(hero);
+    // Adds hero to game data structure
+    this.heroes.push(hero);
+  }
+
 };
 
 // Adds a diamond mine to the board
@@ -50,17 +54,20 @@ Game.prototype.addDiamondMine = function(distanceFromTop, distanceFromLeft) {
     throw new Error('Cannot add diamond mines after the game has started!')
   }
 
-  // Creates new diamond mine object
-  var diamondMine = new DiamondMine(distanceFromTop, distanceFromLeft);
+  //Can only add a diamond mine to unoccupied spaces
+  if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
+    // Creates new diamond mine object
+    var diamondMine = new DiamondMine(distanceFromTop, distanceFromLeft);
 
-  // Saves diamondMines id
-  diamondMine.id = this.diamondMines.length;
+    // Saves diamondMines id
+    diamondMine.id = this.diamondMines.length;
 
-  // Puts diamondMine on board
-  this.board.tiles[distanceFromTop][distanceFromLeft] = diamondMine;
+    // Puts diamondMine on board
+    this.board.tiles[distanceFromTop][distanceFromLeft] = diamondMine;
 
-  // Adds diamondMine to game data structure
-  this.diamondMines.push(diamondMine);
+    // Adds diamondMine to game data structure
+    this.diamondMines.push(diamondMine);
+  }
 };
 
 // Adds a health well to the board
@@ -69,14 +76,17 @@ Game.prototype.addHealthWell = function(distanceFromTop, distanceFromLeft) {
     throw new Error('Cannot add health wells after the game has started!')
   }
 
-  // Creates new health well object
-  var healthWell = new HealthWell(distanceFromTop, distanceFromLeft);
+  //Can only add a health well to unoccupied spaces
+  if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
+    // Creates new health well object
+    var healthWell = new HealthWell(distanceFromTop, distanceFromLeft);
 
-  // Puts healthWell on board
-  this.board.tiles[distanceFromTop][distanceFromLeft] = healthWell;
+    // Puts healthWell on board
+    this.board.tiles[distanceFromTop][distanceFromLeft] = healthWell;
 
-  // Adds healthWell to game data structure
-  this.healthWells.push(healthWell);
+    // Adds healthWell to game data structure
+    this.healthWells.push(healthWell);
+  }
 };
 
 // Adds an impassable (rock, tree, etc) to the board
@@ -84,15 +94,17 @@ Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
   if (this.hasStarted) {
     throw new Error('Cannot add impassables after the game has started!')
   }
+  //Can only add an impassable to unoccupied spaces
+  if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
+    // Creates new impassable object
+    var impassable = new Impassable(distanceFromTop, distanceFromLeft);
 
-  // Creates new impassable object
-  var impassable = new Impassable(distanceFromTop, distanceFromLeft);
+    // Puts impassable on board
+    this.board.tiles[distanceFromTop][distanceFromLeft] = impassable;
 
-  // Puts impassable on board
-  this.board.tiles[distanceFromTop][distanceFromLeft] = impassable;
-
-  // Adds impassable to game data structure
-  this.impassables.push(impassable);
+    // Adds impassable to game data structure
+    this.impassables.push(impassable);
+  }
 };
 
 // Return a reference to the hero whose turn it is

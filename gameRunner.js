@@ -44,9 +44,9 @@ var runGame = function() {
   //Set up the game board
   var game = new Game();
   game.addHero(0,0);
-  game.addHero(0,4);
-  game.addHero(4,0);
-  game.addHero(4,4);
+  game.addHero(0,10);
+  game.addHero(10,0);
+  game.addHero(10,10);
 
   game.addHealthWell(2,2);
   
