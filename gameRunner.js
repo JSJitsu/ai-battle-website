@@ -3,8 +3,7 @@ var Q = require('q');
 var Game = require('./Game.js');
 
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
-// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
-var mongoConnectionURL = 'mongodb://MongoLab-j:MiQYHkkvT_mO7_nLJTZ20OTQ4DdmA2Uj1yEl5pWZFtA-@ds050077.mongolab.com:50077/MongoLab-j';
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var move = function(gameData, helpers) {
   var choices = ['North', 'East', 'South', 'West'];
