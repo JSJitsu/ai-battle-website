@@ -4,6 +4,7 @@ var Game = require('./Game.js');
 
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
 // var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = 'mongodb://MongoLab-j:MiQYHkkvT_mO7_nLJTZ20OTQ4DdmA2Uj1yEl5pWZFtA-@ds050077.mongolab.com:50077/MongoLab-j';
 
 var move = function(gameData, helpers) {
   var choices = ['North', 'East', 'South', 'West'];
@@ -87,18 +88,17 @@ var runGame = function() {
           console.log(err);
         }
 
-        if (game.ended) {
-          console.log('closed!')
-          mongoDb.close();
-          return;
-        }
-
+        //Handles the hero turn
         game.handleHeroTurn(move(game));
 
         //Manually set the ID so Mongo doesn't just keep writing to the same document
         game._id = game.turn + '|' + date;
 
-        resolveGameAndSaveTurnsToDB(game);
+        if (game.ended) {
+          mongoDb.close();
+        } else {
+          resolveGameAndSaveTurnsToDB(game);
+        }
       });
     };
 
