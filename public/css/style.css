@@ -7,9 +7,10 @@
     width: 300px;
     margin-left: 51px; }
   .content .panel {
+    margin-bottom: -84px;
     width: 16%;
     left: 2.6%;
-    top: 41vh;
+    top: 35vh;
     position: relative; }
   .content img {
     max-width: 44.5%; }
