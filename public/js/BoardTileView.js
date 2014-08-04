@@ -19,7 +19,6 @@ var BoardTileView = Backbone.View.extend({
       }
       var html = '<img src="' + assets[type] + '">'
       if (type === 'Hero') {
-        html += '<div class="heroname">'+ 'hero:' + this.model.get('battleId') + '</div>';
         html += '<div class="heroHp">'+ 'hp:' + this.model.get('health') + '</div>';
       }
       this.$el.html(html);
