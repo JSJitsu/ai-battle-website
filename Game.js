@@ -18,7 +18,7 @@ var Game = function() {
   this.impassables = [];
   this.ended = false;
 
-  this.turn = 1;
+  this.turn = 0;
   this.maxTurn = 300;
   this.hasStarted = false;
 };
@@ -107,6 +107,10 @@ Game.prototype.activeHero = function() {
 //    at the start of their turn
 // 2) Moves the active hero in the direction specified
 Game.prototype.handleHeroTurn = function(direction) {
+  if (this.ended) {
+    return;
+  }
+
   var hero = this.activeHero();
 
   // Does nothing if hero is not alive
