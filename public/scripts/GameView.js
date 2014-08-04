@@ -24,7 +24,7 @@ var GameView = Backbone.View.extend({
     this.model.fetch({
       success: this.render.bind(this),
       error: function(collection, response, options){
-        console.log('something went wrong');
+        console.log('error', response);
       }
     });
   }
