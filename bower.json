@@ -13,7 +13,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-css-only": "~3.2.0",
     "powerange": "~0.0.2",
     "backbone": "~1.1.2",
     "jquery": "~2.1.1",
