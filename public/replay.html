@@ -31,15 +31,6 @@
   <div class="slide">
     <input class="slider" step="1"/>
   </div>
-    <script>
-      $(function(){
-        var app = {};
-        app.game = new Game();
-        app.gameView = new GameView({ model: app.game });
-        $('.content').append(app.gameView.$el);
-      })
-    </script>
-
     <script src="./lib/jquery/dist/jquery.js"></script>
     <script src="./lib/lodash/dist/lodash.min.js"></script>
     <script src="./lib/backbone/backbone.js"></script>
@@ -52,6 +43,13 @@
     <script src="./scripts/Game.js"></script>
     <script src="./scripts/GameView.js"></script>
     <script src="./scripts/slider.js"></script>
-    <script src="./scripts/app.js"></script>
+    <script>
+      $(function(){
+        var app = {};
+        app.game = new Game();
+        app.gameView = new GameView({ model: app.game });
+        $('.content').append(app.gameView.$el);
+      })
+    </script>
   </body>
 </html>
