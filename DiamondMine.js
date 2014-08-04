@@ -6,7 +6,7 @@ var DiamondMine = function(distanceFromTop, distanceFromLeft) {
 
   this.type = 'DiamondMine';
 
-  this.owner = undefined;
+  this.owner = 'None';
 };
 
 DiamondMine.prototype.getCode = function() {
@@ -15,6 +15,16 @@ DiamondMine.prototype.getCode = function() {
     idStr = '0' + idStr;
   }
   return 'D' + idStr;
+};
+
+DiamondMine.prototype.updateOwner = function(hero) {
+  if (this.owner !== 'None') {
+    //Removes this mine from the previous owner's array
+    this.owner.loseMine(this);
+  }
+
+  //Updates the owner to be the new hero
+  this.owner = hero;
 };
 
 module.exports = DiamondMine;

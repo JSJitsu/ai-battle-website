@@ -1,15 +1,23 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./Game.js');
-var move = require('./hero.js');
 
-// var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI;// || 'mongodb://localhost/javascriptBattle'
-var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
+// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = 'mongodb://MongoLab-j:MiQYHkkvT_mO7_nLJTZ20OTQ4DdmA2Uj1yEl5pWZFtA-@ds050077.mongolab.com:50077/MongoLab-j';
+
+var move = function(gameData, helpers) {
+  var choices = ['North', 'East', 'South', 'West'];
+  return choices[Math.floor(Math.random()*4)];
+};
 
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
     console.log('open!');
-    return db.collection('jsBattleGameData');
+    return {
+      collection: db.collection('jsBattleGameData'),
+      db: db
+    };
   });
 };
 
@@ -32,38 +40,13 @@ var getDateString = function() {
   return result;
 };
 
-var resolveGameAndSaveTurnsToDB = function(promiseToWaitFor, mongoCollection, game) {
-  console.log(game.turn);
-  if (promiseToWaitFor === undefined) {
-    resolveGameAndSaveTurnsToDB(Q.ninvoke(mongoCollection, 'insert', game), mongoCollection, game);
-  } else {
-    promiseToWaitFor.then(function(collection) {
-      if (!game.ended) {
-        game.handleHeroTurn(move(game));
-
-        //Get today's date in string form
-        var date = getDateString();
-
-        //Manually set the ID so Mongo doesn't just keep writing to the same document
-        game._id = game.turn + '|' + date;
-        
-        promiseToWaitFor.then(function() {
-          setTimeout(function() {
-            resolveGameAndSaveTurnsToDB(Q.ninvoke(mongoCollection, 'insert', game), mongoCollection, game)
-          }, 10000);
-        });
-      }
-    }).catch(function(err) {
-      console.log(err);
-    });
-  }
-};
-
 var runGame = function() {
   //Set up the game board
   var game = new Game();
   game.addHero(0,0);
   game.addHero(0,4);
+  game.addHero(4,0);
+  game.addHero(4,4);
 
   game.addHealthWell(2,2);
   
@@ -75,15 +58,55 @@ var runGame = function() {
   game.addDiamondMine(4,2);
   game.addDiamondMine(2,4);
 
+  //Get today's date in string form
+  var date = getDateString();
+
+  //Manually set the ID so Mongo doesn't just keep writing to the same document
+  game._id = game.turn + '|' + date;
+
+
   //Open up the database connection
   var openDatabasePromise = openGameDatabase();
 
   //After opening the database promise, 
-  openDatabasePromise.then(function(collection) {
+  openDatabasePromise.then(function(mongoData) {
+    //The collection we're inserting into
+    var mongoCollection = mongoData.collection;
+    //The database we're inserting into
+    var mongoDb = mongoData.db;
 
-    resolveGameAndSaveTurnsToDB(undefined, collection, game);
+    var resolveGameAndSaveTurnsToDB = function(game) {
+      console.log(game.turn);
+      mongoCollection.update({
+        '_id':game._id
+      }, game, {
+        upsert:true
+      }, function(err, result) {
+        if (err) {
+          console.trace();
+          console.log('---------')
+          console.log(err);
+        }
+
+        //Handles the hero turn
+        game.handleHeroTurn(move(game));
+
+        //Manually set the ID so Mongo doesn't just keep writing to the same document
+        game._id = game.turn + '|' + date;
+
+        if (game.ended) {
+          mongoDb.close();
+        } else {
+          resolveGameAndSaveTurnsToDB(game);
+        }
+      });
+    };
+
+    resolveGameAndSaveTurnsToDB(game);
 
   }).catch(function(err) {
+    console.trace();
+    console.log('---------')
     console.log(err);
   });
 };
