@@ -12,34 +12,23 @@ var BoardTileView = Backbone.View.extend({
     if (this.model === undefined) {
       return;
     }
-    var tile = this.model.get('tile');
-    var getIcon = function(code) {
-      var assets = {
-        R: "../resources/rock.jpg",
-        H: "../resources/bknight.jpg",
-        D: "../resources/mine.jpg",
-        W: '../resources/pot.png',
-      } 
-      return '<img src="' + assets[code] + '">';
-    };
-
-    var $icon = '';
-    if (tile.type === "Unoccupied") {
-    } else if (tile.type === "Hero") {
-      $icon = getIcon('H');
-    } else if (tile.type === 'DiamondMine') {
-      $icon = getIcon('D');
-    } else if (tile.type === 'HealthWell') {
-      $icon = getIcon('W');
-    } else if (tile.type === 'Impassable') {
-      $icon = getIcon('H');
+    if(!this.model.get('tile').type){
+      return;
     }
-    this.$el.html($icon);
-    // if(this.assets[propertyCode.id.charAt(0)]){
-      // var $icon = '<img src="' +this.assets[propertyCode.id.charAt(0)] + '">';
-    //   if(propertyCode.id.charAt(0) === 'H'){
-    //     $icon += '<div class="heroname">'+ "hero:" + propertyCode.id.charAt(3) + '</div>';
-    //   }
-    // }
+    var tile = this.model.get('tile');
+      var assets = {
+        Impassable: "../resources/rock.jpg",
+        Hero: "../resources/bknight.jpg",
+        DiamondMine: "../resources/mine.jpg",
+        HealthWell: '../resources/pot.png',
+      }
+      var $icon = '<img src="' + assets[tile.type] + '">'
+      if(this.model.get('tile').type === "Hero"){
+        console.log('hero detected')
+        $icon += '<div class="heroname">'+ "hero:" + this.model.get('tile').id + '</div>';
+      }
+      this.$el.html($icon)
+      
+
   }
 });
