@@ -10,7 +10,7 @@ var HERO_ATTACK_DAMAGE = 30;
 var HEALTH_WELL_HEAL_AMOUNT = 40;
 
 var Game = function() {
-  this.board = new Board(5);
+  this.board = new Board(10);
   
   this.heroes = [];
   this.diamondMines = [];
@@ -19,7 +19,7 @@ var Game = function() {
   this.ended = false;
 
   this.turn = 0;
-  this.maxTurn = 300;
+  this.maxTurn = 2000;
   this.hasStarted = false;
 };
 
@@ -236,24 +236,5 @@ Game.prototype.heroDied = function(hero) {
   left = hero.distanceFromLeft;
   this.board.tiles[top][left] = new Unoccupied(top, left);
 };
-
-var game = new Game();
-game.addHero(0,0);
-game.addHero(0,4);
-
-game.addHealthWell(2,2);
-
-game.addImpassable(2,1);
-game.addImpassable(2,3);
-
-// game.addDiamondMine(0,2);
-// game.addDiamondMine(2,0);
-// game.addDiamondMine(4,2);
-// game.addDiamondMine(2,4);
-
-for (var i=0; i<100; i++) {
-  // console.log(game.activeHero());
-  game.handleHeroTurn('East');
-}
 
 module.exports = Game;

@@ -44,6 +44,8 @@ var runGame = function() {
   var game = new Game();
   game.addHero(0,0);
   game.addHero(0,4);
+  game.addHero(4,0);
+  game.addHero(4,4);
 
   game.addHealthWell(2,2);
   
@@ -67,9 +69,9 @@ var runGame = function() {
 
   //After opening the database promise, 
   openDatabasePromise.then(function(mongoData) {
-    // resolveGameAndSaveTurnsToDB(undefined, collection, game);
-
+    //The collection we're inserting into
     var mongoCollection = mongoData.collection;
+    //The database we're inserting into
     var mongoDb = mongoData.db;
 
     var resolveGameAndSaveTurnsToDB = function(game) {
@@ -91,11 +93,7 @@ var runGame = function() {
           return;
         }
 
-        console.log('handling turn...');
-        game.handleHeroTurn('North');
-
-        //Get today's date in string form
-        var date = getDateString();
+        game.handleHeroTurn(move(game));
 
         //Manually set the ID so Mongo doesn't just keep writing to the same document
         game._id = game.turn + '|' + date;
