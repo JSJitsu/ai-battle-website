@@ -42,21 +42,25 @@ var getDateString = function() {
 
 var runGame = function() {
   //Set up the game board
+
+  var randomNumber = function(max) {
+    return Math.floor(Math.random()*max);
+  };
+
   var game = new Game();
-  game.addHero(0,0);
-  game.addHero(0,10);
-  game.addHero(10,0);
-  game.addHero(10,10);
+  for (var i=0; i<10; i++) {
+    game.addHero(randomNumber(10), randomNumber(10));
+  }
+  for (var i=0; i<4; i++) {
+    game.addHealthWell(randomNumber(10), randomNumber(10));
+  }
+  for (var i=0; i<16; i++) {
+    game.addImpassable(randomNumber(10), randomNumber(10));
+  }
+  for (var i=0; i<10; i++) {
+    game.addDiamondMine(randomNumber(10), randomNumber(10));
+  }
 
-  game.addHealthWell(2,2);
-  
-  game.addImpassable(2,1);
-  game.addImpassable(2,3);
-
-  game.addDiamondMine(0,2);
-  game.addDiamondMine(2,0);
-  game.addDiamondMine(4,2);
-  game.addDiamondMine(2,4);
   game.maxTurn = 2000;
 
   //Get today's date in string form
@@ -64,7 +68,6 @@ var runGame = function() {
 
   //Manually set the ID so Mongo doesn't just keep writing to the same document
   game._id = game.turn + '|' + date;
-
 
   //Open up the database connection
   var openDatabasePromise = openGameDatabase();
