@@ -16,7 +16,6 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
   // Stats
   this.diamondsEarned = 0;
   this.damageDone = 0;
-  this.kills = 0;
   this.heroesKilled = [];
 
   // General
@@ -24,8 +23,7 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
 };
 
 Hero.prototype.killedHero = function(otherHero) {
-  this.kills++;
-  this.heroesKilled.push(otherHero);
+  this.heroesKilled.push(otherHero.id);
 };
 
 // Handles any situation in which the hero takes damage
@@ -62,14 +60,12 @@ Hero.prototype.captureMine = function(diamondMine, healthCost) {
 
     if (!this.dead) {
       // Add this mine to mines owned
-      this.minesOwned[diamondMine.id] = diamondMine;
+      //(only stores id to prevent circular logic when saving to Mongo)
+      this.minesOwned[diamondMine.id] = diamondMine.id;
       this.mineCount++;
 
-      // remove this mine from its former owner
-      var formerOwner = diamondMine.owner;
-      if (formerOwner !== undefined) {
-        formerOwner.loseMine(diamondMine);
-      }
+      //Switch the diamond mine's owner to be this hero
+      diamondMine.updateOwner(this);
     }
   }
 };

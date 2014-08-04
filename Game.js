@@ -111,31 +111,32 @@ Game.prototype.handleHeroTurn = function(direction) {
     return;
   }
 
+  this.hasStarted = true;
+
   var hero = this.activeHero();
 
-  // Does nothing if hero is not alive
+  // Only resolves the turn if the hero is not dead
   if (hero.dead) {
-    return;
-  }
 
-  // Gives the hero diamonds for each owned mine
-  this._handleHeroEarnings(hero);
+    // Gives the hero diamonds for each owned mine
+    this._handleHeroEarnings(hero);
 
-  // Attempts to move the hero in the direction indicated
-  this._handleHeroMove(hero, direction);
+    // Attempts to move the hero in the direction indicated
+    this._handleHeroMove(hero, direction);
 
-  // If hero died during their move phase...
-  if (hero.dead) {
-    // Remove hero from board
-    this.heroDied(hero);
+    // If hero died during this move phase...
+    if (hero.dead) {
+      // Remove hero from board
+      this.heroDied(hero);
 
-  // If hero is still alive after moving...
-  } else {
-    // Resolves all damage given and healing received at the
-    // end of the hero's turn
-    this._resolveHeroAttacks(hero);
-  }
-  
+    // If hero is still alive after moving...
+    } else {
+      // Resolves all damage given and healing received at the
+      // end of the hero's turn
+      this._resolveHeroAttacks(hero);
+    }
+  } 
+
   this.turn++;
   if (this.turn > this.maxTurn) {
     this.ended = true;
@@ -144,7 +145,7 @@ Game.prototype.handleHeroTurn = function(direction) {
 
 // Resolve diamond mine earnings
 Game.prototype._handleHeroEarnings = function(hero) {
-  hero.diamondsEarned += hero.minesOwned.length;
+  hero.diamondsEarned += hero.mineCount;
 };
 
 // Attempt to move hero in the direction indicated
@@ -158,6 +159,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
 
   // If tile is occupied, move into that tile
   } else if (tile.type === 'Unoccupied') {
+
     // Make the soon-to-be vacated tile "unoccupied"
     this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = 
         new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
@@ -171,8 +173,10 @@ Game.prototype._handleHeroMove = function(hero, direction) {
   
   // If tile is a diamond mine, the mine is captured, but the hero stays put
   } else if (tile.type === "DiamondMine") {
+    var diamondMine = tile;
+
     // Hero attempts to capture mine
-    hero.captureMine(tile, DIAMOND_MINE_CAPTURE_DAMAGE);
+    hero.captureMine(diamondMine, DIAMOND_MINE_CAPTURE_DAMAGE);
 
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
@@ -181,7 +185,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
 
     // If he survives, he is now the owner of the mine
     } else {
-      tile.owner = hero;
+      diamondMine.owner = hero;
     }
   // Running into a health well will heal a certain amount of damage
   } else if (tile.type === "HealthWell") {
@@ -232,5 +236,24 @@ Game.prototype.heroDied = function(hero) {
   left = hero.distanceFromLeft;
   this.board.tiles[top][left] = new Unoccupied(top, left);
 };
+
+var game = new Game();
+game.addHero(0,0);
+game.addHero(0,4);
+
+game.addHealthWell(2,2);
+
+game.addImpassable(2,1);
+game.addImpassable(2,3);
+
+// game.addDiamondMine(0,2);
+// game.addDiamondMine(2,0);
+// game.addDiamondMine(4,2);
+// game.addDiamondMine(2,4);
+
+for (var i=0; i<100; i++) {
+  // console.log(game.activeHero());
+  game.handleHeroTurn('East');
+}
 
 module.exports = Game;

@@ -17,4 +17,14 @@ DiamondMine.prototype.getCode = function() {
   return 'D' + idStr;
 };
 
+DiamondMine.prototype.updateOwner = function(hero) {
+  if (this.owner !== undefined) {
+    //Removes this mine from the previous owner's array
+    this.owner.loseMine(this);
+  }
+
+  //Updates the owner to be the new hero
+  this.owner = hero;
+};
+
 module.exports = DiamondMine;
