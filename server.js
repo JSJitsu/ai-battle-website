@@ -58,6 +58,7 @@ app.use('/api', router);
 OAuthGithub(app);
 
 app.listen(port);
+
 console.log('Listening on port: ', port);
 
 // for ServerSpec.js to work must export app
