@@ -20,7 +20,7 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
 
   // General
   this.type = 'Hero';
-  this.class = 'Adventurer';
+  this.subType = 'Adventurer';
 };
 
 Hero.prototype.killedHero = function(otherHero) {

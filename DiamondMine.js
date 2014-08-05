@@ -5,7 +5,7 @@ var DiamondMine = function(distanceFromTop, distanceFromLeft) {
   this.distanceFromLeft = distanceFromLeft;
 
   this.type = 'DiamondMine';
-  this.class = 'DiamondMine';
+  this.subType = 'DiamondMine';
 
   this.owner = undefined;
 };
