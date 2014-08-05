@@ -448,7 +448,7 @@ describe('Board methods.', function() {
       game.turn = 1;
       expect(game.activeHero()).to.deep.equal(game.heroes[1]);
     });
-    describe('Hero\'s turn', function(){
+    describe('handleHeroTurn method', function(){
 
       it('Should move the hero.', function(){
         var game = new Game();
@@ -519,7 +519,145 @@ describe('Board methods.', function() {
       });
 
     });
+    describe('handleHeroEarnings method', function() {
+
+      it('Should increase diamondsEarned based on mineCount.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.heroes[0].mineCount = 3;
+        game._handleHeroEarnings(game.heroes[0]);
+        expect(game.heroes[0].diamondsEarned).to.equal(3);
+      });  
+
+      it('Should not change diamondsEarned if mineCount does not increase.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game._handleHeroEarnings(game.heroes[0]);
+        expect(game.heroes[0].diamondsEarned).to.equal(0);
+      })
+
+
+    }); 
+
+    describe('handleHeroMove method', function() {
+
+      it('Returns undefined if trying to move off the board.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        var moveOffBoard = game._handleHeroMove(game.heroes[0], 'North');
+        expect(moveOffBoard).to.equal(undefined);
+        var moveOffBoard = game._handleHeroMove(game.heroes[0], 'West');
+        expect(moveOffBoard).to.equal(undefined);
+      });
+
+      it('Makes soon-to-be vacated tile "unoccupied".', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.board.tiles[0][0].type).to.equal("Unoccupied");
+      });
+
+      it('Updates hero\'s location (in hero)', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.heroes[0].distanceFromTop).to.equal(1);
+        expect(game.heroes[0].distanceFromLeft).to.equal(0);
+      });
+
+      it('Updates hero\'s location (on board)', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.board.tiles[1][0]).to.equal(game.heroes[0]);
+      });
+
+      it('If hero tries to move on diamond mine he does not move.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.addDiamondMine(1,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.heroes[0].distanceFromTop).to.equal(0);
+        expect(game.heroes[0].distanceFromLeft).to.equal(0);
+      });
+
+      it('If hero captures mine with enough health he doesn\'t die and is owner of the mine.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.addDiamondMine(1,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.heroes[0].dead).to.equal(false);
+        expect(game.diamondMines[0].owner).to.equal(game.heroes[0]);
+      });
+
+      it('If hero captures mine with minimal health he dies.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.heroes[0].health = 10;
+        game.addDiamondMine(1,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.heroes[0].dead).to.equal(true);
+      });
+
+      it('If hero tries to move over a healthwell he will get health and not move.', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.heroes[0].health = 10;
+        game.addHealthWell(1,0);
+        game._handleHeroMove(game.heroes[0], 'South');
+        expect(game.heroes[0].health).to.equal(50);
+        expect(game.heroes[0].distanceFromTop).to.equal(0);
+        expect(game.heroes[0].distanceFromLeft).to.equal(0);
+      });
+    });
+
+    describe('resolveHeroAttacks method', function() {
+   
+      it('one hero attacks another if in range', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.addHero(1,0);
+        game._resolveHeroAttacks(game.heroes[0]);
+        expect(game.heroes[1].health).to.equal(70);
+      });
+
+      it('remove hero from board if dead', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.addHero(1,0);
+        game.heroes[1].health = 1;
+        game._resolveHeroAttacks(game.heroes[0]);
+        expect(game.board.tiles[1][0].type).to.equal('Unoccupied');
+      });
+
+      it('tell hero he killed someone', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.addHero(1,0);
+        game.heroes[1].health = 1;
+        game._resolveHeroAttacks(game.heroes[0]);
+        expect(game.heroes[0].heroesKilled).to.have.length(1);
+      });
+    });
+
+    describe('heroDied method', function() {
+
+      it('removes dead hero from board', function() {
+        var game = new Game();
+        game.addHero(0,0);
+        game.heroDied(game.heroes[0]);
+        expect(game.board.tiles[0][0].type).to.equal('Unoccupied');
+      });
+
+    });
+    
+
+        
+
+
+    }); 
+
+
   });
-});
 
 });
