@@ -17,6 +17,7 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
   this.diamondsEarned = 0;
   this.damageDone = 0;
   this.heroesKilled = [];
+  this.lastActiveTurn = 0;
 
   // General
   this.type = 'Hero';
