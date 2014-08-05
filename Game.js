@@ -18,6 +18,11 @@ var Game = function() {
   this.impassables = [];
   this.ended = false;
 
+  this.diamondMessage = '';
+  this.moveMessage = 'Game has started';
+  this.attackMessage = '';
+  this.killMessage = '';
+
   this.turn = 0;
   this.maxTurn = 300;
   this.hasStarted = false;
@@ -157,16 +162,24 @@ Game.prototype.handleHeroTurn = function(direction) {
 
 // Resolve diamond mine earnings
 Game.prototype._handleHeroEarnings = function(hero) {
+  if (hero.mineCount > 0) {
+    this.diamondMessage = 'Hero #' + hero.id + ' got ' + hero.mineCount + ' diamonds from his mines';
+  } else {
+    this.diamondMessage = 'Hero #' + hero.id + ' owns no mines, and got no diamonds';
+  }
   hero.diamondsEarned += hero.mineCount;
 };
 
 // Attempt to move hero in the direction indicated
 Game.prototype._handleHeroMove = function(hero, direction) {
+  this.moveMessage = 'Hero #' + hero.id + ' walked ' + direction;
+
   // Gets the tile at the location that the hero wants to go to
   var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, direction);
 
   // If tile is not on the board (invalid coordinates), don't move
   if (tile === false) {
+    this.moveMessage += '...and realized that wasn\'t possible';
     return;
 
   // If tile is occupied, move into that tile
@@ -193,14 +206,17 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
       this.heroDied(hero);
+      this.moveMessage += ', tried to capture a diamond mine, but died fighting the mine\'s guardians';
       return;
 
     // If he survives, he is now the owner of the mine
     } else {
+      this.moveMessage += ' and is now the proud owner of diamond mine #' + diamondMine.id;
       diamondMine.owner = hero;
     }
   // Running into a health well will heal a certain amount of damage
   } else if (tile.type === "HealthWell") {
+    this.moveMessage += ', drank from a health well, and now feels MUCH better';
     hero.healDamage(HEALTH_WELL_HEAL_AMOUNT);
   }
 };
@@ -214,6 +230,8 @@ Game.prototype._resolveHeroAttacks = function(hero) {
     'West',
   ];
 
+  this.attackMessage = '';
+
   // Loop through all tiles around the hero
   for (var i=0; i<directions.length; i++) {
     var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, directions[i]);
@@ -224,6 +242,13 @@ Game.prototype._resolveHeroAttacks = function(hero) {
       // from the check above, we know 'tile' points to a hero object
       var otherHero = tile;
 
+      //Update the attack message
+      if (this.attackMessage === '') {
+        this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + hero.id;
+      } else {
+        this.attackMessage === 'and Hero #' + hero.id;
+      }
+
       // Our hero (whose turn it is) will auto-hit any heroes in range,
       // so this other hero that is one space away will take damage
       hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
@@ -233,6 +258,8 @@ Game.prototype._resolveHeroAttacks = function(hero) {
 
         // Tell our hero he killed someone
         hero.killedHero(otherHero);
+
+        this.killMessage = 'Hero #' + hero.id + ' killed Hero #' + hero.id + '!';
       }
     }
   }
@@ -241,12 +268,12 @@ Game.prototype._resolveHeroAttacks = function(hero) {
 // Removes a dead hero from the board
 Game.prototype.heroDied = function(hero) {
 
-  console.log('HERO DIED: ' + hero.id);
-
   // Removes a dead hero from the board
   top = hero.distanceFromTop;
   left = hero.distanceFromLeft;
-  this.board.tiles[top][left] = new Unoccupied(top, left);
+  var bones = new Unoccupied(top, left);
+  bones.class = 'Bones';
+  this.board.tiles[top][left] = bones;
 };
 
 module.exports = Game;
