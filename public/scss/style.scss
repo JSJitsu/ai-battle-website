@@ -125,7 +125,7 @@ table {
   float: right;
 }
 
-.range-handle{
+.range-handle {
   bottom: 10px;
   height: 28px;
   width: 29px;
@@ -137,6 +137,14 @@ table {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0; 
+}
+
+.messages {
+  margin: 0 auto;
+  height: 16px;
+  width: 500px;
+  top: -38px;
+  position: relative;
 }
 
 .turn-content {

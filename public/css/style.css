@@ -113,5 +113,12 @@ table {
   box-shadow: none;
   border-radius: 0; }
 
+.messages {
+  margin: 0 auto;
+  height: 16px;
+  width: 500px;
+  top: -38px;
+  position: relative; }
+
 .turn-content {
   color: #2c3e50 !important; }
