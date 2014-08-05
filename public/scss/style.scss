@@ -37,7 +37,9 @@
 
 .battle-map {
   margin: 0 auto;
+  position: relative;
   width: 55%;
+  left: 63px;
 }
 
 .results-btn {
@@ -145,6 +147,14 @@ table {
   width: 500px;
   top: -38px;
   position: relative;
+}
+
+.hero-info {
+  float: right;
+  height: 85px;
+  top: 105px;
+  width: 96px;
+  padding-top: 79px;
 }
 
 .turn-content {

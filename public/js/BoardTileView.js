@@ -5,6 +5,7 @@ var BoardTileView = Backbone.View.extend({
     if (this.model === undefined) {
       console.log('UNDEFINED!');
     }
+
     this.render();
     this.model.on('change', this.render());
   },
@@ -22,6 +23,7 @@ var BoardTileView = Backbone.View.extend({
       };
       var html = '<img src="' + assets[subType] + '">';
       if (type === 'Hero') {
+
         html += '<div class="hero">'+ this.model.get('battleId') + '</div>';
       }
       this.$el.html(html);

@@ -29,7 +29,9 @@
 
 .battle-map {
   margin: 0 auto;
-  width: 55%; }
+  position: relative;
+  width: 55%;
+  left: 63px; }
 
 .results-btn {
   display: inline-block;
@@ -119,6 +121,13 @@ table {
   width: 500px;
   top: -38px;
   position: relative; }
+
+.hero-info {
+  float: right;
+  height: 85px;
+  top: 105px;
+  width: 96px;
+  padding-top: 79px; }
 
 .turn-content {
   color: #2c3e50 !important; }
