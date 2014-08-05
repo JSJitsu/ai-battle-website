@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "blanket": "~1.1.6"
+    "blanket": "~1.1.6",
+    "chai-spies": "^0.5.1"
   },
   "devDependencies": {
     "chai": "^1.9.1"

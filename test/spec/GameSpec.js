@@ -1,5 +1,8 @@
 /* global projects, describe, it, expect, should */
-var expect = require('chai').expect;
+var chai = require('chai');
+var should = chai.should();
+var expect = chai.expect;
+var spies = require('chai-spies');
 var Board = require('../../Board.js');
 var DiamondMine = require('../../DiamondMine.js');
 var Game = require('../../Game.js');
@@ -7,6 +10,7 @@ var HealthWell = require('../../HealthWell.js');
 var Hero = require('../../Hero.js');
 var Impassable = require('../../Impassable.js');
 var Unoccupied = require('../../Unoccupied.js');
+chai.use(spies);
 
 describe('Game dependencies exist.', function () {
   'use strict';
@@ -385,7 +389,6 @@ describe('Board methods.', function() {
         expect(game.hasStarted).to.equal(false);
       });
     });
-  });
 
   describe('Game object methods', function(){
     it('Should add a hero to the game.', function(){
@@ -393,11 +396,130 @@ describe('Board methods.', function() {
       var hero = game.addHero(0,0);
       expect(game.heroes).to.have.length(1);
     });
-    it('Should add a hero to the game.', function(){
+
+    it('Should place a hero on the game board.', function(){
       var game = new Game();
-      var hero = game.addHero(0,0);
-      expect(game.heroes).to.have.length(1);
+      var hero1 = game.addHero(0,0);
+      expect(game.board.tiles[0][0]).to.have.property('health');
+    });
+
+    it('Should add a diamond mine to the game.', function(){
+      var game = new Game();
+      var d = game.addDiamondMine(0,0);
+      expect(game.diamondMines).to.have.length(1);
+    });
+
+    it('Should place a diamond mine on the game board.', function(){
+      var game = new Game();
+      var d = game.addDiamondMine(0,0);
+      expect(game.board.tiles[0][0]).to.have.property('type').that.deep.equals('DiamondMine');
+    });
+
+    it('Should add a health well to the game.', function(){
+      var game = new Game();
+      var hw = game.addHealthWell(0,0);
+      expect(game.healthWells).to.have.length(1);
+    });
+
+    it('Should place a health well on the game board.', function(){
+      var game = new Game();
+      var hw = game.addHealthWell(0,0);
+      expect(game.board.tiles[0][0]).to.have.property('type').that.deep.equals('HealthWell');
+    });
+
+    it('Should add an impassable object to the game.', function(){
+      var game = new Game();
+      var i = game.addImpassable(0,0);
+      expect(game.impassables).to.have.length(1);
+    });
+
+    it('Should place an impassable object on the game board.', function(){
+      var game = new Game();
+      var i = game.addImpassable(0,0);
+      expect(game.board.tiles[0][0]).to.have.property('type').that.deep.equals('Rock');
+    });
+
+    it('Should know what hero\'s turn it is.', function(){
+      var game = new Game();
+      var h1 = game.addHero(0,0);
+      var h2 = game.addHero(0,1);
+      var h3 = game.addHero(1,0);
+      var h4 = game.addHero(0,2);
+      game.turn = 1;
+      expect(game.activeHero()).to.deep.equal(game.heroes[1]);
+    });
+    describe('Hero\'s turn', function(){
+
+      it('Should move the hero.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.handleHeroTurn('South');
+        expect(game.heroes[0].distanceFromTop).to.equal(1);
+      });
+
+      it('Should not move the hero, if the hero is dead.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.heroes[0].dead = true;
+        game.handleHeroTurn('South');
+        expect(game.heroes[0].distanceFromTop).to.equal(0);
+      });
+
+      it('Should call the hero earnings method.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.heroes[0].mineCount = 1;
+        game.handleHeroTurn('South');
+        expect(game.heroes[0].diamondsEarned).to.equal(1);
+      });
+
+      it('Should call the hero attack method.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.heroes[0].takeDamage(100);
+        game.handleHeroTurn('South');
+        expect(game.heroes[0].dead).to.equal(true);
+      });
+
+      it('Should increment the turn.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.handleHeroTurn('South');
+        game.handleHeroTurn('South');
+        game.handleHeroTurn('South');
+        expect(game.turn).to.equal(3);
+      });
+    });
+    describe('Handle hero move', function(){
+      it('Should not let the hero move off of the board.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.handleHeroTurn('North');
+        expect(game.heroes[0].distanceFromTop).to.equal(0);
+      });
+
+      it('Should move the hero in the right direction.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.handleHeroTurn('South');
+        game.handleHeroTurn('East');
+        game.handleHeroTurn('South');
+        game.handleHeroTurn('East');
+        game.handleHeroTurn('North');
+        game.handleHeroTurn('West');
+        expect(game.heroes[0].distanceFromTop).to.equal(1);
+        expect(game.heroes[0].distanceFromLeft).to.equal(1);
+      });
+
+      it('Should leave the previous tile unoccupied.', function(){
+        var game = new Game();
+        var h1 = game.addHero(0,0);
+        game.handleHeroTurn('South');
+        expect(game.board.tiles[0][0]).to.deep.equal(new Unoccupied(0,0));
+      });
+
     });
   });
+});
 
 });
