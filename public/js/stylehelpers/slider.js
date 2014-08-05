@@ -9,7 +9,9 @@ slider.onchange = function() {
 };
 //listens for keydown events to control scrobbling
 $(document).keydown(function(e){
+  var turn = app.gameView.get('turn');
   if(e.which === 39 && slider.value < 2000){
+
     slider.value++;
   }
   if(e.which === 37 && slider.value > 1){

@@ -11,7 +11,8 @@ var GameView = Backbone.View.extend({
 
   render: function(){
   	this.$el.html('');
-    this.el.append(this.model.get('messages'));
+    this.$el.append('<p>' + this.model.get('diamondMessages') + '</p>').fadeIn();
+    // this.el.append(this.model.get('messages'));
     this.context = {round: this.model.get('turn')};
   	var boardView = new BoardView({collection: this.model.get('board')});
     var html = this.template(this.context);

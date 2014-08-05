@@ -132,7 +132,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('./');
+    res.redirect('./index.html');
   });
 
 app.get('/logout', function(req, res){

@@ -9,17 +9,18 @@ var BoardTileView = Backbone.View.extend({
     this.model.on('change', this.render());
   },
   render: function() {
-    var class = this.model.get('class');
-    if (class !== 'Unoccupied') {
+    var subType = this.model.get('subType');
+    var type = this.model.get('type')
+    if (subType !== 'Unoccupied') {
       var assets = {
         Tree: '../img/bush.png',
         Adventurer: '../img/bkknight.png',
         BlackKnight: '../img/black-knight.png',
         DiamondMine: '../img/diamond.png',
         HealthWell: '../img/pot.png',
-        Bones: '../img/bones.png';
+        Bones: '../img/bones.png'
       };
-      var html = '<img src="' + assets[class] + '">';
+      var html = '<img src="' + assets[subType] + '">';
       if (type === 'Hero') {
         html += '<div class="hero">'+ this.model.get('battleId') + '</div>';
       }
