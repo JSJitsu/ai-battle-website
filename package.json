@@ -4,7 +4,8 @@
   "description": "javascript-battle-webworkers ============================",
   "main": "Board.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test-node",
+    "test-node": "mocha -R spec ./test/spec/GameSpec.js"
   },
   "repository": {
     "type": "git",
