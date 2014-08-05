@@ -16,7 +16,7 @@
     position: relative;
   }
   img {
-  max-width: 44.5%;
+  max-width: 69.5%;
   }
 
 }
@@ -105,19 +105,24 @@ table {
 
 .range-bar {
   margin: 1px auto;
-  width: 321px !important;
+  width: 580px;
 }
 
 .battle-tile {
   height: 8vh;
   width: 10%;
-  border: 2px solid black;
+  border: 1px dotted rgba(16, 56, 13, 1);
   background-image: url("../img/tile.png");
 }
 
-.heroHp {
-  color: white; 
+.hero {
+  color: white;
   opacity: 0.6;
+  font-size: 24px;
+  margin-bottom: -44px;
+  position: relative;
+  top: -9px;
+  float: right;
 }
 
 .range-handle{
