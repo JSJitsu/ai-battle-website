@@ -21,6 +21,7 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
   // General
   this.type = 'Hero';
   this.subType = 'Adventurer';
+  this.team = undefined;
 };
 
 Hero.prototype.killedHero = function(otherHero) {
