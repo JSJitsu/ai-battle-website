@@ -3,8 +3,8 @@ var passport = require('passport');
 
 module.exports = function(app) {
   // github oath integration with passport
-  var GITHUB_CLIENT_ID = process.env.clientID || 'local no id';
-  var GITHUB_CLIENT_SECRET = process.env.clientSecret || 'local no id';
+  var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'local no id';
+  var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || 'local no id';
 
   // Passport session setup.
   //   To support persistent login sessions, Passport needs to be able to
