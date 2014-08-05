@@ -9,9 +9,9 @@ var DIAMOND_MINE_CAPTURE_DAMAGE = 20;
 var HERO_ATTACK_DAMAGE = 30;
 var HEALTH_WELL_HEAL_AMOUNT = 40;
 
-var Game = function() {
-  this.board = new Board(10);
-  
+var Game = function(n) {
+  this.board = new Board(n);
+
   this.heroes = [];
   this.diamondMines = [];
   this.healthWells = [];
@@ -158,7 +158,7 @@ Game.prototype.handleHeroTurn = function(direction) {
       // end of the hero's turn
       this._resolveHeroAttacks(hero);
     }
-  } 
+  }
 
   this.turn++;
   if (this.turn > this.maxTurn) {
@@ -192,7 +192,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
   } else if (tile.type === 'Unoccupied') {
 
     // Make the soon-to-be vacated tile "unoccupied"
-    this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = 
+    this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] =
         new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
 
     // Update hero location (in hero)
@@ -201,7 +201,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
 
     // Update hero location (on board)
     this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = hero;
-  
+
   // If tile is a diamond mine, the mine is captured, but the hero stays put
   } else if (tile.type === "DiamondMine") {
     var diamondMine = tile;
