@@ -45,7 +45,7 @@ var runGame = function() {
     return Math.floor(Math.random()*max);
   };
 
-  var game = new Game();
+  var game = new Game(10);
   for (var i=0; i<10; i++) {
     game.addHero(randomNumber(10), randomNumber(10));
   }
