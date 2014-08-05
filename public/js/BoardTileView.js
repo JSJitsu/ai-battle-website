@@ -12,15 +12,14 @@ var BoardTileView = Backbone.View.extend({
     var type = this.model.get('type');
     if (type !== 'Unoccupied') {
       var assets = {
-        Rock: '../img/rock.jpg',
-        Hero: '../img/black-knight.png',
-        DiamondMine: '../img/mine.jpg',
+        Rock: '../img/bush.png',
+        Hero: '../img/bkknight.png',
+        DiamondMine: '../img/diamond.png',
         HealthWell: '../img/pot.png'
-      }
-      var html = '<img src="' + assets[type] + '">'
+      };
+      var html = '<img src="' + assets[type] + '">';
       if (type === 'Hero') {
-        html += '<div class="heroname">'+ 'hero:' + this.model.get('battleId') + '</div>';
-        html += '<div class="heroHp">'+ 'hp:' + this.model.get('health') + '</div>';
+        html += '<div class="hero">'+ this.model.get('battleId') + '</div>';
       }
       this.$el.html(html);
     }

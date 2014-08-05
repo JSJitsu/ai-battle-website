@@ -13,7 +13,15 @@
     top: 35vh;
     position: relative; }
   .content img {
-    max-width: 44.5%; }
+    max-width: 69.5%; }
+
+.lifebar {
+  width: 20%;
+  height: 10px;
+  -webkit-box-shadow: inset 0 2px 0 #A23A3A;
+  background: transparent;
+  border-radius: 15px;
+  border: 3px solid #000058; }
 
 .game-view {
   height: auto;
@@ -75,17 +83,22 @@ table {
 
 .range-bar {
   margin: 1px auto;
-  width: 321px !important; }
+  width: 580px; }
 
 .battle-tile {
   height: 8vh;
   width: 10%;
-  border: 2px solid black;
+  border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
 
-.heroname {
+.hero {
   color: white;
-  opacity: 0.6; }
+  opacity: 0.6;
+  font-size: 24px;
+  margin-bottom: -44px;
+  position: relative;
+  top: -9px;
+  float: right; }
 
 .range-handle {
   bottom: 10px;
