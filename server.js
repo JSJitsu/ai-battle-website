@@ -34,6 +34,9 @@ app.use('/tests', express.static(__dirname + '/test'));
 
  // UNCOMMENT FOR LOCAL TESTING
 var router = express.Router();
+router.get('/debug', function(req, res) {
+  res.send(mongoConnectionURL);
+});
 
 router.get('/gameData/:turn', function(req, res){
   openMongoCollection.then(function(collection) {
