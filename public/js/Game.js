@@ -6,7 +6,10 @@ var Game = Backbone.Model.extend({
   
   parse: function(response) {
     this.set('turn', response.turn);
-
+    this.set('diamondMessages', response.diamondMessage);
+    this.set('moveMessages', response.moveMessage);
+    this.set('attackMessages', response.attackMessage);
+    this.set('killMessages', response.killMessage);
     var board = new Board();
     board.lengthOfSide = response.board.lengthOfSide;
 

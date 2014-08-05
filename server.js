@@ -59,9 +59,8 @@ app.use('/api', router);
 
 
 // github oath integration with passport
-var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-
-var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+var GITHUB_CLIENT_ID = process.env.clientID || 'local no id';
+var GITHUB_CLIENT_SECRET = process.env.clientSecret || 'local no id';
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -132,7 +131,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('./');
+    res.redirect('./index.html');
   });
 
 app.get('/logout', function(req, res){
