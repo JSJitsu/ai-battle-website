@@ -31,8 +31,9 @@ helpers.getTileNearby = function(board, distanceFromTop, distanceFromLeft, direc
   }
 };
 
-helpers.findNearestObject = function(fromTile, toTileType, board) {
+helpers.findNearestObjectDirectionAndDistance = function(fromTile, toTileType, board) {
   var queue = [];
+
   //Keeps track of places the fromTile has been
   var visited = {};
   var dft = fromTile.distanceFromTop;
@@ -61,23 +62,30 @@ helpers.findNearestObject = function(fromTile, toTileType, board) {
         // if this is our final destination, we found the shortest path!
         var key = nextTile.distanceFromTop + '|' + nextTile.distanceFromLeft;
 
-        if (nextTile.type === toTileType) {
+        if (visited.hasOwnProperty(key)) {
+          //Does nothing--this tile has already been visited
+        } else if (nextTile.type === toTileType) {
 
           //This variable will eventually hold the first direction we went
           //on this path
           var correctDirection = direction;
+          var distance = 1;
 
           //Loop back through path until we get to the start
           while (coords[3] !== 'START') {
             //Haven't found the start yet, so go to previous location
             correctDirection = coords[2];
+            distance++;
             coords = coords[3];
           }
 
           //Return the first direction we went on this path
-          return correctDirection;
+          return {
+            direction: correctDirection,
+            distance: distance
+          };
 
-        } else if (nextTile.type === 'Unoccupied' && !visited.hasOwnProperty(key)) {
+        } else if (nextTile.type === 'Unoccupied') {
           queue.push([nextTile.distanceFromTop, nextTile.distanceFromLeft, direction, coords]);
           visited[key] = true;
         }
@@ -88,11 +96,13 @@ helpers.findNearestObject = function(fromTile, toTileType, board) {
 };
 
 
-var game = new Game();
+var game = new Game(5);
 
+game.addHero(1,2);
 game.addHero(2,2);
-game.addDiamondMine(0,2);
+game.addHero(4,2);
+game.addHero(4,4);
 game.board.inspect();
 
-var dir = helpers.findNearestObject(game.board.tiles[2][0], 'DiamondMine', game.board);
+var dir = helpers.findNearestObjectDirectionAndDistance(game.activeHero(), 'Hero', game.board);
 console.log(dir);
