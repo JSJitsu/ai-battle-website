@@ -6,11 +6,9 @@ var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var port = process.env.port || 8080;
-//Deployment code comment out for local
+
 //Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
-//keep commented out for deployment
-// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var getDateString = function() {
   var d = new Date();
@@ -45,9 +43,6 @@ router.get('/gameData/:turn', function(req, res){
       if (err) {
         res.send(err);
       }
-      for (var i=0; i<10; i++) {
-        console.log(results[0].board.tiles[9][0]);
-      }
       res.send(results[0]);
     });
   }).catch(function(err) {
@@ -55,30 +50,6 @@ router.get('/gameData/:turn', function(req, res){
     res.send(err);
   });
 });
-
-
-app.use('/api', router);
-
-
-//comment out local test
-// var router = express.Router();
-
-// router.get('/gameData/:turn', function(req, res){
-//   openMongoCollection.then(function(collection) {
-//     collection.find({
-//       turn:+req.params.turn,
-//       date:getDateString()
-//     }).toArray(function(err,results) {
-//       if (err) {
-//         res.send(err);
-//       }
-//       res.send(results[0]);
-//     });
-//   }).catch(function(err) {
-//     //If something goes wrong, respond with error
-//     res.send(err);
-//   });
-// });
 
 // set root route for app's data
 app.use('/api', router);
