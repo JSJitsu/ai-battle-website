@@ -1,12 +1,13 @@
 var Impassable = function(distanceFromTop, distanceFromLeft) {
   this.id = undefined;
-  this.type = "Rock";
+  this.type = 'Impassable';
+  this.class = 'Tree';
   this.distanceFromTop = distanceFromTop;
   this.distanceFromLeft = distanceFromLeft;
 };
 
 Impassable.prototype.getCode = function() {
-  return 'RRR';
+  return 'III';
 };
 
 module.exports = Impassable;
