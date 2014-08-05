@@ -18,7 +18,7 @@ var BoardTileView = Backbone.View.extend({
         BlackKnight: '../img/black-knight.png',
         DiamondMine: '../img/diamond.png',
         HealthWell: '../img/pot.png',
-        Bones: '../img/bones.png'
+        Bones: '../img/skull-crossbones.png'
       };
       var html = '<img src="' + assets[subType] + '">';
       if (type === 'Hero') {
