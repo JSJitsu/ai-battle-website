@@ -13,6 +13,10 @@ var Game = function(n) {
   this.board = new Board(n);
 
   this.heroes = [];
+
+  //Defaults to two teams currently
+  this.teams = [[],[]];
+
   this.diamondMines = [];
   this.healthWells = [];
   this.impassables = [];
@@ -49,6 +53,15 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
 
     // Adds hero to game data structure
     this.heroes.push(hero);
+
+    //Adds hero to the smaller team
+    if (this.teams[0].length <= this.teams[1].length) {
+      hero.team = 0;
+      this.teams[0].push(hero);
+    } else {
+      hero.team = 1;
+      this.teams[1].push(hero);
+    }
   }
 
 };
@@ -246,24 +259,27 @@ Game.prototype._resolveHeroAttacks = function(hero) {
       // from the check above, we know 'tile' points to a hero object
       var otherHero = tile;
 
-      //Update the attack message
-      if (this.attackMessage === '') {
-        this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + otherHero.id;
-      } else {
-        this.attackMessage === 'and Hero #' + otherHero.id;
-      }
+      // Only damage heroes that are not on your team
+      if (otherHero.team !== hero.team) {
+        // Update the attack message
+        if (this.attackMessage === '') {
+          this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + otherHero.id;
+        } else {
+          this.attackMessage === 'and Hero #' + otherHero.id;
+        }
 
-      // Our hero (whose turn it is) will auto-hit any heroes in range,
-      // so this other hero that is one space away will take damage
-      hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
-      if (otherHero.dead) {
-        // Remove dead hero from the board
-        this.heroDied(otherHero);
+        // Our hero (whose turn it is) will auto-hit any heroes in range,
+        // so this other hero that is one space away will take damage
+        hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
+        if (otherHero.dead) {
+          // Remove dead hero from the board
+          this.heroDied(otherHero);
 
-        // Tell our hero he killed someone
-        hero.killedHero(otherHero);
+          // Tell our hero he killed someone
+          hero.killedHero(otherHero);
 
-        this.killMessage = 'Hero #' + hero.id + ' killed Hero #' + otherHero.id + '!';
+          this.killMessage = 'Hero #' + hero.id + ' killed Hero #' + otherHero.id + '!';
+        }
       }
     }
   }
