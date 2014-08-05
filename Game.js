@@ -248,9 +248,9 @@ Game.prototype._resolveHeroAttacks = function(hero) {
 
       //Update the attack message
       if (this.attackMessage === '') {
-        this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + hero.id;
+        this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + otherHero.id;
       } else {
-        this.attackMessage === 'and Hero #' + hero.id;
+        this.attackMessage === 'and Hero #' + otherHero.id;
       }
 
       // Our hero (whose turn it is) will auto-hit any heroes in range,
@@ -263,7 +263,7 @@ Game.prototype._resolveHeroAttacks = function(hero) {
         // Tell our hero he killed someone
         hero.killedHero(otherHero);
 
-        this.killMessage = 'Hero #' + hero.id + ' killed Hero #' + hero.id + '!';
+        this.killMessage = 'Hero #' + hero.id + ' killed Hero #' + otherHero.id + '!';
       }
     }
   }
