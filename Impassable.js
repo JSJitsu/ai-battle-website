@@ -1,7 +1,7 @@
 var Impassable = function(distanceFromTop, distanceFromLeft) {
   this.id = undefined;
   this.type = 'Impassable';
-  this.class = 'Tree';
+  this.subType = 'Tree';
   this.distanceFromTop = distanceFromTop;
   this.distanceFromLeft = distanceFromLeft;
 };

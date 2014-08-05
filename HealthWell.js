@@ -3,7 +3,7 @@ var HealthWell = function(distanceFromTop, distanceFromLeft) {
   this.distanceFromLeft = distanceFromLeft;
 
   this.type = 'HealthWell';
-  this.class = 'HealthWell';
+  this.subType = 'HealthWell';
 
 };
 
