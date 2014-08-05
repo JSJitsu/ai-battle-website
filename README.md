@@ -1,4 +1,4 @@
-
+![](https://raw.githubusercontent.com/JavascriptBattle/javascript-battle-website/master/public/img/black-knight.png)
 # Javascript Battle
 
 Every day there is an epic battle between legendary heroes.  Control your hero with your own pre-submitted javascript function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
@@ -70,7 +70,6 @@ For the website, our stack includes the above dependencies, which you can read m
 
 Our game engine is hosted on [Microsoft Azure](https://azure.microsoft.com/en-us/), with the following stack:
 - [Linux Ubuntu VM](http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-tutorial/)
-- [Block Blob](http://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-blobs/)
 - [Docker](https://www.docker.com/)
 - [Cron](https://help.ubuntu.com/community/CronHowto)
 
