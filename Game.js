@@ -188,7 +188,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     this.moveMessage += '...and realized that wasn\'t possible';
     return;
 
-  // If tile is occupied, move into that tile
+  // If tile is unoccupied, move into that tile
   } else if (tile.type === 'Unoccupied') {
 
     // Make the soon-to-be vacated tile "unoccupied"
