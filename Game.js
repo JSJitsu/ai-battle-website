@@ -19,7 +19,7 @@ var Game = function() {
   this.ended = false;
 
   this.diamondMessage = '';
-  this.moveMessage = 'Game has started';
+  this.moveMessage = 'Game is about to start';
   this.attackMessage = '';
   this.killMessage = '';
 
@@ -128,6 +128,12 @@ Game.prototype.handleHeroTurn = function(direction) {
     return;
   }
 
+  //Clear past messages
+  this.diamondMessage = '';
+  this.moveMessage = '';
+  this.attackMessage = '';
+  this.killMessage = '';
+
   this.hasStarted = true;
 
   var hero = this.activeHero();
@@ -206,7 +212,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
       this.heroDied(hero);
-      this.moveMessage += ', tried to capture a diamond mine, but died fighting the mine\'s guardians';
+      this.moveMessage += ', tried to capture a diamond mine, but died fighting the mine guardians';
       return;
 
     // If he survives, he is now the owner of the mine
@@ -229,8 +235,6 @@ Game.prototype._resolveHeroAttacks = function(hero) {
     'South',
     'West',
   ];
-
-  this.attackMessage = '';
 
   // Loop through all tiles around the hero
   for (var i=0; i<directions.length; i++) {
