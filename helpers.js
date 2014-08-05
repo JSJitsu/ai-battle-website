@@ -74,6 +74,10 @@ helpers.findNearestObjectDirectionAndDistance = function(fromTile, toTileType, b
           // This variable will eventually hold the first direction we went on this path
           var correctDirection = direction;
           var distance = 1;
+          if (nextTile.health){
+            var health = nextTile.health;
+          }
+          var finalCoords = [nextTile.distanceFromTop, nextTile.distanceFromLeft];
 
           // Loop back through path until we get to the start
           while (coords[3] !== 'START') {
@@ -86,7 +90,9 @@ helpers.findNearestObjectDirectionAndDistance = function(fromTile, toTileType, b
           //Return the first direction we went on this path
           return {
             direction: correctDirection,
-            distance: distance
+            distance: distance,
+            health: health,
+            coords: finalCoords
           };
 
         } else if (nextTile.type === 'Unoccupied') {
@@ -102,14 +108,39 @@ helpers.findNearestObjectDirectionAndDistance = function(fromTile, toTileType, b
   return false;
 };
 
+helpers.findNearestDiamondMine = function(gameObj){
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'DiamondMine', gameObj.board).direction || false;
+};
+
+helpers.findNearestHealthWell = function(gameObj){
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'HealthWell', gameObj.board).direction || false;
+};
+
+helpers.findNearestEnemy = function(gameObj){
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'Hero', gameObj.board).direction || false;
+};
+
+helpers.findNearestEnemyWithLowHealth = function(gameObj, healthLevel){
+  var fn = helpers.findNearestObjectDirectionAndDistance;
+  if (fn(gameObj.activeHero(), 'Hero', gameObj.board).health <= healthLevel){
+    return fn(gameObj.activeHero(), 'Hero', gameObj.board).direction;
+  } else {
+    var coords = fn(gameObj.activeHero(), 'Hero', gameObj.board).coords;
+    gameObj.board.tiles[coords[0]][coords[1]] = null;
+    return fn(gameObj.activeHero(), 'Hero', gameObj.board).direction;
+  }
+  return false;
+};
 
 var game = new Game(5);
 
 game.addHero(1,2);
-game.addHero(2,2);
-game.addHero(4,2);
+game.addHero(1,3);
 game.addHero(4,4);
+game.addDiamondMine(0,0);
+game.heroes[2].health = 50;
+game.heroes[1].health = 61;
 game.board.inspect();
 
-var dir = helpers.findNearestObjectDirectionAndDistance(game.activeHero(), 'Hero', game.board);
+var dir = helpers.findNearestDiamondMine(game);
 console.log(dir);
