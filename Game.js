@@ -153,6 +153,8 @@ Game.prototype.handleHeroTurn = function(direction) {
 
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
+    //Used to determine which hero is "active" at each point in the game on the front-end
+    hero.lastActiveTurn = this.turn;
 
     // Gives the hero diamonds for each owned mine
     this._handleHeroEarnings(hero);
