@@ -37,7 +37,9 @@
 
 .battle-map {
   margin: 0 auto;
+  position: relative;
   width: 55%;
+  left: 63px;
 }
 
 .results-btn {
@@ -55,31 +57,13 @@
   background-color:#3A5875;
 
 }
-
-.red-team {
-  width: 400px;
-  float: left;
-  .score {
-    background-color: #E7E7E7;
-    color: black;
-    border-color:grey;
-  }
-}
  
 table { 
   width: 100%; 
   border-collapse: collapse; 
 }
 
-.blue-team {
-  width: 400px;
-  float: right;
-  .score {
-    background-color: #E7E7E7;
-    color: black;
-    border-color:grey;
-  }
-}
+
 
 .panel-player {
   width: 100px;
@@ -115,17 +99,7 @@ table {
   background-image: url("../img/tile.png");
 }
 
-.hero {
-  color: white;
-  opacity: 0.6;
-  font-size: 24px;
-  margin-bottom: -44px;
-  position: relative;
-  top: -9px;
-  float: right;
-}
-
-.range-handle{
+.range-handle {
   bottom: 10px;
   height: 28px;
   width: 29px;
@@ -139,6 +113,39 @@ table {
   border-radius: 0; 
 }
 
+.messages {
+  margin: 0 auto;
+  height: 16px;
+  width: 500px;
+  top: -38px;
+  position: relative;
+}
+
+.hero-info {
+  float: right;
+  height: 85px;
+  top: 105px;
+  width: 96px;
+  padding-top: 79px;
+}
+
 .turn-content {
   color: #2c3e50 !important;
+}
+
+.hero {
+  color: white;
+  font-size: 24px;
+  margin-bottom: -44px;
+  position: relative;
+  top: -9px;
+  float: right;
+}
+
+.team-blue {
+  color: rgba(0, 61, 255, 0.79);
+}
+
+.team-yellow {
+  color: rgba(245, 255, 0, 0.83);
 }
