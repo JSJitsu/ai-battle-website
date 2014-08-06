@@ -142,6 +142,26 @@ table {
   float: right;
 }
 
+.diamond-owner {
+  color: hotpink; 
+  font-size: 24px;
+  margin-bottom: -44px;
+  position: relative;
+  top: -9px;
+  float: right;
+}
+
+.dead-info {
+  color: red; 
+}
+
+.current-turn {
+  background-color: hotpink;
+  opacity: 0.4;
+}
+
+
+
 .team-blue {
   color: rgba(0, 61, 255, 0.79);
 }

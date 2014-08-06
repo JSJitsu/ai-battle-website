@@ -6,7 +6,6 @@ var Game = Backbone.Model.extend({
   
   parse: function(response) {
     this.set('turn', response.turn);
-    this.set('diamondMessages', response.diamondMessage);
     this.set('moveMessages', response.moveMessage);
     this.set('attackMessages', response.attackMessage);
     this.set('killMessages', response.killMessage);
@@ -17,6 +16,7 @@ var Game = Backbone.Model.extend({
     _.each(_.flatten(response.board.tiles), function(tileObject, key, list) {
       //The id from our game model was overwriting 
       tileObject.battleId = tileObject.id;
+      tileObject.diamondMines = tileObject.diamondMines;
       delete tileObject.id;
       var tile = new BoardTile(tileObject);
       board.add(tile);
