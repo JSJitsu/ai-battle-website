@@ -46,25 +46,9 @@
   box-shadow: inset 0px 0px 0px rgba(255, 255, 255, 0.9), 0 0px 0px rgba(0, 0, 0, 0.6);
   background-color: #3A5875; }
 
-.red-team {
-  width: 400px;
-  float: left; }
-  .red-team .score {
-    background-color: #E7E7E7;
-    color: black;
-    border-color: grey; }
-
 table {
   width: 100%;
   border-collapse: collapse; }
-
-.blue-team {
-  width: 400px;
-  float: right; }
-  .blue-team .score {
-    background-color: #E7E7E7;
-    color: black;
-    border-color: grey; }
 
 .panel-player {
   width: 100px; }
@@ -92,15 +76,6 @@ table {
   width: 10%;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
-
-.hero {
-  color: white;
-  opacity: 0.6;
-  font-size: 24px;
-  margin-bottom: -44px;
-  position: relative;
-  top: -9px;
-  float: right; }
 
 .range-handle {
   bottom: 10px;
@@ -131,3 +106,17 @@ table {
 
 .turn-content {
   color: #2c3e50 !important; }
+
+.hero {
+  color: white;
+  font-size: 24px;
+  margin-bottom: -44px;
+  position: relative;
+  top: -9px;
+  float: right; }
+
+.team-blue {
+  color: rgba(0, 61, 255, 0.79); }
+
+.team-yellow {
+  color: rgba(245, 255, 0, 0.83); }
