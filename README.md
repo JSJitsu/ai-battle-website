@@ -1,3 +1,5 @@
+![](https://circleci.com/gh/JavascriptBattle/javascript-battle-website.png?circle-token=936dcd0da6a58265e76d86b8d5a6b4abcaaeb985)
+
 ![](https://raw.githubusercontent.com/JavascriptBattle/javascript-battle-website/master/public/img/black-knight.png)
 # Javascript Battle
 
