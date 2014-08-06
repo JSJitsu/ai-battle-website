@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "supertest": "^0.13.0",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "chai-spies": "^0.5.1"
   }
 }
