@@ -19,16 +19,22 @@ var BoardTileView = Backbone.View.extend({
         BlackKnight: '../img/black-knight.png',
         DiamondMine: '../img/diamond.png',
         HealthWell: '../img/pot.png',
-        Bones: '../img/skull-crossbones.png'
+        Bones: '../img/grave.png'
       };
       var html = '<img src="' + assets[subType] + '">';
-      if (type === 'Hero') {
         var colors = {
           0: "team-yellow",
           1: "team-blue"
-        }
-        console.log(colors[this.model.get('team')]);
+        };
+      if (type === 'Hero') {
+        html = '<img src="' + assets[subType] + '" class="H' + this.model.get('battleId') +'">';
+        
         html += '<div class="hero ' + colors[this.model.get('team')] +'">' + this.model.get('battleId') + '</div>';
+      } else if (type === 'DiamondMine') {
+        var owner = this.model.get('owner');
+        if (owner) {
+          html += '<div class="diamond-owner ' + colors[owner.team] +'">' + owner.id + '</div>';
+        }
       }
       this.$el.html(html);
     }
