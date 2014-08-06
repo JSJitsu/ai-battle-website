@@ -4,8 +4,8 @@
   "description": "javascript-battle-webworkers ============================",
   "main": "Board.js",
   "scripts": {
-    "test": "npm run test-node",
-    "test-node": "mocha -R spec ./test/spec/GameSpec.js"
+    "test": "npm run test-game",
+    "test-game": "mocha -R spec ./test/spec/GameSpec.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,10 @@
   "dependencies": {
     "mongodb": "^1.4.8",
     "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "supertest": "^0.13.0",
+    "chai": "^1.9.1",
+    "chai-spies": "^0.5.1"
   }
 }
