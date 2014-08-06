@@ -335,7 +335,7 @@ describe('Board methods.', function() {
       expect(rock.distanceFromLeft).to.equal(0);
     });
 
-    it('Should have the type of "Rock".', function(){
+    xit('Should have the type of "Rock".', function(){
       var rock = new Impassable(0,0);
       expect(rock.type).to.equal('Rock');
     });
@@ -359,7 +359,7 @@ describe('Board methods.', function() {
     });
   });
 
-  describe('Game.js', function() {
+  xdescribe('Game.js', function() {
     describe('Game object properties', function(){
       xit('Should not take any arguments.', function(){
         var game = new Game(0,0);
