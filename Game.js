@@ -169,6 +169,7 @@ Game.prototype.handleHeroTurn = function(direction) {
 
     // If hero is still alive after moving...
     } else {
+      
       // Resolves all damage given and healing received at the
       // end of the hero's turn
       this._resolveHeroAttacks(hero);
@@ -243,6 +244,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
 };
 
 Game.prototype._resolveHeroAttacks = function(hero) {
+
   // Resolve Attacks and Healing (if any):
   var directions = [
     'North',
@@ -255,14 +257,18 @@ Game.prototype._resolveHeroAttacks = function(hero) {
   for (var i=0; i<directions.length; i++) {
     var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, directions[i]);
     if (tile === false) {
-      // does nothing if the tile in the given direction
-      // is not on the board
+
+      // Does nothing if the tile in the given direction
+      // Is not on the board
     } else if (tile.type === 'Hero') {
+
       // from the check above, we know 'tile' points to a hero object
       var otherHero = tile;
 
       // Only damage heroes that are not on your team
+
       if (otherHero.team !== hero.team) {
+
         // Update the attack message
         if (this.attackMessage === '') {
           this.attackMessage === 'Hero #' + hero.id + ' stabbed Hero #' + otherHero.id;
@@ -274,6 +280,7 @@ Game.prototype._resolveHeroAttacks = function(hero) {
         // so this other hero that is one space away will take damage
         hero.damageDone += otherHero.takeDamage(HERO_ATTACK_DAMAGE);
         if (otherHero.dead) {
+
           // Remove dead hero from the board
           this.heroDied(otherHero);
 
