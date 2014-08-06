@@ -20,16 +20,6 @@ describe('information at different urls', function() {
       .end(done);
   });
 
-  it('has replay url', function(done) {
-    request(app)
-      .get('/replay.html')
-      .expect(200, function(err, data) {
-        console.log('data: ', data);
-      })
-      .end(done);
-
-  });
-
 });
 
 
