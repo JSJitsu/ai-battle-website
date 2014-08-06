@@ -9,7 +9,6 @@ var port = process.env.port || 8080;
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
 
-
 // Connect to mongo
 var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
   console.log('open!');
@@ -49,6 +48,11 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
     //If something goes wrong, respond with error
     res.send(err);
   });
+});
+
+router.get('/date', function(req, res) {
+  var date = new Date();
+  res.json(date.getHours());
 });
 
 // Set root route for app's data
