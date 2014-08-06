@@ -55,11 +55,6 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
   });
 });
 
-router.get('/date', function(req, res) {
-  var date = new Date();
-  res.json(date.getHours());
-});
-
 // Set root route for app's data
 app.use('/api', router);
 
