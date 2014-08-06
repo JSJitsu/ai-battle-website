@@ -18,7 +18,7 @@ module.exports = function(app) {
 passport.use('github', new GitHubStrategy({
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/"
+      callbackURL: "http://www.javascriptbattle.com/"
   },
   function(accessToken, refreshToken, profile, done) {
       // find or create user in database and return user not entire profile to 'done'
