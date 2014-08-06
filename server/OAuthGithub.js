@@ -16,25 +16,10 @@ module.exports = function(app) {
     callbackURL: 'http://localhost:8080/auth/github/callback'
   });
   passport.use('github', strategy, function(accessToken, refreshToken, profile, done) {
-    done(null, profile);
     process.nextTick(function() {
+      done(null, profile);
     });
   });
-
-  // passport.use(new GitHubStrategy({
-  //     clientID: GITHUB_CLIENT_ID,
-  //     clientSecret: GITHUB_CLIENT_SECRET,
-  //     callbackURL: "http://www.javascriptbattle.com/"
-  //   },
-  //   function(accessToken, refreshToken, profile, done) {
-  //     console.log('accessToken in passport.use callback: ', accessToken);
-  //     console.log('refreshToken in passport.use callback: ', refreshToken);
-  //     console.log('profile in passport.use callback: ', profile);
-  //     process.nextTick(function () {
-  //       return done(null, profile);
-  //     });
-  //   }
-  // ));
 
   passport.serializeUser(function(user, done) {
     console.log('user in serializeUser: ', user);
@@ -49,12 +34,7 @@ module.exports = function(app) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.get('/auth/github',
-    passport.authenticate('github'),
-    function(req, res) {
-      //redirected to github for authentication
-      //so code should never get here
-    });
+  app.get('/auth/github',passport.authenticate('github'));
 
   app.get('/success', function(req, res, next) {
     res.send('Successfully logged in.');
