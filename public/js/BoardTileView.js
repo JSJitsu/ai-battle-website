@@ -19,7 +19,7 @@ var BoardTileView = Backbone.View.extend({
         BlackKnight: '../img/black-knight.png',
         DiamondMine: '../img/diamond.png',
         HealthWell: '../img/pot.png',
-        Bones: '../img/skull-crossbones.png'
+        Bones: '../img/grave.png'
       };
       var html = '<img src="' + assets[subType] + '">';
         var colors = {
@@ -33,7 +33,6 @@ var BoardTileView = Backbone.View.extend({
       } else if (type === 'DiamondMine') {
         var owner = this.model.get('owner');
         if (owner) {
-        console.log(owner.team)
           html += '<div class="diamond-owner ' + colors[owner.team] +'">' + owner.id + '</div>';
         }
       }
