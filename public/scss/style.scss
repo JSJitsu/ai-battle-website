@@ -39,7 +39,7 @@
   margin: 0 auto;
   position: relative;
   width: 55%;
-  left: 63px;
+
 }
 
 .results-btn {
@@ -121,13 +121,22 @@ table {
   position: relative;
 }
 
-.hero-info {
+.team-info-y {
   float: right;
-  height: 85px;
   top: 105px;
-  width: 96px;
-  padding-top: 79px;
+  position: relative;
+  width: 112px;
+
 }
+
+.team-info-b {
+  float: left;
+  right: 40px;
+  position: relative;
+  top: 105px;
+  width: 112px;
+}
+
 
 .turn-content {
   color: #2c3e50 !important;
@@ -167,3 +176,17 @@ table {
 .team-yellow {
   color: rgba(245, 255, 0, 0.83);
 }
+
+.list-group-item-highlighted {
+  color: #813E11;
+  background-color: #FC7C34;
+  border-color: #FC7C34;
+}
+
+.current-turn-info {
+  color: #3c763d;
+  border-color: #A5E08C;
+  background-color: #A5E08C;
+}
+
+

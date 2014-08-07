@@ -20,9 +20,5 @@ var BoardView = Backbone.View.extend({
     	}
     	this.$el.append($tr);
     }
-  },
-  showReport: function(){
-    this.$el.html('');
-    $('.slide').hide();
   }
 });

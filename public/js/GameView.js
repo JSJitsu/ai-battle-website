@@ -4,40 +4,57 @@ var GameView = Backbone.View.extend({
   initialize: function(){
     this.updateTurn(1);
     //what to operate on
-    var turn = $("#turn").html();
+    // var turn = $("#turn").html();
     //compiling handlebars
-    this.turnTemplate = Handlebars.compile(turn);
+    // this.turnTemplate = Handlebars.compile(turn);
   },
 
   render: function(){
   	this.$el.html('');
-    this.$el.append('<div class="messages"></div>');
-    this.$el.append('<div class="hero-info"></div>')
-    $('.messages').append(this.model.get('killMessages'));
-    // this.el.append(this.model.get('messages'));
-    this.context = {round: this.model.get('turn')};
-  	var boardView = new BoardView({collection: this.model.get('board')});
-    var turnHtml = this.turnTemplate(this.context);
-    var heroesArray = this.model.get('heroes');
-    this.$el.append(turnHtml);
-    this.$el.append(boardView.$el);
-    for(var i = 0; i < heroesArray.length; i++){
-      var hero = heroesArray[i];
-      if(hero.health < 1){
-        hero.health = '<span class="dead-info">Dead</span>';
-      }
-      else{
-        hero.health = 'Health:' + hero.health + 'HP';
-      }
-      $('.hero-info').append('<div class="hero-header h-i' + hero.id + ' ">Hero: ' + hero.id + '</div>');
-      $('.hero-info').append('<div class="health-info h-i' + hero.id + '"> ' + hero.health + '</div>');
-      if(hero.lastActiveTurn === this.model.get('turn') - 1 && this.model.get('turn') !== 1){
-        $('.H' + hero.id).parent().toggleClass('current-turn');
-        $('.h-i' + hero.id).toggleClass('current-turn');
-      }
 
-      
-    }
+    //Show game update messages
+    this.$el.append('<div class="messages"></div>');
+    $('.messages').append(this.model.get('killMessages'));
+       //Add html for team info
+    var yellowTeamView = new TeamView({
+      collection: this.model.get('teamYellow'),
+      className: 'team-info-y',
+    });
+    yellowTeamView.teamColor = 'Team Yellow';
+    yellowTeamView.render();
+    var blueTeamView = new TeamView({
+      collection: this.model.get('teamBlue'),
+      className: 'team-info-b'
+    });
+    blueTeamView.teamColor = 'Team Blue';
+    blueTeamView.render()
+
+    
+
+
+    // this.el.append(this.model.get('messages'));
+    
+    //for handlebars template
+    // this.context = {round: this.model.get('turn')};
+
+
+    //Show turn counter
+    // var turnHtml = this.turnTemplate(this.context);
+    // this.$el.append(turnHtml);
+
+
+    //Add all board html
+    this.$el.append(yellowTeamView.$el)
+    this.$el.append(blueTeamView.$el)
+    var boardView = new BoardView({collection: this.model.get('board')});
+    this.$el.append(boardView.$el);
+    
+    // var heroesArray = this.model.get('heroes');
+
+
+ 
+
+  
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
