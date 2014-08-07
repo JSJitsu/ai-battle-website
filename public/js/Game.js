@@ -44,6 +44,7 @@ var Game = Backbone.Model.extend({
       board.add(tile);
 
     }.bind(this));
+    
     this.set('teamYellow', teamYellow);
     this.set('teamBlue', teamBlue);
     this.set('board', board);

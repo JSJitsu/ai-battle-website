@@ -2,7 +2,7 @@ var GameView = Backbone.View.extend({
   tagName: 'div',
   className: 'game-view',
   initialize: function(){
-    this.updateTurn(1);
+    this.updateTurn(0);
     //what to operate on
     // var turn = $("#turn").html();
     //compiling handlebars
