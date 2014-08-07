@@ -50,7 +50,7 @@ var GameView = Backbone.View.extend({
     this.$el.append(boardView.$el);
     
     // var heroesArray = this.model.get('heroes');
-
+    this.$el.append('<div>play pause</div>');
 
  
 
@@ -58,11 +58,26 @@ var GameView = Backbone.View.extend({
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
-    this.model.fetch({
+    return this.model.fetch({
       success: this.render.bind(this),
       error: function(collection, response, options){
         console.log('error', response);
       }
     });
+  },
+  play: function() {
+    //Store the current turn and the turn at which
+    //the game will end
+    var currTurn = this.model.get('turn');
+    var maxTurn = this.model.get('maxTurn');
+
+    //If the game is not yet over, go to next turn
+    if (currTurn < maxTurn) {
+      var updateTurnPromise = this.updateTurn(currTurn+1);
+      var gameView = this;
+      $.when(updateTurnPromise).then(function(){
+        this.play();
+      }.bind(this));
+    }
   }
 });

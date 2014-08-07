@@ -6,6 +6,7 @@ var Game = Backbone.Model.extend({
   
   parse: function(response) {
     this.set('turn', response.turn);
+    this.set('maxTurn', response.maxTurn)
     this.set('moveMessages', response.moveMessage);
     this.set('attackMessages', response.attackMessage);
     this.set('killMessages', response.killMessage);
@@ -44,7 +45,7 @@ var Game = Backbone.Model.extend({
       board.add(tile);
 
     }.bind(this));
-    
+
     this.set('teamYellow', teamYellow);
     this.set('teamBlue', teamBlue);
     this.set('board', board);
