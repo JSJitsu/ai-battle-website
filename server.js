@@ -16,10 +16,16 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
   return db.collection('jsBattleGameData');
 });
 
-// serve up files in public folder
+// Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
-//Helper function 
+// Add github authentication
+OAuthGithub(app, mongoConnectionURL);
+
+// The router for the API
+var router = express.Router();
+
+//Used in the gameData end point (below) 
 var getDateString = function(dayOffset) {
   if (dayOffset === undefined) {
     dayOffset = 0;
@@ -34,8 +40,6 @@ var getDateString = function(dayOffset) {
   result += '/' + jsDate.getFullYear();
   return result;
 };
-
-var router = express.Router();
 
 // Returns the state of the game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
@@ -57,9 +61,6 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
 
 // Set root route for app's data
 app.use('/api', router);
-
-// Add github authentication
-OAuthGithub(app);
 
 app.listen(port);
 
