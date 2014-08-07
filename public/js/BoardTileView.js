@@ -30,7 +30,7 @@ var BoardTileView = Backbone.View.extend({
         var gameTurn = this.model.get('gameTurn');
         var lastActiveTurn = this.model.get('lastActiveTurn')
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
-          this.$el.addClass('current-turn');
+          console.log(this.$el.innerHTML)
         }
         html = '<img src="' + assets[subType] + '" class="H' + this.model.get('battleId') +'">';
         

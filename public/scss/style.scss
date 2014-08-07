@@ -166,7 +166,7 @@ table {
 
 .current-turn {
   background-color: hotpink;
-  opacity: 0.4;
+  z-index: 100;
 }
 
 .team-blue {
@@ -189,4 +189,7 @@ table {
   background-color: #A5E08C;
 }
 
-
+.top {
+  z-index: 100;
+  color:white;
+}
