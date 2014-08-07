@@ -61,8 +61,8 @@ module.exports = function(app, mongoConnectionURL) {
     });
   });
   
-  var GITHUB_CLIENT_ID = 'd0d7cc13b38c11adb842';
-  var GITHUB_CLIENT_SECRET = '9c43f6883b19bc6c32c064f848209df5dc8fba17';
+  var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+  var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
   var strategy = new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
