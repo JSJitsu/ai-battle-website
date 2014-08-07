@@ -150,3 +150,7 @@ table {
   color: #3c763d;
   border-color: #A5E08C;
   background-color: #A5E08C; }
+
+.top {
+  z-index: 100;
+  color: white; }
