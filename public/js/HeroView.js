@@ -7,7 +7,7 @@ var HeroView = Backbone.View.extend({
   render: function() {
     var heroId = this.model.get('battleId');
     var health = this.model.get('health');
-    var turn = this.model.get('turn');
+    var turn = this.model.get('gameTurn');
     var currentTurn = this.model.get('lastActiveTurn');
 
     if(health < 1){
