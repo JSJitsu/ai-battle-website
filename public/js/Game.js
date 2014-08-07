@@ -16,7 +16,7 @@ var Game = Backbone.Model.extend({
     board.lengthOfSide = response.board.lengthOfSide;
     //add team yellow hero Models to team collection
     _.each(response.teams[0], function(heroObject){
-      heroObject.turn = response.turn;
+      heroObject.gameTurn = response.turn;
       heroObject.battleId = heroObject.id;
       delete heroObject.id;
 
@@ -25,7 +25,7 @@ var Game = Backbone.Model.extend({
     });
     //add team blue hero Models to team collection
     _.each(response.teams[1], function(heroObject){
-      heroObject.turn = response.turn;
+      heroObject.gameTurn = response.turn;
       heroObject.battleId = heroObject.id;
       delete heroObject.id;
 
@@ -39,10 +39,11 @@ var Game = Backbone.Model.extend({
       //The id from our game model was overwriting 
       tileObject.battleId = tileObject.id;
       delete tileObject.id;
+      tileObject.gameTurn = this.get('turn');
       var tile = new BoardTile(tileObject);
       board.add(tile);
 
-    });
+    }.bind(this));
     this.set('teamYellow', teamYellow);
     this.set('teamBlue', teamBlue);
     this.set('board', board);
