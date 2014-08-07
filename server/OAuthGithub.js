@@ -37,7 +37,9 @@ module.exports = function(app, mongoConnectionURL) {
         });
 
         //Save user (return the promise of saving the user)
-        return Q.ninvoke(user, 'save');
+        return Q.ninvoke(user, 'save').then(function(user) {
+          return user[0];
+        });
 
       //This user already exists, return it
       } else {
