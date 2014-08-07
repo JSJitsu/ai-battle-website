@@ -1,10 +1,8 @@
 var GitHubStrategy = require('passport-github').Strategy;
 var passport = require('passport');
 var express = require('express');
-var mongoose = require('mongoose');
 var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var Q = require('q');
+var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/javascriptBattle');
 
@@ -18,37 +16,36 @@ var User = mongoose.model('User', userSchema);
 
 module.exports = function(app) {
 
-  app.use(cookieParser());
   app.use(session({ secret: 'thisisasecret'}));
   app.use(passport.initialize());
   app.use(passport.session());
-
-  passport.serializeUser(function(githubUser, done) {
-    //Save user here
-    // Q.ninvoke(User, 'find', {githubHandle:githubUser.login}).then(function(user) {
-    //   console.log(user)
-    // }).catch(function(err) {
-    //   console.log('not found');
-    // });
-
-    //Only store a small amount of information (ie. the ID)
-    //in the session
-    done(null, githubUser);
+  app.use(function(req, res, next) {
+    console.log(req.user);
+    next();
   });
 
-  passport.deserializeUser(function(userId, done) {
+  passport.serializeUser(function(user, done) {
+    //Check if user exists
+    
 
-    done(null, userId);
+    // console.log('user in serializeUser: ', user);
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(function(obj, done) {
+    // console.log('obj in deserializeUser: ', obj);
+    done(null, obj);
   });
   
   var GITHUB_CLIENT_ID = 'd0d7cc13b38c11adb842';
-  var GITHUB_CLIENT_SECRET = 'f745c3ff8e2718cf4f0debabd8d0abbcace5b91f';
+  var GITHUB_CLIENT_SECRET = '9c43f6883b19bc6c32c064f848209df5dc8fba17';
 
   var strategy = new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/github/callback'
   }, function(accessToken, refreshToken, profile, done) {
+    console.log('got here!');
     done(null, profile);
   });
 
