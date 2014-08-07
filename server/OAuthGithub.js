@@ -3,6 +3,7 @@ var passport = require('passport');
 var express = require('express');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var Q = require('q');
 
 mongoose.connect('mongodb://localhost/javascriptBattle');
 
@@ -26,7 +27,7 @@ module.exports = function(app) {
 
   passport.serializeUser(function(user, done) {
     //Check if user exists
-    
+
 
     // console.log('user in serializeUser: ', user);
     done(null, user.id);
