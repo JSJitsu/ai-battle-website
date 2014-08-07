@@ -11,6 +11,7 @@ var HEALTH_WELL_HEAL_AMOUNT = 40;
 
 var Game = function(n) {
   this.board = new Board(n);
+  // console.log(this.board);
 
   this.heroes = [];
 
@@ -28,7 +29,7 @@ var Game = function(n) {
   this.killMessage = '';
 
   this.turn = 0;
-  this.maxTurn = 300;
+  this.maxTurn = 10;
   this.hasStarted = false;
 };
 
@@ -150,6 +151,7 @@ Game.prototype.handleHeroTurn = function(direction) {
   this.hasStarted = true;
 
   var hero = this.activeHero();
+console.log('HERO: ', hero);
 
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
@@ -197,6 +199,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
   this.moveMessage = 'Hero #' + hero.id + ' walked ' + direction;
 
   // Gets the tile at the location that the hero wants to go to
+  console.log('HERP: ', hero)
   var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, direction);
 
   // If tile is not on the board (invalid coordinates), don't move

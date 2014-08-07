@@ -95,18 +95,18 @@ var runGame = function() {
         }
 
         //Handles the hero turn
-        var resultOfPostRequest = gameDataRequest.postGameDataToContainer('http://localhost:8080/', game);
-        console.log(resultOfPostRequest);
-        game.handleHeroTurn(resultOfPostRequest);
+        gameDataRequest.postGameDataToContainer('http://localhost:8080/', game, function(resultFromPostRequest) {
+          game.handleHeroTurn(resultFromPostRequest);
 
-        //Manually set the ID so Mongo doesn't just keep writing to the same document
-        game._id = game.turn + '|' + date;
+          //Manually set the ID so Mongo doesn't just keep writing to the same document
+          game._id = game.turn + '|' + date;
 
-        if (game.ended) {
-          mongoDb.close();
-        } else {
-          resolveGameAndSaveTurnsToDB(game);
-        }
+          if (game.ended) {
+            mongoDb.close();
+          } else {
+            resolveGameAndSaveTurnsToDB(game);
+          }
+        });
       });
     };
 

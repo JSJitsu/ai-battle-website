@@ -6,24 +6,25 @@ var Board = function(lengthOfSide) {
   this.initializeBoard();
 };
 
-Board.prototype.inspect = function() {
-  var horizontalDivide = '|';
-  for (var i=0; i<this.lengthOfSide; i++) {
-    var line = '|';
-    for (var j=0; j<this.lengthOfSide; j++) {
-      line += this.tiles[i][j].getCode() + '|';
-      if (i === 0) {
-        horizontalDivide += '---|';
-      }
-    }
-    if (i === 0) {
-      console.log(horizontalDivide);
-    }
-    console.log(line);
-    console.log(horizontalDivide);
-  }
-  console.log('********');
-};
+// Board.prototype.inspect = function() {
+//   var horizontalDivide = '|';
+//   for (var i=0; i<this.lengthOfSide; i++) {
+//     var line = '|';
+//     for (var j=0; j<this.lengthOfSide; j++) {
+//       console.log('HOW DID WE GET HERE???');
+//       line += this.tiles[i][j].getCode() + '|';
+//       if (i === 0) {
+//         horizontalDivide += '---|';
+//       }
+//     }
+//     if (i === 0) {
+//       console.log(horizontalDivide);
+//     }
+//     console.log(line);
+//     console.log(horizontalDivide);
+//   }
+//   console.log('********');
+// };
 
 Board.prototype.initializeBoard = function() {
   for (var i=0; i<this.lengthOfSide; i++) {
@@ -56,6 +57,7 @@ Board.prototype.getTileNearby = function(distanceFromTop, distanceFromLeft, dire
     return false;
   }
 
+    console.log('HERE YOU ARE', distanceFromTop);
   if (this.validCoordinates(fromTopNew, fromLeftNew)) {
     return this.tiles[fromTopNew][fromLeftNew];
   } else {
