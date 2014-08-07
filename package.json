@@ -21,6 +21,7 @@
   "dependencies": {
     "blanket": "^1.1.6",
     "express": "^4.7.2",
+    "express-session": "^1.7.4",
     "mongodb": "^1.4.8",
     "mongoose": "^3.8.14",
     "passport": "^0.2.0",
