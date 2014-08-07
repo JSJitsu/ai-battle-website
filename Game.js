@@ -13,6 +13,7 @@ var Game = function(n) {
   this.board = new Board(n);
 
   this.heroes = [];
+  this.heroTurnIndex = 0;
 
   //Defaults to two teams currently
   this.teams = [[],[]];
@@ -127,9 +128,25 @@ Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
 
 // Return a reference to the hero whose turn it is
 Game.prototype.activeHero = function() {
-  var numHeroes = this.heroes.length;
-  var activeIndex = this.turn % numHeroes;
-  return this.heroes[activeIndex];
+  //The hero whose turn it is
+  var hero = this.heroes[this.heroTurnIndex];
+
+  //If the current hero is dead, go to next hero
+  while (hero.dead) {
+    this.heroTurnIndex++;
+    hero = this.heroes[this.heroTurnIndex];
+  }
+
+  //Next turn, the next hero in line is up
+  this.heroTurnIndex++;
+
+  //If you reach the end of the hero list, start again
+  if (this.heroTurnIndex >= this.heroes.length) {
+    this.heroTurnIndex = 0;
+  }
+
+  //Return the current hero
+  return hero;
 };
 
 // Resolves the hero's turn:
@@ -174,6 +191,8 @@ Game.prototype.handleHeroTurn = function(direction) {
       // end of the hero's turn
       this._resolveHeroAttacks(hero);
     }
+  } else {
+    throw new Error('Dead heroes should never even have turns!');
   }
 
   this.turn++;
