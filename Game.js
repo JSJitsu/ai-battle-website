@@ -143,9 +143,12 @@ Game.prototype.activeHero = function() {
 
   //Make sure the currently active hero is alive
   while (hero.dead) {
-    goToNextHeroIndex();
+    incrementHeroIndex();
     hero = this.heroes[this.heroTurnIndex];
   }
+
+  //Set up so next hero goes next turn
+  incrementHeroIndex();
 
   //Return the active hero
   return hero;
