@@ -1,7 +1,7 @@
 var request = require('supertest');
 var express = require('express');
 var expect = require('chai').expect;
-var app = require('../../server.js');
+// var app = require('../../server.js');
 
 // not a useful test but shows basic structure of server tests
 describe('information at different urls', function() {
@@ -19,8 +19,6 @@ describe('information at different urls', function() {
       // test will timeout without end
       .end(done);
   });
-
- 
 
 });
 
