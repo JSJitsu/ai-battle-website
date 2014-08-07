@@ -2,26 +2,25 @@ var GitHubStrategy = require('passport-github').Strategy;
 var passport = require('passport');
 var express = require('express');
 var session = require('express-session');
-var mongoose = require('mongoose');
 var Q = require('q');
 
-mongoose.connect('mongodb://localhost/javascriptBattle');
 
-var userSchema = mongoose.Schema({
-  githubHandle: String,
-  codeRepo: {
-    type: String,
-    default: ''
-  }
-});
-
-var User = mongoose.model('User', userSchema);
-
-module.exports = function(app) {
+module.exports = function(app, mongoConnectionURL) {
+  //Creates mongoose User model connected to the mongo URL
+  var User = require('./User')(mongoConnectionURL);
 
   app.use(session({ secret: 'thisisasecret'}));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(function(req,res,next) {
+    console.log(req.user);
+    next();
+  });
+
+  //Makes the current user's info available
+  app.get('/userInfo', function(req, res) {
+    res.json(req.user);
+  });
 
   //Convert the user object from github into something smaller that
   //can be stored in a cookie
@@ -70,7 +69,6 @@ module.exports = function(app) {
     clientSecret: GITHUB_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/github/callback'
   }, function(accessToken, refreshToken, profile, done) {
-    console.log('got here!');
     done(null, profile);
   });
 
