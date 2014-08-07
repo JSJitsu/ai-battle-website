@@ -17,6 +17,7 @@
   }
   img {
   max-width: 69.5%;
+  filter: grayscale(0.5) blur(10px);
   }
 
 }
@@ -50,7 +51,12 @@
   width: auto;
 }
 
+.tile-row {
+  display: table-row;
+}
+
 .battle-map {
+  display: table;
   margin: 0 auto;
   position: relative;
   width: 55%;
@@ -103,16 +109,23 @@ table {
 }
 
 .range-bar {
-  margin: 1px auto;
+  margin: -85px auto;
   width: 580px;
 }
 
 .battle-tile {
-  height: 8vh;
+  float:right;
+  display: table-cell;
+  height: 7vh;
   width: 10%;
-  border: 1px dotted rgba(16, 56, 13, 1);
+  border: 1px dotted #10380d;
   background-image: url("../img/tile.png");
 }
+
+// .tile-row {
+//   position: relative;
+//   height: 20vh;
+// }
 
 .range-handle {
   bottom: 10px;

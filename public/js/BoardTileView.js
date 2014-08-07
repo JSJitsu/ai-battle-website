@@ -1,5 +1,5 @@
 var BoardTileView = Backbone.View.extend({
-  tagName: 'td',
+  tagName: 'div',
   className: 'battle-tile',
   initialize: function(){
     if (this.model === undefined) {
@@ -13,19 +13,19 @@ var BoardTileView = Backbone.View.extend({
     var type = this.model.get('type');
     var teamId = this.model.get('team');
     if (subType !== 'Unoccupied') {
-      var natureObjects = function(){
-        var objects = [
-          '../img/oak.png', 
-          '../img/spruce.png', 
-          '../img/tree2.png', 
-          '../img/tree4.png'
-        ];
-        var randomObj = Math.floor(Math.random() * objects.length);
-        return objects[randomObj];
+      // var natureObjects = function(){
+      //   var objects = [
+      //     '../img/oak.png', 
+      //     '../img/spruce.png', 
+      //     '../img/tree2.png', 
+      //     '../img/tree4.png'
+      //   ];
+      //   var randomObj = Math.floor(Math.random() * objects.length);
+      //   return objects[randomObj];
 
-      };
+      // };
       var assets = {
-        Tree: natureObjects(),
+        Tree: '../img/tree.png',
         Adventurer: '../img/bkknight.png',
         BlackKnight: '../img/black-knight.png',
         DiamondMine: '../img/diamond.png',

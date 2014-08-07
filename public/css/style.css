@@ -13,7 +13,8 @@
     top: 35vh;
     position: relative; }
   .content img {
-    max-width: 69.5%; }
+    max-width: 69.5%;
+    filter: grayscale(0.5) blur(10px); }
 
 .lifebar {
   width: 12px;
@@ -40,7 +41,11 @@
   height: auto;
   width: auto; }
 
+.tile-row {
+  display: table-row; }
+
 .battle-map {
+  display: table;
   margin: 0 auto;
   position: relative;
   width: 55%; }
@@ -80,11 +85,13 @@ table {
   background: #BABABA; }
 
 .range-bar {
-  margin: 1px auto;
+  margin: -85px auto;
   width: 580px; }
 
 .battle-tile {
-  height: 8vh;
+  float: right;
+  display: table-cell;
+  height: 7vh;
   width: 10%;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
