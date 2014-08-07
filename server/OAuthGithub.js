@@ -25,11 +25,15 @@ module.exports = function(app) {
 
   passport.serializeUser(function(githubUser, done) {
     //Save user here
-
+    // Q.ninvoke(User, 'find', {githubHandle:githubUser.login}).then(function(user) {
+    //   console.log(user)
+    // }).catch(function(err) {
+    //   console.log('not found');
+    // });
 
     //Only store a small amount of information (ie. the ID)
     //in the session
-    done(null, user);
+    done(null, githubUser);
   });
 
   passport.deserializeUser(function(userId, done) {
@@ -45,7 +49,6 @@ module.exports = function(app) {
     clientSecret: GITHUB_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/github/callback'
   }, function(accessToken, refreshToken, profile, done) {
-    console.log('got here!');
     done(null, profile);
   });
 
@@ -65,8 +68,7 @@ module.exports = function(app) {
     res.send("Error logging in.");
   });
 
-  app.get('/auth/github/callback', function(req,res, next) { console.log('hi'); next();},
-    passport.authenticate('github', { 
+  app.get('/auth/github/callback', passport.authenticate('github', { 
       successRedirect: '/success',
       failureRedirect: '/error'
     }));
