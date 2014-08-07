@@ -12,10 +12,6 @@ module.exports = function(app, mongoConnectionURL) {
   app.use(session({ secret: 'thisisasecret'}));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(function(req,res,next) {
-    console.log(req.user);
-    next();
-  });
 
   //Makes the current user's info available
   app.get('/userInfo', function(req, res) {
@@ -75,10 +71,6 @@ module.exports = function(app, mongoConnectionURL) {
   });
 
   passport.use('github', strategy);
-  
-  // github oath integration with passport
-  var GITHUB_CLIENT_ID = 'd0d7cc13b38c11adb842';
-  var GITHUB_CLIENT_SECRET = 'f745c3ff8e2718cf4f0debabd8d0abbcace5b91f';
 
   //Go here to login
   app.get('/auth/github',passport.authenticate('github'));
