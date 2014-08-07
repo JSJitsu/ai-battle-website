@@ -128,24 +128,29 @@ Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
 
 // Return a reference to the hero whose turn it is
 Game.prototype.activeHero = function() {
-  //The hero whose turn it is
+
+  var incrementHeroIndex = function() {
+    this.heroTurnIndex++;
+
+    //If you reach the end of the hero list, start again
+    if (this.heroTurnIndex >= this.heroes.length) {
+      this.heroTurnIndex = 0;
+    }
+  }.bind(this);
+
+  //The current active hero
   var hero = this.heroes[this.heroTurnIndex];
 
-  //If the current hero is dead, go to next hero
+  //Make sure the currently active hero is alive
   while (hero.dead) {
-    this.heroTurnIndex++;
+    incrementHeroIndex();
     hero = this.heroes[this.heroTurnIndex];
   }
 
-  //Next turn, the next hero in line is up
-  this.heroTurnIndex++;
+  //Set up so next hero goes next turn
+  incrementHeroIndex();
 
-  //If you reach the end of the hero list, start again
-  if (this.heroTurnIndex >= this.heroes.length) {
-    this.heroTurnIndex = 0;
-  }
-
-  //Return the current hero
+  //Return the active hero
   return hero;
 };
 
