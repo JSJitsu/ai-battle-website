@@ -2,7 +2,7 @@
   display: table;
   margin: 0 auto 2%;
   position: relative;
-  width: 68%;
+  width: 81%;
 }
 
 .tile-row {
@@ -24,13 +24,15 @@
 }
 
 .lifebar {
-  width: 12px;
-  height: 40px;
+  width: 18%;
+  float: left;
+  height: 76%;
   -webkit-box-shadow: inset 0 2px 0 #A23A3A;
   border-radius: 15px;
-  border: 3.3px solid #000058;
-  position: relative;
-  top: -72%;
+  border: 3px solid #000058;
+  position: absolute;
+  top: 0%;
+  left: 0;
 }
 
 .life-capacity {
