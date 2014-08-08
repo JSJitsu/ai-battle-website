@@ -50,7 +50,23 @@
             <a href="#replay">See Today's Battle</a>
           </li>
           <li class="page-scroll">
-            <a href="#contact">Join The Fight!</a>
+            <script type="text/javascript">
+            window.onload = function(){
+              $.ajax({
+                method: 'GET',
+                url: '/userinfo',
+              })
+              .done(function(data){
+                console.log(data);
+                if (data){
+                  $('#userContent').text('Hello, ' + data.githubHandle);
+                } else {
+                  $('#userContent').text('Join The Fight!');
+                }
+              })
+            };
+            </script>
+            <a href="#join" id="userContent"></a>
           </li>
         </ul>
       </div>
@@ -103,7 +119,7 @@
       </div>
   </section>
 
-  <section id="contact">
+  <section id="join">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
