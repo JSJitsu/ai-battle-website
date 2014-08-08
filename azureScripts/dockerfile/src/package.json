@@ -1,0 +1,12 @@
+{
+  "name": "docker-test",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Node.js Hello world app on Ubuntu using docker",
+  "author": "Forrest Thomas <forrestbthomas@gmail.com>",
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "multer": "*"
+  }
+}
