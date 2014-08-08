@@ -46,7 +46,7 @@ var runGame = function() {
   var game = new Game(boardSize);
 
   for (var i=0; i<8; i++) {
-    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize))) {
+    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
       //Loops until each hero is successfully added
     }
   }
@@ -79,7 +79,7 @@ var runGame = function() {
     var mongoDb = mongoData.db;
 
     var resolveGameAndSaveTurnsToDB = function(game) {
-      console.log(game.turn);
+      console.log('Turn: ' + game.turn);
       mongoCollection.update({
         '_id':game._id
       }, game, {
@@ -91,15 +91,12 @@ var runGame = function() {
           console.log(err);
         }
 
-        //Handles the hero turn
-        var activeHero = game.activeHero();
-        console.log('hero id: ' + activeHero.id);
+        //Get the current hero
+        var activeHero = game.activeHero;
 
         //Get the direction the currently active hero
         //wants to move
         heroCommunicator.getNextMove(activeHero, game).then(function(direction) {
-
-          console.log(direction);
 
           //Advances the game one turn
           game.handleHeroTurn(direction);
@@ -114,6 +111,8 @@ var runGame = function() {
           }
         }).catch(function(err) {
           console.log('Something went wrong!');
+          console.log(err);
+          console.trace(err);
           throw err;
         });
       });

@@ -14,25 +14,31 @@ var Game = function(n) {
 
   this.heroes = [];
   this.heroTurnIndex = 0;
+  this.activeHero = undefined;
 
   //Defaults to two teams currently
   this.teams = [[],[]];
 
+  //General game object info
   this.diamondMines = [];
   this.healthWells = [];
   this.impassables = [];
   this.ended = false;
 
+  //messages
   this.diamondMessage = '';
   this.moveMessage = 'Game is about to start';
   this.attackMessage = '';
   this.killMessage = '';
 
-  this.turn = 0;
+  //
 
   //Default is 300, can be overwritten
   this.maxTurn = 300;
+  this.turn = 0;
 
+  //Prevents adding of new objects
+  //after game has started
   this.hasStarted = false;
 };
 
@@ -44,12 +50,18 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team)
     throw new Error('Cannot add heroes after the game has started!')
   }
 
-  name = name || 'noname';
+  name = name || 'random';
+
 
   //Can only add a hero to unoccupied spaces
   if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
     // Creates new hero object
     var hero = new Hero(distanceFromTop, distanceFromLeft, name, team);
+
+    //First hero added is the active hero
+    if (this.heroes.length === 0) {
+      this.activeHero = hero;
+    }
 
     // Saves hero id
     hero.id = this.heroes.length;
@@ -139,34 +151,6 @@ Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
   }
 };
 
-// Return a reference to the hero whose turn it is
-Game.prototype.activeHero = function() {
-
-  var incrementHeroIndex = function() {
-    this.heroTurnIndex++;
-
-    //If you reach the end of the hero list, start again
-    if (this.heroTurnIndex >= this.heroes.length) {
-      this.heroTurnIndex = 0;
-    }
-  }.bind(this);
-
-  //The current active hero
-  var hero = this.heroes[this.heroTurnIndex];
-
-  //Make sure the currently active hero is alive
-  while (hero.dead) {
-    incrementHeroIndex();
-    hero = this.heroes[this.heroTurnIndex];
-  }
-
-  //Set up so next hero goes next turn
-  incrementHeroIndex();
-
-  //Return the active hero
-  return hero;
-};
-
 // Resolves the hero's turn:
 // 1) The active hero earns diamonds from each mine they own
 //    at the start of their turn
@@ -184,7 +168,7 @@ Game.prototype.handleHeroTurn = function(direction) {
 
   this.hasStarted = true;
 
-  var hero = this.activeHero();
+  var hero = this.activeHero;
 
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
@@ -213,10 +197,39 @@ Game.prototype.handleHeroTurn = function(direction) {
     throw new Error('Dead heroes should never even have turns!');
   }
 
-  this.turn++;
+  //Increment the game turn and update the active hero
+  this._incrementTurn();
+
   if (this.turn > this.maxTurn) {
     this.ended = true;
   }
+};
+
+Game.prototype._incrementTurn = function() {
+
+  //Used to determine whose turn it is
+  var incrementHeroTurnIndex = function() {
+    this.heroTurnIndex++;
+
+    //If you reach the end of the hero list, start again
+    if (this.heroTurnIndex >= this.heroes.length) {
+      this.heroTurnIndex = 0;
+    }
+  }.bind(this);
+
+  //Goes to next hero
+  incrementHeroTurnIndex();
+
+  //Make sure the next active hero is alive
+  while (this.heroes[this.heroTurnIndex].dead) {
+    incrementHeroTurnIndex();
+  }
+
+  //Set the active hero (the hero whose turn is next)
+  this.activeHero = this.heroes[this.heroTurnIndex];
+
+  //Increment the turn
+  this.turn++;
 };
 
 // Resolve diamond mine earnings
