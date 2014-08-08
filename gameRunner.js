@@ -42,18 +42,22 @@ var runGame = function() {
     return Math.floor(Math.random()*max);
   };
 
-  var game = new Game(10);
-  for (var i=0; i<10; i++) {
-    game.addHero(randomNumber(10), randomNumber(10));
+  var boardSize = 12;
+  var game = new Game(boardSize);
+
+  for (var i=0; i<8; i++) {
+    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize))) {
+      //Loops until each hero is successfully added
+    }
   }
-  for (var i=0; i<4; i++) {
-    game.addHealthWell(randomNumber(10), randomNumber(10));
+  for (var i=0; i<6; i++) {
+    game.addHealthWell(randomNumber(boardSize), randomNumber(boardSize));
   }
-  for (var i=0; i<16; i++) {
-    game.addImpassable(randomNumber(10), randomNumber(10));
+  for (var i=0; i<18; i++) {
+    game.addImpassable(randomNumber(boardSize), randomNumber(boardSize));
   }
-  for (var i=0; i<10; i++) {
-    game.addDiamondMine(randomNumber(10), randomNumber(10));
+  for (var i=0; i<12; i++) {
+    game.addDiamondMine(randomNumber(boardSize), randomNumber(boardSize));
   }
 
   game.maxTurn = 2000;

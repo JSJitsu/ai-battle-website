@@ -3,13 +3,13 @@ var Q = require('q');
 
 //Only used for local testing
 moveFunctions = {
-  0: function(gameData) {
+  'diamond': function(gameData) {
     return 'West';    
   },
-  1: function(gameData) {
+  'kill': function(gameData) {
     return 'East';
   },
-  other: function(gameData) {
+  'noname': function(gameData) {
     var choices = ['North', 'South', 'East', 'West'];
     return choices[Math.floor(Math.random()*4)];
   }

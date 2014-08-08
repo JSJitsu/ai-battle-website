@@ -29,22 +29,27 @@ var Game = function(n) {
   this.killMessage = '';
 
   this.turn = 0;
+
+  //Default is 300, can be overwritten
   this.maxTurn = 300;
+
   this.hasStarted = false;
 };
 
 // Adds a new hero to the board
 // but ONLY if the game has not yet
 // started
-Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
+Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team) {
   if (this.hasStarted) {
     throw new Error('Cannot add heroes after the game has started!')
   }
 
+  name = name || 'noname';
+
   //Can only add a hero to unoccupied spaces
   if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
     // Creates new hero object
-    var hero = new Hero(distanceFromTop, distanceFromLeft);
+    var hero = new Hero(distanceFromTop, distanceFromLeft, name, team);
 
     // Saves hero id
     hero.id = this.heroes.length;
@@ -55,16 +60,24 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
     // Adds hero to game data structure
     this.heroes.push(hero);
 
-    //Adds hero to the smaller team
-    if (this.teams[0].length <= this.teams[1].length) {
+    //Assign hero to appropriate team
+    if (hero.team) {
+      this.teams[hero.team].push(hero);
+
+    //Adds hero to the smaller team if no team is specified
+    } else if (this.teams[0].length <= this.teams[1].length) {
       hero.team = 0;
       this.teams[0].push(hero);
     } else {
       hero.team = 1;
       this.teams[1].push(hero);
     }
-  }
 
+    //Makes it clear adding the hero was a success
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Adds a diamond mine to the board
