@@ -1,6 +1,6 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
-  className: 'game-view-outer',
+  className: 'row',
   initialize: function(){
     this.updateTurn(0);
     this.playSrc = 'http://icons.iconarchive.com/icons/hopstarter/button/256/Button-Play-icon.png';
@@ -9,11 +9,10 @@ var GameView = Backbone.View.extend({
     this.playInProgress = false;
     this.sliderInitialized = false;
 
-    this.$el.html('<div class="game-view"></div>');
-    this.$el.append('<div class="slider-wrapper">' +
-                      '<input class="slider" />' +
+    this.$el.html('<div class="row"></div>');
+    this.$el.append('<input class="col-lg-12 slider" />' +
                     '</div>');
-    this.$el.append('<div class="play-controls">' +
+    this.$el.append('<div class="col-lg-2 play-controls">' +
                       '<span class="play-pause-game glyphicon glyphicon-play">' +
                       '</span>' +
                       '<span class="restart-game glyphicon glyphicon-repeat">' +
@@ -25,11 +24,10 @@ var GameView = Backbone.View.extend({
     'click .restart-game': 'restartGame'
   },
   render: function(){
-  	var $gameHtml = this.$el.find('.game-view');
+  	var $gameHtml = this.$el.find('.row');
     $gameHtml.html('');
 
     //Show game update messages
-    $gameHtml.append('<div class="messages"></div>');
     $('.messages').append(this.model.get('killMessages'));
        //Add html for team info
     var yellowTeamView = new TeamView({

@@ -19,24 +19,3 @@ section {
   .play-controls .glyphicon {
     font-size: 2em;
     margin: 8% 8%; }
-.team-pic {
-  height: 100px;
-  width: 100px;
-}
-
-#greg {
-  height: 150px;
-  width: 150px;
-}
-#jakob {
-  height: 150px;
-  width: 150px;
-}
-#james {
-  height: 150px;
-  width: 150px;
-}
-#forrest {
-  height: 150px;
-  width: 150px;
-}
