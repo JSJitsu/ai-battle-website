@@ -152,15 +152,18 @@ var GameView = Backbone.View.extend({
       //Updates the model
       this.updateTurn(newTurn);
 
-      //Sends the slider to the new location
+      //Send slider to new location
       this.sendSliderToTurn(newTurn);
 
     }.bind(this));
   },
   restartGame: function() {
     this.pauseGame();
-    this.updateTurn(0);
-    this.sendSliderToTurn(0);
+
+    //Send slider and game to turn 0
+    $.when(this.updateTurn(0)).then(function() {
+      this.sendSliderToTurn(0);
+    }.bind(this));
   },
   pauseGame: function() {
     this.paused = true;
