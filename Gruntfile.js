@@ -47,7 +47,9 @@ module.exports = function(grunt) {
         },
         files: {
           './public/css/style.css': './public/scss/style.scss',
-          './public/css/freelancer.css': './public/scss/freelancer.scss'
+          './public/css/freelancer.css': './public/scss/freelancer.scss',
+          './public/css/gamegrid.css': './public/scss/gamegrid.scss',
+          './public/css/game.css': './public/scss/game.scss'
         }
       }
     },
