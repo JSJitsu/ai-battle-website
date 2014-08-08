@@ -9,7 +9,7 @@ module.exports = function(app, mongoConnectionURL) {
   //Creates mongoose User model connected to the mongo URL
   var User = require('./User')(mongoConnectionURL);
 
-  app.use(session({ secret: 'thisisasecret'}));
+  app.use(session({ secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle' }));
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -62,12 +62,12 @@ module.exports = function(app, mongoConnectionURL) {
   var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
   var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
-  var callBackURL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
+  var callbackURL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
 
   var strategy = new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8080/auth/github/callback'
+    callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done) {
     done(null, profile);
   });
