@@ -3,5 +3,17 @@
   text-align: center;
 }
 
-
-
+.game-view-outer {
+  margin:0;
+  padding:0;
+  div.play-controls {
+    border: solid 5px white;
+    border-radius:15px;
+    width:120px;
+    margin: 5px auto;
+    span.glyphicon {
+      font-size:2em;
+      margin:10px 10px;
+    }
+  }
+}
