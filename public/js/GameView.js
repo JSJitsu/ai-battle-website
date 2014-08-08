@@ -11,7 +11,7 @@ var GameView = Backbone.View.extend({
 
     this.$el.html('<div class="game-view"></div>');
     this.$el.append('<div class="slider-wrapper">' +
-                      '<input class="slider" step="1"/>' +
+                      '<input class="slider" />' +
                     '</div>');
     this.$el.append('<div class="play-controls">' +
                       '<span class="play-pause-game glyphicon glyphicon-play">' +
@@ -19,13 +19,6 @@ var GameView = Backbone.View.extend({
                       '<span class="restart-game glyphicon glyphicon-repeat">' +
                       '</span>' +
                     '</div>');
-
-    this.initializeSlider();
-
-    //what to operate on
-    // var turn = $("#turn").html();
-    //compiling handlebars
-    // this.turnTemplate = Handlebars.compile(turn);
   },
   events: {
     'click .play-pause-game': 'togglePlayGame',
@@ -70,6 +63,35 @@ var GameView = Backbone.View.extend({
       }
     });
   },
+  sendSliderToTurn: function(turn) {
+    //The "track" the sword slides along
+    var $rangeBar = this.$el.find('.range-bar');
+
+    //The sword element
+    var $rangeHandle = $rangeBar.find('.range-handle');
+
+    //The "filled-in" left-hand side of the track
+    var $rangeQuantity = $rangeBar.find('.range-quantity')
+
+    //Calculate how far into the game we are
+    var maxTurn = this.model.get('maxTurn');
+    var percentageComplete = turn / maxTurn;
+
+
+    var convertCssLengthToNumber = function(str) {
+      return +(str.slice(0,-2));
+    };
+
+    //Calculate where to put the slider and slider quantity
+    var totalWidth = convertCssLengthToNumber($rangeBar.css('width'));
+    var handleWidth = convertCssLengthToNumber($rangeHandle.css('width'));
+    var actualWidth = totalWidth - handleWidth;
+    var newHandleLocation = percentageComplete * actualWidth;
+
+    //Put the range handle and range quantity in the correct location
+    $rangeHandle.css('left', newHandleLocation + 'px');
+    $rangeQuantity.css('width', newHandleLocation + 'px');
+  },
   initializeSlider: function() {
     //Only run this function once...this ensures that
     if (!this.sliderInitialized) {
@@ -78,63 +100,75 @@ var GameView = Backbone.View.extend({
       return;
     }
 
-    //Get jQuery object pointing to slider
-    var slider = this.$el.find('.slider')[0];
+    //Get slider
+    var $slider = this.$el.find('.slider');
+    var slider = $slider[0];
 
-    //Initialize new slider
+    //Get basic info about game state
+    var currentTurn = this.model.get('turn');
+    var maxTurn = this.model.get('maxTurn');
+
+    //Initialize new slider and set it to update
+    //the turn on slide
     var init = new Powerange(slider, {
-      hideRange: false,
       min: 0,
-      max: this.model.get('maxTurn'),
-      start: 0
+      max: maxTurn,
+      step: 1,
+      callback: function() {
+        //Pause the game
+        this.pauseGame();
+
+        //Slider value will range from the min to max
+        this.updateTurn(slider.value);
+
+      }.bind(this)
     });
 
-    var sliderPos = slider.value;
-    //count keydowns to keep track of current turn
-    var turn = 0;
+    console.log($slider.width())
 
-    //listens for slider changes and renders backbone view accordingly
-    slider.onchange = function() {
-      console.log('changed');
-      // this.updateTurn(slider.value);
-    }.bind(this);
+    //Allows users to change the turn with arrow keys
+    $(document).keydown(function(e) {
+      var turnAdjustment = 0;
+      if (e.which === 39) {
+        turnAdjustment = 1;
+      } else if (e.which === 37) {
+        turnAdjustment = -1;
+      } else {
+        //does nothing
+        return;
+      }
 
-    //listens for keydown events to control scrobbling
-    $(document).keydown(function(e){
+      //Will only get here if an arrow key is pressed
+      //Pauses the game, then goes to the turn specified
+      this.pauseGame();
 
-      //Allows us to check actual pixel value of slider-handle 
-      var slideQuanity = parseFloat($('.range-handle').css('left'));
-      //gets current turn in the case user dragged handle instead of scrobbled
-      turn = app.game.get('turn');
-      //translates dragging to scrobbling (i.e if dragged to turn 900 the value will be 900 multiplying by
-      // (580 / 2000) gives us the corresponding pixels to translate)
-      sliderPos = parseFloat(slider.value) * (580 / 2000);
-      //check if key down is actually left of right return if not
-      if(e.which !== 39){
-        if(e.which !== 37){
-          return;
-        }
-      }
-      //check if key is right and if slideQuanity (blue bar) is not yet full
-      if(e.which === 39 && slideQuanity < 580){
-        //add .299 which is a slightly tweeked version of 580 / 2000(width of bar is 580px there are 2000 turns) 
-        slider.value = parseFloat(slider.value) + 0.299;
-        turn++;
-      }
-      if(e.which === 37 && slider.value > 1){
-        slider.value = parseFloat(slider.value) - 0.299;
-        turn--;
-      }
-      //updateturn and css with corresponding pixel values
-      app.gameView.updateTurn(turn); 
-      $('.range-handle').css('left',sliderPos);
-      $('.range-quantity').css('width',sliderPos);
-    });
+      //Updates the turn
+      var turn = this.model.get('turn');
+      var maxTurn = this.model.get('maxTurn');
+
+      //Adjusts the turn, but doesn't go below 0 or above the max turn
+      var newTurn = Math.max(Math.min(turn + turnAdjustment, maxTurn),0);
+
+      //Updates the model
+      this.updateTurn(newTurn);
+
+      //Sends the slider to the new location
+      this.sendSliderToTurn(newTurn);
+
+    }.bind(this));
   },
   restartGame: function() {
-    this.paused = false;
-    this.togglePlayGame();
+    this.pauseGame();
     this.updateTurn(0);
+    this.sendSliderToTurn(0);
+  },
+  pauseGame: function() {
+    this.paused = true;
+
+    //Change pause button to a play button
+    var $playPause = this.$el.find('.play-pause-game');
+    $playPause.removeClass('glyphicon-pause');
+    $playPause.addClass('glyphicon-play');
   },
   togglePlayGame: function() {
     this.paused = !this.paused;
@@ -169,6 +203,9 @@ var GameView = Backbone.View.extend({
       $.when(updateTurnPromise).then(function() {
         //promise has resolved, no longer waiting
         this.playInProgress = false;
+
+        //Updates the slider location to track with the current turn
+        this.sendSliderToTurn(currTurn + 1);
 
         //Runs this again (will run until no turns are left or
         //until paused)
