@@ -52,24 +52,18 @@
           <li class="page-scroll">
             <script type="text/javascript">
             window.onload = function(){
-              if ($){
-                $ = jQuery;
-              }
               $.ajax({
                 method: 'GET',
                 url: '/userinfo',
               })
               .done(function(data){
-                console.log(data);
-                if (data){
+                if (data.githubHandle){
                   $('#userContent').text('Hello, ' + data.githubHandle);
-                } else {
-                  $('#userContent').text('Join The Fight!');
                 }
-              })
+              });
             };
             </script>
-            <a href="#join" id="userContent"></a>
+            <a href="#join" id="userContent">Join The Fight!</a>
           </li>
         </ul>
       </div>
