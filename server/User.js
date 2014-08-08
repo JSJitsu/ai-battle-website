@@ -8,6 +8,25 @@ module.exports = function(mongoConnectionUrl) {
     codeRepo: {
       type: String,
       default: ''
+    },
+    lifetimeStats: {
+      kills: Number,
+      deaths: Number,
+      damageDealt: Number,
+      minesCaptured: Number,
+      diamondsEarned: Number,
+      healthRecovered: Number,
+      wins: Number,
+      losses: Number
+    },
+    mostRecentStats: {
+      gameResult: String,
+      survived: Boolean,
+      kills: Number,
+      damageDealt: Number,
+      minesCaptured: Number,
+      diamondsEarned: Number,
+      healthRecovered: Number
     }
   });
 
