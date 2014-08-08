@@ -33,8 +33,6 @@ $(document).on('ready', function(){
     // $(this).css({'opacity': '1'});
     $(this).find('#role').hide();
   });
-})
-
 
   var render = function(template, data) {
     $('#join').html('');
