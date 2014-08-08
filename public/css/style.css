@@ -19,3 +19,8 @@ section {
   .play-controls .glyphicon {
     font-size: 2em;
     margin: 8% 8%; }
+.team-pic {
+  height: 100px;
+  width: 100px;
+}
+
