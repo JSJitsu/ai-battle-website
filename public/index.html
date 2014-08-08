@@ -50,19 +50,6 @@
             <a href="#replay">See Today's Battle</a>
           </li>
           <li class="page-scroll">
-            <script type="text/javascript">
-            window.onload = function(){
-              $.ajax({
-                method: 'GET',
-                url: '/userinfo',
-              })
-              .done(function(data){
-                if (data.githubHandle){
-                  $('#userContent').text('Hello, ' + data.githubHandle);
-                }
-              });
-            };
-            </script>
             <a href="#join" id="userContent">Join The Fight!</a>
           </li>
         </ul>
@@ -88,31 +75,31 @@
 
   <section id="rules">
     <div class="container">
-      <div class="rules-content">
-        <h2>Rules</h2>
-        <hr class="star-primary">
+      <center><h2>Rules</h2></center>
+      <hr>
+      <div class="message"><br></div>
+      <center>
         <h4>
           The first rule of Javascript Battle is...there are no rules! 
           Ok, really, there are some rules, but they are totally reasonable.
         </h4>
-      </div>
+      </center>
         <h4>
           <ol>
-            <li>Create a GitHub account, if you don't have one.</li>
-            <li>Go to our <a href="https://github.com/JavascriptBattle/javascript-battle-website">readme</a> and follow all the steps to get started.</li>
-            <li>Learn some Javascript, write some code, make your hero awesome, and watch the results.</li>
-          </ol>
+          <li>Create a <a href="https://github.com/join">GitHub</a> account, if you don't have one.</li>
+          <li>Go to our <a href="https://github.com/JavascriptBattle/javascript-battle-website">readme</a> and follow all the steps to get started.</li>
+          <li>Learn some Javascript, write some code, make your hero awesome, and watch the results.</li>
+        </ol>
       </h4>
     </div>
   </section>
 
  
-  <section class="success battle-results" id="replay">
-    <div class="success container gamegrid-content">
+  <section class="success" id="replay">
+    <div class="container content">
       <h2>See Today's Battle</h2>
-      <hr class="star-light ">
-      <div class="message">
-        <br>
+      <hr class="star-light">
+      <div class="message"><br></div>
       </div>
     </div>
   </section>
@@ -143,38 +130,43 @@
     </div>
   </section>
   
-  <div class="team slide" id="slide5" data-section="5"  data-stellar-background-ratio="0.5" >
-        <div class="container clearfix">
-            <div class="row-fluid title">
-                <h1 >The Team</h1>
-                <h2> Meet the creators </h2>
+  <section id="join">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2>Meet The Team</h2>
+          <hr class="star-primary">
+        </div>
+        <div class="team">
+          <div class="team-pic col-md-3">
+            <img src="https://avatars0.githubusercontent.com/u/931171?v=2&s=120" />
+            <div class="text">
             </div>
-            <div id="members" class="row-fluid">
-                <!--====== Brandon Cooper  ======-->
-                <div class="team-member">
-                    <div class="team-member-info">
-                        <p class="team-role">NPC Artificial Intelligence, Gameplay Mode Design, Multiplayer</p>
-                        <img class="team-member-picture" src="images/team/BrandonCooper.jpg" alt="Brandon Cooper image">
-                        <h3 class="team-member-name">Brandon Cooper</h3>
-                    </div>
-                    <ul class="team-member-social">
-                        <li><a href="https://github.com/cooperjbrandon" target="_blank"><i class="icon-github"></i></a></li>
-                        <li><a href="http://www.linkedin.com/in/cooperjbrandon" target="_blank"><i class="icon-linkedin-sign"></i></a></li>
-                        <li><a href="http://cooperjbrandon.com" target="_blank"><i class="icon-home"></i></a></li>
-                    </ul>
-                </div>
-
-            </div> <!-- #members -->
-        </div> <!-- .container -->
-    </div> <!-- .team -->
+          </div>
+          <div class="team-pic col-md-3 col-md-offset-2">
+            <img src="https://avatars1.githubusercontent.com/u/5547203?v=2&s=120" />
+            <div class="text">
+            </div>
+          </div>
+          <div class="team-pic col-md-3 col-md-offset-2">
+            <img src="https://avatars0.githubusercontent.com/u/5105939?v=2&s=120" />
+            <div class="text">
+            </div>
+          </div>
+          <div class="team-pic col-md-3 col-md-offset-2">
+            <img src="https://avatars3.githubusercontent.com/u/6327569?v=2&s=120" />
+            <div class="text">
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </section>
 
   <footer>
     <div class="footer-below">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
-            Produced @ <a href="http://www.hackreactor.com/">Hack Reactor</a>
-          </div>
           <div class="col-lg-12">
             Copyright &copy; Javascript Battle 2014
           </div>
@@ -212,6 +204,7 @@
   <script src="./js/Game.js"></script>
   <script src="./js/GameView.js"></script>
   <script src="./js/app.js"></script>
+  <script src="index.js"></script>
 
 </body>
 
