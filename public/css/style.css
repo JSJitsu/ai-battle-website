@@ -46,3 +46,6 @@ section {
   position: absolute;
   display: none;
 }
+li {
+  padding: 10px;
+}
