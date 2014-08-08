@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/gjtrowbridge/javascript-battle-webworkers",
   "dependencies": {
+    "body-parser": "^1.6.2",
     "form-data": "^0.1.4",
     "mongodb": "^1.4.8",
+    "multer": "^0.1.3",
     "q": "^1.0.1",
     "request": "^2.40.0",
     "unirest": "^0.2.7"
