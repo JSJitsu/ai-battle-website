@@ -62,6 +62,8 @@ module.exports = function(app, mongoConnectionURL) {
   var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
   var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
+  var callBackURL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
+
   var strategy = new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
