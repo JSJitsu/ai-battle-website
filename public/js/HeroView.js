@@ -20,7 +20,7 @@ var HeroView = Backbone.View.extend({
     var heroHP = '<div class="health-info h-i' + heroId + '">' + health + '</div>';
     this.$el.append(heroName + heroHP);
     if(currentTurn === turn - 1 && turn !== 1){
-      this.$el.removeClass('list-group-item-info').addClass('current-turn-info');
+      this.$el.removeClass('list-group-item-info').addClass('list-group-item-highlighted');
     }
   }
 });

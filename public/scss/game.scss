@@ -1,0 +1,63 @@
+
+.list-group-item-highlighted {
+  color: #3c763d;
+  border-color: #A0CF8C;
+  background-color: #A0CF8C;
+}
+
+
+#ex1Slider .slider-selection {
+  background: #BABABA;
+}
+
+.range-bar {
+  margin: -85px auto;
+  width: 580px;
+}
+
+.range-handle {
+  bottom: 10px;
+  height: 28px;
+  width: 29px;
+  right: 20px;
+  background-color: transparent;
+  top: -13px;
+  position: absolute;
+  background-image: url('../img/sword.png');
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0; 
+}
+
+.messages {
+  margin: 0 auto;
+  height: 16px;
+  width: 500px;
+  top: -38px;
+  position: relative;
+}
+
+.team-info-y {
+  float: right;
+  top: 105px;
+  position: relative;
+  width: 112px;
+
+}
+
+.team-info-b {
+  float: left;
+  right: 40px;
+  position: relative;
+  top: 105px;
+  width: 112px;
+}
+
+
+.turn-content {
+  color: #2c3e50 !important;
+}
+
+.dead-info {
+  color: red; 
+}

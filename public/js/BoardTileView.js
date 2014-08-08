@@ -32,7 +32,7 @@ var BoardTileView = Backbone.View.extend({
         HealthWell: '../img/pot.png',
         Bones: '../img/grave.png'
       };
-      var html = '<img src="' + assets[subType] + '">';
+      var html = '<img src="' + assets[subType] + '" class="sprite">';
         var colors = {
           0: "team-yellow",
           1: "team-blue"
@@ -45,9 +45,9 @@ var BoardTileView = Backbone.View.extend({
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
           this.$el.addClass('current-turn');
         }
-        html = '<img src="' + assets[subType] + '" class="H' + heroId +'">';
+        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="sprite">';
         
-        html += '<div class="hero ' + colors[this.model.get('team')] +'">' + heroId + '</div>'
+        html += '<div class="hero ' + colors[this.model.get('team')] +'">' + heroId + '</div>';
         html += '<div class="lifebar"><div class="life-capacity" style="height:' + HP + '%"></div></div>';
       } else if (type === 'DiamondMine') {
         var owner = this.model.get('owner');
