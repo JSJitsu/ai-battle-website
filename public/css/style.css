@@ -2,14 +2,13 @@
   margin: 0 auto;
   text-align: center; }
 
-.game-view-outer {
-  margin: 0;
-  padding: 0; }
-  .game-view-outer div.play-controls {
-    border: solid 5px white;
-    border-radius: 15px;
-    width: 120px;
-    margin: 5px auto; }
-    .game-view-outer div.play-controls span.glyphicon {
-      font-size: 2em;
-      margin: 10px 10px; }
+.play-controls {
+  position: relative;
+  border: solid 5px white;
+  border-radius: 15px;
+  width: 120px;
+  margin: 0px auto;
+  top: 95px; }
+  .play-controls .glyphicon {
+    font-size: 2em;
+    margin: 10px 10px; }
