@@ -85,28 +85,20 @@ module.exports = function(app, mongoConnectionURL) {
 
   //This is where github sends us after it finishes authenticating us
   app.get('/auth/github/callback', passport.authenticate('github', { 
-    successRedirect: '/success',
-    failureRedirect: '/error'
+    successRedirect: '/',
+    failureRedirect: '/'
   }));
 
-  app.get('/success', function(req, res, next) {
-    res.send('Successfully logged in.');
-  });
-   
-  app.get('/error', function(req, res, next) {
-    res.send("Error logging in.");
-  });
+  // var ensureAuthenticated = function(req, res, next) {
+  //   if (req.isAuthenticated()) {
+  //     return next();
+  //   } else {
+  //     res.send('you done fucked up now!');
+  //   }
+  // };
 
-  var ensureAuthenticated = function(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    } else {
-      res.send('you done fucked up now!');
-    }
-  };
-
-  app.get('/restricted', ensureAuthenticated, function(req, res) {
-    res.send('you are IN!');
-  });
+  // app.get('/restricted', ensureAuthenticated, function(req, res) {
+  //   res.send('you are IN!');
+  // });
 
 };
