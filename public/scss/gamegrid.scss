@@ -20,6 +20,7 @@
  
 .sprite {
   max-width: 69.5%;
+  max-height: 102%;
   filter: grayscale(0.5) blur(10px);
 }
 
@@ -30,8 +31,7 @@
   border-radius: 15px;
   border: 3.3px solid #000058;
   position: relative;
-  top: -37px;
-  margin-bottom: -31px;
+  top: -72%;
 }
 
 .life-capacity {
