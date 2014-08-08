@@ -7,8 +7,9 @@
   background: #BABABA; }
 
 .range-bar {
-  margin: -85px auto;
-  width: 580px; }
+  margin: 3px auto;
+  width: 45%;
+  bottom: 3vh; }
 
 .range-handle {
   bottom: 10px;
@@ -24,23 +25,22 @@
   border-radius: 0; }
 
 .messages {
-  margin: 0 auto;
-  height: 16px;
+  margin: -28px auto;
+  height: 20px;
   width: 500px;
-  top: -38px;
-  position: relative; }
+  top: -6px;
+  position: relative;
+  font-size: 20px;
+  color: dimgrey; }
 
 .team-info-y {
   float: right;
-  top: 105px;
-  position: relative;
   width: 112px; }
 
 .team-info-b {
   float: left;
-  right: 40px;
+  right: 4%;
   position: relative;
-  top: 105px;
   width: 112px; }
 
 .turn-content {

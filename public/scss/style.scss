@@ -1,18 +1,26 @@
-.content {
+.rules-content {
   margin: 0 auto;
   text-align: center;
 }
 
+.gamegrid-content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+section {
+  padding:1%;
+}
 
 .play-controls {
-position: relative;
-border: solid 5px white;
-border-radius: 15px;
-width: 120px;
-margin: 0px auto;
-top: 95px;
-.glyphicon {
-  font-size:2em;
-  margin:10px 10px;
+  position: relative;
+  border: solid 5px white;
+  border-radius: 15px;
+  width: 10%;
+  bottom: 2vh;
+  margin: 0 auto;
+ .glyphicon {
+   font-size: 2em;
+   margin: 8% 8%;
   }
 }
