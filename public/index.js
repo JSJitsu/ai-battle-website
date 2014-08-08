@@ -9,7 +9,6 @@ $(document).on('ready', function(){
     }
   })
   .error(function(xhr, status){
-    console.log(status);
     if (status !== 'success') {
       $('#userContent').text('Join The Fight!');
     }
