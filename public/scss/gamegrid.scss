@@ -10,7 +10,7 @@
 }
 
 .battle-tile {
-  float:right;
+  float: right;
   display: table-cell;
   height: 7vh;
   width: 10%;
@@ -31,7 +31,6 @@
   border: 3.3px solid #000058;
   position: relative;
   top: -37px;
-  right: -5px;
   margin-bottom: -31px;
 }
 
@@ -55,9 +54,6 @@
   top: -9px;
   float: right;
 }
-
-
-
 
 .current-turn {
   background-color: hotpink;
