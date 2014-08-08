@@ -2,15 +2,15 @@
   display: table;
   margin: 0 auto 2%;
   position: relative;
-  width: 75%; }
+  width: 68%; }
 
 .tile-row {
   display: table-row; }
 
 .battle-tile {
   display: table-cell;
-  height: 4vw;
-  width: 5vw;
+  height: 3.7vw;
+  width: 4.5vw;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
 
