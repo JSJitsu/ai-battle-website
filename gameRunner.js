@@ -1,14 +1,10 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./GameScripts/Game.js');
+var heroCommunicator = require('./heroCommunicator.js');
 
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
-// var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
-
-var move = function(gameData, helpers) {
-  var choices = ['North', 'East', 'South', 'West'];
-  return choices[Math.floor(Math.random()*4)];
-};
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -92,16 +88,30 @@ var runGame = function() {
         }
 
         //Handles the hero turn
-        game.handleHeroTurn(move(game));
+        var activeHero = game.activeHero();
+        console.log('hero id: ' + activeHero.id);
 
-        //Manually set the ID so Mongo doesn't just keep writing to the same document
-        game._id = game.turn + '|' + date;
+        //Get the direction the currently active hero
+        //wants to move
+        heroCommunicator.getNextMove(activeHero, game).then(function(direction) {
 
-        if (game.ended) {
-          mongoDb.close();
-        } else {
-          resolveGameAndSaveTurnsToDB(game);
-        }
+          console.log(direction);
+
+          //Advances the game one turn
+          game.handleHeroTurn(direction);
+
+          //Manually set the ID so Mongo doesn't just keep writing to the same document
+          game._id = game.turn + '|' + date;
+
+          if (game.ended) {
+            mongoDb.close();
+          } else {
+            resolveGameAndSaveTurnsToDB(game);
+          }
+        }).catch(function(err) {
+          console.log('Something went wrong!');
+          throw err;
+        });
       });
     };
 
