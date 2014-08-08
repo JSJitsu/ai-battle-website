@@ -1,6 +1,6 @@
 var BoardView = Backbone.View.extend({
   tagName: 'section',
-  className: 'battle-map',
+  className: 'battle-map row',
   initialize: function() {
     this.render()
   },
@@ -11,8 +11,8 @@ var BoardView = Backbone.View.extend({
   createBoardView: function() {
   	var boardLength = this.collection.lengthOfSide;
     for(var i = 0; i < boardLength; i++){
-      var $tr = $('<div class="tile-row">');
-    	for(var j = boardLength - 1; j >= 0; j--){
+      var $tr = $('<div class="tile-row row">');
+    	for(var j = 0; j < boardLength; j++){
         var tileView = new BoardTileView({
     			model: this.collection.at(i * boardLength + j)          
     		});

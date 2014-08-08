@@ -1,6 +1,6 @@
 var BoardTileView = Backbone.View.extend({
   tagName: 'div',
-  className: 'battle-tile',
+  className: 'col-lg-1 battle-tile',
   initialize: function(){
     if (this.model === undefined) {
       console.log('UNDEFINED!');

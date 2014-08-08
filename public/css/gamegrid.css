@@ -2,22 +2,21 @@
   display: table;
   margin: 0 auto 2%;
   position: relative;
-  width: 55%; }
+  width: 75%; }
 
 .tile-row {
   display: table-row; }
 
 .battle-tile {
-  float: right;
   display: table-cell;
-  height: 7vh;
-  width: 10%;
+  height: 4vw;
+  width: 5vw;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
 
 .sprite {
-  max-width: 69.5%;
-  max-height: 102%;
+  max-width: 109.5%;
+  max-height: 182%;
   filter: grayscale(0.5) blur(10px); }
 
 .lifebar {
@@ -41,11 +40,11 @@
 
 .hero {
   color: white;
-  font-size: 24px;
-  margin-bottom: -44px;
+  font-size: 0.6em;
+  /* margin-bottom: -44px; */
   position: relative;
-  top: -9px;
-  float: right; }
+  top: -76%;
+  right: -75%; }
 
 .current-turn {
   background-color: hotpink;
