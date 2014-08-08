@@ -13,7 +13,11 @@ $(document).on('ready', function(){
       $('#userContent').text('Join The Fight!');
     }
   });
-  $('.team-pic').mouseover(function(){
-    
-  })
+  $('.team-pic').hover(function(){
+    // $(this).css({'opacity': '0.5'});
+    $(this).find('#role').show();
+  }, function(){
+    // $(this).css({'opacity': '1'});
+    $(this).find('#role').hide();
+  });
 })
