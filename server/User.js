@@ -8,13 +8,10 @@ module.exports = function(mongoConnectionUrl) {
     codeRepo: {
       type: String,
       default: 'hero-starter'
-<<<<<<< HEAD
     },
     codeRepoBranch: {
       type: String,
       default: 'master'
-=======
->>>>>>> feature(User.js): Add github info to users
     },
     codeRepoBranch: {
       type: String,
