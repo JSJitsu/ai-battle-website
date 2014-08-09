@@ -1,4 +1,4 @@
-var Hero = function(distanceFromTop, distanceFromLeft) {
+var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
   this.id = undefined;
 
   // Location
@@ -9,7 +9,7 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
   this.minesOwned = {};
   this.mineCount = 0;
 
-  // Personal
+  // Health
   this.health = 100;
   this.dead = false;
 
@@ -21,8 +21,15 @@ var Hero = function(distanceFromTop, distanceFromLeft) {
 
   // General
   this.type = 'Hero';
-  this.subType = 'Adventurer';
-  this.team = undefined;
+  if (team === 0) {
+    this.subType = 'BlackKnight';
+  } else {
+    this.subType = 'Adventurer';
+  }
+  this.team = team;
+
+  //Personal
+  this.name = name;
 };
 
 Hero.prototype.killedHero = function(otherHero) {

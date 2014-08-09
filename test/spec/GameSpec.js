@@ -3,13 +3,13 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 var spies = require('chai-spies');
-var Board = require('../../Board.js');
-var DiamondMine = require('../../DiamondMine.js');
-var Game = require('../../Game.js');
-var HealthWell = require('../../HealthWell.js');
-var Hero = require('../../Hero.js');
-var Impassable = require('../../Impassable.js');
-var Unoccupied = require('../../Unoccupied.js');
+var Board = require('../../GameScripts/Board.js');
+var DiamondMine = require('../../GameScripts/DiamondMine.js');
+var Game = require('../../GameScripts/Game.js');
+var HealthWell = require('../../GameScripts/HealthWell.js');
+var Hero = require('../../GameScripts/Hero.js');
+var Impassable = require('../../GameScripts/Impassable.js');
+var Unoccupied = require('../../GameScripts/Unoccupied.js');
 chai.use(spies);
 
 describe('Game dependencies exist.', function () {
@@ -17,7 +17,6 @@ describe('Game dependencies exist.', function () {
 
   beforeEach(function() {
  
-
   });
 
   it('Board.js exists', function () {

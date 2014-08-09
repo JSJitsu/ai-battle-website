@@ -14,29 +14,40 @@ var Game = function(n) {
 
   this.heroes = [];
   this.heroTurnIndex = 0;
+  this.activeHero = undefined;
 
   //Defaults to two teams currently
   this.teams = [[],[]];
+  this.totalTeamDiamonds = [0,0];
 
+  //General game object info
   this.diamondMines = [];
   this.healthWells = [];
   this.impassables = [];
   this.ended = false;
 
+  //Results
+  this.winningTeam = undefined;
+
+  //Messages
   this.diamondMessage = '';
   this.moveMessage = 'Game is about to start';
   this.attackMessage = '';
   this.killMessage = '';
 
-  this.turn = 0;
+  //Default is 300, can be overwritten
   this.maxTurn = 300;
+  this.turn = 0;
+
+  //Prevents adding of new objects
+  //after game has started
   this.hasStarted = false;
 };
 
 // Adds a new hero to the board
 // but ONLY if the game has not yet
 // started
-Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
+Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team) {
   if (this.hasStarted) {
     throw new Error('Cannot add heroes after the game has started!')
   }
@@ -44,7 +55,12 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
   //Can only add a hero to unoccupied spaces
   if (this.board.tiles[distanceFromTop][distanceFromLeft].type === 'Unoccupied') {
     // Creates new hero object
-    var hero = new Hero(distanceFromTop, distanceFromLeft);
+    var hero = new Hero(distanceFromTop, distanceFromLeft, name, team);
+
+    //First hero added is the active hero
+    if (this.heroes.length === 0) {
+      this.activeHero = hero;
+    }
 
     // Saves hero id
     hero.id = this.heroes.length;
@@ -55,16 +71,14 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft) {
     // Adds hero to game data structure
     this.heroes.push(hero);
 
-    //Adds hero to the smaller team
-    if (this.teams[0].length <= this.teams[1].length) {
-      hero.team = 0;
-      this.teams[0].push(hero);
-    } else {
-      hero.team = 1;
-      this.teams[1].push(hero);
-    }
-  }
+    //Assign hero to appropriate team
+    this.teams[hero.team].push(hero);
 
+    //Makes it clear adding the hero was a success
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Adds a diamond mine to the board
@@ -126,34 +140,6 @@ Game.prototype.addImpassable = function(distanceFromTop, distanceFromLeft) {
   }
 };
 
-// Return a reference to the hero whose turn it is
-Game.prototype.activeHero = function() {
-
-  var incrementHeroIndex = function() {
-    this.heroTurnIndex++;
-
-    //If you reach the end of the hero list, start again
-    if (this.heroTurnIndex >= this.heroes.length) {
-      this.heroTurnIndex = 0;
-    }
-  }.bind(this);
-
-  //The current active hero
-  var hero = this.heroes[this.heroTurnIndex];
-
-  //Make sure the currently active hero is alive
-  while (hero.dead) {
-    incrementHeroIndex();
-    hero = this.heroes[this.heroTurnIndex];
-  }
-
-  //Set up so next hero goes next turn
-  incrementHeroIndex();
-
-  //Return the active hero
-  return hero;
-};
-
 // Resolves the hero's turn:
 // 1) The active hero earns diamonds from each mine they own
 //    at the start of their turn
@@ -171,7 +157,7 @@ Game.prototype.handleHeroTurn = function(direction) {
 
   this.hasStarted = true;
 
-  var hero = this.activeHero();
+  var hero = this.activeHero;
 
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
@@ -200,11 +186,28 @@ Game.prototype.handleHeroTurn = function(direction) {
     throw new Error('Dead heroes should never even have turns!');
   }
 
-  this.turn++;
+  //Increment the game turn and update the active hero
+  this._incrementTurn();
+
+  //Checks whether the game is over
   if (this.turn > this.maxTurn) {
+    this.ended = true;
+    var teamDiamonds0 = this._teamDiamonds(this.teams[0]);
+    var teamDiamonds1 = this._teamDiamonds(this.teams[1]);
+    if (teamDiamonds1 > teamDiamonds0) {
+      this.winningTeam = 1;
+    } else {
+      this.winningTeam = 0;
+    }
+  } else if (this._teamIsDead(this.teams[0])) {
+    this.winningTeam = 1;
+    this.ended = true;
+  } else if (this._teamIsDead(this.teams[1])) {
+    this.winningTeam = 0;
     this.ended = true;
   }
 };
+
 
 // Resolve diamond mine earnings
 Game.prototype._handleHeroEarnings = function(hero) {
@@ -213,6 +216,7 @@ Game.prototype._handleHeroEarnings = function(hero) {
   } else {
     this.diamondMessage = 'Hero #' + hero.id + ' owns no mines, and got no diamonds';
   }
+  this.totalTeamDiamonds[hero.team] += hero.mineCount;
   hero.diamondsEarned += hero.mineCount;
 };
 
@@ -316,6 +320,50 @@ Game.prototype._resolveHeroAttacks = function(hero) {
       }
     }
   }
+};
+
+Game.prototype._teamDiamonds = function(teamArray) {
+  var diamonds = 0;
+  for (var i=0; i<teamArray.length; i++) {
+    diamonds += teamArray[i].diamondsEarned;
+  }
+  return diamonds;
+};
+
+Game.prototype._teamIsDead = function(teamArray) {
+  for (var i=0; i<teamArray.length; i++) {
+    if (!teamArray[i].dead) {
+      return false;
+    }
+  }
+  return true;
+};
+
+Game.prototype._incrementTurn = function() {
+
+  //Used to determine whose turn it is
+  var incrementHeroTurnIndex = function() {
+    this.heroTurnIndex++;
+
+    //If you reach the end of the hero list, start again
+    if (this.heroTurnIndex >= this.heroes.length) {
+      this.heroTurnIndex = 0;
+    }
+  }.bind(this);
+
+  //Goes to next hero
+  incrementHeroTurnIndex();
+
+  //Make sure the next active hero is alive
+  while (this.heroes[this.heroTurnIndex].dead) {
+    incrementHeroTurnIndex();
+  }
+
+  //Set the active hero (the hero whose turn is next)
+  this.activeHero = this.heroes[this.heroTurnIndex];
+
+  //Increment the turn
+  this.turn++;
 };
 
 // Removes a dead hero from the board
