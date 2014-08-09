@@ -21,7 +21,11 @@ var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
 
   // General
   this.type = 'Hero';
-  this.subType = 'Adventurer';
+  if (team === 0) {
+    this.subType = 'BlackKnight';
+  } else {
+    this.subType = 'Adventurer';
+  }
   this.team = team;
 
   //Personal

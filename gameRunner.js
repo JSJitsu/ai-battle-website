@@ -45,6 +45,9 @@ var runGame = function() {
   var boardSize = 12;
   var game = new Game(boardSize);
 
+  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'assassin', 0);
+  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+
   for (var i=0; i<8; i++) {
     while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
       //Loops until each hero is successfully added
