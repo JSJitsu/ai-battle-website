@@ -46,6 +46,17 @@ section {
   position: absolute;
   display: none;
 }
+#team {
+  background: #18bc9c;
+  padding-bottom: 350px;
+}
+.team-title {
+  color: white;
+}
+.team-container {
+  padding: 100px;
+}
 li {
   padding: 10px;
 }
+
