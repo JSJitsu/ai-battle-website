@@ -12,51 +12,11 @@ section {
 .play-controls {
   position: relative;
   border: solid 5px white;
-  border-radius: 15px;
-  width: 10%;
+  border-radius: 16px;
+  width: 11%;
   bottom: 2vh;
-  margin: 0 auto; }
+  margin: 0 auto;
+  left: 42%; }
   .play-controls .glyphicon {
     font-size: 2em;
     margin: 8% 8%; }
-
-.team-pic {
-  height: 100px;
-  width: 100px;
-}
-
-#greg {
-  height: 175px;
-  width: 175px;
-}
-#jakob {
-  height: 175px;
-  width: 175px;
-}
-#james {
-  height: 175px;
-  width: 175px;
-}
-#forrest {
-  height: 175px;
-  width: 175px;
-}
-#role {
-  opacity: 1;
-  position: absolute;
-  display: none;
-}
-#team {
-  background: #18bc9c;
-  padding-bottom: 350px;
-}
-.team-title {
-  color: white;
-}
-.team-container {
-  padding: 100px;
-}
-li {
-  padding: 10px;
-}
-
