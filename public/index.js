@@ -10,11 +10,7 @@ $(document).on('ready', function(){
     console.log('data: ', data);
     if (data.githubHandle){
       $('#userContent').text('Hello, ' + data.githubHandle);
-      if (data.codeRepo) {
-        template = "loggedInSignedUp";
-      } else {
-        template = "loggedInNotSignedUp";
-      }
+        template = "loggedIn";
     } 
     render(template, data);
   })
