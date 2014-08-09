@@ -2,7 +2,7 @@
   display: table;
   margin: 1% auto;
   position: relative;
-  width: 74%; }
+  width: auto; }
 
 .tile-row {
   display: table-row; }
