@@ -409,3 +409,8 @@ a:hover, a:focus, a:active, a.active {
 
 body {
   color: #2c3e50 !important; }
+
+form {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -4,20 +4,48 @@
       <h2> <%= githubHandle %> </h2>
         <hr class="star-primary">
     </div>
-      <p>You are currently NOT ENTERED in the JavaScript Battle.  To enter, please enter the name of the respository that holds your "hero.js" file (with "move" function inside).
+      <p>You are currently NOT ENTERED in the JavaScript Battle.  To enter, please enter the name of the respository and branch that holds your "hero.js" file or upload the file directly.
       </p>
       <br>
       <p>For an overview, follow our walkthrough <a href=# >here.</a></p>
-      <center><p>GitHub Repository</p></center>
-      <center><form><input type="text" name="repo"></form></center>
+      
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputRepo" class="col-sm-2 control-label">GitHub Repository</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputRepo" placeholder="repo">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputBranch" class="col-sm-2 control-label">GitHub Branch</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputBranch" placeholder="master">
+            </div>
+          </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+        </form>
+
       <br>
-      <center><p>GitHub branch</p></center>
-      <center><form><input type="text" name="branch"></form></center>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputFile" class="col-sm-2 control-label">Upload File</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputFile" placeholder="file">
+            </div>
+          </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Upload</button>
+              </div>
+            </div>
+        </form>
+
+      <!-- <center><form><input type="text" name="repo"></form></center>
       <br>
-      <center><p>OR</p></center>
-      <center><p>Upload your file directly here:</p></center>
-      <center><form><input type="text" name="repo"></form></center>
-      <br>
-      <center><button>Select/Upload</button></center>
+      <center><button>Select/Upload</button></center> -->
   </div>  
 </div>
