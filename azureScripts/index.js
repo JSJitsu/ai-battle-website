@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/', function(req, res) {
   var result = move(req.body);
-  res.end(result);
+  res.send(result);
 });
 
 app.post('/heroFilesHere', multer({ 
@@ -19,7 +19,7 @@ app.post('/heroFilesHere', multer({
   }
 }), function(req, res) {
   move = require('./myHero.js');
-  res.end();
+  res.send('File saved...probably');
 });
 
 app.listen(8080);

@@ -1,8 +1,8 @@
 var request = require('request');
 var fs = require('fs');
 var postFileToServer = function(url, heroFilePath){
-	var r = request.post(url, function() {
-    console.log('it is done');
+	var r = request.post(url, function(err, res, body) {
+    console.log(res.body);
 	});
 
 	var form = r.form();
