@@ -6,9 +6,6 @@
   margin: 0 auto;
   text-align: center; }
 
-section {
-  padding: 1%; }
-
 .play-controls {
   position: relative;
   border: solid 5px white;
@@ -24,6 +21,13 @@ section {
   height: 100px;
   width: 100px;
 }
+
+.rules{
+  font-size: 18px; text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
 
 #greg {
   height: 175px;
