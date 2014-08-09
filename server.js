@@ -26,18 +26,11 @@ app.get('/ejs_templates/notLoggedIn', function(req, res) {
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/notLoggedIn.ejs'));
 });
 
-app.get('/ejs_templates/loggedInNotSignedUp', function(req, res) {
+app.get('/ejs_templates/loggedIn', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedInNotSignedUp.ejs'));
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedIn.ejs'));
 });
-
-app.get('/ejs_templates/loggedInSignedUp', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedInSignedUp.ejs'));
-});
-
 
 // Add github authentication
 OAuthGithub(app, mongoConnectionURL);
