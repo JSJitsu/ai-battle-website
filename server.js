@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 var Q = require('q');
 var MongoClient = require('mongodb').MongoClient;
 var OAuthGithub = require('./server/OAuthGithub');
@@ -6,7 +7,6 @@ var OAuthGithub = require('./server/OAuthGithub');
 var app = express();
 var port = process.env.port || 8080;
 var productionMode = process.env.PRODUCTION_MODE || 'local';
-var fs = require('fs')
 
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
@@ -19,10 +19,23 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
 
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
+
 app.get('/ejs_templates/notLoggedIn', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/notLoggedIn.ejs'));
+});
+
+app.get('/ejs_templates/loggedInNotSignedUp', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedInNotSignedUp.ejs'));
+});
+
+app.get('/ejs_templates/loggedInSignedUp', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedInSignedUp.ejs'));
 });
 
 
