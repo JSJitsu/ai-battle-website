@@ -5,10 +5,7 @@
 .gamegrid-content {
   margin: 0 auto;
   text-align: center; }
-
-section {
-  padding: 1%; }
-
+  
 .play-controls {
   position: relative;
   border: solid 5px white;
