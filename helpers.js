@@ -150,7 +150,15 @@ helpers.findNearestUnownedDiamondMine = function(gameObj) {
 
   //Get the path info object
   var pathInfoObject = helpers.findNearestObjectDirectionAndDistance(hero, function(mineTile) {
-    return mineTile.owner.id !== hero.id && mineTile.type === 'DiamondMine';
+    if (mineTile.type === 'DiamondMine') {
+      if (mineTile.owner) {
+        return mineTile.owner.team !== hero.team;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }, board);
 
   //Return the direction that needs to be taken to achieve the goal

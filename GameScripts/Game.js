@@ -42,6 +42,9 @@ var Game = function(n) {
   //Prevents adding of new objects
   //after game has started
   this.hasStarted = false;
+
+  //Used in database retrieval
+  this.date;
 };
 
 // Adds a new hero to the board
