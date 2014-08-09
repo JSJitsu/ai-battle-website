@@ -36,7 +36,7 @@ $(document).on('ready', function(){
 
   var render = function(template, data) {
     $('#join').html('');
-    var html = new EJS({url: '/templates/' + template + '.ejs'}).render(data);
+    var html = new EJS({url: '/ejs_templates/' + template + '.ejs'}).render(data);
     $('#join').html(html);
   };
 
