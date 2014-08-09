@@ -7,7 +7,15 @@ module.exports = function(mongoConnectionUrl) {
     githubHandle: String,
     codeRepo: {
       type: String,
-      default: ''
+      default: 'hero-starter'
+    },
+    codeRepoBranch: {
+      type: String,
+      default: 'master'
+    },
+    codeRepoBranch: {
+      type: String,
+      default: 'master'
     },
     lifetimeStats: {
       kills: Number,
