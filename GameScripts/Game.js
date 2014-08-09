@@ -25,13 +25,14 @@ var Game = function(n) {
   this.impassables = [];
   this.ended = false;
 
-  //messages
+  //Results
+  this.winningTeam = undefined;
+
+  //Messages
   this.diamondMessage = '';
   this.moveMessage = 'Game is about to start';
   this.attackMessage = '';
   this.killMessage = '';
-
-  //
 
   //Default is 300, can be overwritten
   this.maxTurn = 300;
@@ -200,9 +201,40 @@ Game.prototype.handleHeroTurn = function(direction) {
   //Increment the game turn and update the active hero
   this._incrementTurn();
 
+  //Checks whether the game is over
   if (this.turn > this.maxTurn) {
     this.ended = true;
+    var teamDiamonds0 = this._teamDiamonds(this.teams[0]);
+    var teamDiamonds1 = this._teamDiamonds(this.teams[1]);
+    if (teamDiamonds1 > teamDiamonds0) {
+      this.winningTeam = 1;
+    } else {
+      this.winningTeam = 0;
+    }
+  } else if (this._teamIsDead(this.teams[0])) {
+    this.winningTeam = 1;
+    this.ended = true;
+  } else if (this._teamIsDead(this.teams[1])) {
+    this.winningTeam = 0;
+    this.ended = true;
   }
+};
+
+Game.prototype._teamDiamonds = function(teamArray) {
+  var diamonds = 0;
+  for (var i=0; i<teamArray.length; i++) {
+    diamonds += teamArray[i].diamondsEarned;
+  }
+  return diamonds;
+};
+
+Game.prototype._teamIsDead = function(teamArray) {
+  for (var i=0; i<teamArray.length; i++) {
+    if (!teamArray[i].dead) {
+      return false;
+    }
+  }
+  return true;
 };
 
 Game.prototype._incrementTurn = function() {
