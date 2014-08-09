@@ -1,16 +1,25 @@
 var Q = require('q');
+var helpers = require('./helpers.js');
 
 
 //Only used for local testing
 moveFunctions = {
   'miner': function(gameData) {
-    return 'West';    
+    if (gameData.activeHero.health < 50) {
+      return helpers.findNearestHealthWell(gameData);
+    } else {
+      return helpers.findNearestDiamondMine(gameData);
+    }
   },
   'assassin': function(gameData) {
-    return 'East';
+    if (gameData.activeHero.health < 50) {
+      return helpers.findNearestHealthWell(gameData);
+    } else {
+      return helpers.findNearestEnemy(gameData);
+    }
   },
   'coward': function(gameData) {
-    return 'South';
+    return helpers.findNearestHealthWell(gameData);
   },
   'random': function(gameData) {
     var choices = ['North', 'South', 'East', 'West'];
