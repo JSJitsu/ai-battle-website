@@ -13,10 +13,8 @@ section {
   position: relative;
   border: solid 5px white;
   border-radius: 16px;
-  width: 11%;
-  bottom: 2vh;
-  margin: 0 auto;
-  left: 42%; }
+  width: 19%;
+  bottom: 2vh; }
   .play-controls .glyphicon {
     font-size: 2em;
     margin: 8% 8%; }
