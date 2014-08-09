@@ -178,7 +178,20 @@ helpers.findNearestWeakerEnemy = function(gameObj) {
 
   //Get the path info object
   var pathInfoObject = helpers.findNearestObjectDirectionAndDistance(hero, function(enemyTile) {
-    return enemyTile.team !== hero.team && enemyTile.health < hero.health;
+    return enemyTile.team !== hero.team && enemyTile.health < hero.health && enemyTile.type === 'Hero';
+  }, board);
+
+  //Return the direction that needs to be taken to achieve the goal
+  return pathInfoObject.direction;
+};
+
+helpers.findNearestEnemy = function(gameObj) {
+  var hero = gameObj.activeHero;
+  var board = gameObj.board;
+
+  //Get the path info object
+  var pathInfoObject = helpers.findNearestObjectDirectionAndDistance(hero, function(enemyTile) {
+    return enemyTile.team !== hero.team && enemyTile.type === 'Hero'
   }, board);
 
   //Return the direction that needs to be taken to achieve the goal

@@ -8,11 +8,18 @@ moveFunctions = {
     if (gameData.activeHero.health < 50) {
       return helpers.findNearestHealthWell(gameData);
     } else {
-      return helpers.findNearestDiamondMine(gameData);
+      return helpers.findNearestUnownedDiamondMine(gameData);
     }
   },
   'assassin': function(gameData) {
     if (gameData.activeHero.health < 50) {
+      return helpers.findNearestHealthWell(gameData);
+    } else {
+      return helpers.findNearestWeakerEnemy(gameData);
+    }
+  },
+  'berserker': function(gameData) {
+    if (gameData.activeHero.health < 30) {
       return helpers.findNearestHealthWell(gameData);
     } else {
       return helpers.findNearestEnemy(gameData);
