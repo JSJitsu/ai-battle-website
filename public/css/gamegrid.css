@@ -1,22 +1,22 @@
 .battle-map {
   display: table;
-  margin: 0 auto 2%;
+  margin: 1% auto;
   position: relative;
-  width: 81%; }
+  width: 74%; }
 
 .tile-row {
   display: table-row; }
 
 .battle-tile {
   display: table-cell;
-  height: 3.7vw;
-  width: 4.5vw;
+  height: 3.3vw;
+  width: 4.1vw;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
 
 .sprite {
-  max-width: 109.5%;
-  max-height: 182%;
+  max-width: 89.5%;
+  max-height: 101%;
   filter: grayscale(0.5) blur(10px); }
 
 .lifebar {
@@ -42,22 +42,20 @@
 
 .hero {
   color: white;
-  font-size: 0.6em;
-  /* margin-bottom: -44px; */
+  font-size: 1.5vw;
   position: relative;
-  top: -76%;
+  bottom: 85%;
   right: -75%; }
 
 .current-turn {
-  background-color: hotpink;
-  opacity: 0.4; }
+  -webkit-filter: hue-rotate(45deg); }
 
 .diamond-owner {
-  font-size: 24px;
-  margin-bottom: -44px;
+  color: white;
+  font-size: 1.3vw;
   position: relative;
-  top: -9px;
-  float: right; }
+  bottom: 39%;
+  right: -75%; }
 
 .team-yellow {
   color: rgba(245, 255, 0, 0.83); }
