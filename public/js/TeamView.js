@@ -1,6 +1,6 @@
 var TeamView = Backbone.View.extend({
   className: 'list-group',
-  tagName: 'ul',
+  tagName: 'div',
   teamColor: undefined,
   initialize: function(){
     // this.render();

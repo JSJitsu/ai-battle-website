@@ -32,22 +32,22 @@ var GameView = Backbone.View.extend({
        //Add html for team info
     var yellowTeamView = new TeamView({
       collection: this.model.get('teamYellow'),
-      className: 'team-info-y',
+      className: 'team-info-y col-lg-2',
     });
     yellowTeamView.teamColor = 'Team Yellow';
     yellowTeamView.render();
     var blueTeamView = new TeamView({
       collection: this.model.get('teamBlue'),
-      className: 'team-info-b'
+      className: 'team-info-b col-lg-2'
     });
     blueTeamView.teamColor = 'Team Blue';
     blueTeamView.render();
 
+    var boardView = new BoardView({collection: this.model.get('board')});
     //Add all board html
     $gameHtml.append(yellowTeamView.$el)
-    $gameHtml.append(blueTeamView.$el)
-    var boardView = new BoardView({collection: this.model.get('board')});
     $gameHtml.append(boardView.$el);
+    $gameHtml.append(blueTeamView.$el)
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 

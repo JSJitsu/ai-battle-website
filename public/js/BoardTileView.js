@@ -47,7 +47,7 @@ var BoardTileView = Backbone.View.extend({
         }
         html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="sprite">';
         
-        html += '<div class="hero ' + colors[this.model.get('team')] +'">' + heroId + '</div>';
+        html += '<span class="hero ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
         html += '<div class="lifebar"><div class="life-capacity" style="height:' + HP + '%"></div></div>';
       } else if (type === 'DiamondMine') {
         var owner = this.model.get('owner');

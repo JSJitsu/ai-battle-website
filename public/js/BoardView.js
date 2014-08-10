@@ -1,6 +1,6 @@
 var BoardView = Backbone.View.extend({
   tagName: 'section',
-  className: 'battle-map',
+  className: 'battle-map col-lg-8',
   initialize: function() {
     this.render()
   },
