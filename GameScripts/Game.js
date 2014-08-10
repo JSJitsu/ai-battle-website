@@ -42,6 +42,9 @@ var Game = function(n) {
   //Prevents adding of new objects
   //after game has started
   this.hasStarted = false;
+
+  //Used in database retrieval
+  this.date;
 };
 
 // Adds a new hero to the board
@@ -190,6 +193,8 @@ Game.prototype.handleHeroTurn = function(direction) {
   this._incrementTurn();
 
   //Checks whether the game is over
+
+  //Exceeded maximum turns
   if (this.turn > this.maxTurn) {
     this.ended = true;
     var teamDiamonds0 = this._teamDiamonds(this.teams[0]);
@@ -199,13 +204,18 @@ Game.prototype.handleHeroTurn = function(direction) {
     } else {
       this.winningTeam = 0;
     }
+  //Team 0 are all dead
   } else if (this._teamIsDead(this.teams[0])) {
     this.winningTeam = 1;
+    this.maxTurn = this.turn;
     this.ended = true;
+  //Team 1 are all dead
   } else if (this._teamIsDead(this.teams[1])) {
     this.winningTeam = 0;
+    this.maxTurn = this.turn;
     this.ended = true;
   }
+
 };
 
 
