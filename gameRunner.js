@@ -52,7 +52,7 @@ var runGame = function() {
   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
 
   for (var i=0; i<5; i++) {
-    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'random', 1)) {
+    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
       //Loops until each hero is successfully added
     }
   }
@@ -109,16 +109,18 @@ var runGame = function() {
       //Then move the active hero in that direction
       }).then(function(direction) {
 
-        //Advances the game one turn
-        game.handleHeroTurn(direction);
-
-        //Manually set the ID so Mongo doesn't just keep writing to the same document
-        game._id = game.turn + '|' + game.date;
-
         //If game has ended, stop looping and set the max turn
         if (game.ended) {
           maxTurn = game.maxTurn;
+
+        //Otherwise, continue with next turn and save that turn
         } else {
+          //Advances the game one turn
+          game.handleHeroTurn(direction);
+
+          //Manually set the ID so Mongo doesn't just keep writing to the same document
+          game._id = game.turn + '|' + game.date;
+
           return resolveGameAndSaveTurnsToDB(game);
         }
       }).catch(function(err) {
