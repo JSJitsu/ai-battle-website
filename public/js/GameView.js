@@ -1,6 +1,6 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
-  className: 'row',
+  className: 'outer',
   initialize: function(){
     this.updateTurn(0);
     this.playSrc = 'http://icons.iconarchive.com/icons/hopstarter/button/256/Button-Play-icon.png';
@@ -9,7 +9,7 @@ var GameView = Backbone.View.extend({
     this.playInProgress = false;
     this.sliderInitialized = false;
 
-    this.$el.html('<div class="row"></div>');
+    this.$el.html('<div class="row map"></div>');
     this.$el.append('<input class="col-lg-12 slider" />' +
                     '</div>');
     this.$el.append('<div class="col-lg-2 play-controls col-md-2 col-md-offset-5">' +
@@ -24,7 +24,7 @@ var GameView = Backbone.View.extend({
     'click .restart-game': 'restartGame'
   },
   render: function(){
-  	var $gameHtml = this.$el.find('.row');
+  	var $gameHtml = this.$el.find('.map');
     $gameHtml.html('');
 
     //Show game update messages
@@ -32,22 +32,22 @@ var GameView = Backbone.View.extend({
        //Add html for team info
     var yellowTeamView = new TeamView({
       collection: this.model.get('teamYellow'),
-      className: 'team-info-y',
+      className: 'team-info-y col-lg-2',
     });
     yellowTeamView.teamColor = 'Team Yellow';
     yellowTeamView.render();
     var blueTeamView = new TeamView({
       collection: this.model.get('teamBlue'),
-      className: 'team-info-b'
+      className: 'team-info-b col-lg-2'
     });
     blueTeamView.teamColor = 'Team Blue';
     blueTeamView.render();
 
+    var boardView = new BoardView({collection: this.model.get('board')});
     //Add all board html
     $gameHtml.append(yellowTeamView.$el)
-    $gameHtml.append(blueTeamView.$el)
-    var boardView = new BoardView({collection: this.model.get('board')});
     $gameHtml.append(boardView.$el);
+    $gameHtml.append(blueTeamView.$el)
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 

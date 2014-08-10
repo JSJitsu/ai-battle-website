@@ -1,8 +1,8 @@
 .battle-map {
   display: table;
-  margin: 1% auto;
-  position: relative;
-  width: auto; }
+  margin: -5% auto;
+  width: auto;
+}
 
 .tile-row {
   display: table-row; }
@@ -12,23 +12,24 @@
   height: 3.3vw;
   width: 4.1vw;
   border: 1px dotted #10380d;
-  background-image: url("../img/tile.png"); }
+  background-image: url("../img/tile.png");
+}
 
 .sprite {
-  max-width: 89.5%;
-  max-height: 101%;
-  filter: grayscale(0.5) blur(10px); }
+  max-width: 4.1vw;
+  max-height: 3.3vw;
+}
 
 .lifebar {
   width: 18%;
   float: left;
-  height: 76%;
+  height: 87%;
   -webkit-box-shadow: inset 0 2px 0 #A23A3A;
   border-radius: 15px;
   border: 3px solid #000058;
-  position: absolute;
-  top: 0%;
-  left: 0; }
+  position: relative;
+  bottom: -8%;
+  left: 0;}
 
 .life-capacity {
   height: 100%;
@@ -44,8 +45,7 @@
   color: white;
   font-size: 1.5vw;
   position: relative;
-  bottom: 85%;
-  right: -75%; }
+  bottom: 23%;}
 
 .current-turn {
   -webkit-filter: hue-rotate(45deg); }
