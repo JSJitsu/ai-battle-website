@@ -1,6 +1,6 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
-  className: 'row',
+  className: 'outer',
   initialize: function(){
     this.updateTurn(0);
     this.playSrc = 'http://icons.iconarchive.com/icons/hopstarter/button/256/Button-Play-icon.png';
@@ -9,7 +9,7 @@ var GameView = Backbone.View.extend({
     this.playInProgress = false;
     this.sliderInitialized = false;
 
-    this.$el.html('<div class="row"></div>');
+    this.$el.html('<div class="row map"></div>');
     this.$el.append('<input class="col-lg-12 slider" />' +
                     '</div>');
     this.$el.append('<div class="col-lg-2 play-controls col-md-2 col-md-offset-5">' +
@@ -24,7 +24,7 @@ var GameView = Backbone.View.extend({
     'click .restart-game': 'restartGame'
   },
   render: function(){
-  	var $gameHtml = this.$el.find('.row');
+  	var $gameHtml = this.$el.find('.map');
     $gameHtml.html('');
 
     //Show game update messages
