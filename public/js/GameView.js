@@ -10,9 +10,9 @@ var GameView = Backbone.View.extend({
     this.sliderInitialized = false;
 
     this.$el.html('<div class="row map"></div>');
-    this.$el.append('<input class="col-lg-12 slider" />' +
+    this.$el.append('<input class="row slider" />' +
                     '</div>');
-    this.$el.append('<div class="col-lg-2 play-controls col-md-2 col-md-offset-5">' +
+    this.$el.append('<div class="row play-controls">' +
                       '<span class="play-pause-game glyphicon glyphicon-play">' +
                       '</span>' +
                       '<span class="restart-game glyphicon glyphicon-repeat">' +
