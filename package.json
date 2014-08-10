@@ -26,7 +26,8 @@
     "mongoose": "^3.8.14",
     "passport": "^0.2.0",
     "passport-github": "^0.1.5",
-    "q": "^1.0.1"
+    "q": "^1.0.1",
+    "body-parser": "^1.6.2"
   },
   "devDependencies": {
     "chai": "^1.9.1",
