@@ -7,18 +7,18 @@ $(document).on('ready', function(){
     url: '/userinfo',
   })
   .done(function(data){
-    console.log('data: ', data);
+    console.log('userData: ', data);
     if (data.githubHandle){
       $('#userContent').text('Hello, ' + data.githubHandle);
         template = "loggedIn";
     } 
-    render(template, data);
+    // render(template, data);
   })
   .error(function(xhr, status){
     if (status !== 'success') {
       $('#userContent').text('Join The Fight!');
       template = "notLoggedIn";
-      render(template);
+      // render(template);
     }
   });
 
@@ -30,10 +30,7 @@ $(document).on('ready', function(){
     $(this).find('#role').hide();
   });
 
-  var render = function(template, data) {
-    $('#join').html('');
-    var html = new EJS({url: '/ejs_templates/' + template}).render(data);
-    $('#join').html(html);
-  };
+  
 
 });
+

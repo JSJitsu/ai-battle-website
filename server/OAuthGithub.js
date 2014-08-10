@@ -3,6 +3,7 @@ var passport = require('passport');
 var express = require('express');
 var session = require('express-session');
 var Q = require('q');
+var bodyParser = require('body-parser');
 
 
 module.exports = function(app, mongoConnectionURL) {
@@ -16,6 +17,11 @@ module.exports = function(app, mongoConnectionURL) {
   //Makes the current user's info available
   app.get('/userInfo', function(req, res) {
     res.json(req.user);
+  });
+
+  app.post('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
+    console.log(req.body);
+    res.json(req.body);
   });
 
   //Convert the user object from github into something smaller that
