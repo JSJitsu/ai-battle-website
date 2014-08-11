@@ -151,7 +151,6 @@ Game.prototype.handleHeroTurn = function(direction) {
   this.hasStarted = true;
 
   var hero = this.activeHero();
-console.log('HERO: ', hero);
 
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
@@ -307,5 +306,6 @@ Game.prototype.heroDied = function(hero) {
   bones.subType = 'Bones';
   this.board.tiles[top][left] = bones;
 };
+
 
 module.exports = Game;
