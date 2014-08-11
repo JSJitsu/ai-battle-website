@@ -1,2 +1,3 @@
 node_modules/
-/azureScripts/keys.js
+secrets.js
+user_code/*.js
