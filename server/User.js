@@ -14,23 +14,55 @@ module.exports = function(mongoConnectionUrl) {
       default: 'master'
     },
     lifetimeStats: {
-      kills: Number,
-      deaths: Number,
-      damageDealt: Number,
-      minesCaptured: Number,
-      diamondsEarned: Number,
-      healthRecovered: Number,
-      wins: Number,
-      losses: Number
+      kills: {
+        type: Number,
+        default: 0
+      },
+      deaths: {
+        type: Number,
+        default: 0
+      },
+      damageDealt: {
+        type: Number,
+        default: 0
+      },
+      minesCaptured: {
+        type: Number,
+        default: 0
+      },
+      diamondsEarned: {
+        type: Number,
+        default: 0
+      },
+      healthRecovered: {
+        type: Number,
+        default: 0
+      },
+      gravesRobbed: {
+        type: Number,
+        default: 0
+      },
+      wins: {
+        type: Number,
+        default: 0
+      },
+      losses: {
+        type: Number,
+        default: 0
+      }
     },
     mostRecentStats: {
-      gameResult: String,
+      gameResult: {
+        type: String,
+        default: 'N/A'
+      },
       survived: Boolean,
       kills: Number,
       damageDealt: Number,
       minesCaptured: Number,
       diamondsEarned: Number,
-      healthRecovered: Number
+      healthRecovered: Number,
+      gravesRobbed: Number
     }
   });
 
