@@ -26,10 +26,16 @@ app.get('/ejs_templates/notLoggedIn', function(req, res) {
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/notLoggedIn.ejs'));
 });
 
-app.get('/ejs_templates/loggedIn', function(req, res) {
+app.get('/ejs_templates/settings', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/loggedIn.ejs'));
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/settings.ejs'));
+});
+
+app.get('/ejs_templates/lifetime', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/lifetime.ejs'));
 });
 
 // Add github authentication

@@ -41,31 +41,37 @@ var UserView = Backbone.View.extend({
     console.log('settings clicked');
     this.viewing = "settings";
     event.preventDefault();
+    this.render();
   },
   
    showRecent: function(event) {
     console.log('recent clicked');
     this.viewing = "recent";
     event.preventDefault();
+    this.render();
   },
 
    showLifetime: function(event) {
     console.log('lifetime clicked');
     this.viewing = "lifetime";
     event.preventDefault();
+    this.render();
   },
 
    showAverage: function(event) {
     console.log('average clicked');
     this.viewing = "average";
     event.preventDefault();
+    this.render();
   },
 
   render: function() {
     console.log(this.model);
     var githubHandle = this.model.get('githubHandle');
     if (githubHandle && this.viewing === "settings") {
-      var html = new EJS({url: '/ejs_templates/loggedIn'}).render(this.model);
+      var html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
+    } else if (githubHandle && this.viewing === 'lifetime') {
+      var html = new EJS({url: '/ejs_templates/lifetime'}).render(this.model);
     } else {
       var html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
     }
