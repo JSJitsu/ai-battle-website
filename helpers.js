@@ -1,4 +1,4 @@
-var Game = require('./GameScripts/Game.js');
+var Game = require('./game_classes/Game.js');
 
 var helpers = {};
 

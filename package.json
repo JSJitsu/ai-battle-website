@@ -18,15 +18,17 @@
   },
   "homepage": "https://github.com/gjtrowbridge/javascript-battle-webworkers",
   "dependencies": {
+    "child-process-promise": "^0.2.0-SNAPSHOT.1389671754086",
     "express": "^4.8.2",
     "mongodb": "^1.4.8",
     "q": "^1.0.1",
     "request": "^2.40.0"
   },
   "devDependencies": {
-    "supertest": "^0.13.0",
+    "blanket": "~1.1.6",
     "chai": "^1.9.1",
     "chai-spies": "^0.5.1",
-    "blanket": "~1.1.6"
+    "mocha": "^1.21.4",
+    "supertest": "^0.13.0"
   }
 }

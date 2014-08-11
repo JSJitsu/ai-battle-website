@@ -1,10 +1,10 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var Game = require('./GameScripts/Game.js');
-var heroCommunicator = require('./heroCommunicator.js');
+var Game = require('./game_classes/Game.js');
+var heroCommunicator = require('./hero-communicator.js');
+var secrets = require('./secrets.js');
 
-var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle'
-var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = secrets.mongoKey;
 
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
