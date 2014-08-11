@@ -21,8 +21,19 @@ module.exports = function(app, mongoConnectionURL) {
 
   //Make the current user's info updatable
   app.put('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
-    var updatedUser = req.body;
-    res.json(req.body);
+    var newUserParams = req.body;
+    if (newUserParams.codeRepo) {
+      req.user.codeRepo = newUserParams.codeRepo;
+      Q.ninvoke(req.user, 'save', {
+        githubHandle: req.user.githubHandle
+      }).then(function(user) {
+        res.json(user);
+      }).catch(function(err) {
+        res.send('An error occurred...are you logged in?');
+      });
+    } else {
+      res.send('user.codeRepo must be truthy in order to update.');
+    }
   });
 
   //Convert the user object from github into something smaller that
@@ -95,17 +106,5 @@ module.exports = function(app, mongoConnectionURL) {
     successRedirect: '/',
     failureRedirect: '/'
   }));
-
-  // var ensureAuthenticated = function(req, res, next) {
-  //   if (req.isAuthenticated()) {
-  //     return next();
-  //   } else {
-  //     res.send('you done fucked up now!');
-  //   }
-  // };
-
-  // app.get('/restricted', ensureAuthenticated, function(req, res) {
-  //   res.send('you are IN!');
-  // });
 
 };

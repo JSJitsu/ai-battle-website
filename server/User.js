@@ -13,10 +13,6 @@ module.exports = function(mongoConnectionUrl) {
       type: String,
       default: 'master'
     },
-    codeRepoBranch: {
-      type: String,
-      default: 'master'
-    },
     lifetimeStats: {
       kills: Number,
       deaths: Number,
