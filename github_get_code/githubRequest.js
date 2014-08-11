@@ -10,8 +10,8 @@ var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
     console.log('open!');
     return {
-      db: db
-      users: db.collection('users'),
+      db: db,
+      userCollection: db.collection('users')
     };
   });
 };
@@ -24,17 +24,25 @@ var usersCodeRequest = function () {
   var openDatabasePromise = openGameDatabase();
 
   openDatabasePromise.then(function(mongoDataObject) {
-    var userCollection = mongoDataObject.users;
+    var userCollection = mongoDataObject.userCollection;
+    var db = mongoDataObject.db;
 
     //Gets all users in the database
     userCollection.find().toArray(function(err, users) {
+      if (err) {
+        console.log('Error finding users!');
+        console.log(err);
+        db.close();
+        return;
+      }
+
       //Loops through all users
-      results.forEach(function(currentUser, ind) {
+      users.forEach(function(user, ind) {
 
         var options = {
           //Saves the URL at which the hero code can be found
-          url: 'https:/' + secrets.apiUser + ':' + secrets.apiPass + '@api.github.com/repos/' + currentUser.githubHandle + 
-          '/' + currentUser.codeRepo + '/contents/hero.js',
+          url: 'https://' + secrets.apiUser + ':' + secrets.apiPass + '@api.github.com/repos/' + user.githubHandle + 
+          '/' + user.codeRepo + '/contents/hero.js',
 
           //Needed by the github API
           headers: {
@@ -42,11 +50,13 @@ var usersCodeRequest = function () {
           }
         };
 
+        console.log(options.url);
+
         //Sends the request for each user's hero.js file to the github API
         request(options, function (error, response, body) {
-          console.log('Saving hero code for: ' + currentUser.githubHandle);
+          console.log('Saving hero code for: ' + user.githubHandle);
           if (error){
-            console.log('ERROR!');
+            console.log('Error sending request!');
             console.log(error)
             return;
           };
@@ -70,18 +80,26 @@ var usersCodeRequest = function () {
             }
 
             //Write the file to a predefined folder and file name
-            fs.writeFile(secrets.userCodeFolder + currentUser.githubHandle + '_hero.js', usersCode, function(err) {
-              console.log('ERROR!');
-              console.log(err);
-              return;
+            fs.writeFile(secrets.userCodeFolder + user.githubHandle + '_hero.js', usersCode, function(err) {
+              if (err) {
+                console.log('Error writing file!');
+                console.log(err);
+              } else {
+                console.log('Hero code saved!');
+              }
             });
-            
-            console.log('Hero code saved!');
           }
         });
+
+        //Close the database connection when everything is finished
+        db.close();
+
       });
     });
-  });
+  }).catch(function(err) {
+    console.log('Error opening database!');
+    console.log(err);
+  })
 };
 
 //Kick off the whole process
