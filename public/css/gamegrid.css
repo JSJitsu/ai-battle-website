@@ -51,11 +51,9 @@
   -webkit-filter: hue-rotate(45deg); }
 
 .diamond-owner {
-  color: white;
   font-size: 1.3vw;
   position: relative;
-  bottom: 39%;
-  right: -75%; }
+  top: -22%; }
 
 .team-yellow {
   color: rgba(245, 255, 0, 0.83); }
