@@ -16,6 +16,8 @@ var openGameDatabase = function() {
   });
 };
 
+
+//Saves all user data
 var usersCodeRequest = function () {
 
   //Opens connection to mongo database
@@ -42,7 +44,9 @@ var usersCodeRequest = function () {
 
         //Sends the request for each user's hero.js file to the github API
         request(options, function (error, response, body) {
+          console.log('Saving hero code for: ' + currentUser.githubHandle);
           if (error){
+            console.log('ERROR!');
             console.log(error)
             return;
           };
@@ -67,8 +71,12 @@ var usersCodeRequest = function () {
 
             //Write the file to a predefined folder and file name
             fs.writeFile(secrets.userCodeFolder + currentUser.githubHandle + '_hero.js', usersCode, function(err) {
+              console.log('ERROR!');
               console.log(err);
+              return;
             });
+            
+            console.log('Hero code saved!');
           }
         });
       });
