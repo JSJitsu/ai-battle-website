@@ -14,7 +14,10 @@ var UserView = Backbone.View.extend({
 
   events: {
     'submit' : 'handleSubmit',
-    'click .settings': 'showSettings'
+    'click .settings': 'showSettings',
+    'click .recentStats': 'showRecent',
+    'click .lifetimeStats': 'showLifetime',
+    'click .averageStats': 'showAverage'
   },
 
   handleSubmit: function(event) {
@@ -39,17 +42,34 @@ var UserView = Backbone.View.extend({
     this.viewing = "settings";
     event.preventDefault();
   },
+  
+   showRecent: function(event) {
+    console.log('recent clicked');
+    this.viewing = "recent";
+    event.preventDefault();
+  },
+
+   showLifetime: function(event) {
+    console.log('lifetime clicked');
+    this.viewing = "lifetime";
+    event.preventDefault();
+  },
+
+   showAverage: function(event) {
+    console.log('average clicked');
+    this.viewing = "average";
+    event.preventDefault();
+  },
 
   render: function() {
     console.log(this.model);
     var githubHandle = this.model.get('githubHandle');
     if (githubHandle && this.viewing === "settings") {
       var html = new EJS({url: '/ejs_templates/loggedIn'}).render(this.model);
-      this.$el.html(html);
     } else {
       var html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
-      this.$el.html(html);
     }
+    this.$el.html(html);
   }
 
 });
