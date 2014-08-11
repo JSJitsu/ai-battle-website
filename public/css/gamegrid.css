@@ -1,8 +1,7 @@
 .battle-map {
   display: table;
   margin: -5% auto;
-  width: auto;
-}
+  width: auto; }
 
 .tile-row {
   display: table-row; }
@@ -12,13 +11,11 @@
   height: 3.3vw;
   width: 4.1vw;
   border: 1px dotted #10380d;
-  background-image: url("../img/tile.png");
-}
+  background-image: url("../img/tile.png"); }
 
 .sprite {
   max-width: 4.1vw;
-  max-height: 3.3vw;
-}
+  max-height: 3.3vw; }
 
 .lifebar {
   width: 18%;
@@ -29,7 +26,7 @@
   border: 3px solid #000058;
   position: relative;
   bottom: -8%;
-  left: 0;}
+  left: 0; }
 
 .life-capacity {
   height: 100%;
@@ -45,15 +42,18 @@
   color: white;
   font-size: 1.5vw;
   position: relative;
-  bottom: 23%;}
+  bottom: 85%;
+  right: -75%; }
 
 .current-turn {
   -webkit-filter: hue-rotate(45deg); }
 
 .diamond-owner {
+  color: white;
   font-size: 1.3vw;
   position: relative;
-  top: -22%; }
+  bottom: 39%;
+  right: -75%; }
 
 .team-yellow {
   color: rgba(245, 255, 0, 0.83); }
