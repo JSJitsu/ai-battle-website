@@ -25,9 +25,10 @@
     "request": "^2.40.0"
   },
   "devDependencies": {
-    "supertest": "^0.13.0",
+    "blanket": "~1.1.6",
     "chai": "^1.9.1",
     "chai-spies": "^0.5.1",
-    "blanket": "~1.1.6"
+    "mocha": "^1.21.4",
+    "supertest": "^0.13.0"
   }
 }
