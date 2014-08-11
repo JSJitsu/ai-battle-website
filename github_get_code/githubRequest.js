@@ -80,7 +80,7 @@ var usersCodeRequest = function () {
             }
 
             //Write the file to a predefined folder and file name
-            fs.writeFile(secrets.userCodeFolder + user.githubHandle + '_hero.js', usersCode, function(err) {
+            fs.writeFile(secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js', usersCode, function(err) {
               if (err) {
                 console.log('Error writing file!');
                 console.log(err);
