@@ -19,8 +19,9 @@ module.exports = function(app, mongoConnectionURL) {
     res.json(req.user);
   });
 
-  app.post('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
-    console.log(req.body);
+  //Make the current user's info updatable
+  app.put('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
+    var updatedUser = req.body;
     res.json(req.body);
   });
 
