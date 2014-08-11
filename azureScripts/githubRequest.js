@@ -19,8 +19,6 @@ var usersCodeRequest = function () {
   openDatabasePromise.then(function(data){
     data.collection.find().toArray(function(err, results){
       results.forEach(function(val, ind) {
-        console.log('RESULTS: ', results);
-        console.log('LOOPING', ind);
         var currentUser = val;
         var options = {
           url: 'https://bizarroForrest:' + key.forrestPass + '@api.github.com/repos/' + currentUser.githubHandle + 
@@ -30,8 +28,10 @@ var usersCodeRequest = function () {
           }
         };
         request(options, function (error, response, body) {
-          console.log('WTF???: ', ind);
-          // if (error){console.log(error)};
+          if (error){
+            console.log(error)
+            return;
+          };
           if (!error && response.statusCode == 200) {
             var info = JSON.parse(body);
             var buffer = new Buffer(info.content, 'base64');
@@ -39,9 +39,10 @@ var usersCodeRequest = function () {
             var regEx = usersCode.match(/\bdocker\b/gi);
             if (regEx){
               console.log("Possible Malicious Code.");
+              return;
             }
             fs.writeFile('/Users/forrestbthomas/Documents/longproject/javascript-battle-webworkers/azureScripts/UsersCode/' + currentUser.githubHandle + '_hero.js', usersCode, function(err){
-              // console.log(err);
+              console.log(err);
             });
           }
         });
