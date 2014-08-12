@@ -13,7 +13,7 @@ var UserView = Backbone.View.extend({
   },
 
   events: {
-    'submit' : 'handleSubmit',
+    'submit': 'handleSubmit',
     'click .settings': 'showSettings',
     'click .recentStats': 'showRecent',
     'click .lifetimeStats': 'showLifetime',
@@ -60,16 +60,20 @@ var UserView = Backbone.View.extend({
 
   render: function() {
     var githubHandle = this.model.get('githubHandle');
+    var html;
     if (githubHandle && this.viewing === "settings") {
-      var html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
+      html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
     } else if (githubHandle && this.viewing === 'lifetime') {
-      var html = new EJS({url: '/ejs_templates/lifetime'}).render(this.model);
+      html = new EJS({url: '/ejs_templates/lifetime'}).render(this.model);
     } else if (githubHandle && this.viewing === 'recent') {
-      var html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
+      html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
     } else if (githubHandle && this.viewing === 'average') {
-      var html = new EJS({url: '/ejs_templates/average'}).render(this.model);
+      console.log('this.model: ', this.model);
+      var averageStats = this.model.average();
+      console.log('averageStats: ', averageStats);
+      // html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
     } else if (!githubHandle) {
-      var html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model.attributes);
+      html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
     }
     this.$el.html(html);
   }
