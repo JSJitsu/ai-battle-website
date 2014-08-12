@@ -5,6 +5,20 @@
   background-color: #A0CF8C;
 }
 
+.team-info {
+  top: 4vw;
+  width: 16vw;
+  position: absolute;
+}
+
+.t-blue {
+  right: 0;
+}
+
+.t-yellow {
+  left: 0;
+}
+
 
 #ex1Slider .slider-selection {
   background: #BABABA;
@@ -13,7 +27,7 @@
 .range-bar {
   margin: 0 auto;
   width: 43%;
-  bottom: 5vh;
+  bottom: 6vw;
 }
 
 .range-handle {
