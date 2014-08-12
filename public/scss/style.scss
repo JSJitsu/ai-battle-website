@@ -28,7 +28,6 @@
   font-weight: 700;
 }
 
-
 #greg {
   height: 175px;
   width: 175px;
@@ -62,4 +61,22 @@
 }
 li {
   padding: 10px;
+}
+
+.lifetime-table {
+  position: relative;
+  top: 50px;
+}
+
+.lifetime-table-header {
+  font-weight: bold;
+}
+
+.settingsView {
+  margin-top: 35px;
+  margin-bottom: -65px;
+}
+
+.repoInput {
+  margin-top: 40px;
 }

@@ -4,10 +4,17 @@
       <h2> Welcome <%= get('githubHandle') %>! </h2>
         <hr class="star-primary">
     </div>
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li class="settings"><a href="#">Settings</a></li>
+      <li class="recentStats"><a href="#">Recent Stats</a></li>
+      <li class="lifetimeStats"><a href="#">Lifetime Stats</a></li>
+     <!--  <li class="averageStats"><a href="#">Average Stats</a></li> -->
+    </ul>
+    <div class="settingsView">
       <p>
         You are currently entered in the JavaScript Battle.  We are using the following GitHub respository from your account.  Feel free to update this repository, but keep in mind we will import your latest code at ~3:00 AM (PST) every day.  
       </p>
-      <form class="form-horizontal formInput" role="form">
+      <form class="form-horizontal formInput repoInput" role="form">
         <div class="form-group">
           <label for="inputRepo" class="col-sm-2 control-label">GitHub Repository</label>
           <div class="col-sm-10">
@@ -20,5 +27,6 @@
           </div>
         </div>
       </form>
+    </div>
   </div>  
 </div>
