@@ -1,5 +1,4 @@
 var Game = require('./game_classes/Game.js');
-
 var helpers = {};
 
 // Returns false if the given coordinates are out of range

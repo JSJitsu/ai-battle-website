@@ -1,6 +1,5 @@
 var Q = require('q');
-var helpers = require('./helpers.js');
-
+var helpers = require('./docker/hero_brain_container_code/src/helpers.js');
 
 //Only used for local testing
 moveFunctions = {
