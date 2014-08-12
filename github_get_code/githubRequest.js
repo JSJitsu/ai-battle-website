@@ -99,7 +99,7 @@ var usersCodeRequest = function () {
   }).catch(function(err) {
     console.log('Error opening database!');
     console.log(err);
-  })
+  });
 };
 
 //Kick off the whole process
