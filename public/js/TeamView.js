@@ -8,7 +8,7 @@ var TeamView = Backbone.View.extend({
   render: function() {
     this.$el.html('');
     if(this.teamColor){
-      this.$el.append('<h4>' + this.teamColor + '</h4>');
+      this.$el.append('<h4 class="team-name">' + this.teamColor + ' diamonds: ' + this.diamonds + '</h4>');
     }
     this.createTeamView();
   },
