@@ -1,24 +1,21 @@
 .battle-map {
   display: table;
   margin: -5% auto;
-  width: auto;
-}
+  width: auto; }
 
 .tile-row {
   display: table-row; }
 
 .battle-tile {
   display: table-cell;
-  height: 3.3vw;
-  width: 4.1vw;
+  height: 2.7vw;
+  width: 3.1vw;
   border: 1px dotted #10380d;
-  background-image: url("../img/tile.png");
-}
+  background-image: url("../img/tile.png"); }
 
 .sprite {
-  max-width: 4.1vw;
-  max-height: 3.3vw;
-}
+  max-width: 100%;
+  max-height: 2.5vw; }
 
 .lifebar {
   width: 18%;
@@ -29,7 +26,7 @@
   border: 3px solid #000058;
   position: relative;
   bottom: -8%;
-  left: 0;}
+  left: 0; }
 
 .life-capacity {
   height: 100%;
@@ -45,7 +42,8 @@
   color: white;
   font-size: 1.5vw;
   position: relative;
-  bottom: 23%;}
+  bottom: 85%;
+  right: -75%; }
 
 .current-turn {
   -webkit-filter: hue-rotate(45deg); }
