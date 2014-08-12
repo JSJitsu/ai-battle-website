@@ -6,6 +6,8 @@ var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
 var containerFunctions = require('./docker/container-functions.js');
 
+var postToServerFunctions = require('./docker/post-to-server-functions.js');
+
 //Returns a promise that resolves when the database opens
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -48,8 +50,10 @@ var usersCodeRequest = function () {
         //spin up a container at that port (returns a promise)
         return containerFunctions.spinUpContainer(user.port).then(function() {
           var pathToHeroBrain = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js';
-          //return sendthembrain
-          //send them the hero brain
+          
+          //send the hero brain to the server
+          return postToServerFunctions.postFile(user.port, pathToHeroBrain, 'hero');
+
         });
 
       //Start the game
@@ -68,7 +72,7 @@ var usersCodeRequest = function () {
       }).catch(function(err) {
         console.log('ERROR!');
         console.log(err);
-        return;
+        return containerFunctions.shutDownAllContainers();
       });
     });
   }).catch(function(err) {

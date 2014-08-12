@@ -27,6 +27,9 @@ moveFunctions = {
   'coward': function(gameData) {
     return helpers.findNearestHealthWell(gameData);
   },
+  'forrestbthomas': function(gameData) {
+    return helpers.findNearestHealthWell(gameData);
+  },
   'random': function(gameData) {
     var choices = ['North', 'South', 'East', 'West'];
     return choices[Math.floor(Math.random()*4)];
