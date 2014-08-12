@@ -8,14 +8,14 @@
 
 .battle-tile {
   display: table-cell;
-  height: 3.3vw;
-  width: 4.1vw;
+  height: 2.7vw;
+  width: 3.1vw;
   border: 1px dotted #10380d;
   background-image: url("../img/tile.png"); }
 
 .sprite {
-  max-width: 4.1vw;
-  max-height: 3.3vw; }
+  max-width: 100%;
+  max-height: 2.5vw; }
 
 .lifebar {
   width: 18%;

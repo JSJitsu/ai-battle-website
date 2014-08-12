@@ -32,13 +32,13 @@ var GameView = Backbone.View.extend({
        //Add html for team info
     var yellowTeamView = new TeamView({
       collection: this.model.get('teamYellow'),
-      className: 'team-info-y col-lg-2',
+      className: 'team-info-y col-lg-3',
     });
     yellowTeamView.teamColor = 'Team Yellow';
     yellowTeamView.render();
     var blueTeamView = new TeamView({
       collection: this.model.get('teamBlue'),
-      className: 'team-info-b col-lg-2'
+      className: 'team-info-b col-lg-3'
     });
     blueTeamView.teamColor = 'Team Blue';
     blueTeamView.render();
