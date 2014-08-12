@@ -25,13 +25,12 @@
   border-radius: 0; }
 
 .messages {
-  margin: -28px auto;
-  height: 20px;
+  margin: -38px auto;
   width: 500px;
-  top: -6px;
   position: relative;
-  font-size: 20px;
-  color: dimgrey; }
+  font-size: 21px;
+  color: dimgrey;
+  top: 14px; }
 
 .turn-content {
   color: #2c3e50 !important; }

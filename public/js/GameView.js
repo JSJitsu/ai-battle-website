@@ -9,7 +9,7 @@ var GameView = Backbone.View.extend({
     this.playInProgress = false;
     this.sliderInitialized = false;
 
-    this.$el.html('<div class="row map"></div>');
+    this.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
     this.$el.append('<input class="row slider" />' +
                     '</div>');
     this.$el.append('<div class="row play-controls">' +
@@ -28,6 +28,7 @@ var GameView = Backbone.View.extend({
     $gameHtml.html('');
 
     //Show game update messages
+    $('.messages').text('');
     $('.messages').append(this.model.get('killMessages'));
        //Add html for team info
     var yellowTeamView = new TeamView({
