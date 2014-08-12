@@ -1,1 +1,1 @@
-echo "Spinning up container at port: $1"
+sudo docker run -d -p $1:8080 heroBrainWrapper

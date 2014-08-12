@@ -4,7 +4,7 @@ var Q = require('./node_modules/q');
 var fs = require('fs');
 var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
-var containerSpinupPromise = require('./docker/container-spin-up.js');
+var containerFunctions = require('./docker/container-functions.js');
 
 //Returns a promise that resolves when the database opens
 var openGameDatabase = function() {
@@ -45,8 +45,9 @@ var usersCodeRequest = function () {
         port++;
         user.port = port;
 
-        //spin up a container at that port
-        return containerSpinupPromise(user.port).then(function() {
+        //spin up a container at that port (returns a promise)
+        return containerFunctions.spinUpContainer(user.port).then(function() {
+          var pathToHeroBrain = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js';
           //return sendthembrain
           //send them the hero brain
         });
@@ -60,6 +61,10 @@ var usersCodeRequest = function () {
         console.log('Game has finished successfully!');
         console.log('Closing database connection...');
         db.close();
+        
+        console.log('Stopping and removing all containers...');
+        return containerFunctions.shutDownAllContainers();
+
       }).catch(function(err) {
         console.log('ERROR!');
         console.log(err);
@@ -73,13 +78,3 @@ var usersCodeRequest = function () {
 };
 
 usersCodeRequest();
-
-
-//Loop through the array of users
-  //assign a port to each
-  //spin up a container at that port
-  //send them the hero brain
-
-
-
-//Profit
