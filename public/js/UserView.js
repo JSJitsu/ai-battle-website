@@ -71,7 +71,8 @@ var UserView = Backbone.View.extend({
       console.log('this.model: ', this.model);
       var averageStats = this.model.average();
       console.log('averageStats: ', averageStats);
-      // html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
+      averageStats['githubHandle'] = this.model.get('githubHandle');
+      html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
     } else if (!githubHandle) {
       html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
     }
