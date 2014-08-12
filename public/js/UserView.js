@@ -72,8 +72,28 @@ var UserView = Backbone.View.extend({
       var html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
     } else if (githubHandle && this.viewing === 'lifetime') {
       var html = new EJS({url: '/ejs_templates/lifetime'}).render(this.model);
+
+      // console.log('canvas jquery: ', $("#lifetimeStatsChart"));
+      // // console.log('canvas getelement: ', document.getElmentById("lifetimeStatsChart"));
+      // var canvas = $("#lifetimeStatsChart"); 
+      // console.log('canvas: ', canvas);
+      // console.log('canvas get 0: ', canvas.get(0));
+      // var context = canvas.get(0).getContext("2d");
+      // var myChart = new Chart(context);
+      // var options = {
+      //   scaleBeginAtZero: true,
+      //   scaleShowGridLines: true,
+      //   scaleGridLineColor: "rgba(0,0,0,0.05)",
+      //   scaleGridLineWidth: 1,
+      //   barShowStroke: true,
+      //   barStrokeWidth: 2,
+      //   barValueSpacing: 5,
+      //   barDatasetSpacing: 1
+      // };
+      // var lifetimeStatsChart = new Chart(context).Bar(this.model.lifetimeStats, options);
     } else {
-      var html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
+      console.log(this.model);
+      var html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model.attributes);
     }
     this.$el.html(html);
   }
