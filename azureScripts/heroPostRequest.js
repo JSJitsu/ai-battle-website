@@ -1,21 +1,44 @@
 var request = require('request');
 var fs = require('fs');
-var postFileToServer = function(url, heroFilePath){
-	var r = request.post(url, function(err, res, body) {
-    console.log(res.body);
-	});
+var Q = require('q');
 
-	var form = r.form();
-	form.append('my_file', fs.createReadStream(heroFilePath));
+var postToServerFunctions = {};
+
+//Posts the given file to the given port (at localhost)
+//Returns a promise
+postToServerFunctions.postFile = function(port, fileType, heroFilePath) {
+  var deferred = Q.defer();
+
+  var url = 'http://localhost:' + port.toString() + '/' + fileType + 'FilesHere';
+
+  if (fileType !== 'hero' && fileType !== 'helper') {
+    deferred.reject(new Error('Invalid file type! Must be either "helper" or "hero"'));
+
+  } else {
+    var r = request.post(url, function(err, res) {
+      console.log(res.body);
+      if (err) {
+        deferred.reject(new Error(err));
+      } else {
+        deferred.resolve(res.body);
+      }
+    });
+
+    var form = r.form();
+    form.append('my_file', fs.createReadStream(heroFilePath));
+  }
+
+  return deferred.promise;
 };
 
-postFileToServer('http://localhost:8080/heroFilesHere', './hero/myHero.js');
-//spin up all the containers, save the port numbers for each
-//we should now know which heroes are in which containers
+postToServerFunctions.postFile(8080, 'hero', '/home/greg/hack-reactor/javascript-battle/workers/helpers.js').then(function(val) {
+  console.log('---');
+  console.log(val);
+});
 
-//use the above fxn to post the brains to all containers
+module.exports = postToServerFunctions;
 
-//Now all the containers are running a brain.
-
-//OK--start the game.
-
+// postFileToServer('http://localhost:8080/heroFilesHere', '/home/greg/hack-reactor/javascript-battle/workers/helpers.js').then(function(val) {
+//   console.log('---');
+//   console.log(val);
+// });

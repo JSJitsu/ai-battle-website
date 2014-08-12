@@ -45,7 +45,7 @@ var runGame = function() {
   var boardSize = 12;
   var game = new Game(boardSize);
 
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'forrestbthomas', 0);
   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
