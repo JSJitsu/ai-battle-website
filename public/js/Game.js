@@ -6,10 +6,12 @@ var Game = Backbone.Model.extend({
   
   parse: function(response) {
     this.set('turn', response.turn);
-    this.set('maxTurn', response.maxTurn)
+    this.set('maxTurn', response.maxTurn);
     this.set('moveMessages', response.moveMessage);
     this.set('attackMessages', response.attackMessage);
     this.set('killMessages', response.killMessage);
+    this.set('teamDiamonds', response.totalTeamDiamonds);
+    console.log(response)
     var board = new Board();
     var teamYellow = new Team();
     var teamBlue = new Team();

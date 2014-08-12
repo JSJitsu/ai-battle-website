@@ -5,6 +5,16 @@
   background-color: #A0CF8C;
 }
 
+.diamond-display {
+  max-height: 2vw;
+}
+
+.yellow-diamonds {
+  position: relative;
+  right: 34vw;
+  bottom: -26vw;
+}
+
 .team-info {
   top: 4vw;
   width: 16vw;
@@ -19,6 +29,9 @@
   left: 0;
 }
 
+.team-name {
+  font-size: 19px;
+}
 
 #ex1Slider .slider-selection {
   background: #BABABA;

@@ -36,19 +36,21 @@ var GameView = Backbone.View.extend({
       className: 'team-info t-yellow',
     });
     yellowTeamView.teamColor = 'Team Yellow';
+    yellowTeamView.diamonds = this.model.get('teamDiamonds')[0];
     yellowTeamView.render();
     var blueTeamView = new TeamView({
       collection: this.model.get('teamBlue'),
       className: 'team-info t-blue'
     });
     blueTeamView.teamColor = 'Team Blue';
+    blueTeamView.diamonds = this.model.get('teamDiamonds')[1];
     blueTeamView.render();
 
     var boardView = new BoardView({collection: this.model.get('board')});
     //Add all board html
-    $gameHtml.append(yellowTeamView.$el)
+    $gameHtml.append(yellowTeamView.$el);
     $gameHtml.append(boardView.$el);
-    $gameHtml.append(blueTeamView.$el)
+    $gameHtml.append(blueTeamView.$el);
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
