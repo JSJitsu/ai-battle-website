@@ -35,6 +35,8 @@ var UserView = Backbone.View.extend({
   },
 
   showSettings: function(event) {
+    // $('.userTab').removeClass('highlight');
+    // $(this).addClass("highlight");
     this.viewing = "settings";
     event.preventDefault();
     this.render();

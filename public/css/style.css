@@ -74,3 +74,6 @@ li {
 
 .repoInput {
   margin-top: 40px; }
+
+.active {
+  background-color: cyan; }
