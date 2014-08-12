@@ -7,9 +7,9 @@
   background: #BABABA; }
 
 .range-bar {
-  margin: 33px auto;
+  margin: 0 auto;
   width: 43%;
-  bottom: 3vh; }
+  bottom: 5vh; }
 
 .range-handle {
   bottom: 10px;
