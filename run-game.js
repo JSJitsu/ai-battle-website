@@ -5,6 +5,7 @@ var fs = require('fs');
 var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
 var containerFunctions = require('./docker/container-functions.js');
+var GameRunner = require('./GameRunner.js')
 
 var postToServerFunctions = require('./docker/post-to-server-functions.js');
 
@@ -25,9 +26,9 @@ var usersCodeRequest = function () {
   //Opens connection to mongo database
   var openDatabasePromise = openGameDatabase();
 
-  openDatabasePromise.then(function(mongoDataObject) {
-    var userCollection = mongoDataObject.userCollection;
-    var db = mongoDataObject.db;
+  openDatabasePromise.then(function(mongoData) {
+    var userCollection = mongoData.userCollection;
+    var db = mongoData.db;
 
     //Get array of all users
     userCollection.find().toArray(function(err, users) {
@@ -50,16 +51,19 @@ var usersCodeRequest = function () {
         //spin up a container at that port (returns a promise)
         return containerFunctions.spinUpContainer(user.port).then(function() {
           var pathToHeroBrain = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js';
-          
+          var pathToHelperFile = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_helpers.js';
+
           //send the hero brain to the server
-          return postToServerFunctions.postFile(user.port, pathToHeroBrain, 'hero');
+          return postToServerFunctions.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
+            //send the helper file to the server
+            // return postToServerFunctions.postFile(user.port, pathToHelperFile, 'helper');
+          });
 
         });
-
       //Start the game
       })).then(function() {
         console.log('All hero brain containers are ready...starting the game!');
-        //Start the game
+        console.log(users.length);
           //Loop through the turns, send gameData, get responses, etc
       }).then(function() {
         console.log('Game has finished successfully!');
@@ -72,7 +76,13 @@ var usersCodeRequest = function () {
       }).catch(function(err) {
         console.log('ERROR!');
         console.log(err);
-        return containerFunctions.shutDownAllContainers();
+        console.log('Shutting down all containers!');
+        containerFunctions.shutDownAllContainers().then(function() {
+          db.close();
+        }).catch(function(err) {
+          console.log(err);
+          db.close();
+        });
       });
     });
   }).catch(function(err) {

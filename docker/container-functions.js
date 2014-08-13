@@ -22,7 +22,7 @@ containerFunctions.spinUpContainer = function(port) {
 //Return a promise that resolves after stopping all containers,
 //then removing all containers
 containerFunctions.shutDownAllContainers = function() {
-  return exec('sudo docker stop $(sudo docker ps -q)')
+  return exec('sudo docker stop $(sudo docker ps -q -a)')
     .progress(function(childProcess) {
       console.log('[spawn] childProcess.pid: ', childProcess.pid);
       childProcess.stdout.on('data', function(data) {
@@ -32,7 +32,7 @@ containerFunctions.shutDownAllContainers = function() {
           console.log('[spawn] stderr: ', data.toString()); 
       });
     }).then(function() {
-      return exec('sudo docker rm $(sudo docker ps -a -q)')
+      return exec('sudo docker rm -f $(sudo docker ps -a -q)')
         .progress(function(childProcess) {
           console.log('[spawn] childProcess.pid: ', childProcess.pid);
           childProcess.stdout.on('data', function(data) {
