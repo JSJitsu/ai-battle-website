@@ -84,6 +84,20 @@
     bottom: -12%;
     left: 3px;
     margin: -3px; } }
+@media (min-width: 1550px) {
+  .team-info {
+    top: 4vw;
+    width: 9vw; } }
+@media (min-width: 1200px) {
+  .team-info {
+    top: 4vw;
+    width: 9vw; }
+
+  .range-bar {
+    bottom: 5vw; }
+
+  .play-controls {
+    bottom: 4.6vw; } }
 @media (max-width: 678px) {
   .battle-tile {
     width: 7.1vw;
