@@ -35,29 +35,31 @@ var UserView = Backbone.View.extend({
   },
 
   showSettings: function(event) {
-    // $('.userTab').removeClass('highlight');
-    // $(this).addClass("highlight");
-    this.viewing = "settings";
     event.preventDefault();
+    this.viewing = "settings";
     this.render();
+    $('.settings').tab('show');
   },
   
    showRecent: function(event) {
-    this.viewing = "recent";
     event.preventDefault();
+    this.viewing = "recent";
     this.render();
+    $('.recentStats').tab('show');
   },
 
    showLifetime: function(event) {
-    this.viewing = "lifetime";
     event.preventDefault();
+    this.viewing = "lifetime";
     this.render();
+    $('.lifetimeStats').tab('show');
   },
 
    showAverage: function(event) {
-    this.viewing = "average";
     event.preventDefault();
+    this.viewing = "average";
     this.render();
+    $('.averageStats').tab('show');
   },
 
   render: function() {

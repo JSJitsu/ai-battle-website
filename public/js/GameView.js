@@ -26,7 +26,6 @@ var GameView = Backbone.View.extend({
   render: function(){
   	var $gameHtml = this.$el.find('.map');
     $gameHtml.html('');
-
     //Show game update messages
     $('.messages').text('');
     $('.messages').append(this.model.get('killMessages'));
@@ -51,6 +50,7 @@ var GameView = Backbone.View.extend({
     $gameHtml.append(yellowTeamView.$el);
     $gameHtml.append(boardView.$el);
     $gameHtml.append(blueTeamView.$el);
+    this.checkWinner();
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
@@ -229,5 +229,16 @@ var GameView = Backbone.View.extend({
         this.autoPlayGame();
       }.bind(this));
     }  
+  },
+  checkWinner: function() {
+    var winner = this.model.get('winningTeam');
+    if(winner){
+      if(winner === 0){
+        $('.winner-msg').text('Yellow Team Wins!');
+      }
+      else{
+        $('.winner-msg').text('Blue Team Wins!');
+      }
+    }
   }
 });

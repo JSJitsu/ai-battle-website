@@ -31,10 +31,11 @@ $(document).on('ready', function(){
     $(this).find('#role').hide();
   });
 
-  
+
+ $('.nav-tabs>li>a').on('click', function(e){
+    e.preventDefault();
+    console.log('click!')
+    $(this).parent().tab('show')
+  })  
 
 });
-
-$('ul.menu-items>li').on('click', 'a', function(){
-  console.log(this)
-})

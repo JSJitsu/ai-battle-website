@@ -10,6 +10,7 @@ var Game = Backbone.Model.extend({
     this.set('turn', response.turn);
     this.set('maxTurn', response.maxTurn);
     this.set('moveMessages', response.moveMessage);
+    this.set('winningTeam', response.winningTeam);
     this.set('attackMessages', response.attackMessage);
     this.set('killMessages', response.killMessage);
     this.set('teamDiamonds', response.totalTeamDiamonds);
