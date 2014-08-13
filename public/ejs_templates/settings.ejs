@@ -17,17 +17,14 @@
       <p>
         You are currently entered in the JavaScript Battle.  We are using the following GitHub respository from your account.  Feel free to update this repository, but keep in mind we will import your latest code at ~3:00 AM (PST) every day.  
       </p>
-      <form class="form-horizontal formInput repoInput text-center" role="form">
+      <form class="form-inline repoInput text-center" role="form">
         <div class="form-group">
-          <label for="inputRepo" class="control-label">GitHub Repository</label>
-          <div>
-            <input type="text" class="form-control text-center" id="inputRepo" value="<%= get('codeRepo') %>">  
-          </div>
+          <label class="control-label" for="inputRepo">GitHub Repository</label>
+          <input type="text" class="form-control" id="inputRepo" value="<%= get('codeRepo') %>">
+          <span class="glyphicon glyphicon-ok form-control-feedback"></span>  
         </div>
         <div class="form-group">
-          <div class="">
-            <button type="submit" class="btn btn-default submitRepo">Save</button>
-          </div>
+          <button type="submit" class="btn btn-default submitRepo">Save</button>
         </div>
       </form>
     </div>
