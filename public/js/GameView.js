@@ -57,7 +57,19 @@ var GameView = Backbone.View.extend({
     return this.model.fetch({
       success: function() {
         this.initializeSlider();
-        this.render();
+        var userModel = this.model.get('userModel');
+        userModel.fetch({
+          success: function() {
+            this.render();
+            var currentUserHandle = userModel.get('githubHandle');
+            if (currentUserHandle) {
+              this.$el.find('.current-user-' + currentUserHandle).addClass('highlightedCurrentUser');
+            }
+          }.bind(this),
+          error: function(collection, response, options){
+            console.log('error', response);
+          }    
+        });
       }.bind(this),
       error: function(collection, response, options){
         console.log('error', response);

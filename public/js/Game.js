@@ -2,6 +2,8 @@
 var Game = Backbone.Model.extend({
   url: 'api/gameData/0/1',
   initialize: function() {
+    var userModel = new User();
+    this.set('userModel', userModel);
   },
   
   parse: function(response) {
@@ -11,7 +13,6 @@ var Game = Backbone.Model.extend({
     this.set('attackMessages', response.attackMessage);
     this.set('killMessages', response.killMessage);
     this.set('teamDiamonds', response.totalTeamDiamonds);
-    console.log(response)
     var board = new Board();
     var teamYellow = new Team();
     var teamBlue = new Team();

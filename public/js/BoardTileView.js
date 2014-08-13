@@ -1,7 +1,7 @@
 var BoardTileView = Backbone.View.extend({
   tagName: 'div',
   className: 'battle-tile',
-  initialize: function(){
+  initialize: function() {
     if (this.model === undefined) {
       console.log('UNDEFINED!');
     }
@@ -38,6 +38,7 @@ var BoardTileView = Backbone.View.extend({
           1: "team-blue"
         };
       if (type === 'Hero') {
+        var name = this.model.get('name');
         var heroId = this.model.get('battleId');
         var HP = this.model.get('health');
         var gameTurn = this.model.get('gameTurn');
@@ -49,6 +50,7 @@ var BoardTileView = Backbone.View.extend({
         
         html += '<span class="indicator ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
         html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
+        this.$el.addClass('current-user-' + name);
       } else if (type === 'DiamondMine') {
         var owner = this.model.get('owner');
         if (owner) {
