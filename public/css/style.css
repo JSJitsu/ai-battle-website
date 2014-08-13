@@ -18,8 +18,7 @@
     margin: 8% 8%; }
 
 .team-pic {
-  height: 100px;
-  width: 100px; }
+  text-align: center; }
 
 .rules {
   font-size: 18px;
@@ -27,28 +26,21 @@
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700; }
 
-#greg {
+.team-photo img {
   height: 175px;
   width: 175px; }
 
-#jakob {
-  height: 175px;
-  width: 175px; }
+.blur-pic {
+  -webkit-filter: blur(3px); }
 
-#james {
-  height: 175px;
-  width: 175px; }
-
-#forrest {
-  height: 175px;
-  width: 175px; }
-
-#role {
-  opacity: 1;
+.role {
   position: absolute;
-  display: none; }
+  display: none;
+  right: 10vw;
+  top: 2vw;
+  width: 2vw; }
 
-#team {
+.team {
   background: #18bc9c;
   padding-bottom: 350px; }
 
