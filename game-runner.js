@@ -4,12 +4,16 @@ var Game = require('./game_classes/Game.js');
 var heroCommunicator = require('./hero-communicator.js');
 var secrets = require('./secrets.js');
 
-var playAllGames = function(mongoData, users) {
+var createAndSaveAllGames = function(users, mongoData) {
   games = setUpAllGames(users);
-  runAndSaveAllGames(mongoData, games);
+  return runAndSaveAllGames(mongoData, games);
 }
 
+//Synchronous, returns an array of all games that need
+//to be run
 var setUpAllGames = function(users) {
+
+  console.log('Users: ' + users.length);
 
   //Helper function for generating random indices
   var randomIndex = function(maxExcl) {
@@ -97,7 +101,7 @@ var runAndSaveAllGames = function(mongoData, games) {
 
 var runGamePromise = function(mongoData, game, gameIndex) {
   //The collection we're inserting into
-  var mongoCollection = mongoData.collection;
+  var mongoCollection = mongoData.userCollection;
   //The database we're inserting into
   var mongoDb = mongoData.db;
 
@@ -133,6 +137,8 @@ var runGamePromise = function(mongoData, game, gameIndex) {
 
       //Get the current hero
       var activeHero = game.activeHero;
+
+      console.log('Turn: ' + game.turn);
 
       //Get the direction the currently active hero wants to move
       return 'North';
@@ -188,6 +194,8 @@ var runGamePromise = function(mongoData, game, gameIndex) {
     });
   });
 }
+
+module.exports = createAndSaveAllGames;
 
 // var users = [];
 // for (var i=0; i<25; i++) {

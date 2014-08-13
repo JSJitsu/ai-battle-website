@@ -1,5 +1,0 @@
-var move = function() {
-  return 'North';
-};
-
-module.exports = move;

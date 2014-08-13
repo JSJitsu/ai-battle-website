@@ -18,7 +18,11 @@ var openGameDatabase = function() {
 
 
 //Saves all user data
-var usersCodeRequest = function () {
+var usersCodeRequest = function(fileType) {
+
+  if (fileType !== 'hero' & fileType !== 'helpers') {
+    throw new Error('Invalid file type!  Must be either "hero" or "helpers"!');
+  }
 
   //Opens connection to mongo database
   var openDatabasePromise = openGameDatabase();
@@ -40,9 +44,9 @@ var usersCodeRequest = function () {
       users.forEach(function(user, ind) {
 
         var options = {
-          //Saves the URL at which the hero code can be found
+          //Saves the URL at which the code can be found
           url: 'https://' + secrets.apiUser + ':' + secrets.apiPass + '@api.github.com/repos/' + user.githubHandle + 
-          '/' + user.codeRepo + '/contents/hero.js',
+          '/' + user.codeRepo + '/contents/' + fileType +'.js',
 
           //Needed by the github API
           headers: {
@@ -52,9 +56,9 @@ var usersCodeRequest = function () {
 
         console.log(options.url);
 
-        //Sends the request for each user's hero.js file to the github API
+        //Sends the request for each user's hero.js and helper.js file to the github API
         request(options, function (error, response, body) {
-          console.log('Saving hero code for: ' + user.githubHandle);
+          console.log('Saving code for: ' + user.githubHandle);
           if (error){
             console.log('Error sending request!');
             console.log(error)
@@ -79,15 +83,21 @@ var usersCodeRequest = function () {
               return;
             }
 
+            var filePath = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_' + fileType + '.js';
+            console.log(filePath);
+
+
             //Write the file to a predefined folder and file name
-            fs.writeFile(secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js', usersCode, function(err) {
+            fs.writeFile(filePath, usersCode, function(err) {
               if (err) {
-                console.log('Error writing file!');
+                console.log('Error writing file: ' + fileType + '!');
                 console.log(err);
               } else {
-                console.log('Hero code saved!');
+                console.log('Hero code saved: ' + fileType + '!');
               }
             });
+          } else {
+            console.log('Unexpected response code:' + response.statusCode + '!');
           }
         });
 
@@ -103,4 +113,5 @@ var usersCodeRequest = function () {
 };
 
 //Kick off the whole process
-usersCodeRequest();
+usersCodeRequest('hero');
+usersCodeRequest('helpers');
