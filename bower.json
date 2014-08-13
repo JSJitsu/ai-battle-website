@@ -20,6 +20,7 @@
     "font-awesome": "~4.1.0",
     "bower": "*",
     "bootstrap": "~3.2.0",
-    "chartjs": "~0.2.0"
+    "chartjs": "~0.2.0",
+    "bootstrap-social": "~4.6.0"
   }
 }

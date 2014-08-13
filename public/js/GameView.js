@@ -24,7 +24,7 @@ var GameView = Backbone.View.extend({
     'click .restart-game': 'restartGame'
   },
   render: function(){
-  	var $gameHtml = this.$el.find('.map');
+    var $gameHtml = this.$el.find('.map');
     $gameHtml.html('');
     //Show game update messages
     $('.messages').text('');
@@ -231,8 +231,10 @@ var GameView = Backbone.View.extend({
     }  
   },
   checkWinner: function() {
+    console.log(winner)
     var winner = this.model.get('winningTeam'); 
     if(winner){
+
       if(winner === 0){
         $('.winner-msg').text('Yellow Team Wins!');
       }
