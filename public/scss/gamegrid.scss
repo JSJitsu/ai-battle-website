@@ -90,13 +90,22 @@
   }
   .play-controls {
     bottom: -1vw;
-    width: 13%;
+    width: 15%;
   }
   .range-bar {
     bottom: 0;
   }
 }
 
+@media (max-width: 1098px){
+  .lifebar {
+    width: 31%;
+    height: 96%;
+    bottom: -12%;
+    left: 3px;
+    margin: -3px;
+  }
+}
 
 @media (max-width: 678px ) {
   .battle-tile {
@@ -116,10 +125,14 @@
     width: 26%;
   }
   .lifebar {
-    width: 1.9vw;
+    width: 27%;
+  }
+  .range-bar {
+    bottom: 2vw;
   }
   .indicator {
     font-size: 2.5vw;
     margin: 11px -2px;
   }
 }
+
