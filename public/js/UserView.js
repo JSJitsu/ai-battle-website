@@ -72,9 +72,7 @@ var UserView = Backbone.View.extend({
     } else if (githubHandle && this.viewing === 'recent') {
       html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
     } else if (githubHandle && this.viewing === 'average') {
-      console.log('this.model: ', this.model);
       var averageStats = this.model.average();
-      console.log('averageStats: ', averageStats);
       averageStats['githubHandle'] = this.model.get('githubHandle');
       html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
     } else if (!githubHandle) {
