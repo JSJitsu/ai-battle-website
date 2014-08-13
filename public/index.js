@@ -35,3 +35,6 @@ $(document).on('ready', function(){
 
 });
 
+$('ul.menu-items>li').on('click', 'a', function(){
+  console.log(this)
+})
