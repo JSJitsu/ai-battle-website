@@ -62,3 +62,41 @@
 
 .highlightedCurrentUser {
   opacity: 0.5; }
+
+@media (max-width: 800px) {
+  .battle-tile {
+    width: 3.9vw;
+    height: 3.9vw; } }
+@media (max-width: 1199px) {
+  .battle-map {
+    top: 4vw; }
+
+  .play-controls {
+    bottom: -1vw;
+    width: 13%; }
+
+  .range-bar {
+    bottom: 0; } }
+@media (max-width: 678px) {
+  .battle-tile {
+    width: 7.1vw;
+    height: 6vw; }
+
+  .sprite {
+    max-height: 5vw; }
+
+  .team-info {
+    visibility: hidden; }
+
+  .team-name {
+    font-size: 9px; }
+
+  .play-controls {
+    width: 26%; }
+
+  .lifebar {
+    width: 1.9vw; }
+
+  .indicator {
+    font-size: 2.5vw;
+    margin: 11px -2px; } }
