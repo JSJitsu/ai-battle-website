@@ -195,7 +195,7 @@ Game.prototype.handleHeroTurn = function(direction) {
   //Checks whether the game is over
 
   //Exceeded maximum turns
-  if (this.turn > this.maxTurn) {
+  if (this.turn >= this.maxTurn) {
     this.ended = true;
     var teamDiamonds0 = this._teamDiamonds(this.teams[0]);
     var teamDiamonds1 = this._teamDiamonds(this.teams[1]);
