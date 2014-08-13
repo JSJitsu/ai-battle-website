@@ -31,7 +31,12 @@ var UserView = Backbone.View.extend({
     this.model.set('id', 0);
     //Save the model
     this.model.save();
+    // var form = document.getElementsByClassName("form-feedback");
+    // var form = $(".form-feedback");
+    // console.log(form);
     this.render();
+    $(".form-group").addClass("has-success");
+    $(".form-group").addClass("has-feedback");
   },
 
   showSettings: function(event) {
