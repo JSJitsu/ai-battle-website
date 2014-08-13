@@ -80,3 +80,6 @@ li {
 
 .logoutButton {
   margin-top: 100px; }
+
+.active {
+  background-color: cyan; }
