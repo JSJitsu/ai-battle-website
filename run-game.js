@@ -64,7 +64,8 @@ var usersCodeRequest = function () {
       })).then(function() {
         console.log('All hero brain containers are ready...starting the game!');
         console.log(users.length);
-          //Loop through the turns, send gameData, get responses, etc
+        
+      //Loop through the turns, send gameData, get responses, etc
       }).then(function() {
         console.log('Game has finished successfully!');
         console.log('Closing database connection...');
