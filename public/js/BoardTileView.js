@@ -55,7 +55,7 @@ var BoardTileView = Backbone.View.extend({
         var owner = this.model.get('owner');
         if (owner) {
           html += '<span class="indicator ' + colors[owner.team] +'">' + owner.id + '</span>';
-        }
+        } 
       }
       this.$el.html(html);
     }
