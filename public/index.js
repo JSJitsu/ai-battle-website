@@ -7,10 +7,11 @@ $(document).on('ready', function(){
     url: '/userinfo',
   })
   .done(function(data){
-    console.log('userData: ', data);
     if (data.githubHandle){
       $('#userContent').text('Hello, ' + data.githubHandle);
         template = "loggedIn";
+        // $('.' + data.githubHandle).addClass('highlightedUser');
+        // console.log($('.highlightedUser'));
     } 
     // render(template, data);
   })
