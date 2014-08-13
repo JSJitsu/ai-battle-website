@@ -32,7 +32,7 @@ var runAllGames = function(mongoData, users) {
 
   //Create games
   for (var i=0; i<numberOfGames; i++) {
-    var game = Game(boardSize);
+    var game = new Game(boardSize);
     game.maxTurn = 2000;
     games.push(game);
 
@@ -42,26 +42,39 @@ var runAllGames = function(mongoData, users) {
     alternateTeams.push(0);
   }
 
+
   //Add users to each game (one user to first game,
   //then move to next game and add a user, and so on
   //until all users have been added)
   var currentGameIndex = 0;
   while (users.length > 0) {
     var game = games[currentGameIndex];
+    var team = alternateTeams[currentGameIndex];
+
+    //Next hero added to this game will be on the other team
+    if (team === 0) {
+      alternateTeams[currentGameIndex] = 1;
+    } else {
+      alternateTeams[currentGameIndex] = 0;
+    }
 
     //Loops through each game
-    if (currentGameIndex >= games.length) {
-      currentGameIndex = 0;
-    } else {
+    if (currentGameIndex < games.length - 1) {
       currentGameIndex++;
+    } else {
+      currentGameIndex = 0;
     }
 
     //Get a random user from the user list
-    var nextUserIndex = randomNumber(0, users.length);
-    var user = users.splice(nextUserIndex, 1);
+    var nextUserIndex = randomIndex(users.length);
+    var user = users.splice(nextUserIndex, 1)[0];
 
+
+    console.log(user);
     //Save the user (be able to get the hero port, etc later)
     userLookup[user.githubHandle] = user;
+
+    console.log('Adding user: ' + user.githubHandle + ' to game ' + currentGameIndex + ', team ' + team);
 
     //Put hero at random location in the current game
     while (!game.addHero(randomIndex(boardSize), randomIndex(boardSize), user.githubHandle, team)) {
@@ -70,230 +83,152 @@ var runAllGames = function(mongoData, users) {
       // onto occupied squares do nothing and return false, hence the loop)
     }
   }
-
-  //Adds enough game objects to store all users' heroes
-  for (var i=0; i<numberOfGames; i++) {
-    var game = new Game(boardSize);
-    game.maxTurn = 2000;
-
-    var team = 0;
-
-    //Add heroes to the game
-    for (var j=0; j<maxUsersPerTeam*2; j++) {
-      if (users.length === 0) {
-        break;
-      } else {
-        //Add heroes to the game randomly
-        var nextUserIndex = randomNumber(0, users.length);
-        var user = users.splice(nextUserIndex, 1);
-
-        //Be able to get the hero port, etc later
-        userLookup[user.githubHandle] = user;
-
-        //Put hero at random location
-        while (!game.addHero(randomIndex(boardSize), randomIndex(boardSize), user.githubHandle, team)) {
-          //Keep looping until the hero is successfully added
-          //(Since we are choosing random locations, heroes that are added
-          // onto occupied squares do nothing and return false, hence the loop)
-        }
-
-        //Switch teams for every hero added
-        if (team === 0) {
-          team = 1;
-        } else {
-          team = 0;
-        }
-      }
-
-    }
-    
-  }
-
-
-    games.push(game);
-
-
-
 };
 
-GameRunner.prototype.addUserToGame(user) {
-  if (this.usersAdded < this.maxUsers) {
-    this._userLookup[user.githubHandle] = user;
-    var name = user.githubHandle;
-    var team = this.usersAdded % 2;
+// var addGameDataToDatabase = function(collection, gameData, date) {
+//   gameData.date = date;
+//   return Q.ninvoke(collection, 'insert', gameData).then(function(docs) {
+//     console.log('~~~~~~');
+//     console.log(docs);
+//     console.log('~~~~~~');
+//   }, function(err) {
+//     console.log(err);
+//   });
+// };
 
-    this.game.addHero()
+// var getDateString = function() {
+//   var d = new Date();
+//   var result = (d.getMonth() + 1).toString();
+//   result += '/' + d.getDate();
+//   result += '/' + d.getFullYear();
+//   return result;
+// };
 
-    this.usersAdded++;
-    return true;
-  } else {
-    return false;
-  }
-};
-
-GameRunner.prototype.addRandomObjectsToGame() {
-  //Health Wells
-  for (var i=0; i<6; i++) {
-    game.addHealthWell(randomNumber(boardSize), randomNumber(boardSize));
-  }
-
-  //Impassables
-  for (var i=0; i<18; i++) {
-    game.addImpassable(randomNumber(boardSize), randomNumber(boardSize));
-  }
-
-  //Diamond Mines
-  for (var i=0; i<12; i++) {
-    game.addDiamondMine(randomNumber(boardSize), randomNumber(boardSize));
-  }
-};
-
-var addGameDataToDatabase = function(collection, gameData, date) {
-  gameData.date = date;
-  return Q.ninvoke(collection, 'insert', gameData).then(function(docs) {
-    console.log('~~~~~~');
-    console.log(docs);
-    console.log('~~~~~~');
-  }, function(err) {
-    console.log(err);
-  });
-};
-
-var getDateString = function() {
-  var d = new Date();
-  var result = (d.getMonth() + 1).toString();
-  result += '/' + d.getDate();
-  result += '/' + d.getFullYear();
-  return result;
-};
-
-var runGame = function() {
-  //Set up the game board
+// var runGame = function() {
+//   //Set up the game board
 
   
 
-  var boardSize = 12;
-  var game = new Game(boardSize);
+//   var boardSize = 12;
+//   var game = new Game(boardSize);
 
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'forrestbthomas', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'forrestbthomas', 0);
+//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
 
-  for (var i=0; i<5; i++) {
-    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
-      //Loops until each hero is successfully added
-    }
-  }
-  for (var i=0; i<6; i++) {
-    game.addHealthWell(randomNumber(boardSize), randomNumber(boardSize));
-  }
-  for (var i=0; i<18; i++) {
-    game.addImpassable(randomNumber(boardSize), randomNumber(boardSize));
-  }
-  for (var i=0; i<12; i++) {
-    game.addDiamondMine(randomNumber(boardSize), randomNumber(boardSize));
-  }
+//   for (var i=0; i<5; i++) {
+//     while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
+//       //Loops until each hero is successfully added
+//     }
+//   }
+//   for (var i=0; i<6; i++) {
+//     game.addHealthWell(randomNumber(boardSize), randomNumber(boardSize));
+//   }
+//   for (var i=0; i<18; i++) {
+//     game.addImpassable(randomNumber(boardSize), randomNumber(boardSize));
+//   }
+//   for (var i=0; i<12; i++) {
+//     game.addDiamondMine(randomNumber(boardSize), randomNumber(boardSize));
+//   }
 
-  var maxTurn = 2000;
-  game.maxTurn = maxTurn;
+//   var maxTurn = 2000;
+//   game.maxTurn = maxTurn;
 
-  //Get today's date in string form
-  var date = getDateString();
-  game.date = date;
+//   //Get today's date in string form
+//   var date = getDateString();
+//   game.date = date;
 
-  //Manually set the ID so Mongo doesn't just keep writing to the same document
-  game._id = game.turn + '|' + date;
+//   //Manually set the ID so Mongo doesn't just keep writing to the same document
+//   game._id = game.turn + '|' + date;
 
-  //Open up the database connection
-  var openDatabasePromise = openGameDatabase();
+//   //Open up the database connection
+//   var openDatabasePromise = openGameDatabase();
 
-  //After opening the database promise, 
-  openDatabasePromise.then(function(mongoData) {
-    //The collection we're inserting into
-    var mongoCollection = mongoData.collection;
-    //The database we're inserting into
-    var mongoDb = mongoData.db;
+//   //After opening the database promise, 
+//   openDatabasePromise.then(function(mongoData) {
+//     //The collection we're inserting into
+//     var mongoCollection = mongoData.collection;
+//     //The database we're inserting into
+//     var mongoDb = mongoData.db;
 
-    var resolveGameAndSaveTurnsToDB = function(game) {
-      console.log('Turn: ' + game.turn);
+//     var resolveGameAndSaveTurnsToDB = function(game) {
+//       console.log('Turn: ' + game.turn);
 
-      //Save the game to the database
-      return Q.npost(mongoCollection, 'update', [
-        {
-          '_id':game._id
-        }, game, {
-          upsert:true
-        }
+//       //Save the game to the database
+//       return Q.npost(mongoCollection, 'update', [
+//         {
+//           '_id':game._id
+//         }, game, {
+//           upsert:true
+//         }
 
-      //Then get the next direction the activeHero wants to move
-      ]).then(function(result) {
+//       //Then get the next direction the activeHero wants to move
+//       ]).then(function(result) {
 
-        //Get the current hero
-        var activeHero = game.activeHero;
+//         //Get the current hero
+//         var activeHero = game.activeHero;
 
-        //Get the direction the currently active hero wants to move
-        return heroCommunicator.getNextMove(activeHero, game);
+//         //Get the direction the currently active hero wants to move
+//         return heroCommunicator.getNextMove(activeHero, game);
 
-      //Then move the active hero in that direction
-      }).then(function(direction) {
+//       //Then move the active hero in that direction
+//       }).then(function(direction) {
 
-        //If game has ended, stop looping and set the max turn
-        if (game.ended) {
-          maxTurn = game.maxTurn;
+//         //If game has ended, stop looping and set the max turn
+//         if (game.ended) {
+//           maxTurn = game.maxTurn;
 
-        //Otherwise, continue with next turn and save that turn
-        } else {
-          //Advances the game one turn
-          game.handleHeroTurn(direction);
+//         //Otherwise, continue with next turn and save that turn
+//         } else {
+//           //Advances the game one turn
+//           game.handleHeroTurn(direction);
 
-          //Manually set the ID so Mongo doesn't just keep writing to the same document
-          game._id = game.turn + '|' + game.date;
+//           //Manually set the ID so Mongo doesn't just keep writing to the same document
+//           game._id = game.turn + '|' + game.date;
 
-          return resolveGameAndSaveTurnsToDB(game);
-        }
-      }).catch(function(err) {
-        console.trace();
-        console.log('---------')
-        console.log(err);
-        throw err;
-      });
-    };
+//           return resolveGameAndSaveTurnsToDB(game);
+//         }
+//       }).catch(function(err) {
+//         console.trace();
+//         console.log('---------')
+//         console.log(err);
+//         throw err;
+//       });
+//     };
 
-    //Runs the game and saves the result to DB
-    var saveGameData = resolveGameAndSaveTurnsToDB(game);
+//     //Runs the game and saves the result to DB
+//     var saveGameData = resolveGameAndSaveTurnsToDB(game);
 
-    //Updates the game turn objects to have the correct maxTurn
-    //This is necessary for the front end to know the total # of turns
-    return saveGameData.then(function() {
-      console.log('Game done, updating maxTurn for each turn...');
-      console.log(game.maxTurn);
-      Q.npost(mongoCollection, 'update', [
-        {
-          date: game.date
-        },
-        {
-          $set: {
-            maxTurn: game.maxTurn
-          }
-        },
-        {
-          multi: true
-        }
-      ]).then(function() {
-        console.log('Turns updated!');
-        console.log('All tasks complete, closing DB connection')
-        mongoDb.close();
-      });
-    });
-  }).catch(function(err) {
-    mongoDb.close();
-    console.trace();
-    console.log('---------')
-    console.log(err);
-    throw err;
-  });
-};
-
-runGame();
+//     //Updates the game turn objects to have the correct maxTurn
+//     //This is necessary for the front end to know the total # of turns
+//     return saveGameData.then(function() {
+//       console.log('Game done, updating maxTurn for each turn...');
+//       console.log(game.maxTurn);
+//       Q.npost(mongoCollection, 'update', [
+//         {
+//           date: game.date
+//         },
+//         {
+//           $set: {
+//             maxTurn: game.maxTurn
+//           }
+//         },
+//         {
+//           multi: true
+//         }
+//       ]).then(function() {
+//         console.log('Turns updated!');
+//         console.log('All tasks complete, closing DB connection')
+//         mongoDb.close();
+//       });
+//     });
+//   }).catch(function(err) {
+//     mongoDb.close();
+//     console.trace();
+//     console.log('---------')
+//     console.log(err);
+//     throw err;
+//   });
+// };
