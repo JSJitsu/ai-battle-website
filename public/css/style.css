@@ -77,3 +77,9 @@ li {
 
 .logoutButton {
   margin-top: 100px; }
+
+#inputRepo {
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px; }
