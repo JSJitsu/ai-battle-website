@@ -34,7 +34,8 @@ postToServerFunctions.postFile = function(port, filePath, fileType) {
         form.append(fileType, fs.createReadStream(filePath));
 
       } else {
-        deferred.reject(new Error('"' + filePath + '" does not exist!'));
+        deferred.resolve('No file found...file not transferred');
+        // deferred.reject(new Error('"' + filePath + '" does not exist!'));
       }
     });
   }

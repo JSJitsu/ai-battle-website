@@ -5,7 +5,7 @@ var fs = require('fs');
 var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
 var containerFunctions = require('./docker/container-functions.js');
-var GameRunner = require('./GameRunner.js')
+var createAndSaveAllGames = require('./game-runner.js')
 
 var postToServerFunctions = require('./docker/post-to-server-functions.js');
 
@@ -56,15 +56,17 @@ var usersCodeRequest = function () {
           //send the hero brain to the server
           return postToServerFunctions.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
             //send the helper file to the server
-            // return postToServerFunctions.postFile(user.port, pathToHelperFile, 'helper');
+            return postToServerFunctions.postFile(user.port, pathToHelperFile, 'helper');
           });
 
         });
       //Start the game
       })).then(function() {
         console.log('All hero brain containers are ready...starting the game!');
-        console.log(users.length);
-          //Loop through the turns, send gameData, get responses, etc
+        
+        //Loop through the turns, send gameData, get responses, etc
+        return createAndSaveAllGames(users, mongoData);
+
       }).then(function() {
         console.log('Game has finished successfully!');
         console.log('Closing database connection...');

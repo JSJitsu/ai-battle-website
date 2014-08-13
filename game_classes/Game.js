@@ -45,6 +45,7 @@ var Game = function(n) {
 
   //Used in database retrieval
   this.date;
+  this.gameNumber;
 };
 
 // Adds a new hero to the board
