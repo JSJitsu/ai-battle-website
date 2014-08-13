@@ -67,12 +67,13 @@ var GameView = Backbone.View.extend({
             }
           }.bind(this),
           error: function(collection, response, options){
-            console.log('error', response);
-          }    
+            this.initializeSlider();
+            this.render();
+          }.bind(this)    
         });
       }.bind(this),
       error: function(collection, response, options){
-        console.log('error', response);
+        console.log('error', collection);
       }
     });
   },
