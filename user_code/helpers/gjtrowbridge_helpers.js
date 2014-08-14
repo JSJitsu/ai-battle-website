@@ -1,3 +1,5 @@
+
+
 var helpers = {};
 
 // Returns false if the given coordinates are out of range

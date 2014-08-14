@@ -1,3 +1,5 @@
+
+
 var helpers = {};
 
 // Returns false if the given coordinates are out of range
@@ -177,3 +179,5 @@ helpers.findNearestEnemyWithLowHealth = function(gameObj, healthLevel){
   return fn(gameObj.activeHero(), 'Hero', gameObj.board).direction || false;
 
 };
+
+module.exports = helpers;
