@@ -83,7 +83,10 @@
     height: 96%;
     bottom: -12%;
     left: 3px;
-    margin: -3px; } }
+    margin: -3px; }
+
+  .role {
+    left: 34vw; } }
 @media (min-width: 1550px) {
   .team-info {
     top: 4vw;
