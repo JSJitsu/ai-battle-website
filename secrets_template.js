@@ -1,3 +1,5 @@
+//Use this as a template for creating your own local secrets.js file
+
 var secrets = module.exports = {};
 
 secrets.mongoKey = 'mongo connection url here';
