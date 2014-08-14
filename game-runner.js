@@ -5,8 +5,10 @@ var heroCommunicator = require('./hero-communicator.js');
 var secrets = require('./secrets.js');
 
 var createAndSaveAllGames = function(users, mongoData) {
-  games = setUpAllGames(users);
-  return runAndSaveAllGames(mongoData, games);
+  var infoObject = setUpAllGames(users);
+  var games = infoObject.games;
+  var userLookup = infoObject.userLookup;
+  return runAndSaveAllGames(mongoData, games, userLookup);
 }
 
 //Synchronous, returns an array of all games that need
@@ -88,21 +90,25 @@ var setUpAllGames = function(users) {
       // onto occupied squares do nothing and return false, hence the loop)
     }
   }
-  return games;
+  return {
+    games: games
+    userLookup: userLookup
+  };
 };
 
 //Runs and saves all games and returns a promise
-var runAndSaveAllGames = function(mongoData, games) {
+var runAndSaveAllGames = function(mongoData, games, userLookup) {
   var gamePromises = games.map(function(game, gameIndex) {
-    return runGamePromise(mongoData, game, gameIndex);
+    return runGamePromise(mongoData, game, gameIndex, userLookup);
   });
   return Q.all(gamePromises);
 };
 
-var runGamePromise = function(mongoData, game, gameIndex) {
+var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
+
   //The collection we're inserting into
   var mongoCollection = mongoData.gameDataCollection;
-  
+
   //The database we're inserting into
   var mongoDb = mongoData.db;
 
@@ -116,14 +122,14 @@ var runGamePromise = function(mongoData, game, gameIndex) {
   };
 
   //Loops through the entire game, saves each turn to the database
-  var resolveGameAndSaveTurnsToDB = function(game, gameIndex) {
-
-    //Manually set the ID so Mongo doesn't just keep writing to the same document
-    game._id = gameIndex + '|' + game.turn + '|' + date;
-
+  var resolveGameAndSaveTurnsToDB = function(game) {
     //Get today's date in string form
     var date = getDateString();
     game.date = date;
+
+    //Manually set the ID so Mongo doesn't just keep writing to the same document
+    game._id = gameIndex.toString() + '|' + game.turn.toString() + '|' + date;
+
 
     //Save the game to the database
     return Q.npost(mongoCollection, 'update', [
@@ -139,14 +145,20 @@ var runGamePromise = function(mongoData, game, gameIndex) {
       //Get the current hero
       var activeHero = game.activeHero;
 
-      console.log('Turn: ' + game.turn);
+      console.log('Turn is: ' + game.turn);
 
       //Get the direction the currently active hero wants to move
-      return 'North';
-      return heroCommunicator.getNextMove(activeHero, game);
+      var port = userLookup[hero.name];
+      console.log('Port is: ' + port);
+
+      console.log('User is: ' + hero.name);
+
+      return postToServerFunctions.postGameData(port, game)
 
     //Then move the active hero in that direction
     }).then(function(direction) {
+
+      console.log('Direction is: ' + direction);
 
       //If game has ended, stop looping and set the max turn
       if (game.ended) {
@@ -160,7 +172,7 @@ var runGamePromise = function(mongoData, game, gameIndex) {
         //Manually set the ID so Mongo doesn't just keep writing to the same document
         game._id = game.turn + '|' + game.date;
 
-        return resolveGameAndSaveTurnsToDB(game, gameIndex);
+        return resolveGameAndSaveTurnsToDB(game);
       }
     }).catch(function(err) {
       console.trace();
@@ -171,7 +183,7 @@ var runGamePromise = function(mongoData, game, gameIndex) {
   };
 
   //Runs the game and saves the result to DB
-  var saveGameData = resolveGameAndSaveTurnsToDB(game, gameIndex);
+  var saveGameData = resolveGameAndSaveTurnsToDB(game);
 
   //Updates the game turn objects to have the correct maxTurn
   //This is necessary for the front end to know the total # of turns
@@ -197,150 +209,3 @@ var runGamePromise = function(mongoData, game, gameIndex) {
 }
 
 module.exports = createAndSaveAllGames;
-
-// var users = [];
-// for (var i=0; i<25; i++) {
-//   users.push({githubHandle: i});
-// }
-// runAllGames('', users);
-
-// var addGameDataToDatabase = function(collection, gameData, date) {
-//   gameData.date = date;
-//   return Q.ninvoke(collection, 'insert', gameData).then(function(docs) {
-//     console.log('~~~~~~');
-//     console.log(docs);
-//     console.log('~~~~~~');
-//   }, function(err) {
-//     console.log(err);
-//   });
-// };
-
-
-// var runGame = function() {
-//   //Set up the game board
-
-  
-
-//   var boardSize = 12;
-//   var game = new Game(boardSize);
-
-//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'forrestbthomas', 0);
-//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-//   game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-
-//   for (var i=0; i<5; i++) {
-//     while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
-//       //Loops until each hero is successfully added
-//     }
-//   }
-//   for (var i=0; i<6; i++) {
-//     game.addHealthWell(randomNumber(boardSize), randomNumber(boardSize));
-//   }
-//   for (var i=0; i<18; i++) {
-//     game.addImpassable(randomNumber(boardSize), randomNumber(boardSize));
-//   }
-//   for (var i=0; i<12; i++) {
-//     game.addDiamondMine(randomNumber(boardSize), randomNumber(boardSize));
-//   }
-
-//   var maxTurn = 2000;
-//   game.maxTurn = maxTurn;
-
-//   //Get today's date in string form
-//   var date = getDateString();
-//   game.date = date;
-
-//   //Manually set the ID so Mongo doesn't just keep writing to the same document
-//   game._id = game.turn + '|' + date;
-
-//   //Open up the database connection
-//   var openDatabasePromise = openGameDatabase();
-
-//   //After opening the database promise, 
-//   openDatabasePromise.then(function(mongoData) {
-//     //The collection we're inserting into
-//     var mongoCollection = mongoData.collection;
-//     //The database we're inserting into
-//     var mongoDb = mongoData.db;
-
-//     var resolveGameAndSaveTurnsToDB = function(game) {
-//       console.log('Turn: ' + game.turn);
-
-//       //Save the game to the database
-//       return Q.npost(mongoCollection, 'update', [
-//         {
-//           '_id':game._id
-//         }, game, {
-//           upsert:true
-//         }
-
-//       //Then get the next direction the activeHero wants to move
-//       ]).then(function(result) {
-
-//         //Get the current hero
-//         var activeHero = game.activeHero;
-
-//         //Get the direction the currently active hero wants to move
-//         return heroCommunicator.getNextMove(activeHero, game);
-
-//       //Then move the active hero in that direction
-//       }).then(function(direction) {
-
-//         //If game has ended, stop looping and set the max turn
-//         if (game.ended) {
-//           maxTurn = game.maxTurn;
-
-//         //Otherwise, continue with next turn and save that turn
-//         } else {
-//           //Advances the game one turn
-//           game.handleHeroTurn(direction);
-
-//           //Manually set the ID so Mongo doesn't just keep writing to the same document
-//           game._id = game.turn + '|' + game.date;
-
-//           return resolveGameAndSaveTurnsToDB(game);
-//         }
-//       }).catch(function(err) {
-//         console.trace();
-//         console.log('---------')
-//         console.log(err);
-//         throw err;
-//       });
-//     };
-
-//     //Runs the game and saves the result to DB
-//     var saveGameData = resolveGameAndSaveTurnsToDB(game);
-
-//     //Updates the game turn objects to have the correct maxTurn
-//     //This is necessary for the front end to know the total # of turns
-//     return saveGameData.then(function() {
-//       console.log('Game done, updating maxTurn for each turn...');
-//       console.log(game.maxTurn);
-//       Q.npost(mongoCollection, 'update', [
-//         {
-//           date: game.date
-//         },
-//         {
-//           $set: {
-//             maxTurn: game.maxTurn
-//           }
-//         },
-//         {
-//           multi: true
-//         }
-//       ]).then(function() {
-//         console.log('Turns updated!');
-//         console.log('All tasks complete, closing DB connection')
-//         mongoDb.close();
-//       });
-//     });
-//   }).catch(function(err) {
-//     mongoDb.close();
-//     console.trace();
-//     console.log('---------')
-//     console.log(err);
-//     throw err;
-//   });
-// };

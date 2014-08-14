@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./game_classes/Game.js');
-var heroCommunicator = require('./hero-communicator.js');
+var heroCommunicator = require('./hero-communicator-previous.js');
 var secrets = require('./secrets.js');
 
 var mongoConnectionURL = secrets.mongoKey;

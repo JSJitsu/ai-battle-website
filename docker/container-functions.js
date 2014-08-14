@@ -11,10 +11,10 @@ containerFunctions.spinUpContainer = function(port) {
     .progress(function(childProcess) {
       console.log('[spawn] childProcess.pid: ', childProcess.pid);
       childProcess.stdout.on('data', function(data) {
-          console.log('[spawn] stdout: ', data.toString());
+          console.log('  [spawn] stdout: ', data.toString());
       });
       childProcess.stderr.on('data', function(data) {
-          console.log('[spawn] stderr: ', data.toString()); 
+          console.log('  [spawn] stderr: ', data.toString()); 
       });
     });
 };
@@ -26,20 +26,20 @@ containerFunctions.shutDownAllContainers = function() {
     .progress(function(childProcess) {
       console.log('[spawn] childProcess.pid: ', childProcess.pid);
       childProcess.stdout.on('data', function(data) {
-          console.log('[spawn] stdout: ', data.toString());
+          console.log('  [spawn] stdout: ', data.toString());
       });
       childProcess.stderr.on('data', function(data) {
-          console.log('[spawn] stderr: ', data.toString()); 
+          console.log('  [spawn] stderr: ', data.toString()); 
       });
     }).then(function() {
       return exec('sudo docker rm -f $(sudo docker ps -a -q)')
         .progress(function(childProcess) {
           console.log('[spawn] childProcess.pid: ', childProcess.pid);
           childProcess.stdout.on('data', function(data) {
-              console.log('[spawn] stdout: ', data.toString());
+              console.log('  [spawn] stdout: ', data.toString());
           });
           childProcess.stderr.on('data', function(data) {
-              console.log('[spawn] stderr: ', data.toString()); 
+              console.log('  [spawn] stderr: ', data.toString()); 
           });
         });
     });
