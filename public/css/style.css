@@ -18,7 +18,10 @@
     margin: 8% 8%; }
 
 .team-pic {
-  text-align: center; }
+  text-align: center;
+  height: 125px; }
+  .team-pic .h4 {
+    line-height: 2px; }
 
 .rules {
   font-size: 18px;
@@ -26,19 +29,17 @@
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700; }
 
-.team-photo img {
-  height: 175px;
-  width: 175px; }
-
 .blur-pic {
   -webkit-filter: blur(3px); }
 
 .role {
-  position: absolute;
+  position: relative;
   display: none;
-  right: 10vw;
-  top: 2vw;
-  width: 2vw; }
+  width: 2vw;
+  height: 2vw;
+  padding-right: 5vw;
+  bottom: 80%;
+  margin: 0 auto; }
 
 .team {
   background: #18bc9c;
