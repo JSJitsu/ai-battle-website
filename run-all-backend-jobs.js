@@ -15,7 +15,8 @@ var openGameDatabase = function() {
     console.log('open!');
     return {
       db: db,
-      userCollection: db.collection('users')
+      userCollection: db.collection('users'),
+      gameDataCollection: db.collection('jsBattleGameData')
     };
   });
 };

@@ -101,7 +101,8 @@ var runAndSaveAllGames = function(mongoData, games) {
 
 var runGamePromise = function(mongoData, game, gameIndex) {
   //The collection we're inserting into
-  var mongoCollection = mongoData.userCollection;
+  var mongoCollection = mongoData.gameDataCollection;
+  
   //The database we're inserting into
   var mongoDb = mongoData.db;
 
@@ -115,7 +116,7 @@ var runGamePromise = function(mongoData, game, gameIndex) {
   };
 
   //Loops through the entire game, saves each turn to the database
-  var resolveGameAndSaveTurnsToDB = function(game) {
+  var resolveGameAndSaveTurnsToDB = function(game, gameIndex) {
 
     //Manually set the ID so Mongo doesn't just keep writing to the same document
     game._id = gameIndex + '|' + game.turn + '|' + date;
@@ -159,7 +160,7 @@ var runGamePromise = function(mongoData, game, gameIndex) {
         //Manually set the ID so Mongo doesn't just keep writing to the same document
         game._id = game.turn + '|' + game.date;
 
-        return resolveGameAndSaveTurnsToDB(game);
+        return resolveGameAndSaveTurnsToDB(game, gameIndex);
       }
     }).catch(function(err) {
       console.trace();
@@ -170,7 +171,7 @@ var runGamePromise = function(mongoData, game, gameIndex) {
   };
 
   //Runs the game and saves the result to DB
-  var saveGameData = resolveGameAndSaveTurnsToDB(game);
+  var saveGameData = resolveGameAndSaveTurnsToDB(game, gameIndex);
 
   //Updates the game turn objects to have the correct maxTurn
   //This is necessary for the front end to know the total # of turns
