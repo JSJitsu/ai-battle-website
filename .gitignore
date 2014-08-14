@@ -1,6 +1,7 @@
 node_modules/
 secrets.js
-user_code/*.js
+user_code/helpers/*.js
+user_code/hero/*.js
 docker/hero_brain_container_code/src/node_modules/
 docker/hero_brain_container_code/src/myHero.js
 docker/hero_brain_container_code/src/helpers.js
