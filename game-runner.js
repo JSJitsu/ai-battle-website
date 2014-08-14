@@ -3,6 +3,7 @@ var Q = require('q');
 var Game = require('./game_classes/Game.js');
 var heroCommunicator = require('./hero-communicator.js');
 var secrets = require('./secrets.js');
+var postToServerFunctions = require('./docker/post-to-server-functions.js')
 
 var createAndSaveAllGames = function(users, mongoData) {
   var infoObject = setUpAllGames(users);
@@ -91,7 +92,7 @@ var setUpAllGames = function(users) {
     }
   }
   return {
-    games: games
+    games: games,
     userLookup: userLookup
   };
 };
@@ -148,10 +149,10 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
       console.log('Turn is: ' + game.turn);
 
       //Get the direction the currently active hero wants to move
-      var port = userLookup[hero.name];
+      var port = userLookup[activeHero.name].port;
       console.log('Port is: ' + port);
 
-      console.log('User is: ' + hero.name);
+      console.log('User is: ' + activeHero.name);
 
       return postToServerFunctions.postGameData(port, game)
 

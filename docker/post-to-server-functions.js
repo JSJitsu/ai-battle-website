@@ -66,4 +66,9 @@ postToServerFunctions.postFile = function(port, filePath, fileType) {
   return deferred.promise;
 };
 
+var secrets = require('../secrets.js');
+postToServerFunctions.postFile(25000, secrets.rootDirectory + '/user_code/gjtrowbridge_hero.js', 'hero').then(function(val) {
+  console.log(val);
+})
+
 module.exports = postToServerFunctions;

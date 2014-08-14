@@ -11,8 +11,8 @@ RUN  apt-get install -y nodejs npm git git-core
 ADD . /src
 
 # Install app dependencies
-RUN cd src/src; ls; npm install
+RUN cd src; ls; npm install
 
 EXPOSE  8080
 
-CMD ["nodejs", "src/src/index.js"]
+CMD ["nodejs", "src/index.js"]
