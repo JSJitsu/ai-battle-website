@@ -23,20 +23,29 @@ var UserView = Backbone.View.extend({
   handleSubmit: function(event) {
     event.preventDefault();
     var val = $('#inputRepo').val();
-    // update the model with the new form data
-    this.model.set('codeRepo', val);
-    // This line helps backbone realize that
-    // we need to send a PUT request
-    // (that is ALL it does here)
-    this.model.set('id', 0);
-    //Save the model
-    this.model.save();
-    this.render();
     console.log('val: ', val);
-    console.log('codeRepo: ', this.model.get('codeRepo'));
-    if (val.length !== 0) {
+    var codeRepo = this.model.get('codeRepo');
+    // do not process if an empty string or equal to current code repo
+    if (val.length !== 0 && val !== codeRepo) {
+      // update the model with the new form data
+      // escape the form input for security
+      this.model.set('codeRepo', _.escape(val));
+      // This line helps backbone realize that
+      // we need to send a PUT request
+      // (that is ALL it does here)
+      this.model.set('id', 0);
+      //Save the model
+      this.model.save();
+      this.render();
+      // display form as updated with check mark and green highlight
       $(".form-group").addClass("has-success");
       $(".form-group").addClass("has-feedback");
+    } else {
+      // if empty string or equal to current code repo do not display as updated
+      $(".form-group").removeClass("has-success");
+      $(".form-group").removeClass("has-feedback");
+      // render to get current code repo value displayed rather than empty string
+      this.render();
     }
   },
 
