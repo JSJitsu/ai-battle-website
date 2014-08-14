@@ -23,17 +23,12 @@ var UserView = Backbone.View.extend({
   handleSubmit: function(event) {
     event.preventDefault();
     var val = $('#inputRepo').val();
-    console.log('val: ', val);
     var codeRepo = this.model.get('codeRepo');
     // do not process if an empty string or equal to current code repo
     if (val.length !== 0 && val !== codeRepo) {
       // update the model with the new form data
       // escape the form input for security
       this.model.set('codeRepo', _.escape(val));
-      // This line helps backbone realize that
-      // we need to send a PUT request
-      // (that is ALL it does here)
-      this.model.set('id', 0);
       //Save the model
       this.model.save();
       this.render();
