@@ -82,7 +82,8 @@ var usersCodeRequest = function(fileType) {
               return;
             }
 
-            var filePath = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_' + fileType + '.js';
+            var filePath = secrets.rootDirectory + '/user_code/' + fileType 
+                + '/' + user.githubHandle + '_' + fileType + '.js';
             console.log(filePath);
 
 
