@@ -21,6 +21,10 @@
 
 .team-pic {
   text-align: center;
+  height: 125px;
+  .h4 {
+    line-height: 2px;
+  }
 }
 
 .rules{
@@ -29,23 +33,21 @@
   font-weight: 700;
 }
 
-.team-photo {
-  img{
-    height: 175px;
-    width: 175px;
-  }
-}
 
 .blur-pic {
   -webkit-filter: blur(3px)
 }
+
 .role {
-  position: absolute;
+  position: relative;
   display: none;
-  right: 10vw;
-  top: 2vw;
   width: 2vw;
+  height: 2vw;
+  padding-right: 5vw;
+  bottom: 80%;
+  margin: 0 auto;
 }
+
 .team { 
   background: #18bc9c;
   padding-bottom: 350px;
