@@ -22,7 +22,7 @@ var openGameDatabase = function() {
 };
 
 //Saves all user data
-var usersCodeRequest = function () {
+var usersCodeRequest = function() {
 
   //Opens connection to mongo database
   var openDatabasePromise = openGameDatabase();
