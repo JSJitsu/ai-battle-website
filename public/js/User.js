@@ -10,7 +10,6 @@ var User = Backbone.Model.extend({
   average: function() {
     var gamesPlayed = this.get('lifetimeStats').wins + this.get('lifetimeStats').losses;
     console.log('gamesPlayed: ', gamesPlayed);
-    gamesPlayed = 10;
 
     var aveStats = {
       gamesPlayed: gamesPlayed,
