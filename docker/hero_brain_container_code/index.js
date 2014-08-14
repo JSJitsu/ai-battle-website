@@ -17,22 +17,22 @@ app.post('/', function(req, res) {
 });
 
 app.post('/heroFilesHere', multer({ 
-  dest: './',
+  dest: '/src/',
   rename: function() {
     return 'myHero';
   }
 }), function(req, res) {
-  move = require('./myHero.js');
+  move = require('/src/myHero.js');
   res.send("Hero file saved...probably");
 });
 
 app.post('/helperFilesHere', multer({ 
-  dest: './',
+  dest: '/src/',
   rename: function() {
     return 'helpers';
   }
 }), function(req, res) {
-  helpers = require('./helpers.js');
+  helpers = require('/src/helpers.js');
   res.send("Helper file saved...probably");
 });
 

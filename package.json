@@ -22,7 +22,8 @@
     "express": "^4.8.2",
     "mongodb": "^1.4.8",
     "q": "^1.0.1",
-    "request": "^2.40.0"
+    "request": "^2.40.0",
+    "unirest": "^0.2.7"
   },
   "devDependencies": {
     "blanket": "~1.1.6",
