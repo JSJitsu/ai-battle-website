@@ -1,8 +1,30 @@
 var request = require('request');
 var fs = require('fs');
 var Q = require('q');
+var unirest = require('unirest');
 
 var postToServerFunctions = {};
+
+postToServerFunctions.postGameData = function(port, gameData) {
+  var deferred = Q.defer();
+
+  //The URL to post the file
+  var url = 'http://0.0.0.0:' + port.toString();
+
+  //Milliseconds before turn is skipped
+  var maxWaitTime = 5000;
+
+  //Make the request
+  var Request = unirest.post(url)
+      .headers({ 'Accept': 'application/json' })
+      .timeout(maxWaitTime)
+      .send(gameData).end(function(response) {
+    deferred.resolve(response.body);
+  });
+
+  //Return a promise
+  return deferred.promise;
+};
 
 //Posts the given file to the given port (at localhost)
 //Returns a promise
