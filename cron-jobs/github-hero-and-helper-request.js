@@ -16,7 +16,6 @@ var openGameDatabase = function() {
   });
 };
 
-
 //Saves all user data
 var usersCodeRequest = function(fileType) {
 
