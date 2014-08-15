@@ -423,3 +423,282 @@ body {
 
   .collapse.in {
     display: block !important; } }
+.rules-content {
+  margin: 0 auto;
+  text-align: center; }
+
+.gamegrid-content {
+  margin: 0 auto;
+  text-align: center; }
+
+.play-controls {
+  position: relative;
+  border: solid 5px white;
+  border-radius: 15px;
+  width: 10%;
+  bottom: 5.6vw;
+  margin: 0 auto; }
+  .play-controls .glyphicon {
+    font-size: 2em;
+    margin: 8% 8%; }
+
+.team-pic {
+  text-align: center;
+  height: 125px; }
+  .team-pic .h4 {
+    line-height: 2px; }
+
+.rules {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700; }
+
+.blur-pic {
+  -webkit-filter: blur(3px); }
+
+.role {
+  position: relative;
+  display: none;
+  width: 2vw;
+  height: 2vw;
+  padding-right: 5vw;
+  bottom: 80%;
+  margin: 0 auto; }
+
+.team {
+  background: #18bc9c;
+  padding-bottom: 350px; }
+
+.team-title {
+  color: white; }
+
+.team-container {
+  padding: 100px; }
+
+li {
+  padding: 10px; }
+
+.lifetime-table {
+  position: relative;
+  top: 50px; }
+
+.lifetime-table-header {
+  font-weight: bold; }
+
+.settingsView {
+  margin-top: 35px;
+  margin-bottom: -65px; }
+
+.repoInput {
+  margin-top: 40px; }
+
+.logoutButton {
+  margin-top: 100px; }
+
+#inputRepo {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px; }
+
+.list-group-item-highlighted {
+  color: #3c763d;
+  border-color: #A0CF8C;
+  background-color: #A0CF8C; }
+
+.diamond-display {
+  max-height: 2vw; }
+
+.yellow-diamonds {
+  position: relative;
+  right: 34vw;
+  bottom: -26vw; }
+
+.team-info {
+  top: 4vw;
+  width: 16vw;
+  position: absolute; }
+
+.t-blue {
+  right: 0; }
+
+.t-yellow {
+  left: 0; }
+
+.team-name {
+  font-size: 19px; }
+
+#ex1Slider .slider-selection {
+  background: #BABABA; }
+
+.range-bar {
+  margin: 0 auto;
+  width: 43%;
+  bottom: 6vw; }
+
+.range-handle {
+  bottom: 10px;
+  height: 28px;
+  width: 29px;
+  right: 20px;
+  background-color: transparent;
+  top: -13px;
+  position: absolute;
+  background-image: url("../img/sword.png");
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0; }
+
+.messages {
+  margin: -38px auto;
+  width: 500px;
+  position: relative;
+  font-size: 21px;
+  color: dimgrey;
+  top: 14px; }
+
+.turn-content {
+  color: #2c3e50 !important; }
+
+.dead-info {
+  color: red; }
+
+.outer {
+  bottom: 37px;
+  position: relative; }
+
+.battle-map {
+  display: table;
+  bottom: 3vw;
+  margin: -5% auto;
+  width: auto;
+  position: relative; }
+
+.tile-row {
+  display: table-row; }
+
+.battle-tile {
+  display: table-cell;
+  height: 2.7vw;
+  width: 3.1vw;
+  border: 1px dotted #10380d;
+  background-image: url("../img/tile.png");
+  overflow: hidden; }
+
+.sprite {
+  max-width: 100%;
+  max-height: 2.7vw;
+  vertical-align: top; }
+
+.lifebar {
+  width: 23%;
+  float: left;
+  height: 87%;
+  -webkit-box-shadow: inset 0 2px 0 #A23A3A;
+  border-radius: 15px;
+  border: 3px solid #000058;
+  position: relative;
+  bottom: -8%;
+  left: 0; }
+
+.life-capacity {
+  height: 100%;
+  width: 79%;
+  bottom: 0;
+  right: 1px;
+  border-radius: 5px;
+  background: red;
+  position: absolute;
+  -webkit-box-shadow: -1px 0px 2px #C0ACAC, 1px 0px 3px #C0ACAC, -1px 0px 10px #C0ACAC, 8px 4px 6px #290E0E; }
+
+.indicator {
+  font-size: 1vw;
+  margin-left: -3px;
+  position: absolute; }
+
+.current-turn {
+  -webkit-filter: hue-rotate(45deg); }
+
+.team-yellow {
+  color: rgba(245, 255, 0, 0.83); }
+
+.team-blue {
+  color: rgba(0, 61, 255, 0.79); }
+
+.highlightedCurrentUser {
+  opacity: 0.5; }
+
+@media (max-width: 800px) {
+  .battle-tile {
+    width: 3.9vw;
+    height: 3.9vw; } }
+@media (max-width: 1199px) {
+  .battle-map {
+    top: 4vw; }
+
+  .play-controls {
+    bottom: -1vw;
+    width: 15%; }
+
+  .range-bar {
+    bottom: 0; } }
+@media (max-width: 1098px) {
+  .lifebar {
+    width: 31%;
+    height: 96%;
+    bottom: -12%;
+    left: 3px;
+    margin: -3px; } }
+@media (min-width: 1550px) {
+  .team-info {
+    top: 4vw;
+    width: 9vw; } }
+@media (max-width: 1200px) {
+  .team-pic {
+    float: right; } }
+@media (min-width: 1200px) {
+  .team-info {
+    top: 4vw;
+    width: 9vw; }
+
+  .range-bar {
+    bottom: 5vw; }
+
+  .play-controls {
+    bottom: 4.6vw; } }
+@media (max-width: 678px) {
+  .battle-tile {
+    width: 7.1vw;
+    height: 6vw; }
+
+  .sprite {
+    max-height: 5vw; }
+
+  .team-info {
+    visibility: hidden; }
+
+  .team-name {
+    font-size: 9px; }
+
+  .play-controls {
+    width: 26%; }
+
+  .lifebar {
+    width: 27%; }
+
+  .range-bar {
+    bottom: 2vw; }
+
+  .indicator {
+    font-size: 2.5vw;
+    margin: 11px -2px; }
+
+  .team-pic {
+    height: 150px;
+    float: none; }
+    .team-pic .role {
+      left: 30%;
+      padding-right: none;
+      display: block; }
+    .team-pic img {
+      -webkit-filter: none; } }

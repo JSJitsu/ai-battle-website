@@ -11,16 +11,6 @@ module.exports = function(grunt) {
         src: ['test/spec/ServerSpec.js']
       }
     },
-
-    // blanket: {
-    //   options: {
-
-    //   }, 
-    //   files: {
-
-    //   },
-    // },
-
     nodemon: {
       dev: {
         script: 'server.js'
@@ -46,29 +36,66 @@ module.exports = function(grunt) {
           noCache: true
         },
         files: {
-          './public/css/style.css': './public/scss/style.scss',
-          './public/css/freelancer.css': './public/scss/freelancer.scss',
-          './public/css/gamegrid.css': './public/scss/gamegrid.scss',
-          './public/css/game.css': './public/scss/game.scss'
+          './public/css/main.css': './public/scss/main.scss'
         }
+      }
+    },
+    concat: {
+       options:{
+        separator: ';'
+      },
+      js: {
+        src: ['public/js/*.js','public/js/stylehelpers/.*js', '!*.min.js'],
+        dest: 'public/dist/<%= pkg.name %>.js'
+      }
+    },
+    cssmin: {
+      minify: {
+        files: {
+         'public/dist/main.min.css' : ['public/css/main.css']
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        src: 'public/dist/<%= pkg.name %>.js',
+        dest: 'public/dist/<%= pkg.name %>.min.js'
+      }
+    },
+    clean: {
+      build: {
+        src: ['public/dist/<%= pkg.name %>.js']
       }
     },
     watch: {
       files: [
-        './public/scss/*.scss'
+        './public/scss/*.scss',
+        './public/js/*.js',
+        './public/js/stylehelpers/*.js',
+        './public/css/*.css'
       ],
       tasks: [
-        'sass'
+        'sass',
+        'concat',
+        'uglify',
+        'cssmin',
+        'clean'
       ] 
     }
   });
 
+  
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   // grunt.loadNpmTasks('grunt-blanket');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+
 
   // grunt.registerTask('server-dev', function (target) {
   //   // Running nodejs in a different process and displaying output on the main console
@@ -96,7 +123,7 @@ module.exports = function(grunt) {
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', []);
+  grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
 
 
   // grunt.registerTask('upload', function(n) {
