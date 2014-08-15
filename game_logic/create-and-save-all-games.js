@@ -1,9 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./game_classes/Game.js');
-var heroCommunicator = require('./hero-communicator.js');
-var secrets = require('./secrets.js');
-var postToServerFunctions = require('./docker/post-to-server-functions.js')
+var secrets = require('../secrets.js');
+var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js')
 
 var createAndSaveAllGames = function(users, mongoData) {
   var infoObject = setUpAllGames(users);
@@ -154,7 +153,7 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
 
       console.log('User is: ' + activeHero.name);
 
-      return postToServerFunctions.postGameData(port, game)
+      return communicateWithContainers.postGameData(port, game)
 
     //Then move the active hero in that direction
     }).then(function(direction) {

@@ -61,26 +61,7 @@ var move = function(gameData, helpers) {
 };
 */
 // Balanced
-// var move = function(gameData, helpers) {
-//   // Here, we ask if your hero's health is below 50
-//   if (gameData.activeHero().health <= 50){
-//     // If it is, head towards the nearest health well
-//     helpers.findNearestHealthWell(gameData);
-//   } else {
-//     // Otherwise, we want to know what's closer: a mine or an enemy
-//     var distanceToDiamondMine = helpers.findNearestDiamondMine(gameData).distance;
-//     var distanceToEnemy = helpers.findNearestEnemyWithLowHealth(gameData, gameData.activeHero().health).distance;
-//     if (distanceToDiamondMine <= distanceToEnemy){
-//       // If the mine is closer, go mine some diamonds!!!
-//       return helpers.findNearestDiamondMine(gameData);
-//     } else {
-//       // Otherwise, go attack the enemy - but only if that enemy has lower health than your hero
-//       return helpers.findNearestEnemyWithLowHealth(gameData, gameData.activeHero().health);
-//     }
-//   }
-// };
-
-var move = function() {
+var move = function(gameData, helpers) {
   return 'South';
 };
 // Export the move function here

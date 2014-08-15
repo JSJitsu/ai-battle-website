@@ -1,6 +1,7 @@
-var Game = require('./Game.js');
+var Game = require('./game_classes/Game.js');
 var fs = require('fs');
 
+//Creates a board from the map in the given file path
 var parser = function(mapFilePath){
   var buffer = fs.readFileSync(mapFilePath);
   map = buffer.toString('utf8');
