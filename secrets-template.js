@@ -9,3 +9,5 @@ secrets.apiUser = 'a github account handle here';
 secrets.apiPass = 'password to the github account here';
 
 secrets.rootDirectory = 'the local address of the root of this repo';
+
+secrets.map = 'mapnamewithoutfileextension';
