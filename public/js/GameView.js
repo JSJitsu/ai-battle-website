@@ -138,8 +138,6 @@ var GameView = Backbone.View.extend({
       }.bind(this)
     });
 
-    console.log($slider.width())
-
     //Allows users to change the turn with arrow keys
     $(document).keydown(function(e) {
       var turnAdjustment = 0;
@@ -231,7 +229,6 @@ var GameView = Backbone.View.extend({
     }  
   },
   checkWinner: function() {
-    console.log(winner)
     var winner = this.model.get('winningTeam'); 
     if(winner){
 
