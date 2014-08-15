@@ -3,13 +3,13 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 var spies = require('chai-spies');
-var Board = require('../../game_classes/Board.js');
-var DiamondMine = require('../../game_classes/DiamondMine.js');
-var Game = require('../../game_classes/Game.js');
-var HealthWell = require('../../game_classes/HealthWell.js');
-var Hero = require('../../game_classes/Hero.js');
-var Impassable = require('../../game_classes/Impassable.js');
-var Unoccupied = require('../../game_classes/Unoccupied.js');
+var Board = require('../../game_logic/game_classes/Board.js');
+var DiamondMine = require('../../game_logic/game_classes/DiamondMine.js');
+var Game = require('../../game_logic/game_classes/Game.js');
+var HealthWell = require('../../game_logic/game_classes/HealthWell.js');
+var Hero = require('../../game_logic/game_classes/Hero.js');
+var Impassable = require('../../game_logic/game_classes/Impassable.js');
+var Unoccupied = require('../../game_logic/game_classes/Unoccupied.js');
 chai.use(spies);
 
 describe('Game dependencies exist.', function () {

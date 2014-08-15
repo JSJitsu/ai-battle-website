@@ -1,13 +1,13 @@
-var request = require('./node_modules/request');
-var MongoClient = require('./node_modules/mongodb').MongoClient;
-var Q = require('./node_modules/q');
+var request = require('request');
+var MongoClient = require('mongodb').MongoClient;
+var Q = require('q');
 var fs = require('fs');
 var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
-var containerFunctions = require('./docker/container-functions.js');
-var createAndSaveAllGames = require('./game-runner.js')
+var createAndSaveAllGames = require('./game_logic/create-and-save-all-games.js')
 
-var postToServerFunctions = require('./docker/post-to-server-functions.js');
+var startStopContainers = require('./docker/container_interaction/start-stop-containers.js');
+var communicateWithContainers = require('./docker/container_interaction/communicate-with-containers.js');
 
 //Returns a promise that resolves when the database opens
 var openGameDatabase = function() {
@@ -50,14 +50,14 @@ var usersCodeRequest = function() {
         user.port = port;
 
         //spin up a container at that port (returns a promise)
-        return containerFunctions.spinUpContainer(user.port).then(function() {
-          var pathToHeroBrain = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_hero.js';
-          var pathToHelperFile = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_helpers.js';
+        return startStopContainers.spinUpContainer(user.port).then(function() {
+          var pathToHeroBrain = secrets.rootDirectory + '/user_code/hero/' + user.githubHandle + '_hero.js';
+          var pathToHelperFile = secrets.rootDirectory + '/user_code/helpers/' + user.githubHandle + '_helpers.js';
 
           //send the hero brain to the server
-          return postToServerFunctions.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
+          return communicateWithContainers.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
             //send the helper file to the server
-            return postToServerFunctions.postFile(user.port, pathToHelperFile, 'helper');
+            return communicateWithContainers.postFile(user.port, pathToHelperFile, 'helper');
           });
 
         });
@@ -75,13 +75,13 @@ var usersCodeRequest = function() {
         db.close();
         
         console.log('Stopping and removing all containers...');
-        return containerFunctions.shutDownAllContainers();
+        return startStopContainers.shutDownAllContainers();
 
       }).catch(function(err) {
         console.log('ERROR!');
         console.log(err);
         console.log('Shutting down all containers!');
-        containerFunctions.shutDownAllContainers().then(function() {
+        startStopContainers.shutDownAllContainers().then(function() {
           db.close();
         }).catch(function(err) {
           console.log(err);

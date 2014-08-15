@@ -3,9 +3,9 @@ var fs = require('fs');
 var Q = require('q');
 var unirest = require('unirest');
 
-var postToServerFunctions = {};
+var communicateWithContainersObj = {};
 
-postToServerFunctions.postGameData = function(port, gameData) {
+communicateWithContainersObj.postGameData = function(port, gameData) {
   var deferred = Q.defer();
 
   //The URL to post the file
@@ -28,7 +28,7 @@ postToServerFunctions.postGameData = function(port, gameData) {
 
 //Posts the given file to the given port (at localhost)
 //Returns a promise
-postToServerFunctions.postFile = function(port, filePath, fileType) {
+communicateWithContainersObj.postFile = function(port, filePath, fileType) {
   var deferred = Q.defer();
 
   //Make sure fileType is valid
@@ -66,4 +66,4 @@ postToServerFunctions.postFile = function(port, filePath, fileType) {
   return deferred.promise;
 };
 
-module.exports = postToServerFunctions;
+module.exports = communicateWithContainersObj;

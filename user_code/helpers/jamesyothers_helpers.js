@@ -1,3 +1,5 @@
+
+
 var helpers = {};
 
 // Returns false if the given coordinates are out of range
@@ -146,17 +148,17 @@ helpers.findNearestObjectDirectionAndDistance = function(fromTile, toTileType, b
 
 // Returns the nearest diamond mine or false, if there are no diamond mines
 helpers.findNearestDiamondMine = function(gameObj){
-  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'DiamondMine', gameObj.board).direction || false;
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero, 'DiamondMine', gameObj.board).direction || false;
 };
 
 // Returns the nearest health well or false, if there are no health wells
 helpers.findNearestHealthWell = function(gameObj){
-  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'HealthWell', gameObj.board).direction || false;
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero, 'HealthWell', gameObj.board).direction || false;
 };
 
 // Returns the nearest enemy or false, if there are no more enemies
 helpers.findNearestEnemy = function(gameObj){
-  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero(), 'Hero', gameObj.board).direction || false;
+  return helpers.findNearestObjectDirectionAndDistance(gameObj.activeHero, 'Hero', gameObj.board).direction || false;
 };
 
 // Returns the nearest enemy with a health level below the passed in number or false, if no such enemy exists
@@ -166,14 +168,16 @@ helpers.findNearestEnemyWithLowHealth = function(gameObj, healthLevel){
   var fn = helpers.findNearestObjectDirectionAndDistance;
 
   // While the enemy's health is greater than the specified amount...
-  while (fn(gameObj.activeHero(), 'Hero', gameObj.board).health > healthLevel){
+  while (fn(gameObj.activeHero, 'Hero', gameObj.board).health > healthLevel){
 
     // ...get the coordinates of that enemy and set the tile to null
-    var coords = fn(gameObj.activeHero(), 'Hero', gameObj.board).coords;
+    var coords = fn(gameObj.activeHero, 'Hero', gameObj.board).coords;
     gameObj.board.tiles[coords[0]][coords[1]] = null;
   }
 
   // Once we break out of the loop, we either return the direction to head or false
-  return fn(gameObj.activeHero(), 'Hero', gameObj.board).direction || false;
+  return fn(gameObj.activeHero, 'Hero', gameObj.board).direction || false;
 
 };
+
+module.exports = helpers;

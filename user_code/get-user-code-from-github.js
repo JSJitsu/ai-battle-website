@@ -1,6 +1,6 @@
-var request = require('../node_modules/request');
-var MongoClient = require('../node_modules/mongodb').MongoClient;
-var Q = require('../node_modules/q');
+var request = require('request');
+var MongoClient = require('mongodb').MongoClient;
+var Q = require('q');
 var fs = require('fs');
 var secrets = require('../secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
@@ -82,7 +82,8 @@ var usersCodeRequest = function(fileType) {
               return;
             }
 
-            var filePath = secrets.rootDirectory + '/user_code/' + user.githubHandle + '_' + fileType + '.js';
+            var filePath = secrets.rootDirectory + '/user_code/' + fileType 
+                + '/' + user.githubHandle + '_' + fileType + '.js';
             console.log(filePath);
 
 
