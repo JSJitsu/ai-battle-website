@@ -1,1 +1,1 @@
-sudo docker run -d -p $1:8080 heroBrainWrapper
+sudo docker run -d -p $1:8080 hero_brain_wrapper
