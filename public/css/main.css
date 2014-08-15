@@ -501,6 +501,11 @@ li {
   margin-left: auto;
   margin-top: 5px; }
 
+.userViewTabs {
+  width: 565px;
+  margin-left: auto;
+  margin-right: auto; }
+
 .list-group-item-highlighted {
   color: #3c763d;
   border-color: #A0CF8C;
