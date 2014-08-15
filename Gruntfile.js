@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       js: {
-        src: ['public/js/*.js','public/js/stylehelpers/.*js', '!*.min.js'],
+        src: ['public/js/stylehelpers/*.js', 'public/js/*.js'],
         dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
