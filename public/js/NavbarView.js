@@ -11,6 +11,7 @@ var NavbarView = Backbone.View.extend({
     var html;
     var githubHandle = this.model.get('githubHandle');
 
+    // if logged in
     if(githubHandle) {
       html = new EJS({url: '../ejs_templates/navbar'}).render(this.model);
     } else {
