@@ -20,7 +20,6 @@
 }
 
 .team-pic {
-  text-align: center;
   height: 125px;
   .h4 {
     line-height: 2px;
@@ -35,7 +34,7 @@
 
 
 .blur-pic {
-  -webkit-filter: blur(3px)
+  -webkit-filter: blur(3px) grayscale(70%) hue-rotate(120deg);
 }
 
 .role {
