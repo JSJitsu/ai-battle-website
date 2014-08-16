@@ -10,10 +10,10 @@
  */
 var cbpAnimatedHeader = (function() {
 
-	var docElem = document.documentElement,
-		header = document.querySelector( '.navbar-fixed-top' ),
-		didScroll = false,
-		changeHeaderOn = 300;
+	var docElem = document.documentElement;
+	var header = document.querySelector( '.navbar-fixed-top' );
+	var didScroll = false;
+	var changeHeaderOn = 300;
 
 	function init() {
 		window.addEventListener( 'scroll', function( event ) {
@@ -25,12 +25,19 @@ var cbpAnimatedHeader = (function() {
 	}
 
 	function scrollPage() {
+	  var options = document.querySelector('.user-options');
 		var sy = scrollY();
 		if ( sy >= changeHeaderOn ) {
 			classie.add( header, 'navbar-shrink' );
+			if(options){
+        classie.add( options, 'user-options-shrink');
+			}
 		}
 		else {
 			classie.remove( header, 'navbar-shrink' );
+			if(options){
+        classie.remove( options, 'user-options-shrink');
+			}
 		}
 		didScroll = false;
 	}
