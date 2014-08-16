@@ -432,6 +432,24 @@ body {
 .rules-list li {
   padding: 10px; }
 
+.user-options {
+  margin-top: 25px !important;
+  background: #2c3e50; }
+  .user-options:active {
+    background: none; }
+  .user-options li a {
+    color: #FFF; }
+    .user-options li a:hover {
+      background: none; }
+
+.user-options-shrink {
+  margin-top: 5px !important; }
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: #1a242f; }
+
 .lifetime-table {
   position: relative;
   top: 50px; }
@@ -458,24 +476,6 @@ body {
   width: 565px;
   margin-left: auto;
   margin-right: auto; }
-
-.user-options {
-  margin-top: 25px !important;
-  background: #2c3e50; }
-  .user-options:active {
-    background: none; }
-  .user-options li a {
-    color: #FFF; }
-    .user-options li a:hover {
-      background: none; }
-
-.user-options-shrink {
-  margin-top: 5px !important; }
-
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  background: #1a242f; }
 
 .outer {
   bottom: 37px;
