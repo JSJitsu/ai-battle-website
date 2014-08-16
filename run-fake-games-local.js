@@ -119,7 +119,7 @@ var runGame = function() {
           game.handleHeroTurn(direction);
 
           //Manually set the ID so Mongo doesn't just keep writing to the same document
-          game._id = game.turn + '|' + game.date;
+          game._id = '0' + game.turn + '|' + game.date;
 
           return resolveGameAndSaveTurnsToDB(game);
         }
