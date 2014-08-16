@@ -443,7 +443,6 @@ body {
     margin: 8% 8%; }
 
 .team-pic {
-  text-align: center;
   height: 125px; }
   .team-pic .h4 {
     line-height: 2px; }
@@ -455,7 +454,7 @@ body {
   font-weight: 700; }
 
 .blur-pic {
-  -webkit-filter: blur(3px); }
+  -webkit-filter: blur(3px) grayscale(70%) hue-rotate(120deg); }
 
 .role {
   position: relative;
@@ -660,11 +659,16 @@ li {
     width: 9vw; } }
 @media (max-width: 1200px) {
   .team-pic {
-    float: right; } }
+    float: right;
+    padding-right: 5%;
+    padding-left: 5%; } }
 @media (min-width: 1200px) {
   .team-info {
     top: 4vw;
     width: 9vw; }
+
+  .team-pic {
+    margin-left: 7.33333%; }
 
   .range-bar {
     bottom: 5vw; }

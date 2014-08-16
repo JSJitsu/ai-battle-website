@@ -158,18 +158,6 @@
   }
 }
 
-// @media (max-width: 1625px) {
-//   .battle-map {
-//     top: 4vw;
-//   }
-//   .play-controls {
-//     bottom: -1vw;
-//     width: 15%;
-//   }
-//   .range-bar {
-//     bottom: 0;
-//   }
-// }
 
 @media (max-width: 1199px) {
   .battle-map {
@@ -183,6 +171,7 @@
     bottom: 0;
   }
 }
+
 
 @media (max-width: 1098px){
   .lifebar {
@@ -204,6 +193,8 @@
 @media (max-width: 1200px){
   .team-pic {
     float: right;
+    padding-right: 5%;
+    padding-left: 5%;
   }
 }
 
@@ -211,6 +202,9 @@
    .team-info {
     top: 4vw;
     width: 9vw;
+  }
+  .team-pic {
+    margin-left: 7.333333%;
   }
   .range-bar{
     bottom: 5vw;
