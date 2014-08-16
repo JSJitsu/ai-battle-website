@@ -1,19 +1,47 @@
-
-.list-group-item-highlighted {
-  color: #3c763d;
-  border-color: #A0CF8C;
-  background-color: #A0CF8C;
+.outer {
+  bottom: 37px;
+  position: relative;
 }
 
+.messages {
+  margin: -38px auto;
+  width: 500px;
+  position: relative;
+  font-size: 21px;
+  color: dimgrey;
+  top: 14px;
+}
 
-#ex1Slider .slider-selection {
-  background: #BABABA;
+.team-info {
+  top: 4vw;
+  width: 16vw;
+  position: absolute;
+}
+
+.diamond-display {
+  max-height: 2vw;
+}
+
+.t-blue {
+  right: 0;
+}
+
+.t-yellow {
+  left: 0;
+}
+
+.team-name {
+  font-size: 16px;
+}
+
+.dead-info {
+  color: red; 
 }
 
 .range-bar {
-  margin: 3px auto;
-  width: 45%;
-  bottom: 3vh;
+  margin: 0 auto;
+  width: 43%;
+  bottom: 6vw;
 }
 
 .range-handle {
@@ -30,33 +58,15 @@
   border-radius: 0; 
 }
 
-.messages {
-  margin: -28px auto;
-  height: 20px;
-  width: 500px;
-  top: -6px;
+.play-controls {
   position: relative;
-  font-size: 20px;
-  color: dimgrey;
-}
-
-.team-info-y {
-  float: right;
-  width: 112px;
-}
-
-.team-info-b {
-  float: left;
-  right: 4%;
-  position: relative;
-  width: 112px;
-}
-
-
-.turn-content {
-  color: #2c3e50 !important;
-}
-
-.dead-info {
-  color: red; 
+  border: solid 5px white;
+  border-radius: 15px;
+  width: 10%;
+  bottom: 5.6vw;
+  margin: 0 auto;
+  .glyphicon {
+    font-size: 2em;
+    margin: 8% 8%; 
+  }
 }
