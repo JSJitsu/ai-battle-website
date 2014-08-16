@@ -43,17 +43,23 @@ communicateWithContainersObj.postFile = function(port, filePath, fileType) {
         var url = 'http://0.0.0.0:' + port.toString() + '/' + fileType + 'FilesHere';
 
         //Post the file to the given port
-        var r = request.post(url, function(error, response) {
-          if (error) {
-            deferred.reject(new Error(error));
-          } else {
-            deferred.resolve(response.body);
-          }
-        });
 
-        //Append the file so it gets posted
-        var form = r.form();
-        form.append(fileType, fs.createReadStream(filePath));
+        //The set timeout is only necessary because we need to give
+        //the docker containers time to start their servers...this is
+        //a VERY hacky solution, but it's a good stop-gap for now.
+        setTimeout(function() {
+          var r = request.post(url, function(error, response) {
+            if (error) {
+              deferred.reject(new Error(error));
+            } else {
+              deferred.resolve(response.body);
+            }
+          });
+
+          //Append the file so it gets posted
+          var form = r.form();
+          form.append(fileType, fs.createReadStream(filePath));
+        }, 5000);
 
       } else {
         deferred.resolve('No file found...file not transferred');
