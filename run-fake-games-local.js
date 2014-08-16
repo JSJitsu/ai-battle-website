@@ -1,10 +1,9 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var Game = require('./game_classes/Game.js');
-var heroCommunicator = require('./hero-communicator-previous.js');
+var Game = require('./game_logic/game_classes/Game.js');
 var secrets = require('./secrets.js');
 
-var mongoConnectionURL = secrets.mongoKey;
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -45,14 +44,14 @@ var runGame = function() {
   var boardSize = 12;
   var game = new Game(boardSize);
 
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'forrestbthomas', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
-  game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'miner', 0);
+  for (var i=0; i<12; i++) {
+    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'random', 0)) {
+      //Loops until each hero is successfully added
+    }
+  }
 
-  for (var i=0; i<5; i++) {
-    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'coward', 1)) {
+  for (var i=0; i<12; i++) {
+    while (!game.addHero(randomNumber(boardSize), randomNumber(boardSize), 'random', 1)) {
       //Loops until each hero is successfully added
     }
   }
@@ -104,7 +103,8 @@ var runGame = function() {
         var activeHero = game.activeHero;
 
         //Get the direction the currently active hero wants to move
-        return heroCommunicator.getNextMove(activeHero, game);
+        var choices = ['North', 'South', 'East', 'West'];
+        return choices[Math.floor(Math.random()*4)];
 
       //Then move the active hero in that direction
       }).then(function(direction) {
