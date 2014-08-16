@@ -1,5 +1,6 @@
 $(document).on('ready', function(){
-  
+  if($('.user-options')){
+    $('.user-options').remove()}
   $('.team-pic').hover(function(){
     $(this).find('.role').fadeIn();
     $(this).find('img').toggleClass('blur-pic');

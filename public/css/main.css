@@ -505,6 +505,24 @@ li {
   margin-left: auto;
   margin-right: auto; }
 
+.user-options {
+  margin-top: 25px !important;
+  background: #2c3e50; }
+  .user-options:active {
+    background: none; }
+  .user-options li a {
+    color: #FFF; }
+    .user-options li a:hover {
+      background: none; }
+
+.user-options-shrink {
+  margin-top: 5px !important; }
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: #1a242f; }
+
 .list-group-item-highlighted {
   color: #3c763d;
   border-color: #A0CF8C;
@@ -668,7 +686,7 @@ li {
     width: 9vw; }
 
   .team-pic {
-    margin-left: 7.33333%; }
+    margin-left: 7.333333%; }
 
   .range-bar {
     bottom: 5vw; }
