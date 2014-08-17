@@ -2,18 +2,24 @@
   bottom: 37px;
   position: relative;
 }
+.turn{
+  font-size: 2rem;
+  left: 27%;
+  bottom: 19%;
+  position: absolute;
+}
 
 .messages {
-  margin: -38px auto;
-  width: 500px;
-  position: relative;
+  width: auto;
+  position: absolute;
   font-size: 21px;
-  color: dimgrey;
+  color: #b80808;
   top: 14px;
+  left: 42%;
 }
 
 .team-info {
-  top: 4vw;
+  top: 0;
   width: 16vw;
   position: absolute;
 }
