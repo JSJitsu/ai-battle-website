@@ -73,7 +73,7 @@ var runGame = function() {
   game.date = date;
 
   //Manually set the ID so Mongo doesn't just keep writing to the same document
-  game._id = game.turn + '|' + date;
+  game._id = '0' + '|' + game.turn + '|' + date;
 
   //Open up the database connection
   var openDatabasePromise = openGameDatabase();
@@ -119,7 +119,7 @@ var runGame = function() {
           game.handleHeroTurn(direction);
 
           //Manually set the ID so Mongo doesn't just keep writing to the same document
-          game._id = '0' + game.turn + '|' + game.date;
+          game._id = '0' + '|' + game.turn + '|' + game.date;
 
           return resolveGameAndSaveTurnsToDB(game);
         }
