@@ -10,6 +10,7 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 // Connect to mongo
 var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -72,10 +73,6 @@ var router = express.Router();
 var getDateString = function(dayOffset) {
   if (dayOffset === undefined) {
     dayOffset = 0;
-  }
-  if (productionMode === 'production') {
-    //Server is 7 hours ahead
-    dayOffset -= 7/24;
   }
   var jsDate = new Date((new Date()).getTime() + dayOffset*24*60*60*1000);
   var result = (jsDate.getMonth() + 1).toString();
