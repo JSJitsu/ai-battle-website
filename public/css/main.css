@@ -487,6 +487,9 @@ body {
   bottom: 19%;
   position: absolute; }
 
+.score-info {
+  padding: 4px; }
+
 .messages {
   width: auto;
   position: absolute;
@@ -510,7 +513,7 @@ body {
   left: 0; }
 
 .team-name {
-  font-size: 16px; }
+  font-size: 14px; }
 
 .dead-info {
   color: red; }
@@ -631,36 +634,55 @@ body {
 
 @media (min-width: 1200px) {
   .team-info {
-    top: 4vw;
+    top: 0vw;
     width: 9vw; }
 
   .team-pic {
     margin-left: 7.333333%; }
 
   .range-bar {
-    bottom: 5vw; }
+    bottom: 9.9vw; }
 
   .play-controls {
-    bottom: 4.6vw; } }
+    bottom: 8.6vw; }
+
+  .battle-map {
+    bottom: 4vw; } }
 @media (min-width: 1550px) {
   .team-info {
     top: 4vw;
-    width: 9vw; } }
-@media (max-width: 1199px) {
+    width: 9vw; }
+
   .battle-map {
-    top: 4vw; }
+    bottom: 3vw; }
 
   .play-controls {
-    bottom: -1vw;
+    bottom: 7.6vw; }
+
+  .range-bar {
+    bottom: 7.9vw; } }
+@media (max-width: 1199px) {
+  .battle-map {
+    bottom: 4.6vw; }
+
+  .play-controls {
+    bottom: 11vw;
     width: 15%; }
 
   .range-bar {
-    bottom: 0; }
+    bottom: 12.4vw; }
 
   .team-pic {
     float: right;
     padding-right: 5%;
-    padding-left: 5%; } }
+    padding-left: 5%; }
+
+  .turn {
+    bottom: none; }
+
+  .messages {
+    top: 1vw;
+    height: 3vw; } }
 @media (max-width: 1098px) {
   .lifebar {
     width: 31%;
@@ -677,7 +699,11 @@ body {
       padding-right: none;
       display: block; }
     .team-pic img {
-      -webkit-filter: none; } }
+      -webkit-filter: none; }
+
+  .messages {
+    top: 2vw;
+    left: 24%; } }
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;
@@ -703,8 +729,15 @@ body {
     width: 27%; }
 
   .range-bar {
-    bottom: 2vw; }
+    bottom: 15vw; }
 
   .indicator {
     font-size: 2.5vw;
-    margin: 11px -2px; } }
+    margin: 11px -2px; }
+
+  .turn {
+    bottom: 10vw;
+    left: 0; }
+
+  .messages {
+    top: 3vw; } }
