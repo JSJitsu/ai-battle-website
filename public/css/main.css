@@ -513,7 +513,7 @@ body {
   left: 0; }
 
 .team-name {
-  font-size: 14px; }
+  font-size: 13px; }
 
 .dead-info {
   color: red; }
@@ -567,7 +567,7 @@ body {
 
 .sprite {
   max-width: 100%;
-  max-height: 2.7vw;
+  max-height: 2.6vw;
   vertical-align: top; }
 
 .lifebar {
