@@ -24,6 +24,7 @@ var GameView = Backbone.View.extend({
     'click .restart-game': 'restartGame'
   },
   render: function(){
+    this.checkWinner();
     var $gameHtml = this.$el.find('.map');
     $gameHtml.html('');
     //Show game update messages
@@ -50,7 +51,6 @@ var GameView = Backbone.View.extend({
     $gameHtml.append(yellowTeamView.$el);
     $gameHtml.append(boardView.$el);
     $gameHtml.append(blueTeamView.$el);
-    this.checkWinner();
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 
@@ -230,14 +230,16 @@ var GameView = Backbone.View.extend({
   },
   checkWinner: function() {
     var winner = this.model.get('winningTeam'); 
-    if(winner){
-
-      if(winner === 0){
-        $('.winner-msg').text('Yellow Team Wins!');
-      }
-      else{
-        $('.winner-msg').text('Blue Team Wins!');
-      }
+    var message = $('.winner-msg')
+    console.log(winner === 0)
+    if(winner === 0){
+      message.text('Yellow Team Wins!');
+    }
+    else if(winner === 1){
+      message.text('Blue Team Wins!');
+    }
+    else{
+      message.text('See Todays Battle')
     }
   }
 });
