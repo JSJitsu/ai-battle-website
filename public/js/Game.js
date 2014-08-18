@@ -7,7 +7,6 @@ var Game = Backbone.Model.extend({
   },
   
   parse: function(response) {
-    console.log(response)
     this.set('turn', response.turn);
     this.set('maxTurn', response.maxTurn);
     this.set('moveMessages', response.moveMessage);

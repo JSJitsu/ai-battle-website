@@ -17,11 +17,8 @@ var HeroView = Backbone.View.extend({
     } else{
       health =  health + 'HP';
     }
-    var heroName = '<span class="hero-header h-i' + heroId + '">(id: ' + heroId + ') ' + name + ' </span>' + '<span class="health-info h-i' + heroId + '">' + health + '</span>';
-    var divider = '<div class="divider"</div>'
-    this.$el.append(heroName + divider);
-    if(currentTurn === turn - 1 && turn !== 1){
-      // this.$el.removeClass('list-group-item-info').addClass('list-group-item-highlighted');
-    }
+    var heroName = '<div class="hero-header h-i' + heroId + '">(id:' + heroId + ') ' + name + ' </div>'
+    var health = '<div class="health-info h-i' + heroId + '">' + health + '</div>';
+    this.$el.append(heroName + health);
   }
 });
