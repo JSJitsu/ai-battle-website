@@ -207,8 +207,6 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
       }
     ]).then(function() {
       console.log('Game turns updated!');
-      console.log(game.maxTurn);
-      console.log(game.heroes.length);
       console.log('Updating all user stats...');
       return Q.all(game.heroes.map(function(hero) {
         return saveUserStats(mongoData, hero);

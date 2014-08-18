@@ -3,7 +3,6 @@ var Q = require('q');
 //Saves the user stats to the database
 //Returns a promise that resolves to the user object
 module.exports = function(mongoData, hero) {
-  console.log('got here1');
   var userCollection = mongoData.userCollection;
   var deferred = Q.defer();
 
@@ -54,7 +53,7 @@ module.exports = function(mongoData, hero) {
       {
         '_id': user._id
       }, user, {
-        upsert:true
+        upsert: true
       }
     ]);
   });
