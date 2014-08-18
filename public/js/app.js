@@ -10,3 +10,6 @@ $('#join').append(app.userView.$el);
 
 app.navbarView = new NavbarView({ model: app.user });
 $('.navbar').append(app.navbarView.$el);
+
+app.rulesView = new RulesView({ model: app.user });
+$('#rules').append(app.rulesView.$el);
