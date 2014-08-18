@@ -641,15 +641,9 @@ var Game = Backbone.Model.extend({
     if(this.viewing === "rules") {
       html = new EJS({url: '/ejs_templates/rules'}).render(this.model);
     } else if (this.viewing === "brains") {
-<<<<<<< HEAD
       html = new EJS({url: '/ejs_templates/brains'}).render(this.model);
     }  else if (this.viewing === "improve") {
       html = new EJS({url: '/ejs_templates/improve'}).render(this.model);
-=======
-      // html = new EJS({url: '/ejs_templates/brains'}).render(this.model);
-    }  else if (this.viewing === "improve") {
-      // html = new EJS({url: '/ejs_templates/improve'}).render(this.model);
->>>>>>> center tabs in rules view
     }
     this.$el.html(html);
   }
