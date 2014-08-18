@@ -230,16 +230,13 @@ var GameView = Backbone.View.extend({
   },
   checkWinner: function() {
     var winner = this.model.get('winningTeam'); 
-    var message = $('.winner-msg')
-    console.log(winner === 0)
-    if(winner === 0){
+    var message = $('.winner-msg');
+    if (winner === 0) {
       message.text('Yellow Team Wins!');
-    }
-    else if(winner === 1){
+    } else if (winner === 1) {
       message.text('Blue Team Wins!');
-    }
-    else{
-      message.text('See Todays Battle')
+    } else {
+      message.text('See Today\'s Battle')
     }
   }
 });
