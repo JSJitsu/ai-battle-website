@@ -250,6 +250,11 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] =
         new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
 
+    //Check whether the hero robbed a grave, if so give credit
+    if (tile.subType === 'Bones') {
+      hero.gravesRobbed++;
+    }
+
     // Update hero location (in hero)
     hero.distanceFromTop = tile.distanceFromTop;
     hero.distanceFromLeft = tile.distanceFromLeft;
