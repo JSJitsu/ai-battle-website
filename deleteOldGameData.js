@@ -26,7 +26,10 @@ var openGameDatabase = function() {
 };
 
 // delete all game data information with date strings less than current
-module.exports = function() {
+module.exports = function(enteredDate) {
+
+  // if no date passed in use the current date
+  var dateDeleteBefore = enteredDate || currentDateString;
 
   // opens connection to mongo database
   var openDatabasePromise = openGameDatabase();
@@ -37,7 +40,7 @@ module.exports = function() {
     var db = mongoData.db;
       
       // remove all data with date less than current
-      gameDataCollection.remove({date: { $lt: currentDateString}}, function(err, removed) {
+      gameDataCollection.remove({date: { $lt: dateDeleteBefore}}, function(err, removed) {
         // error handling
         if (err) {
           console.log('err: ', err);
