@@ -282,11 +282,6 @@ footer .footer-below {
   padding: 25px 0;
   background-color: #233140; }
 
-.btn-social {
-  width: 40%;
-  text-align: center !important;
-  margin: auto; }
-
 .btn:focus,
 .btn:active,
 .btn.active {
@@ -445,6 +440,13 @@ body {
     color: #FFF; }
     .user-options li a:hover {
       background: none; }
+
+.btn-social {
+  width: 12vw;
+  text-align: center !important;
+  margin: auto; }
+  .btn-social .fa-github {
+    border-right: none; }
 
 .user-options-shrink {
   margin-top: 5px !important; }

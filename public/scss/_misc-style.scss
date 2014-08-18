@@ -30,6 +30,15 @@
   }
 }
 
+.btn-social {
+  width: 12vw;
+  text-align: center !important;
+  margin: auto;
+  .fa-github {
+    border-right: none;
+  }
+}
+
 .user-options-shrink {
   margin-top: 5px !important;
 }
