@@ -62,6 +62,12 @@ app.get('/ejs_templates/navbarNotLoggedIn', function(req, res) {
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/navbarNotLoggedIn.ejs'));
 });
 
+app.get('/ejs_templates/rules', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/rules.ejs'));
+});
+
 // Add github authentication
 OAuthGithub(app, mongoConnectionURL);
 
