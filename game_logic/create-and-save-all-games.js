@@ -2,8 +2,9 @@ var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var Game = require('./game_classes/Game.js');
 var secrets = require('../secrets.js');
-var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js')
-var createGameFromMap = require('./create-game-from-map.js')
+var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
+var createGameFromMap = require('./create-game-from-map.js');
+var saveUserStats = require('./save-user-stats.js')
 
 var createAndSaveAllGames = function(users, mongoData) {
   var infoObject = setUpAllGames(users);
@@ -164,6 +165,7 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
       //If game has ended, stop looping and set the max turn
       if (game.ended) {
         maxTurn = game.maxTurn;
+        return game;
 
       //Otherwise, continue with next turn and save that turn
       } else {
@@ -188,10 +190,10 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
 
   //Updates the game turn objects to have the correct maxTurn
   //This is necessary for the front end to know the total # of turns
-  return saveGameData.then(function() {
+  return saveGameData.then(function(game) {
     console.log('Game done, updating maxTurn for each turn...');
     console.log(game.maxTurn);
-    Q.npost(mongoCollection, 'update', [
+    return Q.npost(mongoCollection, 'update', [
       {
         date: game.date
       },
@@ -205,6 +207,10 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
       }
     ]).then(function() {
       console.log('Game turns updated!');
+      console.log('Updating all user stats...');
+      return Q.all(game.heroes.map(function(hero) {
+        return saveUserStats(mongoData, hero);
+      }));
     });
   });
 }

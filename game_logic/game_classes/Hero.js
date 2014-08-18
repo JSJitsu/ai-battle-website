@@ -8,6 +8,7 @@ var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
   // Mines
   this.minesOwned = {};
   this.mineCount = 0;
+  this.minesCaptured = 0;
 
   // Health
   this.health = 100;
@@ -18,6 +19,11 @@ var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
   this.damageDone = 0;
   this.heroesKilled = [];
   this.lastActiveTurn = 0;
+  this.gravesRobbed = 0;
+  this.healthRecovered = 0;
+
+  // Results
+  this.won = false;
 
   // General
   this.type = 'Hero';
@@ -54,10 +60,15 @@ Hero.prototype.takeDamage = function(amount) {
 
 // Handles any situation in which the hero heals damage
 Hero.prototype.healDamage = function(amount) {
+  var startingHealth = this.health;
+
   this.health += amount;
   if (this.health > 100) {
     this.health = 100;
   }
+
+  //Stores stats
+  this.healthRecovered += this.health - startingHealth;
 };
 
 // Take control of a diamond mine
@@ -73,6 +84,7 @@ Hero.prototype.captureMine = function(diamondMine, healthCost) {
       //(only stores id to prevent circular logic when saving to Mongo)
       this.minesOwned[diamondMine.id] = diamondMine.id;
       this.mineCount++;
+      this.minesCaptured++;
 
       //Switch the diamond mine's owner to be this hero
       diamondMine.updateOwner(this);

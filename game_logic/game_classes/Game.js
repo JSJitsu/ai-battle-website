@@ -210,11 +210,24 @@ Game.prototype.handleHeroTurn = function(direction) {
     this.winningTeam = 1;
     this.maxTurn = this.turn;
     this.ended = true;
+
   //Team 1 are all dead
   } else if (this._teamIsDead(this.teams[1])) {
     this.winningTeam = 0;
     this.maxTurn = this.turn;
     this.ended = true;
+  }
+
+  //Save the win or loss directly on the hero objects
+  if (this.ended) {
+    for (var i=0; i<this.heroes.length; i++) {
+      var hero = this.heroes[i];
+      if (hero.team === this.winningTeam) {
+        hero.won = true;
+      } else {
+        hero.won = false;
+      }
+    }
   }
 
 };
@@ -249,6 +262,11 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // Make the soon-to-be vacated tile "unoccupied"
     this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] =
         new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
+
+    //Check whether the hero robbed a grave, if so give credit
+    if (tile.subType === 'Bones') {
+      hero.gravesRobbed++;
+    }
 
     // Update hero location (in hero)
     hero.distanceFromTop = tile.distanceFromTop;
