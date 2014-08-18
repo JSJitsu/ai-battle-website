@@ -437,6 +437,11 @@ body {
   width: 7vw;
   margin-bottom: -5px;
   background-color: #2c3e50 !important; }
+  .submitRepo:hover {
+    color: #18bc9c; }
+
+#inputRepo {
+  width: 23vw; }
 
 .user-options {
   margin-top: 25px !important;
@@ -495,6 +500,10 @@ body {
   margin-left: auto;
   margin-right: auto; }
 
+.form-control-feedback {
+  color: #06C20A !important;
+  margin-top: 5px; }
+
 .outer {
   bottom: 37px;
   position: relative; }
@@ -518,7 +527,7 @@ body {
 
 .team-info {
   top: 0;
-  width: 10vw;
+  width: 16vw;
   position: absolute; }
 
 .diamond-display {
