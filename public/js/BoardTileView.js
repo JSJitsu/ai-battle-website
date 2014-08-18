@@ -13,17 +13,6 @@ var BoardTileView = Backbone.View.extend({
     var type = this.model.get('type');
     var teamId = this.model.get('team');
     if (subType !== 'Unoccupied') {
-      // var natureObjects = function(){
-      //   var objects = [
-      //     '../img/oak.png', 
-      //     '../img/spruce.png', 
-      //     '../img/tree2.png', 
-      //     '../img/tree4.png'
-      //   ];
-      //   var randomObj = Math.floor(Math.random() * objects.length);
-      //   return objects[randomObj];
-
-      // };
       var assets = {
         Tree: '../img/tree.png',
         Adventurer: '../img/bkknight.png',
@@ -46,7 +35,7 @@ var BoardTileView = Backbone.View.extend({
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
           this.$('.sprite').addClass('current-turn');
         }
-        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="sprite">';
+        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="highlightedCurrentUser sprite">';
         
         html += '<span class="indicator ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
         html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
