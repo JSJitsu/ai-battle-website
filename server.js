@@ -20,6 +20,7 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
+// must serve up ejs files individually for Azure to accept in deployment
 app.get('/ejs_templates/notLoggedIn', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -66,6 +67,18 @@ app.get('/ejs_templates/rules', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/rules.ejs'));
+});
+
+app.get('/ejs_templates/brains', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/brains.ejs'));
+});
+
+app.get('/ejs_templates/improve', function(req, res) {
+  // file server
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/improve.ejs'));
 });
 
 // Add github authentication
