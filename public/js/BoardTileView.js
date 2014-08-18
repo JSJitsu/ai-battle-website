@@ -42,7 +42,7 @@ var BoardTileView = Backbone.View.extend({
         var heroId = this.model.get('battleId');
         var HP = this.model.get('health');
         var gameTurn = this.model.get('gameTurn');
-        var lastActiveTurn = this.model.get('lastActiveTurn')
+        var lastActiveTurn = this.model.get('lastActiveTurn');
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
           this.$('.sprite').addClass('current-turn');
         }

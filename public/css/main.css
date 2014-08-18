@@ -282,11 +282,6 @@ footer .footer-below {
   padding: 25px 0;
   background-color: #233140; }
 
-.btn-social {
-  width: 40%;
-  text-align: center !important;
-  margin: auto; }
-
 .btn:focus,
 .btn:active,
 .btn.active {
@@ -423,14 +418,25 @@ body {
 
   .collapse.in {
     display: block !important; } }
-.rules {
+.info-header {
   font-size: 18px;
   text-transform: uppercase;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 700; }
+  font-weight: 700;
+  padding-bottom: 20px; }
 
-.rules-list li {
-  padding: 10px; }
+.info-list {
+  font-size: 17px;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700; }
+  .info-list li {
+    padding: 10px; }
+
+.submitRepo {
+  color: white;
+  width: 7vw;
+  margin-bottom: -5px;
+  background-color: #2c3e50 !important; }
 
 .user-options {
   margin-top: 25px !important;
@@ -441,6 +447,13 @@ body {
     color: #FFF; }
     .user-options li a:hover {
       background: none; }
+
+.btn-social {
+  width: 12vw;
+  text-align: center !important;
+  margin: auto; }
+  .btn-social .fa-github {
+    border-right: none; }
 
 .user-options-shrink {
   margin-top: 5px !important; }
@@ -500,7 +513,7 @@ body {
 
 .team-info {
   top: 0;
-  width: 16vw;
+  width: 10vw;
   position: absolute; }
 
 .diamond-display {
@@ -512,8 +525,8 @@ body {
 .t-yellow {
   left: 0; }
 
-.team-name {
-  font-size: 13px; }
+.stat-names {
+  word-spacing: 1.7rem; }
 
 .dead-info {
   color: red; }
@@ -635,7 +648,7 @@ body {
 @media (min-width: 1200px) {
   .team-info {
     top: 0vw;
-    width: 9vw; }
+    width: 10vw; }
 
   .team-pic {
     margin-left: 7.333333%; }
@@ -651,7 +664,7 @@ body {
 @media (min-width: 1550px) {
   .team-info {
     top: 4vw;
-    width: 9vw; }
+    width: 10vw; }
 
   .battle-map {
     bottom: 3vw; }

@@ -235,6 +235,7 @@ var GameView = Backbone.View.extend({
       message.text('Yellow Team Wins!');
     } else if (winner === 1) {
       message.text('Blue Team Wins!');
+
     } else {
       message.text('See Today\'s Battle')
     }
