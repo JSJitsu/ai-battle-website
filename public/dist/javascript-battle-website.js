@@ -604,7 +604,6 @@ var Game = Backbone.Model.extend({
 });;var RulesView = Backbone.View.extend({
   
   initialize: function(){
-<<<<<<< HEAD
     this.viewing = {};
     this.viewing = "rules";
     this.render();
@@ -642,24 +641,16 @@ var Game = Backbone.Model.extend({
     if(this.viewing === "rules") {
       html = new EJS({url: '/ejs_templates/rules'}).render(this.model);
     } else if (this.viewing === "brains") {
+<<<<<<< HEAD
       html = new EJS({url: '/ejs_templates/brains'}).render(this.model);
     }  else if (this.viewing === "improve") {
       html = new EJS({url: '/ejs_templates/improve'}).render(this.model);
-    }
 =======
-    this.render();
-
-
-
-
-
-  },
-
-
-
-  render: function(){
-    var html = new EJS({url: '/ejs_templates/rules'}).render(this.model);
->>>>>>> add rules backbone view
+      // html = new EJS({url: '/ejs_templates/brains'}).render(this.model);
+    }  else if (this.viewing === "improve") {
+      // html = new EJS({url: '/ejs_templates/improve'}).render(this.model);
+>>>>>>> center tabs in rules view
+    }
     this.$el.html(html);
   }
 
