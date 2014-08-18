@@ -22,6 +22,9 @@ var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
   this.gravesRobbed = 0;
   this.healthRecovered = 0;
 
+  // Results
+  this.won = false;
+
   // General
   this.type = 'Hero';
   if (team === 0) {
