@@ -425,11 +425,12 @@ body {
   font-weight: 700;
   padding-bottom: 20px; }
 
-.rules-list li {
-  padding: 10px;
+.info-list {
   font-size: 17px;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700; }
+  .info-list li {
+    padding: 10px; }
 
 .user-options {
   margin-top: 25px !important;
