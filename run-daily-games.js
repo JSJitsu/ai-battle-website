@@ -43,7 +43,9 @@ var usersCodeRequest = function() {
 
       //Get the docker containers and hero brains ready to roll
       Q.all(users.map(function(user) {
-
+        var pathToHeroBrain = secrets.rootDirectory + '/user_code/hero/' + user.githubHandle + '_hero.js';
+        var pathToHelperFile = secrets.rootDirectory + '/user_code/helpers/' + user.githubHandle + '_helpers.js';
+        
         //send the hero brain to the server in the container
         return communicateWithContainers.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
           //send the helper file to the server in the container
