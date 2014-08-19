@@ -15,6 +15,9 @@
   .battle-map {
     bottom: 4vw;
   }
+  .messages {
+    top: 1vw;
+  }
 }
 
 @media (min-width: 1550px){
@@ -52,10 +55,6 @@
   .turn {
     bottom: none;
   }
-  .messages {
-    top: 1vw;
-    height: 3vw;
-  }
 }
 
 @media (max-width: 1098px){
@@ -81,10 +80,6 @@
       -webkit-filter: none;
     }
   }
-  .messages {
-    top: 2vw;
-    left: 24%;
-  }
 }
 
 @media (max-width: 800px) {
@@ -96,6 +91,9 @@
 
 
 @media (max-width: 678px) {
+  .messages {
+    top: 3vw;
+  }
   .battle-tile {
     width: 7.1vw;
     height: 6vw
@@ -125,8 +123,5 @@
   .turn {
     bottom: 10vw;
     left: 0;
-  }
-  .messages {
-    top: 3vw;
   }
 }

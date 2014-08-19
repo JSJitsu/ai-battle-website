@@ -514,12 +514,12 @@ body {
   padding: 4px; }
 
 .messages {
-  width: auto;
   position: absolute;
+  top: 2vw;
+  width: 100%;
   font-size: 21px;
-  color: #b80808;
-  top: 14px;
-  left: 42%; }
+  color: white;
+  text-align: center; }
 
 .team-info {
   top: 0;
@@ -702,7 +702,10 @@ body {
     bottom: 8.6vw; }
 
   .battle-map {
-    bottom: 4vw; } }
+    bottom: 4vw; }
+
+  .messages {
+    top: 1vw; } }
 @media (min-width: 1550px) {
   .team-info {
     top: 4vw;
@@ -733,11 +736,7 @@ body {
     padding-left: 3%; }
 
   .turn {
-    bottom: none; }
-
-  .messages {
-    top: 1vw;
-    height: 3vw; } }
+    bottom: none; } }
 @media (max-width: 1098px) {
   .lifebar {
     width: 31%;
@@ -754,16 +753,15 @@ body {
       padding-right: none;
       display: block; }
     .portfolio-item img {
-      -webkit-filter: none; }
-
-  .messages {
-    top: 2vw;
-    left: 24%; } }
+      -webkit-filter: none; } }
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;
     height: 3.9vw; } }
 @media (max-width: 678px) {
+  .messages {
+    top: 3vw; }
+
   .battle-tile {
     width: 7.1vw;
     height: 6vw; }
@@ -792,7 +790,4 @@ body {
 
   .turn {
     bottom: 10vw;
-    left: 0; }
-
-  .messages {
-    top: 3vw; } }
+    left: 0; } }
