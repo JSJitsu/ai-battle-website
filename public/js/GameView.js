@@ -18,6 +18,7 @@ var GameView = Backbone.View.extend({
                       '<span class="restart-game glyphicon glyphicon-repeat">' +
                       '</span>' +
                     '</div>');
+    this.$el.append('<span class="turn"></span>');
   },
   events: {
     'click .play-pause-game': 'togglePlayGame',
@@ -51,6 +52,7 @@ var GameView = Backbone.View.extend({
     $gameHtml.append(yellowTeamView.$el);
     $gameHtml.append(boardView.$el);
     $gameHtml.append(blueTeamView.$el);
+    this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
   },
   updateTurn: function(turn) {
     this.model.updateTurn(turn); 

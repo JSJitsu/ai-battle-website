@@ -561,6 +561,7 @@ body {
 
 .play-controls {
   position: relative;
+  text-align: center;
   border: solid 5px white;
   border-radius: 15px;
   width: 10%;
@@ -628,7 +629,7 @@ body {
     width: 0;
     height: 0;
     border-width: 8px;
-    top: 14px;
+    top: 1vw;
     right: -3.8px;
     border-style: solid;
     border-color: red transparent transparent transparent; }
