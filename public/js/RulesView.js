@@ -2,7 +2,7 @@ var RulesView = Backbone.View.extend({
   
   initialize: function(){
     this.viewing = {};
-    this.viewing = "rules";
+    this.viewing = "general";
     this.render();
   },
 
