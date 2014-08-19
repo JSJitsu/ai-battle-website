@@ -1,10 +1,3 @@
-.team-pic {
-  height: 125px;
-  .h4 {
-    line-height: 2px;
-  }
-}
-
 .role {
   position: relative;
   display: none;
@@ -15,10 +8,6 @@
   margin: 0 auto;
 }
 
-.team { 
-  background: #18bc9c;
-  padding-bottom: 350px;
-}
 
 .team-title {
   color: white;
@@ -28,6 +17,31 @@
   padding: 100px;
 }
 
-.blur-pic {
-  -webkit-filter: blur(3px) grayscale(70%) hue-rotate(120deg);
+.img-team {
+  max-height: 201px;  
+}
+
+.engineer {
+  background: #2c3e50;
+  height: 61px;
+  line-height: 50px;
+  position: relative;
+  bottom: 10px;
+  width: 201px;
+  text-align: center;
+  border-bottom: 10px solid #2980b9;
+}
+
+.engineer-social {
+  background: #272727;
+  height: 52px;
+  line-height: 55px;
+  position: relative;
+  bottom: 20px;
+  width: 201px;
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.3);
+   i {
+    font-size: 23px;
+    margin: 0 44%;
+  }
 }

@@ -3,8 +3,8 @@
     top: 0vw;
     width: 10vw;
   }
-  .team-pic {
-    margin-left: 7.333333%;
+  .portfolio-item {
+    margin-left: 6%;
   }
   .range-bar{
     bottom: 9.9vw;
@@ -44,10 +44,10 @@
   .range-bar {
     bottom: 12.4vw;
   }
-  .team-pic {
+  .portfolio-item {
     float: left;
-    padding-right: 5%;
-    padding-left: 5%;
+    padding-right: 1%;
+    padding-left: 3%;
   }
   .turn {
     bottom: none;
@@ -69,9 +69,9 @@
 }
 
 @media (max-width: 991px) {
-  .team-pic {
-    height: 150px;
-    float: none;
+  .portfolio-item {
+    padding-right: 0%;
+    padding-left: 16%;
     .role{
       left: 30%;
       padding-right: none;
