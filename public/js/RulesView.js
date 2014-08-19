@@ -7,8 +7,8 @@ var RulesView = Backbone.View.extend({
   },
 
   events: {
+    'click .general': 'showBrains',
     'click .rules': 'showRules',
-    'click .brains': 'showBrains',
     'click .improve': 'showImprove'
   },
 
@@ -21,7 +21,7 @@ var RulesView = Backbone.View.extend({
   
    showBrains: function(event) {
     event.preventDefault();
-    this.viewing = "brains";
+    this.viewing = "general";
     this.render();
     $('.brains').tab('show');
   },
@@ -37,8 +37,8 @@ var RulesView = Backbone.View.extend({
     var html;
     if(this.viewing === "rules") {
       html = new EJS({url: '/ejs_templates/rules'}).render(this.model);
-    } else if (this.viewing === "brains") {
-      html = new EJS({url: '/ejs_templates/brains'}).render(this.model);
+    } else if (this.viewing === "general") {
+      html = new EJS({url: '/ejs_templates/general'}).render(this.model);
     }  else if (this.viewing === "improve") {
       html = new EJS({url: '/ejs_templates/improve'}).render(this.model);
     }
