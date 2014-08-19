@@ -599,7 +599,7 @@ var Game = Backbone.Model.extend({
   },
 
   events: {
-    'click .general': 'showBrains',
+    'click .general': 'showGeneral',
     'click .rules': 'showRules',
     'click .improve': 'showImprove'
   },
@@ -611,11 +611,11 @@ var Game = Backbone.Model.extend({
     $('.rules').tab('show');
   },
   
-   showBrains: function(event) {
+   showGeneral: function(event) {
     event.preventDefault();
     this.viewing = "general";
     this.render();
-    $('.brains').tab('show');
+    $('.general').tab('show');
   },
 
    showImprove: function(event) {
