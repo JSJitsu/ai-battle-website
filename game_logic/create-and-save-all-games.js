@@ -116,7 +116,8 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
 
   //Get date string for use in game ID (helpful saving uniquely to mongo db)
   var getDateString = function() {
-    var d = new Date();
+    var dayOffset = secrets.dayOffset;
+    var d = new Date((new Date()).getTime() + dayOffset*24*60*60*1000);
     var result = (d.getMonth() + 1).toString();
     result += '/' + d.getDate();
     result += '/' + d.getFullYear();
