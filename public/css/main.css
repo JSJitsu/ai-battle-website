@@ -423,9 +423,8 @@ body {
   padding-bottom: 20px; }
 
 .info-list {
-  font-size: 17px;
-  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 700; }
+  font-size: 15px;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif; }
   .info-list li {
     padding: 10px; }
 
