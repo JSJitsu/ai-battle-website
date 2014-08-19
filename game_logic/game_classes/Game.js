@@ -229,7 +229,6 @@ Game.prototype.handleHeroTurn = function(direction) {
       }
     }
   }
-
 };
 
 
