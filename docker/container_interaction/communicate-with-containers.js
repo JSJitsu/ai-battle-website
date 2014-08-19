@@ -16,9 +16,10 @@ communicateWithContainersObj.postGameData = function(port, gameData) {
 
   //Make the request
   var Request = unirest.post(url)
-      .headers({ 'Accept': 'application/json' })
+      .headers({ 'Accepts': 'application/json' })
+      .set('Content-Type', 'application/json')
       .timeout(maxWaitTime)
-      .send(gameData).end(function(response) {
+      .send(JSON.stringify(gameData)).end(function(response) {
     deferred.resolve(response.body);
   });
 
