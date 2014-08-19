@@ -5,6 +5,7 @@ module.exports = function(mongoConnectionUrl) {
 
   var UserSchema = mongoose.Schema({
     githubHandle: String,
+    port: Number,
     codeRepo: {
       type: String,
       default: 'hero-starter'
