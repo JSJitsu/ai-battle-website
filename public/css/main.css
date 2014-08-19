@@ -634,6 +634,7 @@ body {
     border-color: red transparent transparent transparent; }
 
 .indicator {
+  background: rgba(122, 122, 122, 0.8);
   font-size: 1vw;
   margin-left: -3px;
   position: absolute; }
