@@ -45,7 +45,7 @@ var setUpAllGames = function(users) {
   for (var gameIndex=0; gameIndex<numberOfGames; gameIndex++) {
     var game = createGameFromMap(secrets.rootDirectory + 
         '/game_logic/maps/' + secrets.map + '.txt');
-    game.maxTurn = 2000;
+    game.maxTurn = 1250;
     games.push(game);
 
     //Keeps track of which team to add the
