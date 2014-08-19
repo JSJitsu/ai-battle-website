@@ -63,7 +63,7 @@ var GameView = Backbone.View.extend({
             this.render();
             var currentUserHandle = userModel.get('githubHandle');
             if (currentUserHandle) {
-              this.$el.find('.current-user-' + currentUserHandle).addClass('highlightedCurrentUser');
+              this.$el.find('.current-user-' + currentUserHandle).parent().append('<span class="arrow"></span>');
             }
           }.bind(this),
           error: function(collection, response, options){

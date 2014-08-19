@@ -48,6 +48,27 @@
   -webkit-box-shadow: -1px 0px 2px #C0ACAC, 1px 0px 3px #C0ACAC, -1px 0px 10px #C0ACAC, 8px 4px 6px #290E0E;
 }
 
+.arrow {
+  position: absolute;
+  opacity: 0.7;
+  width: 0.6vw;
+  margin: -15px auto;
+  height: 1vw;
+  -webkit-transform: rotate(35deg);
+  background: red;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    top: 14px;
+    right: -3.8px;
+    border-style: solid;
+    border-color: red transparent transparent transparent;
+  }
+}
+
 .indicator {
   font-size: 1vw;
   margin-left: -3px;
@@ -60,9 +81,4 @@
 
 .team-blue {
   color: rgba(0, 61, 255, 0.79);
-}
-
-
-.highlightedCurrentUser {
-  opacity: 0.5;
 }
