@@ -69,10 +69,10 @@ app.get('/ejs_templates/rules', function(req, res) {
   res.end(fs.readFileSync(__dirname+'/public/ejs_templates/rules.ejs'));
 });
 
-app.get('/ejs_templates/brains', function(req, res) {
+app.get('/ejs_templates/general', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/brains.ejs'));
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/general.ejs'));
 });
 
 app.get('/ejs_templates/improve', function(req, res) {
