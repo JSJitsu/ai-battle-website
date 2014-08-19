@@ -6,8 +6,9 @@ var secrets = require('./secrets.js');
 var mongoConnectionURL = secrets.mongoKey;
 var createAndSaveAllGames = require('./game_logic/create-and-save-all-games.js')
 
-var startStopContainers = require('./docker/container_interaction/start-stop-containers.js');
 var communicateWithContainers = require('./docker/container_interaction/communicate-with-containers.js');
+
+//This script requires that all docker containers at the specified user ports are ALREADY running
 
 //Returns a promise that resolves when the database opens
 var openGameDatabase = function() {
@@ -40,27 +41,15 @@ var usersCodeRequest = function() {
         return;
       }
 
-      //The starting port
-      var port = 12499;
-
       //Get the docker containers and hero brains ready to roll
       Q.all(users.map(function(user) {
-        //assign a port to each
-        port++;
-        user.port = port;
 
-        //spin up a container at that port (returns a promise)
-        return startStopContainers.spinUpContainer(user.port).then(function() {
-          var pathToHeroBrain = secrets.rootDirectory + '/user_code/hero/' + user.githubHandle + '_hero.js';
-          var pathToHelperFile = secrets.rootDirectory + '/user_code/helpers/' + user.githubHandle + '_helpers.js';
-
-          //send the hero brain to the server
-          return communicateWithContainers.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
-            //send the helper file to the server
-            return communicateWithContainers.postFile(user.port, pathToHelperFile, 'helper');
-          });
-
+        //send the hero brain to the server in the container
+        return communicateWithContainers.postFile(user.port, pathToHeroBrain, 'hero').then(function() {
+          //send the helper file to the server in the container
+          return communicateWithContainers.postFile(user.port, pathToHelperFile, 'helper');
         });
+
       //Start the game
       })).then(function(value) {
         console.log(value);
@@ -73,20 +62,12 @@ var usersCodeRequest = function() {
         console.log('Game has finished successfully!');
         console.log('Closing database connection...');
         db.close();
-        
-        console.log('Stopping and removing all containers...');
-        return startStopContainers.shutDownAllContainers();
 
       }).catch(function(err) {
         console.log('ERROR!');
         console.log(err);
-        console.log('Shutting down all containers!');
-        startStopContainers.shutDownAllContainers().then(function() {
-          db.close();
-        }).catch(function(err) {
-          console.log(err);
-          db.close();
-        });
+        console.log('Closing db connection...');
+        db.close();
       });
     });
   }).catch(function(err) {
