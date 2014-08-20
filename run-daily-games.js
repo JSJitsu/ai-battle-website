@@ -32,8 +32,12 @@ var usersCodeRequest = function() {
     var userCollection = mongoData.userCollection;
     var db = mongoData.db;
 
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
+    //Get array of all users that have assigned ports
+    userCollection.find({ 
+      port: {
+        $gt: 12499
+      }
+    }).toArray(function(err, users) {
       if (err) {
         console.log('Error finding users!');
         console.log(err);
