@@ -107,11 +107,11 @@ var getDateString = function(dayOffset) {
 router.get('/gameData/:dayOffset/:turn', function(req, res){
   var gameNumber = '0';
   if (req.user) {
-    console.log('user signed in');
+    gameNumber = req.user.mostRecentGameNumber;
   }
   openMongoCollection.then(function(collection) {
     collection.find({
-      '_id':gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
+      '_id': gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
@@ -129,7 +129,7 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
 router.get('/gameData/:dayOffset/:turn/:gameNumber', function(req, res){
   openMongoCollection.then(function(collection) {
     collection.find({
-      '_id':req.params.gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
+      '_id': req.params.gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
