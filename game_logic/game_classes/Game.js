@@ -277,7 +277,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     this.board.tiles[hero.distanceFromTop][hero.distanceFromLeft] = hero;
 
   // If tile is a diamond mine, the mine is captured, but the hero stays put
-  } else if (tile.type === "DiamondMine") {
+  } else if (tile.type === 'DiamondMine') {
     var diamondMine = tile;
 
     // Hero attempts to capture mine
@@ -286,7 +286,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
       this.heroDied(hero);
-      this.moveMessage += ', tried to capture a diamond mine, but died.';
+      this.moveMessage += ', tried to capture a diamond mine, but died';
       return;
 
     // If he survives, he is now the owner of the mine
@@ -295,9 +295,22 @@ Game.prototype._handleHeroMove = function(hero, direction) {
       diamondMine.owner = hero;
     }
   // Running into a health well will heal a certain amount of damage
-  } else if (tile.type === "HealthWell") {
+  } else if (tile.type === 'HealthWell') {
     this.moveMessage += ', drank from a health well, and now feels MUCH better';
     hero.healDamage(HEALTH_WELL_HEAL_AMOUNT);
+  } else if (tile.type === 'Hero') {
+    var otherHero = tile;
+
+    // Running directly into an enemy hero will deal extra damage
+    if (otherHero.team !== hero.team) {
+      this.moveMessage += ', and stabbed ' + otherHero.name + ' for extra damage';
+      hero.damageDone += otherHero.takeDamage(HERO_FOCUSED_ATTACK_DAMAGE);
+
+    // Running directly into a friendly hero will give the friendly hero health
+    } else {
+      this.moveMessage += ', and healed ' + otherHero.name;
+      hero.healthGiven += otherHero.healDamage(HERO_HEAL_AMOUNT);
+    }
   }
 };
 

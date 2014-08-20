@@ -69,7 +69,11 @@ Hero.prototype.healDamage = function(amount) {
   }
 
   //Stores stats
-  this.healthRecovered += this.health - startingHealth;
+  var healthReceived = this.health - startingHealth;
+  this.healthRecovered += healthReceived;
+
+  //Returns the amount healed
+  return healthReceived;
 };
 
 // Take control of a diamond mine
