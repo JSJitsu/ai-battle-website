@@ -155,50 +155,7 @@ section.success {
   section.first {
     padding-top: 75px; } }
 
-#team .portfolio-item .portfolio-link {
-  display: block;
-  position: relative;
-  margin: 0 auto;
-  max-width: 400px; }
 
-#team .portfolio-item .portfolio-link .caption {
-  position: absolute;
-  width: 201px;
-  height: 100%;
-  opacity: 0;
-  background: rgba(0, 0, 0, 0.67);
-  -webkit-transition: all ease .5s;
-  -moz-transition: all ease .5s;
-  transition: all ease .5s; }
-
-#team .portfolio-item .portfolio-link .caption:hover {
-  opacity: 1; }
-
-#team .portfolio-item .portfolio-link .caption .caption-content {
-  position: absolute;
-  top: 17%;
-  width: 14vw;
-  height: 20px;
-  margin-top: -12px;
-  text-align: center;
-  color: #fff; 
-  p {
-    font-size: 25px;
-    position: relative;
-    width: 200px;
-    bottom: 20px;
-  }
-}
-
-#team .portfolio-item .portfolio-link .caption .caption-content i {
-  margin-top: -12px; }
-
-#team .portfolio-item .portfolio-link .caption .caption-content h3,
-#team .portfolio-item .portfolio-link .caption .caption-content h4 {
-  margin: 0; }
-
-#team * {
-  z-index: 2; }
 
 .btn-outline {
   margin-top: 15px;
