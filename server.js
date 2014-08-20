@@ -20,6 +20,55 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
+app.get('/api/leaderboard/lifetime/kills', function(req, res) {
+  var lifetimeKills = {
+    topUsers: [
+      {
+        name: 'James',
+        value: 10
+      }, 
+      {
+        name: 'James',
+        value: 9
+      }, 
+      {
+        name: 'James',
+        value: 8
+      }, 
+      {
+        name: 'James',
+        value: 7
+      }, 
+      {
+        name: 'James',
+        value: 6
+      }, 
+      {
+        name: 'James',
+        value: 5
+      }, 
+      {
+        name: 'James',
+        value: 4
+      }, 
+      {
+        name: 'James',
+        value: 3
+      }, 
+      {
+        name: 'James',
+        value: 2
+      }, 
+      {
+        name: 'James',
+        value: 1
+      }
+    ]
+  };
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(lifetimeKills));
+})
+
 // must serve up ejs files individually for Azure to accept in deployment
 app.get('/ejs_templates/notLoggedIn', function(req, res) {
   // file server
