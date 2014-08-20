@@ -1,22 +1,3 @@
-.role {
-  position: relative;
-  display: none;
-  width: 2vw;
-  height: 2vw;
-  padding-right: 5vw;
-  bottom: 80%;
-  margin: 0 auto;
-}
-
-
-.team-title {
-  color: white;
-}
-
-.team-container {
-  padding: 100px;
-}
-
 .img-team {
   max-height: 201px;  
 }
@@ -68,6 +49,7 @@
 
 .engineer {
   background: #2c3e50;
+  color: white;
   height: 61px;
   line-height: 50px;
   position: relative;
@@ -92,4 +74,9 @@
     position: relative;
     left: 10px;
   }
+}
+
+.centered {
+  display: block;
+text-align: -webkit-center;
 }
