@@ -387,7 +387,7 @@ body {
 
 .submitRepo {
   color: white;
-  width: 7vw;
+  width: 10rem;
   margin-bottom: -5px;
   background-color: #2c3e50 !important; }
   .submitRepo:hover {
@@ -407,7 +407,7 @@ body {
       background: none; }
 
 .btn-social {
-  width: 18rem;
+  width: 19rem;
   text-align: center !important;
   margin: auto; }
   .btn-social .fa-github {
@@ -428,10 +428,6 @@ body {
 .lifetime-table-header {
   font-weight: bold; }
 
-.settingsView {
-  margin-top: 35px;
-  margin-bottom: -65px; }
-
 .repoInput {
   margin-top: 40px; }
 
@@ -442,15 +438,6 @@ body {
   margin-right: auto;
   margin-left: auto;
   margin-top: 5px; }
-
-.userViewTabs {
-  width: 31vw;
-  margin: 0 auto; }
-
-.rulesViewTabs {
-  width: 28vw;
-  margin-left: auto;
-  margin-right: auto; }
 
 .form-control-feedback {
   color: #06C20A !important;
