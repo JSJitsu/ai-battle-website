@@ -602,21 +602,6 @@ body {
 .team-blue {
   color: rgba(0, 61, 255, 0.79); }
 
-.role {
-  position: relative;
-  display: none;
-  width: 2vw;
-  height: 2vw;
-  padding-right: 5vw;
-  bottom: 80%;
-  margin: 0 auto; }
-
-.team-title {
-  color: white; }
-
-.team-container {
-  padding: 100px; }
-
 .img-team {
   max-height: 201px; }
 
@@ -665,6 +650,7 @@ body {
 
 .engineer {
   background: #2c3e50;
+  color: white;
   height: 61px;
   line-height: 50px;
   position: relative;
@@ -687,6 +673,10 @@ body {
     letter-spacing: 23px;
     position: relative;
     left: 10px; }
+
+.centered {
+  display: block;
+  text-align: -webkit-center; }
 
 @media (min-width: 1200px) {
   .team-info {
@@ -747,14 +737,9 @@ body {
     margin: -3px; } }
 @media (max-width: 991px) {
   .portfolio-item {
-    padding-right: 0%;
-    padding-left: 34%; }
-    .portfolio-item .role {
-      left: 30%;
-      padding-right: none;
-      display: block; }
-    .portfolio-item img {
-      -webkit-filter: none; } }
+    float: left;
+    padding-right: 8%;
+    padding-left: 12%; } }
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;
@@ -762,6 +747,12 @@ body {
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
+
+  .portfolio-item {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: none; }
 
   .battle-tile {
     width: 7.1vw;
