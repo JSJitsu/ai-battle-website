@@ -133,6 +133,8 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
     //Manually set the ID so Mongo doesn't just keep writing to the same document
     game._id = gameIndex.toString() + '|' + game.turn.toString() + '|' + date;
 
+    //Save the number of the game
+    game.gameNumber = gameIndex;
 
     //Save the game to the database
     return Q.npost(mongoCollection, 'update', [
@@ -210,7 +212,7 @@ var runGamePromise = function(mongoData, game, gameIndex, userLookup) {
       console.log('Game turns updated!');
       console.log('Updating all user stats...');
       return Q.all(game.heroes.map(function(hero) {
-        return saveUserStats(mongoData, hero);
+        return saveUserStats(mongoData, hero, game.gameNumber);
       }));
     });
   });
