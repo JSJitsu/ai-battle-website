@@ -21,6 +21,7 @@ var Hero = function(distanceFromTop, distanceFromLeft, name, team) {
   this.lastActiveTurn = 0;
   this.gravesRobbed = 0;
   this.healthRecovered = 0;
+  this.healthGiven = 0;
 
   // Results
   this.won = false;

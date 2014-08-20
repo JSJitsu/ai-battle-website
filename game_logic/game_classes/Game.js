@@ -6,8 +6,10 @@ var Impassable = require('./Impassable.js');
 var HealthWell = require('./HealthWell.js');
 
 var DIAMOND_MINE_CAPTURE_DAMAGE = 20;
-var HERO_ATTACK_DAMAGE = 30;
-var HEALTH_WELL_HEAL_AMOUNT = 40;
+var HERO_ATTACK_DAMAGE = 20;
+var HERO_FOCUSED_ATTACK_DAMAGE = 10;
+var HEALTH_WELL_HEAL_AMOUNT = 30;
+var HERO_HEAL_AMOUNT = 40;
 
 var Game = function(n) {
   this.board = new Board(n);
