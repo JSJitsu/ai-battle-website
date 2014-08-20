@@ -2,12 +2,15 @@ var Q = require('q');
 
 //Saves the user stats to the database
 //Returns a promise that resolves to the user object
-module.exports = function(mongoData, hero) {
+module.exports = function(mongoData, hero, gameNumber) {
   var userCollection = mongoData.userCollection;
   var deferred = Q.defer();
 
   //Grab the user from the database
   return Q.ninvoke(userCollection, 'findOne', { githubHandle: hero.name }).then(function(user) {
+
+    //Update the number of the most recently played game
+    user.mostRecentGameNumber = gameNumber;
 
     //Update the user's lifetime and most recent stats
     user.lifetimeStats.kills += hero.heroesKilled.length;
