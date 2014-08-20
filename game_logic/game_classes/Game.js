@@ -298,6 +298,8 @@ Game.prototype._handleHeroMove = function(hero, direction) {
   } else if (tile.type === 'HealthWell') {
     this.moveMessage += ', drank from a health well, and now feels MUCH better';
     hero.healDamage(HEALTH_WELL_HEAL_AMOUNT);
+
+  // Running into another hero will either heal them (same team) or hurt them (opposing team)
   } else if (tile.type === 'Hero') {
     var otherHero = tile;
 
