@@ -66,6 +66,12 @@
   top: 50px;
 }
 
+.leaderboard-table {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
 .lifetime-table-header {
   font-weight: bold;
 }
@@ -84,7 +90,25 @@
   margin-top: 5px;
 }
 
+.userViewTabs {
+  width: 31vw;
+  margin: 0 auto;
+}
+
+.leaderViewTabs {
+  width: 31vw;
+  margin: 0 auto;
+  backhround-color: white;
+}
+
+.rulesViewTabs {
+  width: 28vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .form-control-feedback {
   color: #06C20A !important;
   margin-top: 5px;
 }
+
