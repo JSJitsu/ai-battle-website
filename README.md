@@ -11,7 +11,7 @@ Such is the power of javascript.
 
 ## Team
 
-&nbsp;&nbsp;&nbsp;&nbsp;Product Owner: Greg Trowbridge
+&nbsp;&nbsp;&nbsp;&nbsp;Product Owner, Tech Lead: Greg Trowbridge
 
 &nbsp;&nbsp;&nbsp;&nbsp;Scrum Master: Forrest Thomas
 
