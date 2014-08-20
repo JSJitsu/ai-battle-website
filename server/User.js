@@ -5,6 +5,10 @@ module.exports = function(mongoConnectionUrl) {
 
   var UserSchema = mongoose.Schema({
     githubHandle: String,
+    mostRecentGameNumber: {
+      type: Number,
+      default: 0
+    },
     port: Number,
     codeRepo: {
       type: String,
