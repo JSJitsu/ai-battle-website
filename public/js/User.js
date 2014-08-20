@@ -9,15 +9,21 @@ var User = Backbone.Model.extend({
 
   average: function() {
     var gamesPlayed = this.get('lifetimeStats').wins + this.get('lifetimeStats').losses;
+    var that = this;
+
+    var numbersForDisplay = function(prop) {
+      return (Number(parseFloat(that.get('lifetimeStats')[prop] / gamesPlayed).toFixed(2)) || 0) + ' per game';
+    };
+
     var aveStats = {
       gamesPlayed: gamesPlayed,
-      kills: (Number(parseFloat(this.get('lifetimeStats').kills / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').kills) + ' per game',
-      deaths: (Number(parseFloat(this.get('lifetimeStats').deaths / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').deaths) + ' per game',
-      damageDealt: (Number(parseFloat(this.get('lifetimeStats').damageDealt / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').damageDealt) + ' per game',
-      minesCaptured: (Number(parseFloat(this.get('lifetimeStats').minesCaptured / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').minesCaptured) + ' per game',
-      diamondsEarned: (Number(parseFloat(this.get('lifetimeStats').diamondsEarned / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').diamondsEarned) + ' per game',
-      healthRecovered: (Number(parseFloat(this.get('lifetimeStats').healthRecovered / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').healthRecovered) + ' per game',
-      gravesRobbed: (Number(parseFloat(this.get('lifetimeStats').gravesRobbed / gamesPlayed).toFixed(2)) || this.get('lifetimeStats').gravesRobbed) + ' per game'
+      kills: numbersForDisplay('kills'),
+      deaths: numbersForDisplay('deaths'),
+      damageDealt: numbersForDisplay('damageDealt'),
+      minesCaptured: numbersForDisplay('minesCaptured'),
+      diamondsEarned: numbersForDisplay('diamondsEarned'),
+      healthRecovered: numbersForDisplay('healthRecovered'),
+      gravesRobbed: numbersForDisplay('gravesRobbed')
     }; 
     return aveStats;
   }
