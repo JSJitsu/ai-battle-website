@@ -2,13 +2,22 @@ var LeaderboardView = Backbone.View.extend({
   tagName: 'div',
   initialize: function() {
     this.viewing = {
-      stat: 'kills',
-      type: 'lifetime'
+      stat: 'Kills',
+      type: 'Lifetime'
     };
 
-    var initialHtml = '<div class="dropdown"><ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"><li><a tabindex="-1" href="#">Kills</a></li></ul></div>';
+    var initialHtml = '<div class="row centered"><div class="dropdown">' + 
+         '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">' + 
+           'LeaderBoard Stats' + 
+           '<span class="caret"></span>' + 
+          '</button>' + 
+          '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">' +
+            '<li role="presentation"><a role="menuitem" href="#">Kills</a></li>' +
+          '</ul>' +
+        '</div>' + 
+      '</div>';
 
-    this.$el.html = initialHtml;
+    this.$el.append(initialHtml);
 
     //Tells the model to get data
     //for the specified stat and type
@@ -49,33 +58,34 @@ var LeaderboardView = Backbone.View.extend({
 
   render: function() {
     //Add dropdown value also
-    var tableHtml = '<table class="leaderboard table">';
+    var tableHtml = '<div class="container">' +
+  '<div class="row">' + 
+    '<ul class="nav nav-tabs leaderViewTabs" role="tablist">' +
+      // '<li><a href="#">Recent Leaders</a></li>' +
+      // '<li><a href="#">Lifetime Leaders</a></li>' +
+    '</ul>' +
+  '</div>' +
+    '<table class="table table-bordered table-responsive table-striped lifetime-table leaderboard-table">' +
+      '<tr class="lifetime-table-header">' +
+        '<td>Rank</td>' +
+        '<td>Name</td>' +
+        '<td>' + this.viewing.stat + '</td>' +
+      '</tr>';
     var topUsers = this.model.get('topUsers');
     for (var i=0; i<topUsers.length; i++) {
       var user = topUsers[i];
       tableHtml += '<tr>';
 
       //Add the rank of the user to table
-      tableHtml += '<td>' + i + '</td>';
+      tableHtml += '<td>' + (i + 1) + '</td>';
       tableHtml += '<td>' + user.name + '</td>';
       tableHtml += '<td>' + user.value + '</td>';
 
 
       tableHtml += '</tr>';
     }
-    tableHtml += '</table>'
+    tableHtml += '</table></div></div></div>';
     this.$el.append(tableHtml);
-    // this.$el.find();
-    // var dropdownValue = $('#dropdownMenu').text();
-    // console.log(dropdownValue);
-    // if (!dropdownValue) {
-    //   html = new EJS({url: '/ejs_templates/lifetimeLeaders'}).render(this.model.get('lifetimeKills'));
-    // }
-    // if (this.viewing === "lifetime" && dropdownValue === 'Kills') {
-    //   html = new EJS({url: '/ejs_templates/lifetimeLeaders'}).render(this.model.get('lifetimeKills'));
-    // } else if (this.viewing === 'recent' && dropdownValue === 'Kills') {
-    //   html = new EJS({url: '/ejs_templates/recentLeaders'}).render(this.model.get('recentKills'));
-    // }
   }
 
 });
