@@ -235,9 +235,9 @@ Game.prototype.handleHeroTurn = function(direction) {
 // Resolve diamond mine earnings
 Game.prototype._handleHeroEarnings = function(hero) {
   if (hero.mineCount > 0) {
-    this.diamondMessage = 'Hero #' + hero.id + ' got ' + hero.mineCount + ' diamonds from his mines';
+    this.diamondMessage = hero.name + ' got ' + hero.mineCount + ' diamonds from his mines';
   } else {
-    this.diamondMessage = 'Hero #' + hero.id + ' owns no mines, and got no diamonds';
+    this.diamondMessage = hero.name + ' owns no mines, and got no diamonds';
   }
   this.totalTeamDiamonds[hero.team] += hero.mineCount;
   hero.diamondsEarned += hero.mineCount;
@@ -245,7 +245,7 @@ Game.prototype._handleHeroEarnings = function(hero) {
 
 // Attempt to move hero in the direction indicated
 Game.prototype._handleHeroMove = function(hero, direction) {
-  this.moveMessage = 'Hero #' + hero.id + ' walked ' + direction;
+  this.moveMessage = hero.name + ' walked ' + direction;
 
   // Gets the tile at the location that the hero wants to go to
   var tile = this.board.getTileNearby(hero.distanceFromTop, hero.distanceFromLeft, direction);
