@@ -38,18 +38,30 @@ module.exports = function(enteredDate) {
   openDatabasePromise.then(function(mongoData) {
     var gameDataCollection = mongoData.gameDataCollection;
     var db = mongoData.db;
-      
-      // remove all data with date less than current
-      gameDataCollection.remove({date: { $lt: dateDeleteBefore}}, function(err, removed) {
-        // error handling
-        if (err) {
-          console.log('err: ', err);
-        }
-        console.log('number removed: ', removed);
-        // close the database
-        db.close();
-        console.log('closed the collection');
-      });
+    var removeData = false;
+
+    gameDataCollection.find({date: dateDeleteBefore}, function(err, todaysData) {
+      if(err) {
+        console.log('error in find: ', err);
+      }
+      if(todaysData) {
+        removeData = true;
+        console.log('todaysData: ', todaysData);
+      }
+      if(removeData) {
+        // remove all data with date less than current
+        gameDataCollection.remove({date: { $ne: dateDeleteBefore}}, function(err, removed) {
+          // error handling
+          if (err) {
+            console.log('err: ', err);
+          }
+          console.log('number removed: ', removed);
+        });
+      }
+      // close the database
+      db.close();
+      console.log('closed the collection');
+    });
   });
 };
 
