@@ -9,7 +9,6 @@ var createAndSaveAllGames = require('./game_logic/create-and-save-all-games.js')
 //Returns a promise that resolves when the database opens
 var openGameDatabase = function() {
   return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
-    console.log('open!');
     return {
       db: db,
       userCollection: db.collection('users'),
@@ -73,252 +72,50 @@ var updateLeaderboard = function() {
     var lossesRecent = getArrays('losses', 'mostRecentStats');
     var lossesLifetime = getArrays('losses', 'lifetimeStats');
 
-      Q.npost(leaderboardCollection, 'update', [
+    var statsTuples = [['recent|kills', killsRecent],
+                       ['lifetime|kills', killsLifetime],
+                       ['recent|damageDealt', damageDealtRecent],
+                       ['lifetime|damageDealt', damageDealtLifetime],
+                       ['recent|minesCaptured', minesCapturedRecent],
+                       ['lifetime|minesCaptured', minesCapturedLifetime],
+                       ['recent|diamondsEarned', diamondsEarnedRecent],
+                       ['lifetime|diamondsEarned', diamondsEarnedLifetime],
+                       ['recent|healthRecovered', healthRecoveredRecent],
+                       ['lifetime|healthRecovered', healthRecoveredLifetime],
+                       ['lifetime|wins', winsLifetime],
+                       ['recent|gravesRobbed', gravesRobbedRecent],
+                       ['lifetime|gravesRobbed', gravesRobbedLifetime],
+                       ['recent|healthGiven', healthGivenRecent],
+                       ['lifetime|healthGiven', healthGivenLifetime],
+                       ['recent|deaths', deathsRecent],
+                       ['lifetime|deaths', deathsLifetime],
+                       ['recent|losses', lossesRecent],
+                       ['lifetime|losses', lossesLifetime]];
+
+    var generateUpdate = function(statsTuple) {
+      return Q.npost(leaderboardCollection, 'update', [
         {
-          '_id': 'recent|kills'
+          '_id': statsTuple[0]
         },                 
         {
-          '_id': 'recent|kills',
-          'topUsers': killsRecent
+          '_id': statsTuple[0],
+          'topUsers': statsTuple[1]
         },                             
         { 
           upsert: true 
         }
-      ]).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|kills'
-          },                 
-          {
-            '_id': 'lifetime|kills',
-            'topUsers': killsLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|damageDealt'
-          },                 
-          {
-            '_id': 'recent|damageDealt',
-            'topUsers': damageDealtRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|damageDealt'
-          },                 
-          {
-            '_id': 'lifetime|damageDealt',
-            'topUsers': damageDealtLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|minesCaptured'
-          },                 
-          {
-            '_id': 'recent|minesCaptured',
-            'topUsers': minesCapturedRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|minesCaptured'
-          },                 
-          {
-            '_id': 'lifetime|minesCaptured',
-            'topUsers': minesCapturedLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|diamondsEarned'
-          },                 
-          {
-            '_id': 'recent|diamondsEarned',
-            'topUsers': diamondsEarnedRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|diamondsEarned'
-          },                 
-          {
-            '_id': 'lifetime|diamondsEarned',
-            'topUsers': diamondsEarnedLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|healthRecovered'
-          },                 
-          {
-            '_id': 'recent|healthRecovered',
-            'topUsers': healthRecoveredRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|healthRecovered'
-          },                 
-          {
-            '_id': 'lifetime|healthRecovered',
-            'topUsers': healthRecoveredLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|wins'
-          },                 
-          {
-            '_id': 'lifetime|wins',
-            'topUsers': winsLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|gravesRobbed'
-          },                 
-          {
-            '_id': 'recent|gravesRobbed',
-            'topUsers': gravesRobbedRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|gravesRobbed'
-          },                 
-          {
-            '_id': 'lifetime|gravesRobbed',
-            'topUsers': gravesRobbedLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|healthGiven'
-          },                 
-          {
-            '_id': 'recent|healthGiven',
-            'topUsers': healthGivenRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|healthGiven'
-          },                 
-          {
-            '_id': 'lifetime|healthGiven',
-            'topUsers': healthGivenLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|deaths'
-          },                 
-          {
-            '_id': 'recent|deaths',
-            'topUsers': deathsRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|deaths'
-          },                 
-          {
-            '_id': 'lifetime|deaths',
-            'topUsers': deathsLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'recent|losses'
-          },                 
-          {
-            '_id': 'recent|losses',
-            'topUsers': lossesRecent
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
-          return Q.npost(leaderboardCollection, 'update', [
-          {
-            '_id': 'lifetime|losses'
-          },                 
-          {
-            '_id': 'lifetime|losses',
-            'topUsers': lossesLifetime
-          },                             
-          { 
-            upsert: true 
-          }
-        ]);
-      }).then(function() {
+      ])
+    };
+
+    var generateUpdatePromises = [];
+
+    for (var j = 0; j < statsTuples.length; j++) {
+      generateUpdatePromises.push(generateUpdate(statsTuples[j]));
+    
+    }
+    Q.all(generateUpdatePromises)
+      .then(function() {
+          console.log('leaderboardCollection updated');
           db.close();
       }).catch(function(error) {
         console.error("Error in writing leaderboard data to database: ", error);
