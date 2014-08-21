@@ -20,24 +20,6 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
-app.get('/api/leaderboard/:timePeriod/:stat', function(req, res) {
-  var timePeriod = req.params.timePeriod.toLowerCase();
-  var stat = req.params.stat.toLowerCase();
-
-  openMongoCollection.then(function(collection) {
-    collection.find({
-      '_id': timePeriod + '|' + stat
-    }).toArray(function(err, results) {
-      if (err) {
-        res.send(err);
-      }
-      res.send(results[0].topTen);
-    });
-  }).catch(function(err) {
-    //If something goes wrong, respond with error
-    res.send(err);
-  });
-})
 
 // must serve up ejs files individually for Azure to accept in deployment
 app.get('/ejs_templates/notLoggedIn', function(req, res) {
@@ -120,6 +102,25 @@ var getDateString = function(dayOffset) {
   result += '/' + jsDate.getFullYear();
   return result;
 };
+
+router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
+  var timePeriod = req.params.timePeriod.toLowerCase();
+  var stat = req.params.stat.toLowerCase();
+
+  openMongoCollection.then(function(collection) {
+    collection.find({
+      '_id': timePeriod + '|' + stat
+    }).toArray(function(err, results) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(results[0].topTen);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
+});
 
 // Returns the state of the game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
