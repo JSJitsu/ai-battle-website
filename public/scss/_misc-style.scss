@@ -75,18 +75,31 @@
   background-color: white;
   color: black;
   text-align: center;
+  width: 60vw;
 }
 
 .leaderboard-headers {
   text-align: center;
 }
 
+.leaderboard-time-param {
+  margin: 0 25px 25px 0;
+}
+
 .leaderboard-data {
   width: 33%;
 }
 
-.leaderboard-dropdown {
-  left: 40vw;
+.leaderboard-rank {
+  width: 6vw;
+}
+
+.leaderboard-name {
+  width: 26vw;
+}
+
+.leaderboard-damage {
+  width: 26vw;
 }
 
 .lifetime-table-header {
@@ -127,10 +140,6 @@
 .form-control-feedback {
   color: #06C20A !important;
   margin-top: 5px;
-}
-
-.leaderboard-time-param {
-  margin: 0 25px 25px 0;
 }
 
 .centered {
