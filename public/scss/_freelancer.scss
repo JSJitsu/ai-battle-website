@@ -367,6 +367,10 @@ body {
     .navbar-collapse.collapse {
         display: none!important;
     }
+    .navbar-collapse {
+      border-top: 1px solid transparent;
+      left: 20px;
+    }
     .navbar-nav>li {
         float: right;
     }
@@ -376,5 +380,7 @@ body {
     }
     .collapse.in{
        display:block !important;
+       float: left;
+       padding-right: 100%;
     }
 }
