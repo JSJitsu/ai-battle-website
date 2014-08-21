@@ -354,6 +354,11 @@ body {
   color: #2c3e50 !important; }
 
 @media (max-width: 1200px) {
+  .navbar-collapse {
+    padding-right: 100%;
+    float: left;
+    border-top: 1px solid transparent; }
+
   .navbar-header {
     float: none; }
 
@@ -362,10 +367,6 @@ body {
 
   .navbar-collapse.collapse {
     display: none !important; }
-
-  .navbar-collapse {
-    border-top: 1px solid transparent;
-    left: 20px; }
 
   .navbar-nav > li {
     float: right; }
