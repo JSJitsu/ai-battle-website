@@ -1,5 +1,6 @@
 var LeaderboardView = Backbone.View.extend({
   tagName: 'div',
+  className: 'centered',
   initialize: function() {
     
     this.leaderboardParams = {
@@ -28,7 +29,7 @@ var LeaderboardView = Backbone.View.extend({
     var timeFrames = [
       ['lifetime', 'Overall'],
       ['recent', 'Most Recent Battle']
-    ]
+    ];
 
     var timeHtml = timeFrames.map(function(timeFrame) {
       return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
