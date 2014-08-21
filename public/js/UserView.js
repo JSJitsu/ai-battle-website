@@ -22,7 +22,7 @@ var UserView = Backbone.View.extend({
 
   handleSubmit: function(event) {
     event.preventDefault();
-    var val = $('#inputRepo').val();
+    var val = this.$el.find('#inputRepo').val();
     var codeRepo = this.model.get('codeRepo');
     // do not process if an empty string or equal to current code repo
     if (val.length !== 0 && val !== codeRepo) {
@@ -33,12 +33,12 @@ var UserView = Backbone.View.extend({
       this.model.save();
       this.render();
       // display form as updated with check mark and green highlight
-      $(".form-group").addClass("has-success");
-      $(".form-group").addClass("has-feedback");
+      this.$el.find(".form-group").addClass("has-success");
+      this.$el.find(".form-group").addClass("has-feedback");
     } else {
       // if empty string or equal to current code repo do not display as updated
-      $(".form-group").removeClass("has-success");
-      $(".form-group").removeClass("has-feedback");
+      this.$el.find(".form-group").removeClass("has-success");
+      this.$el.find(".form-group").removeClass("has-feedback");
       // render to get current code repo value displayed rather than empty string
       this.render();
     }
@@ -48,28 +48,28 @@ var UserView = Backbone.View.extend({
     event.preventDefault();
     this.viewing = "settings";
     this.render();
-    $('.settings').tab('show');
+    this.$el.find('.settings').tab('show');
   },
   
    showRecent: function(event) {
     event.preventDefault();
     this.viewing = "recent";
     this.render();
-    $('.recentStats').tab('show');
+    this.$el.find('.recentStats').tab('show');
   },
 
    showLifetime: function(event) {
     event.preventDefault();
     this.viewing = "lifetime";
     this.render();
-    $('.lifetimeStats').tab('show');
+    this.$el.find('.lifetimeStats').tab('show');
   },
 
    showAverage: function(event) {
     event.preventDefault();
     this.viewing = "average";
     this.render();
-    $('.averageStats').tab('show');
+    this.$el.find('.averageStats').tab('show');
   },
 
   render: function() {
