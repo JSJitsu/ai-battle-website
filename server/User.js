@@ -43,6 +43,10 @@ module.exports = function(mongoConnectionUrl) {
         type: Number,
         default: 0
       },
+      healthGiven: {
+        type: Number,
+        default: 0
+      },
       gravesRobbed: {
         type: Number,
         default: 0
@@ -67,6 +71,7 @@ module.exports = function(mongoConnectionUrl) {
       minesCaptured: Number,
       diamondsEarned: Number,
       healthRecovered: Number,
+      healthGiven: Number,
       gravesRobbed: Number
     }
   });
