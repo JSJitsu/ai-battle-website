@@ -18,7 +18,7 @@ var openGameDatabase = function() {
   });
 };
 
-var updateLeaderboardKillsRecent = function() {
+var updateLeaderboard = function() {
 
   //Opens connection to mongo database
   var openDatabasePromise = openGameDatabase();
@@ -36,677 +36,212 @@ var updateLeaderboardKillsRecent = function() {
         db.close();
         return;
       }
-      var leaderboardKillsRecentArray = [];
 
+    var getArrays = function(prop, recentOrLifetime) {
+      var leaderboardArray = [];
       for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardKillsRecentArray.push({Name: users[i].githubHandle, kills: users[i].mostRecentStats.kills});
+        if (users[i][recentOrLifetime][prop] !== undefined) {
+          leaderboardArray[i] = {};
+          leaderboardArray[i].Name =  users[i].githubHandle;
+          leaderboardArray[i][prop] = users[i][recentOrLifetime][prop];
         }
-
       } 
-
-      leaderboardKillsRecentArray.sort(function(a, b){
-        return b.kills - a.kills;
+      leaderboardArray.sort(function(a, b){
+        return b[prop] - a[prop];
       });
+      leaderboardArray = leaderboardArray.slice(0, 10);
+      return leaderboardArray;
+    };
 
-      leaderboardKillsRecentArray = leaderboardKillsRecentArray.slice(0, 10);
-      console.log('leaderBoardKillsRecentArray: ', leaderboardKillsRecentArray);
+    var killsRecent = getArrays('kills', 'mostRecentStats');
+    var killsLifetime = getArrays('kills', 'lifetimeStats');
+    var damageDealtRecent = getArrays('damageDealt', 'mostRecentStats');
+    var damageDealtLifetime = getArrays('damageDealt', 'lifetimeStats');
+    var minesCapturedRecent = getArrays('minesCaptured', 'mostRecentStats');
+    var minesCapturedLifetime = getArrays('minesCaptured', 'lifetimeStats');
+    var diamondsEarnedRecent = getArrays('diamondsEarned', 'mostRecentStats');
+    var diamondsEarnedLifetime = getArrays('diamondsEarned', 'lifetimeStats');
+    var healthRecoveredRecent = getArrays('healthRecovered', 'mostRecentStats');
+    var healthRecoveredLifetime = getArrays('healthRecovered', 'lifetimeStats');
+    var winsLifetime = getArrays('wins', 'lifetimeStats');
+    var gravesRobbedRecent = getArrays('gravesRobbed', 'mostRecentStats');
+    var gravesRobbedLifetime = getArrays('gravesRobbed', 'lifetimeStats');
+
 
       Q.npost(leaderboardCollection, 'update', [
         {
-          '_id': 'recentKillsLeaderboard'
+          '_id': 'killsRecent'
         },                 
         {
-          '_id': 'recentKillLeaderboard',
-          'recentKillsArray': leaderboardKillsRecentArray
+          '_id': 'killsRecent',
+          'killsRecent': killsRecent
         },                             
         { 
           upsert: true 
         }
       ]).then(function() {
-        console.log('close database1');
-        db.close();
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'killsLifetime'
+          },                 
+          {
+            '_id': 'killsLifetime',
+            'killsLifetime': killsLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'damageDealtRecent'
+          },                 
+          {
+            '_id': 'damageDealtRecent',
+            'damageDealtRecent': damageDealtRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'damageDealtLifetime'
+          },                 
+          {
+            '_id': 'damageDealtLifetime',
+            'damageDealtLifetime': damageDealtLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'minesCapturedRecent'
+          },                 
+          {
+            '_id': 'minesCapturedRecent',
+            'minesCapturedRecent': minesCapturedRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'minesCapturedLifetime'
+          },                 
+          {
+            '_id': 'minesCapturedLifetime',
+            'minesCapturedLifetime': minesCapturedLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'diamondsEarnedRecent'
+          },                 
+          {
+            '_id': 'diamondsEarnedRecent',
+            'diamondsEarnedRecent': diamondsEarnedRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'diamondsEarnedLifetime'
+          },                 
+          {
+            '_id': 'diamondsEarnedLifetime',
+            'diamondsEarnedLifetime': diamondsEarnedLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'healthRecoveredRecent'
+          },                 
+          {
+            '_id': 'healthRecoveredRecent',
+            'healthRecoveredRecent': healthRecoveredRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'healthRecoveredLifetime'
+          },                 
+          {
+            '_id': 'healthRecoveredLifetime',
+            'healthRecoveredLifetime': healthRecoveredLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'winsLifetime'
+          },                 
+          {
+            '_id': 'winsLifetime',
+            'winsLifetime': winsLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'gravesRobbedRecent'
+          },                 
+          {
+            '_id': 'gravesRobbedRecent',
+            'gravesRobbedRecent': gravesRobbedRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'gravesRobbedLifetime'
+          },                 
+          {
+            '_id': 'gravesRobbedLifetime',
+            'gravesRobbedLifetime': gravesRobbedLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          db.close();
+      }).catch(function(error) {
+        console.error("Error in writing leaderboard data to database: ", error);
       });
     });
   });
 };
 
-var updateLeaderboardKillsLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardLifetimeKillsArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardLifetimeKillsArray.push({Name: users[i].githubHandle, kills: users[i].lifetimeStats.kills});
-      } 
-
-      leaderboardLifetimeKillsArray.sort(function(a, b){
-        return b.kills - a.kills;
-      });
-
-      leaderboardLifetimeKillsArray = leaderboardLifetimeKillsArray.slice(0, 10);
-      console.log('leaderBoardLifetimeKillsArray: ', leaderboardLifetimeKillsArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeKillsLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeKillsLeaderboard',
-          'lifetimeKillsArray': leaderboardLifetimeKillsArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database2');
-        db.close();
-      });
-    });
-  });
-};
-
-var updateLeaderboardDamagedealtRecent = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardDamagedealtRecentArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardDamagedealtRecentArray.push({Name: users[i].githubHandle, damageDealt: users[i].mostRecentStats.damageDealt});
-        }
-      } 
-
-      leaderboardDamagedealtRecentArray.sort(function(a, b){
-        return b.damageDealt - a.damageDealt;
-      });
-
-      leaderboardDamagedealtRecentArray = leaderboardDamagedealtRecentArray.slice(0, 10);
-      console.log('leaderBoardDamagedealtRecentArray: ', leaderboardDamagedealtRecentArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'recentDamagedealtLeaderboard'
-        },                 
-        {
-          '_id': 'recentDamagedealtLeaderboard',
-          'recentDamagedealtArray': leaderboardDamagedealtRecentArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database3');
-        db.close();
-      });
-    });
-  });
-};
-
-var updateLeaderboardDamagedealtLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardDamagedealtLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardDamagedealtLifetimeArray.push({Name: users[i].githubHandle, damageDealt: users[i].lifetimeStats.damageDealt});
-      } 
-
-      leaderboardDamagedealtLifetimeArray.sort(function(a, b){
-        return b.damageDealt - a.damageDealt;
-      });
-
-      leaderboardDamagedealtLifetimeArray = leaderboardDamagedealtLifetimeArray.slice(0, 10);
-      console.log('leaderBoardDamagedealtLifetimeArray: ', leaderboardDamagedealtLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeDamagedealtLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeDamagedealtLeaderboard',
-          'lifetimeDamagedealtArray': leaderboardDamagedealtLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database4');
-        db.close();
-      });
-    });
-  });
-};
-
-var updateLeaderboardMinesCapturedRecent = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardMinesCapturedRecentArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-      
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardMinesCapturedRecentArray.push({Name: users[i].githubHandle, minesCaptured: users[i].mostRecentStats.minesCaptured});
-        }
-      } 
-
-      leaderboardMinesCapturedRecentArray.sort(function(a, b){
-        return b.minesCaptured - a.minesCaptured;
-      });
-
-      leaderboardMinesCapturedRecentArray = leaderboardMinesCapturedRecentArray.slice(0, 10);
-      console.log('leaderBoardMinesCapturedRecentArray: ', leaderboardMinesCapturedRecentArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'recentMinesCapturedRecentLeaderboard'
-        },                 
-        {
-          '_id': 'recentMinesCapturedRecentLeaderboard',
-          'recentMinesCapturedArray': leaderboardMinesCapturedRecentArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database5');
-        db.close();
-      });
-    });
-  });
-};
-
-var updateLeaderboardMinesCapturedLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardMinesCapturedLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardMinesCapturedLifetimeArray.push({Name: users[i].githubHandle, minesCaptured: users[i].lifetimeStats.minesCaptured});
-      } 
-
-      leaderboardMinesCapturedLifetimeArray.sort(function(a, b){
-        return b.minesCaptured - a.minesCaptured;
-      });
-
-      leaderboardMinesCapturedLifetimeArray = leaderboardMinesCapturedLifetimeArray.slice(0, 10);
-      console.log('leaderBoardMinesCapturedLifetimeArray: ', leaderboardMinesCapturedLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeMinesCapturedLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeMinesCapturedLeaderboard',
-          'lifetimeMinesCapturedArray': leaderboardMinesCapturedLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database6');
-        db.close();
-      });
-    });
-  });
-};
-
-var updateLeaderboardDiamondsEarnedRecent = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardDiamondsEarnedRecentArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardDiamondsEarnedRecentArray.push({Name: users[i].githubHandle, diamondsEarned: users[i].mostRecentStats.diamondsEarned});
-        }
-      } 
-
-      leaderboardDiamondsEarnedRecentArray.sort(function(a, b){
-        return b.diamondsEarned - a.diamondsEarned;
-      });
-      
-
-      leaderboardDiamondsEarnedRecentArray = leaderboardDiamondsEarnedRecentArray.slice(0, 10);
-      console.log('leaderBoardDiamondsEarnedRecentArray: ', leaderboardDiamondsEarnedRecentArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'recentDiamondsEarnedLeaderboard'
-        },                 
-        {
-          '_id': 'recentDiamondsEarnedLeaderboard',
-          'recentDiamondsEarnedArray': leaderboardDiamondsEarnedRecentArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database7');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardDiamondsEarnedLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardDiamondsEarnedLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardDiamondsEarnedLifetimeArray.push({Name: users[i].githubHandle, diamondsEarned: users[i].lifetimeStats.diamondsEarned});
-      } 
-
-      leaderboardDiamondsEarnedLifetimeArray.sort(function(a, b){
-        return b.diamondsEarned - a.diamondsEarned;
-      });
-
-      leaderboardDiamondsEarnedLifetimeArray = leaderboardDiamondsEarnedLifetimeArray.slice(0, 10);
-      console.log('leaderBoardDiamondsEarnedLifetimeArray: ', leaderboardDiamondsEarnedLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeDiamondsEarnedLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeDiamondsEarnedLeaderboard',
-          'lifetimeDiamondsEarnedArray': leaderboardDiamondsEarnedLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database8');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardHealthRecoveredRecent = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardHealthRecoveredRecentArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardHealthRecoveredRecentArray.push({Name: users[i].githubHandle, healthRecovered: users[i].mostRecentStats.healthRecovered});
-        }
-      } 
-
-      leaderboardHealthRecoveredRecentArray.sort(function(a, b){
-        return b.healthRecovered - a.healthRecovered;
-      });
-
-      leaderboardHealthRecoveredRecentArray = leaderboardHealthRecoveredRecentArray.slice(0, 10);
-      console.log('leaderBoardHealthRecoveredRecentArray: ', leaderboardHealthRecoveredRecentArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'recentHealthRecoveredLeaderboard'
-        },                 
-        {
-          '_id': 'recentHealthRecoveredLeaderboard',
-          'recentHealthRecoveredArray': leaderboardHealthRecoveredRecentArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database9');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardHealthRecoveredLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardHealthRecoveredLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recenthealthRecovered document
-        leaderboardHealthRecoveredLifetimeArray.push({Name: users[i].githubHandle, healthRecovered: users[i].lifetimeStats.healthRecovered});
-      } 
-
-      leaderboardHealthRecoveredLifetimeArray.sort(function(a, b){
-        return b.healthRecovered - a.healthRecovered;
-      });
-
-      leaderboardHealthRecoveredLifetimeArray = leaderboardHealthRecoveredLifetimeArray.slice(0, 10);
-      console.log('leaderBoardHealthRecoveredLifetimeArray: ', leaderboardHealthRecoveredLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeHealthRecoveredLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeHealthRecoveredLeaderboard',
-          'lifetimeHealthRecoveredArray': leaderboardHealthRecoveredLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database10');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardWinsLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardWinsLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardWinsLifetimeArray.push({Name: users[i].githubHandle, wins: users[i].lifetimeStats.wins});
-      } 
-
-      leaderboardWinsLifetimeArray.sort(function(a, b){
-        return b.wins - a.wins;
-      });
-
-      leaderboardWinsLifetimeArray = leaderboardWinsLifetimeArray.slice(0, 10);
-      console.log('leaderBoardWinsLifetimeArray: ', leaderboardWinsLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeWinsLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeWinsLeaderboard',
-          'lifetimeWinsArray': leaderboardWinsLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database11');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardGravesRobbedRecent = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardGravesRobbedRecentArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].mostRecentStats.kills !== undefined) {
-          leaderboardGravesRobbedRecentArray.push({Name: users[i].githubHandle, gravesRobbed: users[i].mostRecentStats.gravesRobbed});
-        }
-      } 
-
-      leaderboardGravesRobbedRecentArray.sort(function(a, b){
-        return b.gravesRobbed - a.gravesRobbed;
-      });
-
-      leaderboardGravesRobbedRecentArray = leaderboardGravesRobbedRecentArray.slice(0, 10);
-      console.log('leaderBoardGravesRobbedRecentArray: ', leaderboardGravesRobbedRecentArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'recentGravesRobbedLeaderboard'
-        },                 
-        {
-          '_id': 'recentGravesRobbedLeaderboard',
-          'recentKillsArray': leaderboardGravesRobbedRecentArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database12');
-        db.close();
-      });
-    });
-  });
-};
-
-
-var updateLeaderboardGravesRobbedLifetime = function() {
-
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
-
-  openDatabasePromise.then(function(mongoData) {
-    var userCollection = mongoData.userCollection;
-    var leaderboardCollection = mongoData.leaderboardCollection;
-    var db = mongoData.db;
-
-    //Get array of all users
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
-        return;
-      }
-      var leaderboardGravesRobbedLifetimeArray = [];
-
-      for (var i = 0; i < users.length; i++) {
-        // recentKills document
-        leaderboardGravesRobbedLifetimeArray.push({Name: users[i].githubHandle, gravesRobbed: users[i].lifetimeStats.gravesRobbed});
-      } 
-
-      leaderboardGravesRobbedLifetimeArray.sort(function(a, b){
-        return b.gravesRobbed - a.gravesRobbed;
-      });
-
-      leaderboardGravesRobbedLifetimeArray = leaderboardGravesRobbedLifetimeArray.slice(0, 10);
-      console.log('leaderBoardGravesRobbedLifetimeArray: ', leaderboardGravesRobbedLifetimeArray);
-
-      Q.npost(leaderboardCollection, 'update', [
-        {
-          '_id': 'lifetimeGravesRobbedLeaderboard'
-        },                 
-        {
-          '_id': 'lifetimeGravesRobbedLeaderboard',
-          'lifetimeGravesRobbedArray': leaderboardGravesRobbedLifetimeArray
-        },                             
-        { 
-          upsert: true 
-        }
-      ]).then(function() {
-        console.log('close database13');
-        db.close();
-      });
-    });
-  });
-};
-
-updateLeaderboardKillsRecent();
-updateLeaderboardKillsLifetime();
-updateLeaderboardDamagedealtRecent();
-updateLeaderboardDamagedealtLifetime();
-updateLeaderboardMinesCapturedRecent();
-updateLeaderboardMinesCapturedLifetime();
-updateLeaderboardDiamondsEarnedRecent();
-updateLeaderboardDiamondsEarnedLifetime();
-updateLeaderboardHealthRecoveredRecent();
-updateLeaderboardHealthRecoveredLifetime();
-updateLeaderboardWinsLifetime();
-updateLeaderboardGravesRobbedRecent();
-updateLeaderboardGravesRobbedLifetime();
+updateLeaderboard();
