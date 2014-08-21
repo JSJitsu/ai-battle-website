@@ -441,6 +441,9 @@ body {
   color: black;
   text-align: center; }
 
+.leaderboard-dropdown {
+  left: 40vw; }
+
 .lifetime-table-header {
   font-weight: bold; }
 
