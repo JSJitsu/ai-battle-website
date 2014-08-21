@@ -9,10 +9,16 @@ var LeaderboardView = Backbone.View.extend({
 
     //Create dropdown html
     var stats = [
-      ['kills', 'Kills'],
+      ['damageDealt', 'Damage Dealt'],
+      ['deaths', 'Deaths'],
       ['diamondsEarned', 'Diamonds Earned'],
+      ['gravesRobbed', 'Graves Robbed'],
+      ['healthGiven', 'Health Given'],
       ['healthRecovered', 'Health Recovered'],
-      ['healthGiven', 'Health Given']
+      ['kills', 'Kills'],
+      ['losses', 'Losses'],
+      ['minesCaptured', 'Mines Captured'],
+      ['wins', 'Wins']
     ];
 
     var statsHtml = stats.map(function(stat) {
