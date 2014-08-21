@@ -35,8 +35,8 @@ var LeaderboardView = Backbone.View.extend({
     });
 
     var initialHtml =
-        '<select class="leaderboard-time-param" name="stats">' + timeHtml.join('') + '</select>' +
-        '<select class="leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select>' +
+        '<select class="col-lg-2 col-lg-offset-4 leaderboard-time-param" name="stats">' + timeHtml.join('') + '</select>' +
+        '<select class="col-lg-2 leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select>' +
         '<table class="table table-striped table-bordered table-responsive leaderboard-table">' + 
         '</table>';
 
