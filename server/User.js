@@ -71,6 +71,7 @@ module.exports = function(mongoConnectionUrl) {
       minesCaptured: Number,
       diamondsEarned: Number,
       healthRecovered: Number,
+      healthGiven: Number,
       gravesRobbed: Number
     }
   });
