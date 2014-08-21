@@ -12,9 +12,9 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
 
 // Connect to mongo
-var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
+var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
   console.log('open!');
-  return db.collection('jsBattleGameData');
+  return db;
 });
 
 // Serve up files in public folder
@@ -103,18 +103,24 @@ var getDateString = function(dayOffset) {
   return result;
 };
 
+//Returns the leaderboard data for the specified time period and stat
 router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
   var timePeriod = req.params.timePeriod.toLowerCase();
   var stat = req.params.stat.toLowerCase();
 
-  openMongoCollection.then(function(collection) {
+
+  openMongoDatabase.then(function(collection) {
+    var collection = db.collection('leaderboard');
     collection.find({
       '_id': timePeriod + '|' + stat
     }).toArray(function(err, results) {
       if (err) {
         res.send(err);
       }
-      res.send(results[0].topTen);
+        console.log('asdgsagasgasadhdfh');
+      console.log(results);
+      console.log('results');
+      res.send(results);
     });
   }).catch(function(err) {
     //If something goes wrong, respond with error
@@ -129,7 +135,8 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
   if (req.user) {
     gameNumber = req.user.mostRecentGameNumber;
   }
-  openMongoCollection.then(function(collection) {
+  openMongoDatabase.then(function(db) {
+    var collection = db.collection('jsBattleGameData');
     collection.find({
       '_id': gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
@@ -147,7 +154,8 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
 // Returns the state of the given game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
 router.get('/gameData/:dayOffset/:turn/:gameNumber', function(req, res){
-  openMongoCollection.then(function(collection) {
+  openMongoDatabase.then(function(db) {
+    var collection = db.collection('jsBattleGameData');
     collection.find({
       '_id': req.params.gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
