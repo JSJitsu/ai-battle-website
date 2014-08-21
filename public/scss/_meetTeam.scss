@@ -13,7 +13,7 @@
   width: 201px;
   height: 100%;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.67);
+  background: rgba(0, 0, 0, 0.7);
   -webkit-transition: all ease .5s;
   -moz-transition: all ease .5s;
   transition: all ease .5s; }
@@ -37,15 +37,11 @@
   }
 }
 
-#team .portfolio-item .portfolio-link .caption .caption-content i {
-  margin-top: -12px; }
 
-#team .portfolio-item .portfolio-link .caption .caption-content h3,
-#team .portfolio-item .portfolio-link .caption .caption-content h4 {
-  margin: 0; }
-
-#team * {
-  z-index: 2; }
+.role {
+  text-align: center;
+  padding: 20px;
+}
 
 .engineer {
   background: #2c3e50;
@@ -74,9 +70,4 @@
     position: relative;
     left: 10px;
   }
-}
-
-.centered {
-  display: block;
-text-align: -webkit-center;
 }
