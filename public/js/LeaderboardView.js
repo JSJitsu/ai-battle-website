@@ -60,10 +60,10 @@ var LeaderboardView = Backbone.View.extend({
     //Add dropdown value also
     var tableHtml = '<div class="container">' +
   '<div class="row">' + 
-    '<ul class="nav nav-tabs leaderViewTabs" role="tablist">' +
-      // '<li><a href="#">Recent Leaders</a></li>' +
-      // '<li><a href="#">Lifetime Leaders</a></li>' +
-    '</ul>' +
+    // '<ul class="nav nav-tabs leaderViewTabs" role="tablist">' +
+    //   '<li><a href="#">Recent Leaders</a></li>' +
+    //   '<li><a href="#">Lifetime Leaders</a></li>' +
+    // '</ul>' +
   '</div>' +
     '<table class="table table-bordered table-responsive table-striped lifetime-table leaderboard-table">' +
       '<tr class="lifetime-table-header">' +
