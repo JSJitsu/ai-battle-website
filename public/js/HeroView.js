@@ -17,7 +17,8 @@ var HeroView = Backbone.View.extend({
     } else{
       health =  health + 'HP';
     }
-    var heroName = '<div class="hero-header h-i' + heroId + '">(id:' + heroId + ') ' + name + ' </div>'
+    var heroName = '<div class="hero-header h-i' + heroId + '">(id:' + heroId + ') ' + 
+        '<span>' + name + '</span>' + ' </div>'
     var health = '<div class="health-info h-i' + heroId + '">' + health + '</div>';
     this.$el.append(heroName + health);
   }

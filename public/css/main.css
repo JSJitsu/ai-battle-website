@@ -533,6 +533,9 @@ body {
     font-size: 2em;
     margin: 8% 8%; }
 
+.hero-header span {
+  font-weight: bold; }
+
 .battle-map {
   display: table;
   bottom: 0;
