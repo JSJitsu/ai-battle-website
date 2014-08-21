@@ -1,20 +1,21 @@
 var LeaderboardView = Backbone.View.extend({
   tagName: 'div',
   initialize: function() {
+    
     this.viewing = {
       stat: 'Kills',
       type: 'Lifetime'
     };
 
-    var initialHtml = '<div class="row centered"><div class="dropdown">' + 
+    var initialHtml = '<div class="row centered"><div class="dropdown">' +
          '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">' + 
-           'LeaderBoard Stats' + 
-           '<span class="caret"></span>' + 
-          '</button>' + 
+          'LeaderBoard Stats' +
+          '<span class="caret"></span>' +
+          '</button>' +
           '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">' +
-            '<li role="presentation"><a role="menuitem" href="#">Kills</a></li>' +
+            '<li role="presentation"><a id="menuitem">Kills</a></li>' +
           '</ul>' +
-        '</div>' + 
+        '</div>' +
       '</div>';
 
     this.$el.append(initialHtml);
@@ -30,13 +31,17 @@ var LeaderboardView = Backbone.View.extend({
   },
 
   events: {
-    'change .leaderboardDropdown': 'updateViewingParams'
+    'click #menuitem': 'updateViewingParams'
     // 'click .recentLeaders': 'showRecent',
     // 'click .lifetimeLeaders': 'showLifetime'
   },
-  updateViewingParams: function() {
-    this.viewing.stat = this.$el.find('.leaderboardDropdown').value();
+  updateViewingParams: function(clickEvent) {
+
+    this.viewing.stat = clickEvent.currentTarget.textContent;
+    this.$el.find('.dropdown-toggle').text(clickEvent.currentTarget.textContent);
     this.model.updateViewingParams(this.viewing);
+
+console.log(this.$el.find('.dropdown-toggle').append('<span class="caret"></span>'));
 
     $.when(this.model.fetch()).then(function() {
       this.render();
