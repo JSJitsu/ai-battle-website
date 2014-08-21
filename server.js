@@ -24,65 +24,12 @@ app.use('/', express.static(__dirname + '/public'));
 
 
 // must serve up ejs files individually for Azure to accept in deployment
-app.get('/ejs_templates/notLoggedIn', function(req, res) {
+app.get('/ejs_templates/:ejsTemplate', function(req, res) {
   // file server
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/notLoggedIn.ejs'));
+  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/' +  req.params.ejsTemplate + '.ejs'));
 });
 
-app.get('/ejs_templates/settings', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/settings.ejs'));
-});
-
-app.get('/ejs_templates/lifetime', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/lifetime.ejs'));
-});
-
-app.get('/ejs_templates/recent', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/recent.ejs'));
-});
-
-app.get('/ejs_templates/average', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/average.ejs'));
-});
-
-app.get('/ejs_templates/navbar', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/navbar.ejs'));
-});
-
-app.get('/ejs_templates/navbarNotLoggedIn', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/navbarNotLoggedIn.ejs'));
-});
-
-app.get('/ejs_templates/rules', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/rules.ejs'));
-});
-
-app.get('/ejs_templates/general', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/general.ejs'));
-});
-
-app.get('/ejs_templates/improve', function(req, res) {
-  // file server
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(fs.readFileSync(__dirname+'/public/ejs_templates/improve.ejs'));
-});
 
 // Add github authentication
 OAuthGithub(app, mongoConnectionURL);
