@@ -20,53 +20,23 @@ var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
-app.get('/api/leaderboard/lifetime/kills', function(req, res) {
-  var lifetimeKills = {
-    topUsers: [
-      {
-        name: 'Coming Soon',
-        value: 10
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 9
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 8
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 7
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 6
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 5
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 4
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 3
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 2
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 1
+app.get('/api/leaderboard/:timePeriod/:stat', function(req, res) {
+  var timePeriod = req.params.timePeriod.toLowerCase();
+  var stat = req.params.stat.toLowerCase();
+
+  openMongoCollection.then(function(collection) {
+    collection.find({
+      '_id': timePeriod + '|' + stat
+    }).toArray(function(err, results) {
+      if (err) {
+        res.send(err);
       }
-    ]
-  };
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(lifetimeKills));
+      res.send(results[0].topTen);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
 })
 
 // must serve up ejs files individually for Azure to accept in deployment
