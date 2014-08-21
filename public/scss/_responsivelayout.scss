@@ -131,3 +131,22 @@
     }
   }
 }
+
+@media (max-width: 398px) {
+  .indicator {
+    font-size: 3.5vw;
+    margin: 11px -16px;
+  }
+  .lifebar {
+    width: 37%;
+    left: 16px;
+    top: 4px;
+  }
+  .sprite {
+    max-height: 6vw;
+  }
+  .battle-tile {
+    width: 7.1vw;
+    height: 7.3vw;
+  }
+}

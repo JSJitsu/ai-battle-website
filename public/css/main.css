@@ -353,7 +353,14 @@ a:hover, a:focus, a:active, a.active {
 body {
   color: #2c3e50 !important; }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
+  .navbar .navbar-nav {
+    letter-spacing: -1px;
+    font-size: 12px; } }
+@media (max-width: 767px) {
+  .navbar .navbar-nav {
+    letter-spacing: 1px; }
+
   .navbar-collapse {
     padding-right: 100%;
     float: left;
@@ -475,6 +482,14 @@ body {
 .form-control-feedback {
   color: #06C20A !important;
   margin-top: 5px; }
+
+.leaderboard-time-param {
+  margin: 0 25px 25px 0; }
+
+.centered {
+  display: block;
+  text-align: -webkit-center;
+  text-align: -moz-center; }
 
 .outer {
   bottom: 37px;
@@ -639,7 +654,7 @@ body {
   width: 201px;
   height: 100%;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.67);
+  background: rgba(0, 0, 0, 0.7);
   -webkit-transition: all ease .5s;
   -moz-transition: all ease .5s;
   transition: all ease .5s; }
@@ -661,15 +676,9 @@ body {
     width: 200px;
     bottom: 20px; }
 
-#team .portfolio-item .portfolio-link .caption .caption-content i {
-  margin-top: -12px; }
-
-#team .portfolio-item .portfolio-link .caption .caption-content h3,
-#team .portfolio-item .portfolio-link .caption .caption-content h4 {
-  margin: 0; }
-
-#team * {
-  z-index: 2; }
+.role {
+  text-align: center;
+  padding: 20px; }
 
 .engineer {
   background: #2c3e50;
@@ -696,10 +705,6 @@ body {
     letter-spacing: 23px;
     position: relative;
     left: 10px; }
-
-.centered {
-  display: block;
-  text-align: -webkit-center; }
 
 @media (min-width: 1200px) {
   .team-info {
@@ -812,3 +817,19 @@ body {
     max-width: 75rem; }
     .nav-buttons .btn {
       font-size: 11px; } }
+@media (max-width: 398px) {
+  .indicator {
+    font-size: 3.5vw;
+    margin: 11px -16px; }
+
+  .lifebar {
+    width: 37%;
+    left: 16px;
+    top: 4px; }
+
+  .sprite {
+    max-height: 6vw; }
+
+  .battle-tile {
+    width: 7.1vw;
+    height: 7.3vw; } }

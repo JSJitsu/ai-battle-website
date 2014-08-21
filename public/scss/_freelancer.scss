@@ -355,9 +355,17 @@ a:hover, a:focus, a:active, a.active {
 
 body {
   color: #2c3e50 !important; }
+@media (max-width: 991px) {
+  .navbar .navbar-nav {
+    letter-spacing: -1px;
+    font-size: 12px;
+  }
+}
 
-
-@media (max-width: 1200px) {
+@media (max-width: 767px) {
+    .navbar .navbar-nav {
+      letter-spacing: 1px;
+    }
     .navbar-collapse {
       padding-right: 100%;
       float: left;
