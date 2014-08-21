@@ -35,6 +35,14 @@ module.exports = function(mongoData, hero, gameNumber) {
     user.lifetimeStats.healthRecovered += hero.healthRecovered;
     user.mostRecentStats.healthRecovered = hero.healthRecovered;
 
+    if (user.lifetimeStats.healthGiven) {
+      user.lifetimeStats.healthGiven += hero.healthGiven;
+    } else {
+      user.lifetimeStats.healthGiven = hero.healthGiven;
+    }
+    
+    user.mostRecentStats.healthGiven = hero.healthGiven;
+
     user.lifetimeStats.gravesRobbed += hero.gravesRobbed;
     user.mostRecentStats.gravesRobbed = hero.gravesRobbed;
 
