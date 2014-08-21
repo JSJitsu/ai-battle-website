@@ -42,12 +42,12 @@ var updateLeaderboard = function() {
       for (var i = 0; i < users.length; i++) {
         if (users[i][recentOrLifetime][prop] !== undefined) {
           leaderboardArray[i] = {};
-          leaderboardArray[i].Name =  users[i].githubHandle;
-          leaderboardArray[i][prop] = users[i][recentOrLifetime][prop];
+          leaderboardArray[i].name =  users[i].githubHandle;
+          leaderboardArray[i].value = users[i][recentOrLifetime][prop];
         }
       } 
       leaderboardArray.sort(function(a, b){
-        return b[prop] - a[prop];
+        return b.value - a.value;
       });
       leaderboardArray = leaderboardArray.slice(0, 10);
       return leaderboardArray;
@@ -66,15 +66,16 @@ var updateLeaderboard = function() {
     var winsLifetime = getArrays('wins', 'lifetimeStats');
     var gravesRobbedRecent = getArrays('gravesRobbed', 'mostRecentStats');
     var gravesRobbedLifetime = getArrays('gravesRobbed', 'lifetimeStats');
-
+    var healthGivenRecent = getArrays('healthGiven', 'mostRecentStats');
+    var healthGivenLifetime = getArrays('healthGiven', 'lifetimeStats');
 
       Q.npost(leaderboardCollection, 'update', [
         {
-          '_id': 'killsRecent'
+          '_id': 'recent|kills'
         },                 
         {
-          '_id': 'killsRecent',
-          'killsRecent': killsRecent
+          '_id': 'recent|kills',
+          'topTen': killsRecent
         },                             
         { 
           upsert: true 
@@ -82,11 +83,11 @@ var updateLeaderboard = function() {
       ]).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'killsLifetime'
+            '_id': 'lifetime|kills'
           },                 
           {
-            '_id': 'killsLifetime',
-            'killsLifetime': killsLifetime
+            '_id': 'lifetime|kills',
+            'topTen': killsLifetime
           },                             
           { 
             upsert: true 
@@ -95,11 +96,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'damageDealtRecent'
+            '_id': 'recent|damageDealt'
           },                 
           {
-            '_id': 'damageDealtRecent',
-            'damageDealtRecent': damageDealtRecent
+            '_id': 'recent|damageDealt',
+            'topTen': damageDealtRecent
           },                             
           { 
             upsert: true 
@@ -108,11 +109,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'damageDealtLifetime'
+            '_id': 'lifetime|damageDealt'
           },                 
           {
-            '_id': 'damageDealtLifetime',
-            'damageDealtLifetime': damageDealtLifetime
+            '_id': 'lifetime|damageDealt',
+            'topTen': damageDealtLifetime
           },                             
           { 
             upsert: true 
@@ -121,11 +122,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'minesCapturedRecent'
+            '_id': 'recent|minesCaptured'
           },                 
           {
-            '_id': 'minesCapturedRecent',
-            'minesCapturedRecent': minesCapturedRecent
+            '_id': 'recent|minesCaptured',
+            'topTen': minesCapturedRecent
           },                             
           { 
             upsert: true 
@@ -134,11 +135,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'minesCapturedLifetime'
+            '_id': 'lifetime|minesCaptured'
           },                 
           {
-            '_id': 'minesCapturedLifetime',
-            'minesCapturedLifetime': minesCapturedLifetime
+            '_id': 'lifetime|minesCaptured',
+            'topTen': minesCapturedLifetime
           },                             
           { 
             upsert: true 
@@ -147,11 +148,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'diamondsEarnedRecent'
+            '_id': 'recent|diamondsEarned'
           },                 
           {
-            '_id': 'diamondsEarnedRecent',
-            'diamondsEarnedRecent': diamondsEarnedRecent
+            '_id': 'recent|diamondsEarned',
+            'topTen': diamondsEarnedRecent
           },                             
           { 
             upsert: true 
@@ -160,11 +161,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'diamondsEarnedLifetime'
+            '_id': 'lifetime|diamondsEarned'
           },                 
           {
-            '_id': 'diamondsEarnedLifetime',
-            'diamondsEarnedLifetime': diamondsEarnedLifetime
+            '_id': 'lifetime|diamondsEarned',
+            'topTen': diamondsEarnedLifetime
           },                             
           { 
             upsert: true 
@@ -173,11 +174,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'healthRecoveredRecent'
+            '_id': 'recent|healthRecovered'
           },                 
           {
-            '_id': 'healthRecoveredRecent',
-            'healthRecoveredRecent': healthRecoveredRecent
+            '_id': 'recent|healthRecovered',
+            'topTen': healthRecoveredRecent
           },                             
           { 
             upsert: true 
@@ -186,11 +187,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'healthRecoveredLifetime'
+            '_id': 'lifetime|healthRecovered'
           },                 
           {
-            '_id': 'healthRecoveredLifetime',
-            'healthRecoveredLifetime': healthRecoveredLifetime
+            '_id': 'lifetime|healthRecovered',
+            'topTen': healthRecoveredLifetime
           },                             
           { 
             upsert: true 
@@ -199,11 +200,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'winsLifetime'
+            '_id': 'lifetime|wins'
           },                 
           {
-            '_id': 'winsLifetime',
-            'winsLifetime': winsLifetime
+            '_id': 'lifetime|wins',
+            'topTen': winsLifetime
           },                             
           { 
             upsert: true 
@@ -212,11 +213,11 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'gravesRobbedRecent'
+            '_id': 'recent|gravesRobbed'
           },                 
           {
-            '_id': 'gravesRobbedRecent',
-            'gravesRobbedRecent': gravesRobbedRecent
+            '_id': 'recent|gravesRobbed',
+            'topTen': gravesRobbedRecent
           },                             
           { 
             upsert: true 
@@ -225,11 +226,37 @@ var updateLeaderboard = function() {
       }).then(function() {
           return Q.npost(leaderboardCollection, 'update', [
           {
-            '_id': 'gravesRobbedLifetime'
+            '_id': 'lifetime|gravesRobbed'
           },                 
           {
-            '_id': 'gravesRobbedLifetime',
-            'gravesRobbedLifetime': gravesRobbedLifetime
+            '_id': 'lifetime|gravesRobbed',
+            'topTen': gravesRobbedLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'recent|healthGiven'
+          },                 
+          {
+            '_id': 'recent|healthGiven',
+            'topTen': healthGivenRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'lifetime|healthGiven'
+          },                 
+          {
+            '_id': 'lifetime|healthGiven',
+            'topTen': healthGivenLifetime
           },                             
           { 
             upsert: true 
