@@ -66,7 +66,8 @@ var updateLeaderboard = function() {
     var winsLifetime = getArrays('wins', 'lifetimeStats');
     var gravesRobbedRecent = getArrays('gravesRobbed', 'mostRecentStats');
     var gravesRobbedLifetime = getArrays('gravesRobbed', 'lifetimeStats');
-
+    var healthGivenRecent = getArrays('healthGiven', 'mostRecentStats');
+    var healthGivenLifetime = getArrays('healthGiven', 'lifetimeStats');
 
       Q.npost(leaderboardCollection, 'update', [
         {
@@ -230,6 +231,32 @@ var updateLeaderboard = function() {
           {
             '_id': 'lifetime|gravesRobbed',
             'topTen': gravesRobbedLifetime
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'recent|healthGiven'
+          },                 
+          {
+            '_id': 'recent|healthGiven',
+            'topTen': healthGivenRecent
+          },                             
+          { 
+            upsert: true 
+          }
+        ]);
+      }).then(function() {
+          return Q.npost(leaderboardCollection, 'update', [
+          {
+            '_id': 'lifetime|healthGiven'
+          },                 
+          {
+            '_id': 'lifetime|healthGiven',
+            'topTen': healthGivenLifetime
           },                             
           { 
             upsert: true 
