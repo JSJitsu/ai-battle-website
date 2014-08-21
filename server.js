@@ -1,7 +1,9 @@
 var express = require('express');
 var fs = require('fs');
 var Q = require('q');
-var MongoClient = require('mongodb').MongoClient;
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
+var MongoObjectId = Mongo.ObjectID;
 var OAuthGithub = require('./server/OAuthGithub');
 
 var app = express();
@@ -12,62 +14,14 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/javascriptBattle';
 
 // Connect to mongo
-var openMongoCollection = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
+var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
   console.log('open!');
-  return db.collection('jsBattleGameData');
+  return db;
 });
 
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
-app.get('/api/leaderboard/lifetime/kills', function(req, res) {
-  var lifetimeKills = {
-    topUsers: [
-      {
-        name: 'Coming Soon',
-        value: 10
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 9
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 8
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 7
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 6
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 5
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 4
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 3
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 2
-      }, 
-      {
-        name: 'Coming Soon',
-        value: 1
-      }
-    ]
-  };
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(lifetimeKills));
-})
 
 // must serve up ejs files individually for Azure to accept in deployment
 app.get('/ejs_templates/notLoggedIn', function(req, res) {
@@ -151,6 +105,28 @@ var getDateString = function(dayOffset) {
   return result;
 };
 
+//Returns the leaderboard data for the specified time period and stat
+router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
+  var timePeriod = req.params.timePeriod;
+  var stat = req.params.stat;
+
+  openMongoDatabase.then(function(db) {
+    var collection = db.collection('leaderboard');
+    var id = timePeriod + '|' + stat;
+    collection.findOne({
+      '_id': id
+    }, function(err, results) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(results);
+    });
+  }).catch(function(err) {
+    //If something goes wrong, respond with error
+    res.send(err);
+  });
+});
+
 // Returns the state of the game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
 router.get('/gameData/:dayOffset/:turn', function(req, res){
@@ -158,7 +134,8 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
   if (req.user) {
     gameNumber = req.user.mostRecentGameNumber;
   }
-  openMongoCollection.then(function(collection) {
+  openMongoDatabase.then(function(db) {
+    var collection = db.collection('jsBattleGameData');
     collection.find({
       '_id': gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
@@ -176,7 +153,8 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
 // Returns the state of the given game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
 router.get('/gameData/:dayOffset/:turn/:gameNumber', function(req, res){
-  openMongoCollection.then(function(collection) {
+  openMongoDatabase.then(function(db) {
+    var collection = db.collection('jsBattleGameData');
     collection.find({
       '_id': req.params.gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
     }).toArray(function(err,results) {
