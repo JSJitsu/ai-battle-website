@@ -1,7 +1,9 @@
 var express = require('express');
 var fs = require('fs');
 var Q = require('q');
-var MongoClient = require('mongodb').MongoClient;
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
+var MongoObjectId = Mongo.ObjectID;
 var OAuthGithub = require('./server/OAuthGithub');
 
 var app = express();
@@ -105,21 +107,18 @@ var getDateString = function(dayOffset) {
 
 //Returns the leaderboard data for the specified time period and stat
 router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
-  var timePeriod = req.params.timePeriod.toLowerCase();
-  var stat = req.params.stat.toLowerCase();
+  var timePeriod = req.params.timePeriod;
+  var stat = req.params.stat;
 
-
-  openMongoDatabase.then(function(collection) {
+  openMongoDatabase.then(function(db) {
     var collection = db.collection('leaderboard');
-    collection.find({
-      '_id': timePeriod + '|' + stat
-    }).toArray(function(err, results) {
+    var id = timePeriod + '|' + stat;
+    collection.findOne({
+      '_id': id
+    }, function(err, results) {
       if (err) {
         res.send(err);
       }
-        console.log('asdgsagasgasadhdfh');
-      console.log(results);
-      console.log('results');
       res.send(results);
     });
   }).catch(function(err) {

@@ -4,13 +4,13 @@ var LeaderboardView = Backbone.View.extend({
     
     this.leaderboardParams = {
       stat: 'kills',
-      type: 'Lifetime'
+      type: 'lifetime'
     };
 
     //Create dropdown html
     var stats = [
       ['kills', 'Kills'],
-      ['deaths', 'Deaths'],
+      ['diamondsEarned', 'Diamonds Earned'],
       ['healthRecovered', 'Health Recovered'],
       ['healthGiven', 'Health Given']
     ];
@@ -83,19 +83,19 @@ var LeaderboardView = Backbone.View.extend({
         '<td>' + this.leaderboardParams.stat + '</td>' +
       '</tr>';
 
-    var topUsers = this.model.get('topUsers');
-    // for (var i=0; i<topUsers.length; i++) {
-    //   var user = topUsers[i];
-    //   tableHtml += '<tr>';
+    var topUsers = this.model.get('topTen');
+    for (var i=0; i<topUsers.length; i++) {
+      var user = topUsers[i];
+      tableHtml += '<tr>';
 
-    //   //Add the rank of the user to table
-    //   tableHtml += '<td>' + (i + 1) + '</td>';
-    //   tableHtml += '<td>' + user.name + '</td>';
-    //   tableHtml += '<td>' + user.value + '</td>';
+      //Add the rank of the user to table
+      tableHtml += '<td>' + (i + 1) + '</td>';
+      tableHtml += '<td>' + user.name + '</td>';
+      tableHtml += '<td>' + user.value + '</td>';
 
 
-    //   tableHtml += '</tr>';
-    // }
+      tableHtml += '</tr>';
+    }
     tableHtml += '</table>';
     $table.html(tableHtml);
 
