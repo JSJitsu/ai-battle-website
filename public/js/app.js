@@ -16,4 +16,4 @@ $('#rules').append(app.rulesView.$el);
 
 app.leaderboard = new Leaderboard();
 app.leaderboardView = new LeaderboardView({ model: app.leaderboard });
-$('#leaderboard').append(app.leaderboardView.$el);
+$('#leaderboard div.container').append(app.leaderboardView.$el);
