@@ -43,6 +43,10 @@ module.exports = function(mongoConnectionUrl) {
         type: Number,
         default: 0
       },
+      healthGiven: {
+        type: Number,
+        default: 0
+      },
       gravesRobbed: {
         type: Number,
         default: 0
