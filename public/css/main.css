@@ -449,7 +449,7 @@ body {
   text-align: center;
   width: 60vw; }
 
-.leaderboard-headers {
+.leaderboard-headers th {
   text-align: center; }
 
 .leaderboard-time-param {
