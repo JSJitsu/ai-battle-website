@@ -22,7 +22,6 @@ var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).th
 // Serve up files in public folder
 app.use('/', express.static(__dirname + '/public'));
 
-
 // must serve up ejs files individually for Azure to accept in deployment
 app.get('/ejs_templates/:ejsTemplate', function(req, res) {
   // file server

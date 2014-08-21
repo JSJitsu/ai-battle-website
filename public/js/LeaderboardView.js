@@ -3,28 +3,36 @@ var LeaderboardView = Backbone.View.extend({
   className: 'centered',
   initialize: function() {
     
+    //Current leaderboard settings
     this.leaderboardParams = {
-      stat: 'kills',
+      stat: 'damageDealt',
       timeFrame: 'lifetime'
     };
 
-    //Create dropdown html
-    this.statItems = [
-      ['damageDealt', 'Damage Dealt'],
-      ['deaths', 'Deaths'],
-      ['diamondsEarned', 'Diamonds Earned'],
-      ['gravesRobbed', 'Graves Robbed'],
-      ['healthGiven', 'Health Given'],
-      ['healthRecovered', 'Health Recovered'],
-      ['kills', 'Kills'],
-      ['losses', 'Losses'],
-      ['minesCaptured', 'Mines Captured'],
-      ['wins', 'Wins']
-    ];
-
-    var statsHtml = this.statItems.map(function(stat) {
-      return '<option class="leaderboard" value="' + stat[0] + '">' + stat[1] + '</option>';
-    });
+    //Dropdown items for lifetime stats
+    this.statItems = {
+      'lifetime': [
+        ['damageDealt', 'Damage Dealt'],
+        ['deaths', 'Deaths'],
+        ['diamondsEarned', 'Diamonds Earned'],
+        ['gravesRobbed', 'Graves Robbed'],
+        ['healthGiven', 'Health Given'],
+        ['healthRecovered', 'Health Recovered'],
+        ['kills', 'Kills'],
+        ['losses', 'Losses'],
+        ['minesCaptured', 'Mines Captured'],
+        ['wins', 'Wins']
+      ],
+      'recent': [
+        ['damageDealt', 'Damage Dealt'],
+        ['diamondsEarned', 'Diamonds Earned'],
+        ['gravesRobbed', 'Graves Robbed'],
+        ['healthGiven', 'Health Given'],
+        ['healthRecovered', 'Health Recovered'],
+        ['kills', 'Kills'],
+        ['minesCaptured', 'Mines Captured'],
+      ]
+    };
 
     var timeFrames = [
       ['lifetime', 'Overall'],
@@ -33,6 +41,10 @@ var LeaderboardView = Backbone.View.extend({
 
     var timeHtml = timeFrames.map(function(timeFrame) {
       return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
+    });
+
+    var statsHtml = this.statItems[this.leaderboardParams.timeFrame].map(function(stat) {
+      return '<option value="' + stat[0] + '">' + stat[1] + '</option>';
     });
 
     var initialHtml =
@@ -59,12 +71,39 @@ var LeaderboardView = Backbone.View.extend({
     'change select.leaderboard-stat-param': 'updateLeaderboardStat'
   },
   updateLeaderboardTime: function(clickEvent) {
+    //Update dropdown for the time frame selected
+    if (this.leaderboardParams.timeFrame !== clickEvent.currentTarget.value) {
 
-    //Get the stat the user clicked on
-    this.leaderboardParams.timeFrame = clickEvent.currentTarget.value;
+      //Get the stat the user clicked on
+      this.leaderboardParams.timeFrame = clickEvent.currentTarget.value;
 
-    //Update the leaderboard to show the new stat
-    this.updateLeaderboard();
+      //Update the dropdown stats list for the new time frame
+      var statItemsForTimeFrame = this.statItems[this.leaderboardParams.timeFrame]
+      var statsHtml = statItemsForTimeFrame.map(function(stat) {
+        return '<option value="' + stat[0] + '">' + stat[1] + '</option>';
+      });
+      var $statSelect = this.$el.find('select.leaderboard-stat-param');
+      $statSelect.html(statsHtml);
+
+      //If last selected stat is in the new stat list, keep it
+      var inList = false;
+      for (var i=0; i<statItemsForTimeFrame.length; i++) {
+        if (statItemsForTimeFrame[i][0] === this.leaderboardParams.stat) {
+          $statSelect.val(this.leaderboardParams.stat);
+          inList = true;
+          break;
+        }
+      }
+      
+      //If last selected stat is not valid for this time frame,
+      //default to the first stat
+      if (!inList) {
+        this.leaderboardParams.stat = statItemsForTimeFrame[0][0];
+      }
+
+      //Update the leaderboard itself
+      this.updateLeaderboard();
+    }
   },
   updateLeaderboardStat: function(clickEvent) {
 
@@ -93,16 +132,20 @@ var LeaderboardView = Backbone.View.extend({
     var $table = this.$el.find('table.leaderboard-table');
     
     if (failed) {
+
       $table.html('<tr><th>Rank</th><th>Name</th><th>Failed To Load</th></tr>')
+
     } else {
-      var displayItem = 'Failed To Load';
+      var headerItem = 'Failed To Load';
 
       //Replace with object-based logic eventually
       //Gets the nicely formatted label to display in the table header
-      for (var i=0; i<this.statItems.length; i++) {
-        var value = this.statItems[i][0];
+      var statItems = this.statItems[this.leaderboardParams.timeFrame];
+
+      for (var i=0; i<statItems.length; i++) {
+        var value = statItems[i][0];
         if (value === this.leaderboardParams.stat) {
-          displayItem = this.statItems[i][1];
+          headerItem = statItems[i][1];
           break;
         }
       }
@@ -111,12 +154,12 @@ var LeaderboardView = Backbone.View.extend({
         '<tr class="lifetime-table-header">' +
           '<th>Rank</th>' +
           '<th>Name</th>' +
-          '<th>' + displayItem + '</th>' +
+          '<th>' + headerItem + '</th>' +
         '</tr>';
 
-      var topTen = this.model.get('topTen');
-      for (var i=0; i<topTen.length; i++) {
-        var user = topTen[i];
+      var topUsers = this.model.get('topUsers');
+      for (var i=0; i<topUsers.length; i++) {
+        var user = topUsers[i];
         tableHtml += '<tr>';
 
         //Add the rank of the user to table
