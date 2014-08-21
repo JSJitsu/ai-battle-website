@@ -6,14 +6,22 @@
     </div> 
   </div>
   <div class="row">
-    <ul class="nav nav-tabs userViewTabs" role="tablist">
-      <li class="active settings"><a href="#">Settings</a></li>
-      <li class="recentStats"><a href="#">Recent Stats</a></li>
-      <li class="lifetimeStats"><a href="#">Lifetime Stats</a></li>
-      <li class="averageStats"><a href="#">Average Stats</a></li>
-    </ul>
-  </div>
-    <table class="table table-striped table-bordered table-responsive lifetime-table">
+    <div class="btn-group btn-group-justified">
+      <div class="general btn-group">
+        <button type="button" class="btn btn-default settings">Settings</button>
+      </div>
+      <div class="active rules btn-group">
+        <button type="button" class="btn btn-default recentStats">Recent Stats</button>
+      </div>
+      <div class="btn-group improve">
+        <button type="button" class="btn btn-default lifetimeStats">Lifetime Stats</button>
+      </div>
+      <div class="btn-group improve">
+        <button type="button" class="btn btn-default averageStats">Average Stats</button>
+      </div>
+    </div>
+  </div>  
+    <table class="table table-bordered table-responsive lifetime-table">
       <tr class="lifetime-table-header">
         <td>Category</td>
         <td>Stats</td>
