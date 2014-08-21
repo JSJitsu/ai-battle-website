@@ -123,4 +123,11 @@
     bottom: 10vw;
     left: 0;
   }
+  .nav-buttons {
+    margin: 0 auto;
+    max-width: 75rem;
+    .btn{
+      font-size: 11px;
+    }
+  }
 }
