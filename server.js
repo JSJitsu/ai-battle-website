@@ -24,43 +24,43 @@ app.get('/api/leaderboard/lifetime/kills', function(req, res) {
   var lifetimeKills = {
     topUsers: [
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 10
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 9
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 8
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 7
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 6
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 5
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 4
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 3
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 2
       }, 
       {
-        name: 'James',
+        name: 'Coming Soon',
         value: 1
       }
     ]

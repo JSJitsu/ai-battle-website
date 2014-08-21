@@ -49,6 +49,7 @@ var LeaderboardView = Backbone.View.extend({
       'Damage Dealt'
     ];
 
+
     //Make dropdown list html
     for (var i=0; i<dropdownItems.length; i++) {
 
