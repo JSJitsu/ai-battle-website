@@ -4,23 +4,39 @@ var LeaderboardView = Backbone.View.extend({
     
     this.leaderboardParams = {
       stat: 'kills',
-      type: 'lifetime'
+      timeFrame: 'lifetime'
     };
 
     //Create dropdown html
-    var stats = [
-      ['kills', 'Kills'],
+    this.statItems = [
+      ['damageDealt', 'Damage Dealt'],
+      ['deaths', 'Deaths'],
       ['diamondsEarned', 'Diamonds Earned'],
+      ['gravesRobbed', 'Graves Robbed'],
+      ['healthGiven', 'Health Given'],
       ['healthRecovered', 'Health Recovered'],
-      ['healthGiven', 'Health Given']
+      ['kills', 'Kills'],
+      ['losses', 'Losses'],
+      ['minesCaptured', 'Mines Captured'],
+      ['wins', 'Wins']
     ];
 
-    var statsHtml = stats.map(function(stat) {
+    var statsHtml = this.statItems.map(function(stat) {
       return '<option class="leaderboard" value="' + stat[0] + '">' + stat[1] + '</option>';
     });
 
+    var timeFrames = [
+      ['lifetime', 'Overall'],
+      ['recent', 'Most Recent Battle']
+    ]
+
+    var timeHtml = timeFrames.map(function(timeFrame) {
+      return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
+    });
+
     var initialHtml =
-        '<select class="leaderboard" name="stats">' + statsHtml.join('') + '</select>' +
+        '<select class="leaderboard-time-param" name="stats">' + timeHtml.join('') + '</select>' +
+        '<select class="leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select>' +
         '<table class="table table-striped table-bordered table-responsive leaderboard-table">' + 
         '</table>';
 
@@ -38,67 +54,81 @@ var LeaderboardView = Backbone.View.extend({
   },
 
   events: {
-    'change select.leaderboard': 'updateLeaderboard'
-    // 'click .recentLeaders': 'showRecent',
-    // 'click .lifetimeLeaders': 'showLifetime'
+    'change select.leaderboard-time-param': 'updateLeaderboardTime',
+    'change select.leaderboard-stat-param': 'updateLeaderboardStat'
   },
-  updateLeaderboard: function(clickEvent) {
+  updateLeaderboardTime: function(clickEvent) {
+
+    //Get the stat the user clicked on
+    this.leaderboardParams.timeFrame = clickEvent.currentTarget.value;
+
+    //Update the leaderboard to show the new stat
+    this.updateLeaderboard();
+  },
+  updateLeaderboardStat: function(clickEvent) {
 
     //Get the stat the user clicked on
     this.leaderboardParams.stat = clickEvent.currentTarget.value;
 
     //Update the leaderboard to show the new stat
+    this.updateLeaderboard();
+  },
+  updateLeaderboard: function() {
+    //Update the leaderboard model to grab the new leaderboard data
     this.model.updateLeaderboard(this.leaderboardParams);
 
+    //Grab the new leaderboard data, then re-render
     $.when(this.model.fetch()).then(function() {
       this.render();
     }.bind(this), function() {
       console.log('Failed to retrieve leaderboard');
-      this.render();
+      this.render(true);
     }.bind(this));
   },
-  // showRecent: function(event) {
-  //   event.preventDefault();
-  //   this.viewing = "recent";
-  //   this.render();
-  //   $('.recentLeaders').tab('show');
-  // },
 
-  // showLifetime: function(event) {
-  //   event.preventDefault();
-  //   this.viewing = "lifetime";
-  //   this.render();
-  //   $('.lifetimeLeaders').tab('show');
-  // },
-
-  render: function() {
+  render: function(failed) {
 
     //Update Leaderboard
     var $table = this.$el.find('table.leaderboard-table');
     
-    var tableHtml =
-      '<tr class="lifetime-table-header">' +
-        '<td>Rank</td>' +
-        '<td>Name</td>' +
-        '<td>' + this.leaderboardParams.stat + '</td>' +
-      '</tr>';
+    if (failed) {
+      $table.html('<tr><th>Rank</th><th>Name</th><th>Failed To Load</th></tr>')
+    } else {
+      var displayItem = 'Failed To Load';
 
-    var topUsers = this.model.get('topTen');
-    for (var i=0; i<topUsers.length; i++) {
-      var user = topUsers[i];
-      tableHtml += '<tr>';
+      //Replace with object-based logic eventually
+      //Gets the nicely formatted label to display in the table header
+      for (var i=0; i<this.statItems.length; i++) {
+        var value = this.statItems[i][0];
+        if (value === this.leaderboardParams.stat) {
+          displayItem = this.statItems[i][1];
+          break;
+        }
+      }
 
-      //Add the rank of the user to table
-      tableHtml += '<td>' + (i + 1) + '</td>';
-      tableHtml += '<td>' + user.name + '</td>';
-      tableHtml += '<td>' + user.value + '</td>';
+      var tableHtml =
+        '<tr class="lifetime-table-header">' +
+          '<th>Rank</th>' +
+          '<th>Name</th>' +
+          '<th>' + displayItem + '</th>' +
+        '</tr>';
+
+      var topTen = this.model.get('topTen');
+      for (var i=0; i<topTen.length; i++) {
+        var user = topTen[i];
+        tableHtml += '<tr>';
+
+        //Add the rank of the user to table
+        tableHtml += '<td>' + (i + 1) + '</td>';
+        tableHtml += '<td>' + user.name + '</td>';
+        tableHtml += '<td>' + user.value + '</td>';
 
 
-      tableHtml += '</tr>';
+        tableHtml += '</tr>';
+      }
+      tableHtml += '</table>';
+      $table.html(tableHtml);
     }
-    tableHtml += '</table>';
-    $table.html(tableHtml);
-
   }
 
 });
