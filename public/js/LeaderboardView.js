@@ -152,9 +152,9 @@ var LeaderboardView = Backbone.View.extend({
 
       var tableHtml =
         '<tr class="lifetime-table-header">' +
-          '<th>Rank</th>' +
-          '<th>Name</th>' +
-          '<th>' + headerItem + '</th>' +
+          '<th class="leaderboard-headers">Rank</th>' +
+          '<th class="leaderboard-headers">Name</th>' +
+          '<th class="leaderboard-headers">' + headerItem + '</th>' +
         '</tr>';
 
       var topUsers = this.model.get('topUsers');
@@ -163,9 +163,9 @@ var LeaderboardView = Backbone.View.extend({
         tableHtml += '<tr>';
 
         //Add the rank of the user to table
-        tableHtml += '<td>' + (i + 1) + '</td>';
-        tableHtml += '<td>' + user.name + '</td>';
-        tableHtml += '<td>' + user.value + '</td>';
+        tableHtml += '<td class="leaderboard-data">' + (i + 1) + '</td>';
+        tableHtml += '<td class="leaderboard-data">' + user.name + '</td>';
+        tableHtml += '<td class="leaderboard-data">' + user.value + '</td>';
 
 
         tableHtml += '</tr>';
