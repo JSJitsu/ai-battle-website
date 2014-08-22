@@ -80,6 +80,15 @@
     width: 3.9vw;  
     height: 3.9vw;
   }
+  @-moz-document url-prefix() {
+    .battle-tile {
+      width: 3.9vw;
+      height: 2.9vw; 
+    }
+    .sprite {
+      max-height: 2.8vw;
+    }
+  }
 }
 
 
@@ -130,6 +139,15 @@
       font-size: 11px;
     }
   }
+  @-moz-document url-prefix() {
+    .battle-tile {
+      width: 7.1vw;
+      height: 5vw;
+    }
+    .sprite{
+      max-height: 5vw;
+    } 
+  }
 }
 
 @media (max-width: 398px) {
@@ -148,5 +166,14 @@
   .battle-tile {
     width: 7.1vw;
     height: 7.3vw;
+  }
+   @-moz-document url-prefix() {
+    .battle-tile {
+      width: 7.1vw;
+      height: 5vw;
+    }
+    .sprite{
+      max-height: 5vw;
+    } 
   }
 }
