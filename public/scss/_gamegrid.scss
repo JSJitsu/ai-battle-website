@@ -83,3 +83,17 @@
 .team-blue {
   color: rgba(102, 137, 248, 0.79);
 }
+
+@-moz-document url-prefix() {
+  .battle-tile {
+      display: table-cell;
+      width: 3.1vw;
+      border: 1px dotted #10380D;
+      background-image: url('../img/tile.png');
+      height: 2vw;
+  }
+  .sprite{
+      max-width: 100%;
+      max-height: 1.8vw;
+  }
+}
