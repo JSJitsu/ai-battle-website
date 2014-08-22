@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       js: {
-        src: ['public/js/stylehelpers/*.js', 'public/js/*.js'],
+        src: ['public/js/**/*.js','public/app.js'],
         dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
@@ -70,8 +70,7 @@ module.exports = function(grunt) {
     watch: {
       files: [
         './public/scss/*.scss',
-        './public/js/*.js',
-        './public/js/stylehelpers/*.js',
+        './public/js/**/*.js',
         './public/css/*.css'
       ],
       tasks: [
