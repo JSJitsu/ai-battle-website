@@ -23,6 +23,18 @@ var LeaderboardView = Backbone.View.extend({
         ['minesCaptured', 'Mines Captured'],
         ['wins', 'Wins']
       ],
+      'average': [
+        ['damageDealt', 'Damage Dealt'],
+        ['deaths', 'Deaths'],
+        ['diamondsEarned', 'Diamonds Earned'],
+        ['gravesRobbed', 'Graves Robbed'],
+        ['healthGiven', 'Health Given'],
+        ['healthRecovered', 'Health Recovered'],
+        ['kills', 'Kills'],
+        ['losses', 'Losses'],
+        ['minesCaptured', 'Mines Captured'],
+        ['wins', 'Wins']
+      ],
       'recent': [
         ['damageDealt', 'Damage Dealt'],
         ['diamondsEarned', 'Diamonds Earned'],
@@ -36,11 +48,13 @@ var LeaderboardView = Backbone.View.extend({
 
     var timeFrames = [
       ['lifetime', 'Overall'],
+      ['average', 'Average'],
       ['recent', 'Most Recent Battle']
     ];
 
     var timeHtml = timeFrames.map(function(timeFrame) {
       return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
+      console.log(timeFrame);
     });
 
     var statsHtml = this.statItems[this.leaderboardParams.timeFrame].map(function(stat) {
