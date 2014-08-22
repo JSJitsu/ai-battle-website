@@ -150,6 +150,20 @@
   }
 }
 
+@media (max-width: 763px) {
+  @-moz-document url-prefix() {
+    .team-info {
+      visibility: hidden;
+    }
+    .life-capacity {
+      width: 111%;
+    }
+    .sprite {
+      max-height: 3.1vw;
+    }
+  }
+}
+
 @media (max-width: 398px) {
   .indicator {
     font-size: 3.5vw;
