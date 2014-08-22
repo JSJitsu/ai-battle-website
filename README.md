@@ -3,9 +3,9 @@
 ![](https://raw.githubusercontent.com/JavascriptBattle/javascript-battle-website/master/public/img/black-knight.png)
 # Javascript Battle
 
-Every day there is an epic battle between legendary heroes.  Control your hero with your own pre-submitted javascript function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
+Every day there is an epic battle between legendary heroes.  Control your hero with either a pre-defined function from our repo or your own submitted function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
 
-Sign up is as easy as logging into your github account, forking a “starter” repository, and opting in to the daily battle at javascriptbattle.com.  Learn from your past mistakes and make your hero smarter by customizing your code, and feel the power as your hero dominates the battlefield.
+Sign up is as easy as logging into your github account, forking a “starter” repository, and opting in to the daily battle at javascriptbattle.com.  Learn from your past mistakes and make your hero smarter by customizing your hero.js file, and feel the power as your hero dominates the battlefield.
 
 Such is the power of javascript.
 
