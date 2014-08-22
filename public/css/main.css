@@ -606,6 +606,8 @@ body {
   float: left;
   height: 87%;
   -webkit-box-shadow: inset 0 2px 0 #A23A3A;
+  box-shadow: inset 0 2px 0 #A23A3A;
+  -moz-box-shadow: inset 0 2px 0 #A23A3A;
   border-radius: 15px;
   border: 3px solid #000058;
   position: relative;
@@ -620,7 +622,15 @@ body {
   border-radius: 5px;
   background: red;
   position: absolute;
+  box-shadow: -1px 0px 2px #C0ACAC, 1px 0px 3px #C0ACAC, -1px 0px 10px #C0ACAC, 8px 4px 6px #290E0E;
+  -moz-box-shadow: -1px 0px 2px #C0ACAC, 1px 0px 3px #C0ACAC, -1px 0px 10px #C0ACAC, 8px 4px 6px #290E0E;
   -webkit-box-shadow: -1px 0px 2px #C0ACAC, 1px 0px 3px #C0ACAC, -1px 0px 10px #C0ACAC, 8px 4px 6px #290E0E; }
+
+.indicator {
+  background: rgba(92, 43, 43, 0.8);
+  font-size: 1vw;
+  margin-left: -3px;
+  position: absolute; }
 
 .arrow {
   position: absolute;
@@ -640,12 +650,6 @@ body {
     right: -3.8px;
     border-style: solid;
     border-color: red transparent transparent transparent; }
-
-.indicator {
-  background: rgba(92, 43, 43, 0.8);
-  font-size: 1vw;
-  margin-left: -3px;
-  position: absolute; }
 
 .team-yellow {
   color: rgba(245, 255, 0, 0.83); }
@@ -795,7 +799,15 @@ body {
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;
-    height: 3.9vw; } }
+    height: 3.9vw; }
+
+  @-moz-document url-prefix() {
+    .battle-tile {
+      width: 3.9vw;
+      height: 2.9vw; }
+
+    .sprite {
+      max-height: 2.8vw; } } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
@@ -840,7 +852,15 @@ body {
     margin: 0 auto;
     max-width: 75rem; }
     .nav-buttons .btn {
-      font-size: 11px; } }
+      font-size: 11px; }
+
+  @-moz-document url-prefix() {
+    .battle-tile {
+      width: 7.1vw;
+      height: 5vw; }
+
+    .sprite {
+      max-height: 5vw; } } }
 @media (max-width: 398px) {
   .indicator {
     font-size: 3.5vw;
@@ -856,4 +876,12 @@ body {
 
   .battle-tile {
     width: 7.1vw;
-    height: 7.3vw; } }
+    height: 7.3vw; }
+
+  @-moz-document url-prefix() {
+    .battle-tile {
+      width: 7.1vw;
+      height: 5vw; }
+
+    .sprite {
+      max-height: 5vw; } } }
