@@ -35,7 +35,7 @@ var BoardTileView = Backbone.View.extend({
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
           this.$('.sprite').addClass('current-turn');
         }
-        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="highlightedCurrentUser sprite">';
+        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="sprite">';
         
         html += '<span class="indicator ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
         html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
