@@ -755,17 +755,23 @@ body {
     top: 1vw; } }
 @media (min-width: 1550px) {
   .team-info {
-    top: 4vw;
+    top: 3.5vw;
     width: 10vw; }
 
   .battle-map {
-    bottom: 3vw; }
+    bottom: 1vw; }
 
   .play-controls {
-    bottom: 7.6vw; }
+    bottom: 5.6vw; }
 
   .range-bar {
-    bottom: 7.9vw; } }
+    bottom: 5.9vw; }
+
+  .team-name {
+    width: 140px; }
+
+  .turn {
+    bottom: 13%; } }
 @media (max-width: 1199px) {
   .battle-map {
     bottom: 4.6vw; }
