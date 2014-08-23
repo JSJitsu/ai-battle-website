@@ -1,9 +1,14 @@
+//This file is meant to be run many times per day after all users have been
+//assigned to games at the start of the day
+
 var Q = require('q');
 var openGameDatabase = require('../helpers/open-mongo-database.js');
 var startStopContainers = require('../docker/container_interaction/start-stop-containers.js');
 
 var GAMES_AT_ONCE = 3;
 var port = 12500;
+
+
 
 var startContainersForUsersInGame = function(userCollection, gameNumber) {
   //Grab all users in this game
@@ -41,7 +46,21 @@ openGameDatabase().then(function(mongoDataObject) {
 
       if (gamesRemaining <= 0) {
         //We're at our max games at the moment
-        return Q.all(gamePrepPromises);
+        return Q.all(gamePrepPromises).then(function() {
+          console.log('Started all containers for users in the next set of games...');
+          
+          console.log('Saving this progress to the gameQueue object in the database...');
+          //Save new game status to database
+          return Q.npost(miscCollection, 'update', [
+            {
+              '_id': 'gameQueue'
+            }, gameQueue, {
+              upsert: true
+            }
+          ]).then(function() {
+            console.log('Progress saved to gameQueue object!');
+          });
+        });
 
       } else if (game.status === 'Containers Started') {
         //The last game has not completed yet
@@ -50,14 +69,17 @@ openGameDatabase().then(function(mongoDataObject) {
         //This game has already been fully completed
         //skip it
       } else if (game.status === 'Not Started') {
-
         //This game needs to be run
+
+        //Updates the status of the game (doesn't save to database unless it all completes)
+        game.status = 'Containers Started';
+
+        console.log('Starting user containers for game #' + i);
         gamePrepPromises.push(startContainersForUsersInGame(userCollection, i));
         gamesRemaining--;
       }
     }
   }).then(function() {
-    console.log('Started all containers for users in the next set of games...');
     console.log('Closing database!');
     db.close();
   }).catch(function(err) {
