@@ -1,0 +1,1016 @@
+Mongo database is connected!
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+23
+[spawn] childProcess.pid:  14245
+[spawn] childProcess.pid:  14247
+[spawn] childProcess.pid:  14249
+[spawn] childProcess.pid:  14251
+[spawn] childProcess.pid:  14254
+[spawn] childProcess.pid:  14259
+[spawn] childProcess.pid:  14264
+[spawn] childProcess.pid:  14270
+[spawn] childProcess.pid:  14282
+[spawn] childProcess.pid:  14291
+[spawn] childProcess.pid:  14298
+[spawn] childProcess.pid:  14303
+[spawn] childProcess.pid:  14320
+[spawn] childProcess.pid:  14326
+[spawn] childProcess.pid:  14330
+[spawn] childProcess.pid:  14343
+[spawn] childProcess.pid:  14373
+[spawn] childProcess.pid:  14375
+[spawn] childProcess.pid:  14376
+[spawn] childProcess.pid:  14380
+[spawn] childProcess.pid:  14381
+[spawn] childProcess.pid:  14387
+[spawn] childProcess.pid:  14397
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+[spawn] childProcess.pid:  14425
+[spawn] childProcess.pid:  14433
+[spawn] childProcess.pid:  14437
+[spawn] childProcess.pid:  14441
+[spawn] childProcess.pid:  14450
+[spawn] childProcess.pid:  14458
+[spawn] childProcess.pid:  14468
+[spawn] childProcess.pid:  14475
+[spawn] childProcess.pid:  14479
+[spawn] childProcess.pid:  14482
+[spawn] childProcess.pid:  14488
+[spawn] childProcess.pid:  14497
+[spawn] childProcess.pid:  14501
+[spawn] childProcess.pid:  14510
+[spawn] childProcess.pid:  14519
+[spawn] childProcess.pid:  14532
+[spawn] childProcess.pid:  14562
+[spawn] childProcess.pid:  14576
+[spawn] childProcess.pid:  14583
+[spawn] childProcess.pid:  14586
+[spawn] childProcess.pid:  14590
+[spawn] childProcess.pid:  14596
+[spawn] childProcess.pid:  14600
+[spawn] childProcess.pid:  14615
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+[spawn] childProcess.pid:  14636
+[spawn] childProcess.pid:  14644
+[spawn] childProcess.pid:  14647
+[spawn] childProcess.pid:  14650
+[spawn] childProcess.pid:  14657
+[spawn] childProcess.pid:  14669
+[spawn] childProcess.pid:  14678
+[spawn] childProcess.pid:  14691
+[spawn] childProcess.pid:  14693
+[spawn] childProcess.pid:  14701
+[spawn] childProcess.pid:  14715
+[spawn] childProcess.pid:  14729
+[spawn] childProcess.pid:  14734
+[spawn] childProcess.pid:  14739
+[spawn] childProcess.pid:  14763
+[spawn] childProcess.pid:  14770
+[spawn] childProcess.pid:  14774
+[spawn] childProcess.pid:  14781
+[spawn] childProcess.pid:  14791
+[spawn] childProcess.pid:  14798
+[spawn] childProcess.pid:  14800
+[spawn] childProcess.pid:  14802
+[spawn] childProcess.pid:  14825
+[spawn] childProcess.pid:  14831
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5dbc19b94b0df9bee1210cf7107a3d0150291b2737d6de9b2929d133355714b7
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ade09a5dccf8cdebe6bbb090621b1b90678ad87021b34b4a5806b357ed3b5c7d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f8abf0469868387414e976e30e550e35f61758920edfafe0e4bbf5791484d7e0
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  bab8c0e1e4c787658dfb3eee5a01ce142c42bdd80a806a87c7c69f9d3c0c7f60
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5402fff32442e2fbfe66c7cf09631282876b016ddc36a120fd6ebca546dfa848
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  aaebc58c22943a52c4d07d011a51b9196264a6a114dde73b9d84407e44972335
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  32848f1eb9a659197ea3c84f9f486280fb26d013711f510cf4c3926eea567bd0
+
+  [spawn] stderr:  2014/08/23 15:57:32 Error: Cannot start container 5402fff32442e2fbfe66c7cf09631282876b016ddc36a120fd6ebca546dfa848: port has already been allocated
+
+Error starting user containers for the next group of games!
+"/home/greg/hack-reactor/javascript-battle/workers/docker/container_interaction/start-hero-brain-container.sh 12509" failed with code 1
+Closing database!
+Shutting down all containers due to error
+[spawn] childProcess.pid:  14860
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ffff8bb2e446cf819f8bc1d3c0acf673fa66f9532cb242d310e32bff4c1ff9d4
+
+  [spawn] stderr:  2014/08/23 15:57:32 Error: Cannot start container 5dbc19b94b0df9bee1210cf7107a3d0150291b2737d6de9b2929d133355714b7: port has already been allocated
+
+  [spawn] stdout:  2a618f14e700
+
+  [spawn] stderr:  2014/08/23 15:57:32 Error: Cannot start container ade09a5dccf8cdebe6bbb090621b1b90678ad87021b34b4a5806b357ed3b5c7d: port has already been allocated
+
+  [spawn] stdout:  ffff8bb2e446
+
+  [spawn] stdout:  bab8c0e1e4c7
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ba373b29ea3aaa182f8d5699e622f9a2ba0b5398b992821e526b978f7e360c20
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  14d105df49f4f02aeb46bce32ed5ae325452a8cf83734b42bdbab4ad4d286bcf
+
+  [spawn] stdout:  32848f1eb9a6
+
+  [spawn] stdout:  14d105df49f4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  2a618f14e70012adacdda9d23eaf2e65d9bab9c517174e4ee133692b77de62a2
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5c0f484273b8e6466198e220b09da005ba95bd17ea6a02f064352616d45553fc
+
+  [spawn] stdout:  ade09a5dccf8
+
+  [spawn] stderr:  2014/08/23 15:57:33 Error: Cannot start container f8abf0469868387414e976e30e550e35f61758920edfafe0e4bbf5791484d7e0: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:33 Error: Cannot start container bab8c0e1e4c787658dfb3eee5a01ce142c42bdd80a806a87c7c69f9d3c0c7f60: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9f21b71446f5750e97cda6e4b0e18d3fa83e1a2e7b0b04f1cdeb607b59ee7819
+
+  [spawn] stdout:  5402fff32442
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  88e24cafe200d747fd4eb2a9346b4cfc4d4bf8769f0622a2c8c3e6fb595cc788
+
+  [spawn] stdout:  5dbc19b94b0d
+
+  [spawn] stderr:  2014/08/23 15:57:33 Error: Cannot start container ffff8bb2e446cf819f8bc1d3c0acf673fa66f9532cb242d310e32bff4c1ff9d4: port has already been allocated
+
+  [spawn] stdout:  aaebc58c2294
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  6be672707d77fc0f748b6ef414e55f1d85398a38f4f68a271ed9bcdbaa867709
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  3c6d43b959528fb788f8fbd2fc3f876b6f8d41be49348178dbf38407b432566c
+
+  [spawn] stdout:  f8abf0469868
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  cdcfd62e54f75adf4a5ea0632c104490e78e59693613517a9302ee19bf095ebf
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5cc4eadfdc416944dd69a3c23a8931145eba7e97322610cdc8f60474298b311d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c0a2d1ab339f299ab54a01c4b798511811d98ca5be52abd2154b0f0c57c5a1f3
+
+  [spawn] stderr:  2014/08/23 15:57:34 Error: Cannot start container 32848f1eb9a659197ea3c84f9f486280fb26d013711f510cf4c3926eea567bd0: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  442f7fae8d0aba1e09001546a8259db70cf663e5e9fb58e2f5e73556f1cfb98d
+
+  [spawn] stdout:  268c0b411488
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c11603d2fa1cc29fea44bcaf98482d869ef2bd3d29eba32f4d62361c7491d3be
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d2d069b01cd77d66790d4c7826300e4620f6939c0fdaf23c8c4d09da576a96c5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  1ecd85daeeb5aff39479dfd0b6467db99061eabc16507a9eeb40e6af6bca7d15
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  137a1f92c7effbef5362a324bf0ee0b7e3c05c8a6bc23c424048f46b01e46a46
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  789d1da45da9d9cd0cfc61d476bbe94ab51e95a914fb9698edc2bf9ad45d6028
+
+  [spawn] stderr:  2014/08/23 15:57:35 Error: Cannot start container 1ecd85daeeb5aff39479dfd0b6467db99061eabc16507a9eeb40e6af6bca7d15: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  95f24cd5f065c2f3f5db30e4b8883d52258f5f134ec96573632271d62b20b4c9
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c74032f3a75deefad5f0c9761f2dbf75bb8f46680345212036b7d8425189066d
+
+  [spawn] stderr:  2014/08/23 15:57:35 Error: Cannot start container 6be672707d77fc0f748b6ef414e55f1d85398a38f4f68a271ed9bcdbaa867709: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  69fb5366c7778aee63ebff9ad590162ace006b778a9ae62072cfd6a73d4ba916
+
+  [spawn] stderr:  2014/08/23 15:57:35 Error: Cannot start container aaebc58c22943a52c4d07d011a51b9196264a6a114dde73b9d84407e44972335: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a854511275a35998856e08e065bbfb0b7897d61a19f61002b9a2c50ce7859997
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  dbbf8db903edf7a6bcbd1ad517c7e68201fee0e4447f541fbda9a992c9e7c7f5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  227d600910eb6fb6411e391ea4782a7fdd5816fcfb89e102b19338d123656a44
+
+  [spawn] stdout:  605ec3422c7164016b645c42a94ba07a4f5c3c90d75b25c227f4bbcdcb8e3457
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  2195545d9ed47e8e74a2d2109decd47de3d88d1c5774a7f007e3fd0c48ac5b15
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  23705ec3ca94289c45bdf6744861ac07e24b8b8bcb96920a311a7dfaa5f59a86
+
+  [spawn] stdout:  de1caa156f441244e1d5f63f99487d1b9163674c4d3a5f0dc2a60b4eec63713f
+
+  [spawn] stdout:  7807ebb8f025382f0c27a3e5bd723ec4f5a8f82413d007963d4e6b5f507af01a
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f3279c896160dc04a069ade8dd87e347cd94cc4903009ee4237ec522bc17a9f0
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  43fe5cae80d5016faba9bf2de74faea29d3fd58f5d2442023473030f45c90e16
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  571fda9269d30c1046b40b33d4ae59397cd1319fdeb230c90a027f1a0b28b74a
+
+  [spawn] stderr:  2014/08/23 15:57:36 Error: Cannot start container ba373b29ea3aaa182f8d5699e622f9a2ba0b5398b992821e526b978f7e360c20: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b0ed5234503e5328ef5391dd2e1542eb6d5c9c2e0d58c4ae7ada592d1fc092cc
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9bd2295f6241429c5ed1ae4925eca935965b9ac48af88f1f54d3111f3ac75b70
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  27fdde3000db819371cba733f8d7af921bf7ea7367a8784bd2db620d1a095a74
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  145264c3549810b83b1cdfb34dc24d1f85ae193a3731ed573d36ea97059ca6f0
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  bd33ed2c09409067630812ccc765c117e2e4f17e2997bb8d2e3294c9ad77fba3
+
+  [spawn] stderr:  2014/08/23 15:57:36 Error: Cannot start container 5c0f484273b8e6466198e220b09da005ba95bd17ea6a02f064352616d45553fc: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b3902637cfee41a0d41878f2f80faab4b90f8605c7d4136b3fa4e0285d9335d3
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  dfd081bf39b810873c54d4986480981dcaa272081db510d82bb88eabb06dbb71
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  2166ff85ada392fba48c4af49f135f73ca3f34891f50bcb996b21bec7c3ee966
+
+  [spawn] stdout:  cb40d9bd94cb823fb81b606fe6cea10e08d90aadb0b7479f1b1df3fcb624d9c5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c255e6d90c3afec13456f677d29456733943e7cae6cb5e079abea014883cfb7c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  3e8db0a30c4d238e4e7d86e3e4f274d35c603486f1005c69af067075cb21c82c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  68fca85ce569e9fe55b70be0eac6829ad97d630aee7c8c7b36fc88fcb16cdcca
+
+  [spawn] stderr:  2014/08/23 15:57:37 Error: Cannot start container 137a1f92c7effbef5362a324bf0ee0b7e3c05c8a6bc23c424048f46b01e46a46: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a4cc9f2f908ac79ce771a49ce82508b50e11136b08e0f4872e8e309cb18d1351
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e9c15d52ccecbe968fb700788ceebf8d06f543dc636e3061ef3a75bbd127128d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b5bf504c1bad70fa0f9e553b7db2c7f8440764bf2076a5605857ff58db929c5d
+
+  [spawn] stderr:  2014/08/23 15:57:37 Error: Cannot start container 9f21b71446f5750e97cda6e4b0e18d3fa83e1a2e7b0b04f1cdeb607b59ee7819: port has already been allocated
+
+  [spawn] stdout:  fa879917886c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  059a56ed867f5623c44ab723ec8c30b9df43af94f41ad96c7b4000d60becdd6c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a955b5a6007c28a608093113952910148142fa1969b0c92c6c968679d55e852f
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0a9feeb864bf97aadfc164ca89993fc503aa38ca17f55f59664e63bd32ff5faa
+
+  [spawn] stderr:  2014/08/23 15:57:37 Error: Cannot start container 059a56ed867f5623c44ab723ec8c30b9df43af94f41ad96c7b4000d60becdd6c: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:37 Error: Cannot start container 3c6d43b959528fb788f8fbd2fc3f876b6f8d41be49348178dbf38407b432566c: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:37 Error: Cannot start container 5cc4eadfdc416944dd69a3c23a8931145eba7e97322610cdc8f60474298b311d: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container 69fb5366c7778aee63ebff9ad590162ace006b778a9ae62072cfd6a73d4ba916: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8177788e8e04c4d1e1236c7c26c668270a6a02242f26df199438cd1bb5554565
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  753851a008d1f4f98bef7a3cbd44e66511cb0cd2a52a135e37178c0781ca1d6b
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f52faee65094393136fa265b7880884affb968700920f24031fa397888ac274f
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container c0a2d1ab339f299ab54a01c4b798511811d98ca5be52abd2154b0f0c57c5a1f3: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container 2195545d9ed47e8e74a2d2109decd47de3d88d1c5774a7f007e3fd0c48ac5b15: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container f3279c896160dc04a069ade8dd87e347cd94cc4903009ee4237ec522bc17a9f0: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container 43fe5cae80d5016faba9bf2de74faea29d3fd58f5d2442023473030f45c90e16: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  7d391bce536d04cf6ca039fb7dcf2d739a6a085dd04f204f460a8745a66d4261
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container 571fda9269d30c1046b40b33d4ae59397cd1319fdeb230c90a027f1a0b28b74a: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:38 Error: Cannot start container 442f7fae8d0aba1e09001546a8259db70cf663e5e9fb58e2f5e73556f1cfb98d: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:39 Error: Cannot start container 2a618f14e70012adacdda9d23eaf2e65d9bab9c517174e4ee133692b77de62a2: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c0c065220216a704daa76a1ce97454329f483ea587255721c548f17d8f3823f6
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e381654abdf53a72d2380961f41bdfbb38608b49d0676917c6979a2832ddff54
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  077ab80e62e98b964a3e06230fd5a54c154681e6fd0ede87550f7c72e2b4afe1
+
+  [spawn] stderr:  2014/08/23 15:57:39 Error: Cannot start container dfd081bf39b810873c54d4986480981dcaa272081db510d82bb88eabb06dbb71: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  4f0047017b5461e61d6494ce9f7d0c1e0abb8f85c6ffc30c489d8ac3846c5cd6
+
+  [spawn] stderr:  2014/08/23 15:57:39 Error: Cannot start container 077ab80e62e98b964a3e06230fd5a54c154681e6fd0ede87550f7c72e2b4afe1: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5d593711348a40f9b2a078ef4bc49bfa18670834f3a57b70caa9100813ab6353
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e00c2d6d54a963941b297534047f8923b7bcb926e766fed4179269468ac1d3de
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d828644f644bd6aa7d5ba0a8d1651e660e8b75e634d916cefccb68c404d53280
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container 789d1da45da9d9cd0cfc61d476bbe94ab51e95a914fb9698edc2bf9ad45d6028: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container b5bf504c1bad70fa0f9e553b7db2c7f8440764bf2076a5605857ff58db929c5d: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container 95f24cd5f065c2f3f5db30e4b8883d52258f5f134ec96573632271d62b20b4c9: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container cdcfd62e54f75adf4a5ea0632c104490e78e59693613517a9302ee19bf095ebf: port has already been allocated
+
+  [spawn] stdout:  ae63fa253527
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container a854511275a35998856e08e065bbfb0b7897d61a19f61002b9a2c50ce7859997: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:40 Error: Cannot start container dbbf8db903edf7a6bcbd1ad517c7e68201fee0e4447f541fbda9a992c9e7c7f5: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  61f54ab73576054daf947b616ba63e49e7340aeb18d33d2a29fd8eb2442b19a6
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 605ec3422c7164016b645c42a94ba07a4f5c3c90d75b25c227f4bbcdcb8e3457: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 23705ec3ca94289c45bdf6744861ac07e24b8b8bcb96920a311a7dfaa5f59a86: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 7807ebb8f025382f0c27a3e5bd723ec4f5a8f82413d007963d4e6b5f507af01a: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container de1caa156f441244e1d5f63f99487d1b9163674c4d3a5f0dc2a60b4eec63713f: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  593f22a8d1edb18886d114010a3279214d23f7222d9f9d5b1fe7bf878089ced5
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 753851a008d1f4f98bef7a3cbd44e66511cb0cd2a52a135e37178c0781ca1d6b: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container c11603d2fa1cc29fea44bcaf98482d869ef2bd3d29eba32f4d62361c7491d3be: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 27fdde3000db819371cba733f8d7af921bf7ea7367a8784bd2db620d1a095a74: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 7d391bce536d04cf6ca039fb7dcf2d739a6a085dd04f204f460a8745a66d4261: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container bd33ed2c09409067630812ccc765c117e2e4f17e2997bb8d2e3294c9ad77fba3: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container 2166ff85ada392fba48c4af49f135f73ca3f34891f50bcb996b21bec7c3ee966: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:41 Error: Cannot start container d2d069b01cd77d66790d4c7826300e4620f6939c0fdaf23c8c4d09da576a96c5: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 88e24cafe200d747fd4eb2a9346b4cfc4d4bf8769f0622a2c8c3e6fb595cc788: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container cb40d9bd94cb823fb81b606fe6cea10e08d90aadb0b7479f1b1df3fcb624d9c5: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container a4cc9f2f908ac79ce771a49ce82508b50e11136b08e0f4872e8e309cb18d1351: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 3e8db0a30c4d238e4e7d86e3e4f274d35c603486f1005c69af067075cb21c82c: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container a955b5a6007c28a608093113952910148142fa1969b0c92c6c968679d55e852f: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container c74032f3a75deefad5f0c9761f2dbf75bb8f46680345212036b7d8425189066d: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 0a9feeb864bf97aadfc164ca89993fc503aa38ca17f55f59664e63bd32ff5faa: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 8177788e8e04c4d1e1236c7c26c668270a6a02242f26df199438cd1bb5554565: port has already been allocated
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  195910128bc9487aa517135297af03c4c236d94308c13aa490af4cd640d7ec22
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 14d105df49f4f02aeb46bce32ed5ae325452a8cf83734b42bdbab4ad4d286bcf: port has already been allocated
+
+  [spawn] stdout:  70b31011f0af
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 61f54ab73576054daf947b616ba63e49e7340aeb18d33d2a29fd8eb2442b19a6: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container f52faee65094393136fa265b7880884affb968700920f24031fa397888ac274f: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 593f22a8d1edb18886d114010a3279214d23f7222d9f9d5b1fe7bf878089ced5: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 9bd2295f6241429c5ed1ae4925eca935965b9ac48af88f1f54d3111f3ac75b70: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 145264c3549810b83b1cdfb34dc24d1f85ae193a3731ed573d36ea97059ca6f0: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container b0ed5234503e5328ef5391dd2e1542eb6d5c9c2e0d58c4ae7ada592d1fc092cc: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container e381654abdf53a72d2380961f41bdfbb38608b49d0676917c6979a2832ddff54: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container b3902637cfee41a0d41878f2f80faab4b90f8605c7d4136b3fa4e0285d9335d3: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:42 Error: Cannot start container 5d593711348a40f9b2a078ef4bc49bfa18670834f3a57b70caa9100813ab6353: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container e9c15d52ccecbe968fb700788ceebf8d06f543dc636e3061ef3a75bbd127128d: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container 4f0047017b5461e61d6494ce9f7d0c1e0abb8f85c6ffc30c489d8ac3846c5cd6: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container e00c2d6d54a963941b297534047f8923b7bcb926e766fed4179269468ac1d3de: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container 227d600910eb6fb6411e391ea4782a7fdd5816fcfb89e102b19338d123656a44: port has already been allocated
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container d828644f644bd6aa7d5ba0a8d1651e660e8b75e634d916cefccb68c404d53280: port has already been allocated
+
+  [spawn] stdout:  faff183cfb36
+
+  [spawn] stderr:  2014/08/23 15:57:43 Error: Cannot start container 195910128bc9487aa517135297af03c4c236d94308c13aa490af4cd640d7ec22: port has already been allocated
+
+  [spawn] stdout:  967b1d78e8e9
+
+  [spawn] stdout:  6f987f159caf
+
+  [spawn] stdout:  da46602b5a19
+
+  [spawn] stdout:  707db68d88a9
+
+  [spawn] stdout:  bcdeafb9fc5d
+
+  [spawn] stdout:  1444e5a52300
+
+  [spawn] stdout:  0c4832cb0b04
+
+  [spawn] stdout:  3d682a07fcc5
+
+  [spawn] stdout:  3d1849b08f0b
+
+  [spawn] stdout:  39294e2833f4
+
+  [spawn] stdout:  ab4a0c8e22a1
+
+  [spawn] stdout:  ac60198a60ae
+
+  [spawn] stdout:  1448b9747e14
+
+  [spawn] stdout:  8e4c242e4848
+
+  [spawn] stdout:  ba0517476e80
+
+  [spawn] stdout:  5d0a35d8e34d
+
+  [spawn] stdout:  7d8280774562
+
+  [spawn] stdout:  bafcda94cee0
+
+  [spawn] stdout:  2d48beb8c19d
+
+  [spawn] stdout:  849506f812db
+
+  [spawn] stdout:  c941c249de7e
+
+  [spawn] stdout:  a3d7097b3076
+
+  [spawn] stdout:  c9587b7aa2b4
+
+  [spawn] stdout:  5f3a8e83b26f
+
+  [spawn] stdout:  304e1cce4179
+
+  [spawn] stdout:  0fb3d8bbed72
+
+  [spawn] stdout:  de8610b4fe4d
+
+  [spawn] stdout:  48bf9415003e
+
+  [spawn] stdout:  895c3929ca52
+
+  [spawn] stdout:  1b3301557b48
+
+  [spawn] stdout:  78158516e563
+
+  [spawn] stdout:  35d33aba3e59
+
+  [spawn] stdout:  807fd5af22de
+
+  [spawn] stdout:  547d62513e95
+
+  [spawn] stdout:  dbee96c52dd7
+
+  [spawn] stdout:  199515f8a90b
+
+  [spawn] stdout:  1f8ea828e4e2
+
+  [spawn] stdout:  0d730ac16b6f
+
+  [spawn] stdout:  11288b5b8071
+
+  [spawn] stdout:  45c782f10334
+
+  [spawn] stdout:  d0d1163ea556
+
+  [spawn] stdout:  f9e954c496cd
+
+  [spawn] stdout:  76b28d602604
+
+  [spawn] stdout:  71cfc891d7a4
+
+  [spawn] stdout:  1724e7c27717
+
+  [spawn] stdout:  8a18b19b172b
+
+  [spawn] stdout:  3f00ba30c628
+
+  [spawn] stdout:  ccb39a10a193
+
+  [spawn] stdout:  25ac303fd1bb
+
+  [spawn] stdout:  0154f09d0ea2
+
+  [spawn] stdout:  24204342904c
+
+  [spawn] stdout:  a6a112025ea0
+
+  [spawn] stdout:  2900544ebaec
+
+  [spawn] stdout:  8089aa35d758
+
+  [spawn] stdout:  24df21c16cd6
+
+  [spawn] stdout:  257c80374e4f
+
+  [spawn] stdout:  607beadbc81a
+
+  [spawn] stdout:  a28606a5985d
+
+  [spawn] stdout:  b6cce9641cfb
+
+  [spawn] stdout:  d57e48d22460
+
+  [spawn] stdout:  fde32e73ae32
+
+  [spawn] stdout:  4c84dde90ac9
+
+  [spawn] stdout:  e19aee3e7622
+
+  [spawn] stdout:  64120d11e0b4
+
+  [spawn] stdout:  4edddca29ee6
+
+  [spawn] stdout:  6f01e0648fc8
+
+[spawn] childProcess.pid:  15714
+  [spawn] stdout:  c255e6d90c3a
+
+  [spawn] stdout:  077ab80e62e9
+
+  [spawn] stdout:  5d593711348a
+
+  [spawn] stdout:  3e8db0a30c4d
+
+  [spawn] stdout:  4f0047017b54
+
+  [spawn] stdout:  68fca85ce569
+
+  [spawn] stdout:  571fda9269d3
+
+  [spawn] stdout:  bd33ed2c0940
+
+  [spawn] stdout:  9bd2295f6241
+
+  [spawn] stdout:  b0ed5234503e
+
+  [spawn] stdout:  442f7fae8d0a
+
+  [spawn] stdout:  195910128bc9
+
+  [spawn] stdout:  43fe5cae80d5
+
+  [spawn] stdout:  61f54ab73576
+
+  [spawn] stdout:  753851a008d1
+
+  [spawn] stdout:  de1caa156f44
+
+  [spawn] stdout:  f3279c896160
+
+  [spawn] stdout:  2195545d9ed4
+
+  [spawn] stdout:  23705ec3ca94
+
+  [spawn] stdout:  27fdde3000db
+
+  [spawn] stdout:  e381654abdf5
+
+  [spawn] stdout:  2166ff85ada3
+
+  [spawn] stdout:  c0c065220216
+
+  [spawn] stdout:  d2d069b01cd7
+
+  [spawn] stdout:  145264c35498
+
+  [spawn] stdout:  b5bf504c1bad
+
+  [spawn] stdout:  a854511275a3
+
+  [spawn] stdout:  69fb5366c777
+
+  [spawn] stdout:  0a9feeb864bf
+
+  [spawn] stdout:  e00c2d6d54a9
+
+  [spawn] stdout:  d828644f644b
+
+  [spawn] stdout:  c74032f3a75d
+
+  [spawn] stdout:  a955b5a6007c
+
+  [spawn] stdout:  95f24cd5f065
+
+  [spawn] stdout:  6be672707d77
+
+  [spawn] stdout:  789d1da45da9
+
+  [spawn] stdout:  cb40d9bd94cb
+
+  [spawn] stdout:  dfd081bf39b8
+
+  [spawn] stdout:  b3902637cfee
+
+  [spawn] stdout:  c11603d2fa1c
+
+  [spawn] stdout:  7d391bce536d
+
+  [spawn] stdout:  593f22a8d1ed
+
+  [spawn] stdout:  5c0f484273b8
+
+  [spawn] stdout:  8177788e8e04
+
+  [spawn] stdout:  605ec3422c71
+
+  [spawn] stdout:  7807ebb8f025
+
+  [spawn] stdout:  227d600910eb
+
+  [spawn] stdout:  dbbf8db903ed
+
+  [spawn] stdout:  059a56ed867f
+
+  [spawn] stdout:  a4cc9f2f908a
+
+  [spawn] stdout:  88e24cafe200
+
+  [spawn] stdout:  137a1f92c7ef
+
+  [spawn] stdout:  1ecd85daeeb5
+
+  [spawn] stdout:  f52faee65094
+
+  [spawn] stdout:  ffff8bb2e446
+
+  [spawn] stdout:  5cc4eadfdc41
+
+  [spawn] stdout:  bab8c0e1e4c7
+
+  [spawn] stdout:  32848f1eb9a6
+
+  [spawn] stdout:  e9c15d52ccec
+
+  [spawn] stdout:  ba373b29ea3a
+
+  [spawn] stdout:  3c6d43b95952
+
+  [spawn] stdout:  c0a2d1ab339f
+
+  [spawn] stdout:  cdcfd62e54f7
+
+  [spawn] stdout:  9f21b71446f5
+
+  [spawn] stdout:  2a618f14e700
+
+  [spawn] stdout:  14d105df49f4
+
+  [spawn] stdout:  f8abf0469868
+
+  [spawn] stdout:  5402fff32442
+
+  [spawn] stdout:  5dbc19b94b0d
+
+  [spawn] stdout:  aaebc58c2294
+
+  [spawn] stdout:  ade09a5dccf8
+
+  [spawn] stdout:  268c0b411488
+
+  [spawn] stdout:  fa879917886c
+
+  [spawn] stdout:  ae63fa253527
+
+  [spawn] stdout:  70b31011f0af
+
+  [spawn] stdout:  faff183cfb36
+
+  [spawn] stdout:  da46602b5a19
+
+  [spawn] stdout:  707db68d88a9
+
+  [spawn] stdout:  bcdeafb9fc5d
+
+  [spawn] stdout:  967b1d78e8e9
+
+  [spawn] stdout:  1444e5a52300
+
+  [spawn] stdout:  0c4832cb0b04
+
+  [spawn] stdout:  3d682a07fcc5
+
+  [spawn] stdout:  6f987f159caf
+
+  [spawn] stdout:  3d1849b08f0b
+
+  [spawn] stdout:  39294e2833f4
+
+  [spawn] stdout:  ab4a0c8e22a1
+
+  [spawn] stdout:  ac60198a60ae
+
+  [spawn] stdout:  1448b9747e14
+
+  [spawn] stdout:  8e4c242e4848
+
+  [spawn] stdout:  ba0517476e80
+
+  [spawn] stdout:  5d0a35d8e34d
+
+  [spawn] stdout:  7d8280774562
+
+  [spawn] stdout:  bafcda94cee0
+
+  [spawn] stdout:  2d48beb8c19d
+
+  [spawn] stdout:  849506f812db
+
+  [spawn] stdout:  c941c249de7e
+
+  [spawn] stdout:  a3d7097b3076
+
+  [spawn] stdout:  c9587b7aa2b4
+
+  [spawn] stdout:  5f3a8e83b26f
+
+  [spawn] stdout:  547d62513e95
+
+  [spawn] stdout:  0fb3d8bbed72
+
+  [spawn] stdout:  304e1cce4179
+
+  [spawn] stdout:  de8610b4fe4d
+
+  [spawn] stdout:  48bf9415003e
+
+  [spawn] stdout:  895c3929ca52
+
+  [spawn] stdout:  1b3301557b48
+
+  [spawn] stdout:  78158516e563
+
+  [spawn] stdout:  807fd5af22de
+
+  [spawn] stdout:  dbee96c52dd7
+
+  [spawn] stdout:  199515f8a90b
+
+  [spawn] stdout:  1f8ea828e4e2
+
+  [spawn] stdout:  0d730ac16b6f
+
+  [spawn] stdout:  11288b5b8071
+
+  [spawn] stdout:  45c782f10334
+
+  [spawn] stdout:  35d33aba3e59
+
+  [spawn] stdout:  d0d1163ea556
+
+  [spawn] stdout:  f9e954c496cd
+
+  [spawn] stdout:  76b28d602604
+
+  [spawn] stdout:  71cfc891d7a4
+
+  [spawn] stdout:  1724e7c27717
+
+  [spawn] stdout:  24204342904c
+
+  [spawn] stdout:  a6a112025ea0
+
+  [spawn] stdout:  2900544ebaec
+
+  [spawn] stdout:  8089aa35d758
+
+  [spawn] stdout:  24df21c16cd6
+
+  [spawn] stdout:  257c80374e4f
+
+  [spawn] stdout:  607beadbc81a
+
+  [spawn] stdout:  a28606a5985d
+
+  [spawn] stdout:  b6cce9641cfb
+
+  [spawn] stdout:  d57e48d22460
+
+  [spawn] stdout:  8a18b19b172b
+
+  [spawn] stdout:  3f00ba30c628
+
+  [spawn] stdout:  ccb39a10a193
+
+  [spawn] stdout:  25ac303fd1bb
+
+  [spawn] stdout:  0154f09d0ea2
+
+  [spawn] stdout:  4edddca29ee6
+
+  [spawn] stdout:  6f01e0648fc8
+
+  [spawn] stdout:  4c84dde90ac9
+
+  [spawn] stdout:  e19aee3e7622
+
+  [spawn] stdout:  64120d11e0b4
+
+  [spawn] stdout:  fde32e73ae32
+
+Containers shut down successfully

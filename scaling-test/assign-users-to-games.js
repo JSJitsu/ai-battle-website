@@ -1,28 +1,17 @@
-var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var fs = require('fs');
-var secrets = require('../secrets.js');
-var mongoConnectionURL = secrets.mongoKey;
-
-//Returns a promise that resolves when the database opens
-var openGameDatabase = function() {
-  return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
-    console.log('open!');
-    return {
-      db: db,
-      userCollection: db.collection('users')
-    };
-  });
-};
+var openGameDatabase = require('../helpers/open-mongo-database.js');
 
 var assignUsersToGames = function() {
 
   //Opens connection to mongo database
-  openGameDatabase().then(function(mongoDataObject) {
+  return openGameDatabase().then(function(mongoDataObject) {
     var userCollection = mongoDataObject.userCollection;
+    var miscCollection = mongoDataObject.miscCollection;
     var db = mongoDataObject.db;
+    var gameQueue = {};
 
-    Q.ninvoke(userCollection, 'find', {}).then(function(response) {
+    //Get array of users from database
+    return Q.ninvoke(userCollection, 'find', {}).then(function(response) {
       return Q.ninvoke(response, 'toArray');
     }).then(function(users) {
 
@@ -34,12 +23,17 @@ var assignUsersToGames = function() {
 
       //Used to make sure heroes get added evenly to teams
       var alternateTeams = [];
+      gameQueue.numberOfGames = numberOfGames;
+      gameQueue.gamesToPlay = [];
       for (var gameIndex=0; gameIndex<numberOfGames; gameIndex++) {
         alternateTeams.push(0);
+        gameQueue.gamesToPlay[gameIndex] = {
+          status: 'Not Started'
+        };
       }
 
       var userUpdatePromises = [];
-      var currentGameIndex = 0;
+      var currentGameIndex = -1;
 
       //Assign users to games and teams
       while (users.length > 0) {
@@ -53,29 +47,30 @@ var assignUsersToGames = function() {
         }
 
         //Loops through each game
-        if (currentGameIndex < games.length - 1) {
+        if (currentGameIndex < numberOfGames - 1) {
           currentGameIndex++;
         } else {
           currentGameIndex = 0;
         }
 
         //Get a random user from the user list
-        var nextUserIndex = Math.floor(Math.random() * users.length);
+        var nextUserIndex = Math.floor(Math.random(Date.now()) * users.length);
         var user = users.splice(nextUserIndex, 1)[0];
 
         //Save the user (be able to get the hero port, etc later)
-        user.team = team;
+        user.assignedTeam = team;
         user.assignedGame = currentGameIndex;
 
-        console.log('Assigning user: ' + user.githubHandle + ' to game ' + currentGameIndex + 'on team ' + team);
+        console.log('Assigning user: ' + user.githubHandle + ' to game ' + currentGameIndex + ' on team ' + team);
 
-        var userPromise = Q.npost(mongoCollection, 'update', [
+        var userPromise = Q.npost(userCollection, 'update', [
           {
             '_id':user._id
           }, user, {
             upsert: true
           }
         ]);
+
         userUpdatePromises.push(userPromise);
       }
 
@@ -83,6 +78,19 @@ var assignUsersToGames = function() {
 
     }).then(function() {
       console.log('Assigning users to games was successful!');
+      console.log('Saving game queue to misc database');
+
+      gameQueue._id = 'gameQueue';
+      var gameQueuePromise = Q.npost(miscCollection, 'update', [
+        {
+          '_id': 'gameQueue'
+        }, gameQueue, {
+          upsert: true
+        }
+      ]);
+
+    }).then(function() {
+      console.log('Game Queue saved successfully!')
       console.log('Closing database...');
       db.close();
     }).catch(function(err) {
@@ -91,13 +99,7 @@ var assignUsersToGames = function() {
       console.log('Closing database...');
       db.close();
     });
-
-
-  }).catch(function(err) {
-    console.log('Error opening database!');
-    console.log(err);
   });
-
 };
 
 assignUsersToGames();

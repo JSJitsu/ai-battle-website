@@ -14,3 +14,6 @@
 //Periodic Script 
 //shift the next game (or 3 games) off the queue,
 //start up dockers for each of the users in that game,
+
+
+//run the top few games in the queue that are marked as "ready"
