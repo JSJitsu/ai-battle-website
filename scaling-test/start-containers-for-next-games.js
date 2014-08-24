@@ -9,7 +9,6 @@ var GAMES_AT_ONCE = 3;
 var port = 12500;
 
 
-
 var startContainersForUsersInGame = function(userCollection, gameNumber) {
   //Grab all users in this game
   return Q.ninvoke(userCollection, 'find', { assignedGame: gameNumber }).then(function(response) {
@@ -19,12 +18,32 @@ var startContainersForUsersInGame = function(userCollection, gameNumber) {
     
     //Start up containers for all those users
     for (var i=0; i<users.length; i++) {
-      userContainerPromises.push(startStopContainers.spinUpContainer(port));
+      var user = users[i];
+      user.port = port;
+      
+      var userContainerPromise = startStopContainers.spinUpContainer(port).then(function() {
+
+        console.log('Saving port for user: ' + user.githubHandle);
+
+        //Save ports on the user object
+        return Q.npost(userCollection, 'update', [
+          {
+            '_id': user._id
+          }, user, {
+            upsert: true
+          }
+        ]).then(function() {
+          console.log('Port saved!');
+        });
+
+      });
+
+      userContainerPromises.push(userContainerPromise);
       port++;
     }
 
     //Resolves when all user containers start up
-    return Q.all(userContainerPromises);
+    return Q.all(userContainerPromises).then();
 
   });
 };
