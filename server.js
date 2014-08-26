@@ -64,6 +64,7 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
     }, function(err, results) {
       if (err) {
         res.send(err);
+        return;
       }
       res.send(results);
     });
@@ -87,6 +88,7 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
+        return;
       }
       res.send(results[0]);
     });
@@ -106,6 +108,7 @@ router.get('/gameData/:dayOffset/:turn/:gameNumber', function(req, res){
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
+        return;
       }
       res.send(results[0]);
     });
