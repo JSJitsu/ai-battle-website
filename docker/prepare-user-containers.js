@@ -1,6 +1,7 @@
+var Q = require('q');
+var secrets = require('../secrets.js');
 var startStopContainers = require('./container_interaction/start-stop-containers.js');
 var communicateWithContainers = require('./container_interaction/communicate-with-containers.js')
-var secrets = require('../secrets.js');
 
 //This function will stop existing containers,
 //  start containers for each of the users in the provided array,
@@ -58,22 +59,23 @@ var prepareUserContainers = function(users) {
 
     return Q.all(users.map(function(user) {
 
-      var pathToHeroBrain = secrets.rootDirectory + '/user_code/hero/' + user.githubHandle + '_hero.js';
-      var pathToHelperFile = secrets.rootDirectory + '/user_code/helpers/' + user.githubHandle + '_helpers.js';
+      var heroFilePath = secrets.rootDirectory + '/user_code/hero/' + user.githubHandle + '_hero.js';
+      var helperFilePath = secrets.rootDirectory + '/user_code/helpers/' + user.githubHandle + '_helpers.js';
 
       //Sends the hero file, then the helper file
-      return communicateWithContainers.postFile(user.port, heroFilePath, 'hero').then(function() {
-        console.log('Successfully sent hero file to user ' + user.githubHandle);
-        return communicateWithContainers.postFile(user.port, helperFilePath, 'helper').then(function() {
-          console.log('Successfully sent helper file to user ' + user.githubHandle);
+      return communicateWithContainers.postFile(user.port, heroFilePath, 'hero').then(function(heroFileMessage) {
+        console.log('Attempted to send hero file to user ' + user.githubHandle);
+        console.log(heroFileMessage);
+        return communicateWithContainers.postFile(user.port, helperFilePath, 'helper').then(function(helperFileMessage) {
+          console.log('Attempted to send helper file to user ' + user.githubHandle);
+          console.log(helperFileMessage);
         });
       })
 
     }));
 
   }).then(function() {
-    console.log('Successfully sent all files to all user containers');
-    console.log('All containers are ready!');
+    console.log('Finished sending files (if available) to all user containers');
   });
 };
 

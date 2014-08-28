@@ -36,8 +36,11 @@ var usersCodeRequest = function() {
     //All user containers are 100% ready--run this game
     }).then(function() {
 
-      console.log('All users prepared!');
-
+      console.log('All user containers are prepared!');
+    }).then(function() {
+      console.log('All done!');
+      console.log('Closing database...');
+      db.close();
     }).catch(function(err) {
       console.log('ERROR!');
       console.log(err);

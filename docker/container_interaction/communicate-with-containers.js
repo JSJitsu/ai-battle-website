@@ -44,27 +44,20 @@ communicateWithContainersObj.postFile = function(port, filePath, fileType) {
         var url = 'http://0.0.0.0:' + port.toString() + '/' + fileType + 'FilesHere';
 
         //Post the file to the given port
+        var r = request.post(url, function(error, response) {
+          if (error) {
+            deferred.reject(new Error(error));
+          } else {
+            deferred.resolve('File sent successfully!');
+          }
+        });
 
-        //The set timeout is only necessary because we need to give
-        //the docker containers time to start their servers...this is
-        //a VERY hacky solution, but it's a good stop-gap for now.
-        setTimeout(function() {
-          var r = request.post(url, function(error, response) {
-            if (error) {
-              deferred.reject(new Error(error));
-            } else {
-              deferred.resolve(response.body);
-            }
-          });
-
-          //Append the file so it gets posted
-          var form = r.form();
-          form.append(fileType, fs.createReadStream(filePath));
-        }, 5000);
+        //Append the file so it gets posted
+        var form = r.form();
+        form.append(fileType, fs.createReadStream(filePath));
 
       } else {
-        deferred.resolve('No file found...file not transferred');
-        // deferred.reject(new Error('"' + filePath + '" does not exist!'));
+        deferred.resolve('No file found...file not transferred!');
       }
     });
   }
@@ -96,17 +89,13 @@ communicateWithContainersObj.checkIfContainerIsReady = function(port) {
       deferred.reject('Container at port ' + port + ' not ready after ' + maxAttempts + ' attempts!')
     } else {
       request.post(url, fakeForm, function(err, response, body) {
-        if (err) {
-          deferred.reject(err);
-        } else {
-          if (body === '"Not yet loaded"') {
-            deferred.resolve(true);        
-          } else {
-            console.log('Container at port ' + port + ' is not yet ready...trying again');
+        if (err || body !== '"Not yet loaded"') {
+          console.log('Container at port ' + port + ' is not yet ready...trying again');
 
-            //Keeps looping until the container is ready
-            process.setTimeout(pingContainer, msDelay); 
-          }
+          //Keeps looping until the container is ready
+          setTimeout(pingContainer, msDelay); 
+        } else {
+          deferred.resolve(true);        
         }
       });
     }
