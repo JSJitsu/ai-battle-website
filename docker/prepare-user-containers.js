@@ -7,7 +7,7 @@ var secrets = require('../secrets.js');
 //  wait until those containers are ready,
 //  then pass the appropriate user files into each container.
 //Returns a promise
-var function = prepareUserContainers(users) {
+var prepareUserContainers = function(users) {
 
   //The starting port
   var port = 12499;
@@ -76,3 +76,5 @@ var function = prepareUserContainers(users) {
     console.log('All containers are ready!');
   });
 };
+
+module.exports = prepareUserContainers;

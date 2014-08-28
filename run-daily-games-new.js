@@ -1,10 +1,10 @@
+var Q = require('q');
+var secrets = require('./secrets.js');
 var openDatabase = require('./helpers/open-mongo-database.js');
 var prepareUserContainers = require('./docker/prepare-user-containers.js');
 
-
 // var request = require('request');
 // var MongoClient = require('mongodb').MongoClient;
-// var Q = require('q');
 // var fs = require('fs');
 // var secrets = require('./secrets.js');
 // var mongoConnectionURL = secrets.mongoKey;
@@ -21,7 +21,7 @@ var usersCodeRequest = function() {
     var gameDataCollection = mongoData.gameDataCollection;
 
     //Find all users
-    return Q.ninvoke(userCollection, 'find').then(function(response) {
+    Q.ninvoke(userCollection, 'find').then(function(response) {
       return Q.ninvoke(response, 'toArray');
 
     //Get all user containers ready for game
@@ -41,7 +41,13 @@ var usersCodeRequest = function() {
     }).catch(function(err) {
       console.log('ERROR!');
       console.log(err);
+      console.log('Closing database...');
+      db.close();
     });
+  }).catch(function(err) {
+    console.log('Error opening database!');
+    console.log(err);
+  });
 };
 
 usersCodeRequest();
