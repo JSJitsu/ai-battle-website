@@ -30,4 +30,4 @@ var addFakeUsers = function(numberOfFakeUsers) {
   });
 };
 
-addFakeUsers(10);
+addFakeUsers(200);

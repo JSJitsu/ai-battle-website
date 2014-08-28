@@ -1,7 +1,7 @@
 var Q = require('q');
 var secrets = require('./secrets.js');
 var openDatabase = require('./helpers/open-mongo-database.js');
-var prepareUserContainers = require('./docker/prepare-user-containers.js');
+var completeAllGames = require('./game_logic/complete-all-games.js');
 
 // var request = require('request');
 // var MongoClient = require('mongodb').MongoClient;
@@ -18,7 +18,6 @@ var usersCodeRequest = function() {
   openDatabase(secrets.mongoKey).then(function(mongoData) {
     var db = mongoData.db;
     var userCollection = mongoData.userCollection;
-    var gameDataCollection = mongoData.gameDataCollection;
 
     //Find all users
     Q.ninvoke(userCollection, 'find').then(function(response) {
@@ -27,16 +26,12 @@ var usersCodeRequest = function() {
     //Get all user containers ready for game
     }).then(function(users) {
 
-      console.log('Preparing users...');
-
-      //Get the users for the first game
-      return prepareUserContainers(users);
-      
+      completeAllGames(users, mongoData);      
 
     //All user containers are 100% ready--run this game
     }).then(function() {
-
       console.log('All user containers are prepared!');
+      console.log('Running game!')
     }).then(function() {
       console.log('All done!');
       console.log('Closing database...');

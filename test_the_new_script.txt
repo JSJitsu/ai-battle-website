@@ -1,0 +1,1813 @@
+Mongo database is connected!
+Planning games for 410 users.
+Adding user: fakeUser66 to game 1, team 0
+Adding user: fakeUser5 to game 2, team 0
+Adding user: fakeUser172 to game 3, team 0
+Adding user: fakeUser76 to game 4, team 0
+Adding user: fakeUser80 to game 5, team 0
+Adding user: fakeUser82 to game 6, team 0
+Adding user: fakeUser36 to game 7, team 0
+Adding user: fakeUser113 to game 8, team 0
+Adding user: fakeUser186 to game 9, team 0
+Adding user: fakeUser147 to game 10, team 0
+Adding user: fakeUser10 to game 11, team 0
+Adding user: fakeUser122 to game 12, team 0
+Adding user: fakeUser8 to game 13, team 0
+Adding user: fakeUser176 to game 14, team 0
+Adding user: fakeUser94 to game 15, team 0
+Adding user: fakeUser42 to game 16, team 0
+Adding user: fakeUser112 to game 17, team 0
+Adding user: fakeUser18 to game 0, team 0
+Adding user: fakeUser47 to game 1, team 1
+Adding user: fakeUser137 to game 2, team 1
+Adding user: fakeUser77 to game 3, team 1
+Adding user: fakeUser174 to game 4, team 1
+Adding user: fakeUser165 to game 5, team 1
+Adding user: fakeUser66 to game 6, team 1
+Adding user: fakeUser38 to game 7, team 1
+Adding user: fakeUser34 to game 8, team 1
+Adding user: fakeUser92 to game 9, team 1
+Adding user: fakeUser0 to game 10, team 1
+Adding user: fakeUser54 to game 11, team 1
+Adding user: fakeUser87 to game 12, team 1
+Adding user: fakeUser28 to game 13, team 1
+Adding user: fakeUser141 to game 14, team 1
+Adding user: fakeUser7 to game 15, team 1
+Adding user: fakeUser138 to game 16, team 1
+Adding user: fakeUser36 to game 17, team 1
+Adding user: fakeUser2 to game 0, team 1
+Adding user: fakeUser170 to game 1, team 0
+Adding user: fakeUser122 to game 2, team 0
+Adding user: fakeUser190 to game 3, team 0
+Adding user: fakeUser111 to game 4, team 0
+Adding user: fakeUser100 to game 5, team 0
+Adding user: fakeUser9 to game 6, team 0
+Adding user: fakeUser37 to game 7, team 0
+Adding user: fakeUser189 to game 8, team 0
+Adding user: fakeUser132 to game 9, team 0
+Adding user: fakeUser130 to game 10, team 0
+Adding user: fakeUser12 to game 11, team 0
+Adding user: fakeUser43 to game 12, team 0
+Adding user: fakeUser160 to game 13, team 0
+Adding user: fakeUser169 to game 14, team 0
+Adding user: fakeUser153 to game 15, team 0
+Adding user: fakeUser171 to game 16, team 0
+Adding user: fakeUser118 to game 17, team 0
+Adding user: fakeUser197 to game 0, team 0
+Adding user: fakeUser59 to game 1, team 1
+Adding user: fakeUser91 to game 2, team 1
+Adding user: fakeUser107 to game 3, team 1
+Adding user: fakeUser191 to game 4, team 1
+Adding user: fakeUser54 to game 5, team 1
+Adding user: fakeUser86 to game 6, team 1
+Adding user: fakeUser184 to game 7, team 1
+Adding user: fakeUser96 to game 8, team 1
+Adding user: fakeUser22 to game 9, team 1
+Adding user: fakeUser146 to game 10, team 1
+Adding user: fakeUser134 to game 11, team 1
+Adding user: fakeUser123 to game 12, team 1
+Adding user: fakeUser31 to game 13, team 1
+Adding user: fakeUser101 to game 14, team 1
+Adding user: fakeUser10 to game 15, team 1
+Adding user: fakeUser18 to game 16, team 1
+Adding user: fakeUser129 to game 17, team 1
+Adding user: fakeUser4 to game 0, team 1
+Adding user: fakeUser72 to game 1, team 0
+Adding user: fakeUser12 to game 2, team 0
+Adding user: fakeUser161 to game 3, team 0
+Adding user: fakeUser85 to game 4, team 0
+Adding user: fakeUser44 to game 5, team 0
+Adding user: fakeUser103 to game 6, team 0
+Adding user: fakeUser28 to game 7, team 0
+Adding user: fakeUser102 to game 8, team 0
+Adding user: fakeUser25 to game 9, team 0
+Adding user: fakeUser152 to game 10, team 0
+Adding user: fakeUser9 to game 11, team 0
+Adding user: fakeUser106 to game 12, team 0
+Adding user: fakeUser143 to game 13, team 0
+Adding user: fakeUser145 to game 14, team 0
+Adding user: fakeUser194 to game 15, team 0
+Adding user: fakeUser17 to game 16, team 0
+Adding user: fakeUser154 to game 17, team 0
+Adding user: fakeUser57 to game 0, team 0
+Adding user: fakeUser109 to game 1, team 1
+Adding user: fakeUser62 to game 2, team 1
+Adding user: fakeUser106 to game 3, team 1
+Adding user: fakeUser93 to game 4, team 1
+Adding user: fakeUser63 to game 5, team 1
+Adding user: fakeUser49 to game 6, team 1
+Adding user: fakeUser125 to game 7, team 1
+Adding user: fakeUser34 to game 8, team 1
+Adding user: fakeUser24 to game 9, team 1
+Adding user: fakeUser105 to game 10, team 1
+Adding user: fakeUser21 to game 11, team 1
+Adding user: fakeUser41 to game 12, team 1
+Adding user: fakeUser70 to game 13, team 1
+Adding user: fakeUser88 to game 14, team 1
+Adding user: fakeUser180 to game 15, team 1
+Adding user: fakeUser138 to game 16, team 1
+Adding user: fakeUser173 to game 17, team 1
+Adding user: fakeUser24 to game 0, team 1
+Adding user: fakeUser119 to game 1, team 0
+Adding user: fakeUser162 to game 2, team 0
+Adding user: fakeUser148 to game 3, team 0
+Adding user: fakeUser35 to game 4, team 0
+Adding user: fakeUser5 to game 5, team 0
+Adding user: fakeUser184 to game 6, team 0
+Adding user: fakeUser23 to game 7, team 0
+Adding user: fakeUser59 to game 8, team 0
+Adding user: fakeUser48 to game 9, team 0
+Adding user: fakeUser142 to game 10, team 0
+Adding user: fakeUser198 to game 11, team 0
+Adding user: fakeUser191 to game 12, team 0
+Adding user: fakeUser6 to game 13, team 0
+Adding user: fakeUser174 to game 14, team 0
+Adding user: fakeUser53 to game 15, team 0
+Adding user: fakeUser63 to game 16, team 0
+Adding user: fakeUser164 to game 17, team 0
+Adding user: fakeUser108 to game 0, team 0
+Adding user: fakeUser127 to game 1, team 1
+Adding user: fakeUser150 to game 2, team 1
+Adding user: fakeUser85 to game 3, team 1
+Adding user: fakeUser61 to game 4, team 1
+Adding user: fakeUser2 to game 5, team 1
+Adding user: fakeUser132 to game 6, team 1
+Adding user: fakeUser143 to game 7, team 1
+Adding user: fakeUser166 to game 8, team 1
+Adding user: fakeUser146 to game 9, team 1
+Adding user: fakeUser61 to game 10, team 1
+Adding user: fakeUser115 to game 11, team 1
+Adding user: fakeUser74 to game 12, team 1
+Adding user: fakeUser15 to game 13, team 1
+Adding user: fakeUser69 to game 14, team 1
+Adding user: fakeUser55 to game 15, team 1
+Adding user: fakeUser170 to game 16, team 1
+Adding user: fakeUser82 to game 17, team 1
+Adding user: fakeUser90 to game 0, team 1
+Adding user: fakeUser6 to game 1, team 0
+Adding user: fakeUser133 to game 2, team 0
+Adding user: fakeUser186 to game 3, team 0
+Adding user: fakeUser30 to game 4, team 0
+Adding user: fakeUser195 to game 5, team 0
+Adding user: fakeUser33 to game 6, team 0
+Adding user: fakeUser92 to game 7, team 0
+Adding user: fakeUser195 to game 8, team 0
+Adding user: fakeUser45 to game 9, team 0
+Adding user: fakeUser130 to game 10, team 0
+Adding user: fakeUser155 to game 11, team 0
+Adding user: fakeUser38 to game 12, team 0
+Adding user: fakeUser164 to game 13, team 0
+Adding user: fakeUser51 to game 14, team 0
+Adding user: fakeUser181 to game 15, team 0
+Adding user: fakeUser193 to game 16, team 0
+Adding user: fakeUser58 to game 17, team 0
+Adding user: fakeUser3 to game 0, team 0
+Adding user: fakeUser22 to game 1, team 1
+Adding user: fakeUser41 to game 2, team 1
+Adding user: fakeUser29 to game 3, team 1
+Adding user: fakeUser110 to game 4, team 1
+Adding user: fakeUser78 to game 5, team 1
+Adding user: fakeUser20 to game 6, team 1
+Adding user: fakeUser163 to game 7, team 1
+Adding user: fakeUser0 to game 8, team 1
+Adding user: fakeUser8 to game 9, team 1
+Adding user: fakeUser115 to game 10, team 1
+Adding user: fakeUser60 to game 11, team 1
+Adding user: fakeUser44 to game 12, team 1
+Adding user: fakeUser3 to game 13, team 1
+Adding user: fakeUser14 to game 14, team 1
+Adding user: fakeUser29 to game 15, team 1
+Adding user: fakeUser84 to game 16, team 1
+Adding user: fakeUser1 to game 17, team 1
+Adding user: fakeUser144 to game 0, team 1
+Adding user: fakeUser128 to game 1, team 0
+Adding user: fakeUser163 to game 2, team 0
+Adding user: fakeUser68 to game 3, team 0
+Adding user: fakeUser52 to game 4, team 0
+Adding user: fakeUser97 to game 5, team 0
+Adding user: fakeUser81 to game 6, team 0
+Adding user: fakeUser46 to game 7, team 0
+Adding user: fakeUser137 to game 8, team 0
+Adding user: fakeUser135 to game 9, team 0
+Adding user: fakeUser149 to game 10, team 0
+Adding user: fakeUser187 to game 11, team 0
+Adding user: fakeUser46 to game 12, team 0
+Adding user: fakeUser104 to game 13, team 0
+Adding user: fakeUser58 to game 14, team 0
+Adding user: fakeUser150 to game 15, team 0
+Adding user: fakeUser8 to game 16, team 0
+Adding user: fakeUser13 to game 17, team 0
+Adding user: fakeUser89 to game 0, team 0
+Adding user: fakeUser9 to game 1, team 1
+Adding user: fakeUser185 to game 2, team 1
+Adding user: fakeUser134 to game 3, team 1
+Adding user: fakeUser39 to game 4, team 1
+Adding user: fakeUser73 to game 5, team 1
+Adding user: fakeUser32 to game 6, team 1
+Adding user: fakeUser168 to game 7, team 1
+Adding user: fakeUser56 to game 8, team 1
+Adding user: fakeUser31 to game 9, team 1
+Adding user: fakeUser2 to game 10, team 1
+Adding user: fakeUser60 to game 11, team 1
+Adding user: fakeUser11 to game 12, team 1
+Adding user: fakeUser84 to game 13, team 1
+Adding user: fakeUser89 to game 14, team 1
+Adding user: fakeUser139 to game 15, team 1
+Adding user: fakeUser171 to game 16, team 1
+Adding user: fakeUser43 to game 17, team 1
+Adding user: fakeUser102 to game 0, team 1
+Adding user: fakeUser187 to game 1, team 0
+Adding user: fakeUser189 to game 2, team 0
+Adding user: fakeUser151 to game 3, team 0
+Adding user: fakeUser105 to game 4, team 0
+Adding user: fakeUser173 to game 5, team 0
+Adding user: fakeUser140 to game 6, team 0
+Adding user: fakeUser190 to game 7, team 0
+Adding user: fakeUser196 to game 8, team 0
+Adding user: fakeUser4 to game 9, team 0
+Adding user: fakeUser97 to game 10, team 0
+Adding user: fakeUser193 to game 11, team 0
+Adding user: fakeUser71 to game 12, team 0
+Adding user: fakeUser157 to game 13, team 0
+Adding user: fakeUser188 to game 14, team 0
+Adding user: fakeUser88 to game 15, team 0
+Adding user: fakeUser179 to game 16, team 0
+Adding user: fakeUser64 to game 17, team 0
+Adding user: fakeUser57 to game 0, team 0
+Adding user: fakeUser121 to game 1, team 1
+Adding user: fakeUser99 to game 2, team 1
+Adding user: fakeUser79 to game 3, team 1
+Adding user: fakeUser183 to game 4, team 1
+Adding user: fakeUser40 to game 5, team 1
+Adding user: fakeUser64 to game 6, team 1
+Adding user: fakeUser95 to game 7, team 1
+Adding user: fakeUser67 to game 8, team 1
+Adding user: fakeUser160 to game 9, team 1
+Adding user: fakeUser162 to game 10, team 1
+Adding user: fakeUser139 to game 11, team 1
+Adding user: fakeUser135 to game 12, team 1
+Adding user: fakeUser49 to game 13, team 1
+Adding user: fakeUser123 to game 14, team 1
+Adding user: fakeUser172 to game 15, team 1
+Adding user: fakeUser127 to game 16, team 1
+Adding user: fakeUser91 to game 17, team 1
+Adding user: fakeUser192 to game 0, team 1
+Adding user: fakeUser178 to game 1, team 0
+Adding user: fakeUser94 to game 2, team 0
+Adding user: fakeUser65 to game 3, team 0
+Adding user: fakeUser116 to game 4, team 0
+Adding user: fakeUser69 to game 5, team 0
+Adding user: fakeUser149 to game 6, team 0
+Adding user: fakeUser16 to game 7, team 0
+Adding user: fakeUser62 to game 8, team 0
+Adding user: fakeUser110 to game 9, team 0
+Adding user: fakeUser75 to game 10, team 0
+Adding user: fakeUser16 to game 11, team 0
+Adding user: fakeUser75 to game 12, team 0
+Adding user: fakeUser80 to game 13, team 0
+Adding user: fakeUser77 to game 14, team 0
+Adding user: fakeUser7 to game 15, team 0
+Adding user: fakeUser182 to game 16, team 0
+Adding user: fakeUser145 to game 17, team 0
+Adding user: fakeUser156 to game 0, team 0
+Adding user: fakeUser98 to game 1, team 1
+Adding user: fakeUser182 to game 2, team 1
+Adding user: fakeUser175 to game 3, team 1
+Adding user: fakeUser104 to game 4, team 1
+Adding user: fakeUser136 to game 5, team 1
+Adding user: fakeUser15 to game 6, team 1
+Adding user: fakeUser196 to game 7, team 1
+Adding user: fakeUser23 to game 8, team 1
+Adding user: fakeUser177 to game 9, team 1
+Adding user: fakeUser68 to game 10, team 1
+Adding user: fakeUser194 to game 11, team 1
+Adding user: fakeUser81 to game 12, team 1
+Adding user: fakeUser21 to game 13, team 1
+Adding user: fakeUser161 to game 14, team 1
+Adding user: fakeUser198 to game 15, team 1
+Adding user: fakeUser136 to game 16, team 1
+Adding user: fakeUser72 to game 17, team 1
+Adding user: fakeUser177 to game 0, team 1
+Adding user: fakeUser111 to game 1, team 0
+Adding user: fakeUser5 to game 2, team 0
+Adding user: fakeUser151 to game 3, team 0
+Adding user: fakeUser120 to game 4, team 0
+Adding user: fakeUser175 to game 5, team 0
+Adding user: fakeUser131 to game 6, team 0
+Adding user: fakeUser17 to game 7, team 0
+Adding user: fakeUser70 to game 8, team 0
+Adding user: fakeUser131 to game 9, team 0
+Adding user: fakeUser124 to game 10, team 0
+Adding user: fakeUser14 to game 11, team 0
+Adding user: fakeUser199 to game 12, team 0
+Adding user: fakeUser133 to game 13, team 0
+Adding user: fakeUser99 to game 14, team 0
+Adding user: fakeUser33 to game 15, team 0
+Adding user: fakeUser181 to game 16, team 0
+Adding user: fakeUser112 to game 17, team 0
+Adding user: fakeUser71 to game 0, team 0
+Adding user: fakeUser120 to game 1, team 1
+Adding user: fakeUser39 to game 2, team 1
+Adding user: fakeUser4 to game 3, team 1
+Adding user: fakeUser25 to game 4, team 1
+Adding user: fakeUser118 to game 5, team 1
+Adding user: fakeUser159 to game 6, team 1
+Adding user: fakeUser178 to game 7, team 1
+Adding user: fakeUser107 to game 8, team 1
+Adding user: fakeUser74 to game 9, team 1
+Adding user: fakeUser52 to game 10, team 1
+Adding user: fakeUser87 to game 11, team 1
+Adding user: fakeUser117 to game 12, team 1
+Adding user: fakeUser188 to game 13, team 1
+Adding user: fakeUser158 to game 14, team 1
+Adding user: fakeUser32 to game 15, team 1
+Adding user: fakeUser26 to game 16, team 1
+Adding user: fakeUser126 to game 17, team 1
+Adding user: fakeUser55 to game 0, team 1
+Adding user: fakeUser83 to game 1, team 0
+Adding user: fakeUser51 to game 2, team 0
+Adding user: fakeUser142 to game 3, team 0
+Adding user: fakeUser144 to game 4, team 0
+Adding user: fakeUser37 to game 5, team 0
+Adding user: fakeUser119 to game 6, team 0
+Adding user: fakeUser40 to game 7, team 0
+Adding user: fakeUser169 to game 8, team 0
+Adding user: fakeUser6 to game 9, team 0
+Adding user: fakeUser3 to game 10, team 0
+Adding user: fakeUser157 to game 11, team 0
+Adding user: fakeUser101 to game 12, team 0
+Adding user: fakeUser53 to game 13, team 0
+Adding user: fakeUser7 to game 14, team 0
+Adding user: fakeUser27 to game 15, team 0
+Adding user: fakeUser148 to game 16, team 0
+Adding user: fakeUser165 to game 17, team 0
+Adding user: fakeUser158 to game 0, team 0
+Adding user: fakeUser167 to game 1, team 1
+Adding user: fakeUser108 to game 2, team 1
+Adding user: fakeUser35 to game 3, team 1
+Adding user: fakeUser20 to game 4, team 1
+Adding user: fakeUser159 to game 5, team 1
+Adding user: fakeUser67 to game 6, team 1
+Adding user: fakeUser90 to game 7, team 1
+Adding user: fakeUser141 to game 8, team 1
+Adding user: fakeUser180 to game 9, team 1
+Adding user: fakeUser128 to game 10, team 1
+Adding user: fakeUser1 to game 11, team 1
+Adding user: fakeUser156 to game 12, team 1
+Adding user: fakeUser114 to game 13, team 1
+Adding user: fakeUser11 to game 14, team 1
+Adding user: fakeUser95 to game 15, team 1
+Adding user: fakeUser47 to game 16, team 1
+Adding user: fakeUser65 to game 17, team 1
+Adding user: fakeUser125 to game 0, team 1
+Adding user: fakeUser152 to game 1, team 0
+Adding user: fakeUser100 to game 2, team 0
+Adding user: fakeUser192 to game 3, team 0
+Adding user: fakeUser26 to game 4, team 0
+Adding user: fakeUser76 to game 5, team 0
+Adding user: fakeUser179 to game 6, team 0
+Adding user: fakeUser183 to game 7, team 0
+Adding user: fakeUser116 to game 8, team 0
+Adding user: fakeUser45 to game 9, team 0
+Adding user: fakeUser199 to game 10, team 0
+Adding user: fakeUser83 to game 11, team 0
+Adding user: fakeUser154 to game 12, team 0
+Adding user: fakeUser197 to game 13, team 0
+Adding user: fakeUser113 to game 14, team 0
+Adding user: fakeUser1 to game 15, team 0
+Adding user: fakeUser73 to game 16, team 0
+Adding user: fakeUser103 to game 17, team 0
+Adding user: fakeUser124 to game 0, team 0
+Adding user: fakeUser140 to game 1, team 1
+Adding user: fakeUser27 to game 2, team 1
+Adding user: fakeUser147 to game 3, team 1
+Adding user: fakeUser176 to game 4, team 1
+Adding user: fakeUser50 to game 5, team 1
+Adding user: fakeUser153 to game 6, team 1
+Adding user: fakeUser114 to game 7, team 1
+Adding user: fakeUser86 to game 8, team 1
+Adding user: fakeUser185 to game 9, team 1
+Adding user: fakeUser96 to game 10, team 1
+Adding user: fakeUser0 to game 11, team 1
+Adding user: fakeUser129 to game 12, team 1
+Adding user: fakeUser166 to game 13, team 1
+Adding user: fakeUser48 to game 14, team 1
+Adding user: fakeUser78 to game 15, team 1
+Adding user: fakeUser121 to game 16, team 1
+Adding user: fakeUser117 to game 17, team 1
+Adding user: fakeUser98 to game 0, team 1
+Adding user: fakeUser93 to game 1, team 0
+Adding user: fakeUser19 to game 2, team 0
+Adding user: fakeUser109 to game 3, team 0
+Adding user: fakeUser167 to game 4, team 0
+Adding user: fakeUser13 to game 5, team 0
+Adding user: fakeUser30 to game 6, team 0
+Adding user: fakeUser42 to game 7, team 0
+Adding user: fakeUser19 to game 8, team 0
+Adding user: fakeUser50 to game 9, team 0
+Adding user: fakeUser155 to game 10, team 0
+Adding user: fakeUser56 to game 11, team 0
+Adding user: fakeUser126 to game 12, team 0
+Adding user: fakeUser79 to game 13, team 0
+Adding user: fakeUser168 to game 14, team 0
+Killing all currently running containers to start...
+All user containers are prepared!
+Running game!
+All done!
+Closing database...
+[spawn] childProcess.pid:  5579
+  [spawn] stdout:  548f6c84f4be
+
+  [spawn] stdout:  d41e9e6b8933
+
+  [spawn] stdout:  ef5bf50c7be6
+
+  [spawn] stdout:  5da227d6a1da
+
+  [spawn] stdout:  e96dad24eda1
+
+  [spawn] stdout:  a7b5af94bd8d
+
+  [spawn] stdout:  4ff4c4b29fe6
+
+  [spawn] stdout:  6f7c0c98b205
+
+  [spawn] stdout:  97ec7fa80e3a
+
+  [spawn] stdout:  1ef89eb8bca0
+
+[spawn] childProcess.pid:  5683
+  [spawn] stdout:  548f6c84f4be
+
+  [spawn] stdout:  d41e9e6b8933
+
+  [spawn] stdout:  ef5bf50c7be6
+
+  [spawn] stdout:  5da227d6a1da
+
+  [spawn] stdout:  e96dad24eda1
+
+  [spawn] stdout:  a7b5af94bd8d
+
+  [spawn] stdout:  4ff4c4b29fe6
+
+  [spawn] stdout:  6f7c0c98b205
+
+  [spawn] stdout:  97ec7fa80e3a
+
+  [spawn] stdout:  1ef89eb8bca0
+
+All containers stopped...
+Starting containers for 23 users...
+[spawn] childProcess.pid:  5696
+[spawn] childProcess.pid:  5698
+[spawn] childProcess.pid:  5699
+[spawn] childProcess.pid:  5702
+[spawn] childProcess.pid:  5705
+[spawn] childProcess.pid:  5706
+[spawn] childProcess.pid:  5716
+[spawn] childProcess.pid:  5728
+[spawn] childProcess.pid:  5738
+[spawn] childProcess.pid:  5745
+[spawn] childProcess.pid:  5759
+[spawn] childProcess.pid:  5774
+[spawn] childProcess.pid:  5777
+[spawn] childProcess.pid:  5784
+[spawn] childProcess.pid:  5789
+[spawn] childProcess.pid:  5810
+[spawn] childProcess.pid:  5822
+[spawn] childProcess.pid:  5824
+[spawn] childProcess.pid:  5826
+[spawn] childProcess.pid:  5832
+[spawn] childProcess.pid:  5841
+[spawn] childProcess.pid:  5848
+[spawn] childProcess.pid:  5852
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  099d1b02f01a52eff90db85e366b7293ada18066eac5863589952e503b533482
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e42fb1b2156df19a264c8aaee4725a3b8ae0de1c6cf1dccd2d19b11a091f4d1c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  3a17d5e5109c51c730e5e115d904393cb7d68c5e959e099f3644daf42b4c8a52
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  453e3bec80dfec31dce22df46fb0af8bc6023db32602647caf206ebcd824b6b6
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f9c697e81cd91b21c29390726cf815e43f18a4a3fc071c6fb9414f920de57605
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  99a63fece0e455247935e7f8d469092a6cdabffd83eaf4778d76132d6ed68024
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b167b7cf605c9d026f40e8564414c5768fd13eeb9a2326bd839ee2ccadc1e913
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  04f2562258bb05631d4cdcca4024f762d25d54958a41d79ac63daf18d228abff
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b8ce07515cdbecf06b732f4cbd1e71e163b49795b0a24d9b5a765d942215b13b
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d31334c1cc22c0ab143679d0c131375a3f833d09a7957aff746ab5750c5b7d89
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  4975a03281d612a9ddec2f0cbbf38aa666620412857b02cdeaaccc46489685da
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e29d8f450b6e17d2a0b38bd060c607712dc06cbbeb0f789b1bc2408dbb059ad4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f882a66701e86bcfa5803fcb999cb14bbc43249255545926867f28662b50344d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  17546e033ecd5d328322ec3dc99536e82791d1551d66d5e8bec87d9d7f08c945
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9f0827bfd65a636d2645841e85f28d742ffae091984c32d43eb2499c375d6cb4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  362efae3a49fbf7b70966ff6c3a5756852af4b7b732a9188bb428e42c592feb6
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  4fcf04bc29507f48ab2944400f7a717bfe6f909bf2bd7e471c7245d3b2f70613
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  196dd7f9961e4f99f8cf4e277a93f6f6f551449263b772c7fb0051455bb7da28
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9c27d551390e6075590523ba588b1b2819424a846c7b0b1c57c9886e71e930ca
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0de511f16ecfe6dffcae7e7bda2611b1d9c31a1bdb91563e99dd0529903605c6
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  1b1dd39ca64b94d6091027347d139aaba945f64c38e8f536892e3084a3637df0
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  7df6c51344efc90dd72307323c65f46563cade52ab4823009b038a0a20861e64
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ed21cfddc89cc31eaca6e87f252bc85342e2082dd5c724a0bed4d9a6bd2b3e3b
+
+All containers started successfully
+Container at port 12505 is not yet ready...trying again
+Container at port 12516 is not yet ready...trying again
+Container at port 12521 is not yet ready...trying again
+Container at port 12522 is not yet ready...trying again
+All containers are ready!
+Attempted to send hero file to user fakeUser66
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser47
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser170
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser59
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser72
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser109
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser119
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser6
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser127
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser22
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser9
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser128
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser187
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser121
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser178
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser98
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser111
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser120
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser83
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser167
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser152
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser140
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser93
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser66
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser47
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser170
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser59
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser72
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser109
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser119
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser6
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser127
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser22
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser9
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser128
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser187
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser121
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser178
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser98
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser111
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser120
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser83
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser167
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser152
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser140
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser93
+No file found...file not transferred!
+Finished sending files (if available) to all user containers
+Killing all currently running containers to start...
+[spawn] childProcess.pid:  6815
+  [spawn] stdout:  1b1dd39ca64b
+
+  [spawn] stdout:  ed21cfddc89c
+
+  [spawn] stdout:  0de511f16ecf
+
+  [spawn] stdout:  7df6c51344ef
+
+  [spawn] stdout:  362efae3a49f
+
+  [spawn] stdout:  e29d8f450b6e
+
+  [spawn] stdout:  9c27d551390e
+
+  [spawn] stdout:  196dd7f9961e
+
+  [spawn] stdout:  4fcf04bc2950
+
+  [spawn] stdout:  9f0827bfd65a
+
+  [spawn] stdout:  4975a03281d6
+
+  [spawn] stdout:  f882a66701e8
+
+  [spawn] stdout:  17546e033ecd
+
+  [spawn] stdout:  d31334c1cc22
+
+  [spawn] stdout:  b167b7cf605c
+
+  [spawn] stdout:  04f2562258bb
+
+  [spawn] stdout:  b8ce07515cdb
+
+  [spawn] stdout:  99a63fece0e4
+
+  [spawn] stdout:  f9c697e81cd9
+
+  [spawn] stdout:  e42fb1b2156d
+
+  [spawn] stdout:  453e3bec80df
+
+  [spawn] stdout:  3a17d5e5109c
+
+  [spawn] stdout:  099d1b02f01a
+
+[spawn] childProcess.pid:  7015
+  [spawn] stdout:  1b1dd39ca64b
+
+  [spawn] stdout:  ed21cfddc89c
+
+  [spawn] stdout:  0de511f16ecf
+
+  [spawn] stdout:  7df6c51344ef
+
+  [spawn] stdout:  362efae3a49f
+
+  [spawn] stdout:  e29d8f450b6e
+
+  [spawn] stdout:  9c27d551390e
+
+  [spawn] stdout:  196dd7f9961e
+
+  [spawn] stdout:  4fcf04bc2950
+
+  [spawn] stdout:  9f0827bfd65a
+
+  [spawn] stdout:  4975a03281d6
+
+  [spawn] stdout:  f882a66701e8
+
+  [spawn] stdout:  17546e033ecd
+
+  [spawn] stdout:  d31334c1cc22
+
+  [spawn] stdout:  b167b7cf605c
+
+  [spawn] stdout:  04f2562258bb
+
+  [spawn] stdout:  b8ce07515cdb
+
+  [spawn] stdout:  99a63fece0e4
+
+  [spawn] stdout:  f9c697e81cd9
+
+  [spawn] stdout:  e42fb1b2156d
+
+  [spawn] stdout:  453e3bec80df
+
+  [spawn] stdout:  3a17d5e5109c
+
+  [spawn] stdout:  099d1b02f01a
+
+All containers stopped...
+Starting containers for 23 users...
+[spawn] childProcess.pid:  7028
+[spawn] childProcess.pid:  7030
+[spawn] childProcess.pid:  7032
+[spawn] childProcess.pid:  7035
+[spawn] childProcess.pid:  7042
+[spawn] childProcess.pid:  7047
+[spawn] childProcess.pid:  7063
+[spawn] childProcess.pid:  7069
+[spawn] childProcess.pid:  7071
+[spawn] childProcess.pid:  7078
+[spawn] childProcess.pid:  7084
+[spawn] childProcess.pid:  7108
+[spawn] childProcess.pid:  7115
+[spawn] childProcess.pid:  7123
+[spawn] childProcess.pid:  7127
+[spawn] childProcess.pid:  7129
+[spawn] childProcess.pid:  7132
+[spawn] childProcess.pid:  7138
+[spawn] childProcess.pid:  7146
+[spawn] childProcess.pid:  7160
+[spawn] childProcess.pid:  7182
+[spawn] childProcess.pid:  7185
+[spawn] childProcess.pid:  7188
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5545e25a9d8d879620dc1ccecdb5bf9d36a5a2237c706c44f905e10577c71f6a
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8a2b3f8d2e88adce35a25096cfcb456463e797b051f1fc2682bbaa7a6062c8cf
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  07dcebbe54336cb90376931361b598a80db4773af22aeccb23eabf2e1391dd3c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  943a855fc21b9b73792f38f7f34c9c7537aa36912ca205d4fc0f3a7755ded70b
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  6e24986fe4e3fb875efaae71365a4275956ab2019802f20ec1bfe419188ba940
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ec89d601de8c2744e983d0ffe3724039a6ecae8fb1d7b1609cb427649a0b9ad7
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c65c51dc3a00eebfdf2cf4882a1f4a36e0e4391ec5705bd142cb6a8ea9d28a89
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9378c98b95970540b5dce50b5a8ac1c99da955b88a345eea23faf1d7e4a68af4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  344082f5fee281602a8e717874f45cd503242b47578802e1292c56bdceb81d47
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f8820d5cbb756775f8f1e6a02f756f5266a334cedcf7222b05b02dcc5a54eba1
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9e360620364bbf7e1af7bce4e080576dec3e74454f48002983ff96df7f06a346
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c415b652c6af92171414a0f72f16dade7b613c90774cb21c46d9119070e29706
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  abf68565c73a1774cc1b3878221a7ff934e73937d8dc7fea79a9ce46f6b89d5e
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  968444276dd634c855281667fedbc97c4c903f5c8a59658c7dae61c73f282be9
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  bd49760c7592685eaf1a565f1f907cb17144c804a8aae86605f5d3e41d41935d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8394abe84e45ee52ccfbd4d3f5a947688427992e8f98bcf5c5fc396ed3ede51b
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e482131d2b3c2042eae287a3779de19f3fefc6a6cc98c9f4ffa5d094981d2ec5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d07f3ab3582c4cc207d9636a63231203706516e4d537556dce69493d5c63b757
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  13f09672ccc58544dd7649fe9e820a53f8d916ad183bcb69e2d455ab32f38b08
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8e45070daa528cf32009ed394dce7c56cafdfe0aaccda26845ef7735d0c61190
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  66486e7f7e44de08e674db43e262c5f7135114f7158479b506c1b5b7a9e67102
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0b24a3283f9bbca20571fd96667a61c5f5557f3e31d13e007aa352d1636dd4b9
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b8a143e7d6638ff599f11e8e24a43e2338fef2648b3cebbba12568bc98bd34c5
+
+All containers started successfully
+Container at port 12506 is not yet ready...trying again
+All containers are ready!
+Attempted to send hero file to user fakeUser5
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser137
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser122
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser91
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser12
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser62
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser162
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser150
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser133
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser41
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser163
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser185
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser189
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser99
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser94
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser5
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser182
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser39
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser51
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser108
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser100
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser27
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser19
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser5
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser137
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser122
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser91
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser12
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser62
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser162
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser150
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser133
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser41
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser163
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser185
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser189
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser99
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser94
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser5
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser182
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser39
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser51
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser108
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser100
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser27
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser19
+No file found...file not transferred!
+Finished sending files (if available) to all user containers
+Killing all currently running containers to start...
+[spawn] childProcess.pid:  8117
+  [spawn] stdout:  0b24a3283f9b
+
+  [spawn] stdout:  d07f3ab3582c
+
+  [spawn] stdout:  8e45070daa52
+
+  [spawn] stdout:  13f09672ccc5
+
+  [spawn] stdout:  8394abe84e45
+
+  [spawn] stdout:  bd49760c7592
+
+  [spawn] stdout:  66486e7f7e44
+
+  [spawn] stdout:  e482131d2b3c
+
+  [spawn] stdout:  c415b652c6af
+
+  [spawn] stdout:  f8820d5cbb75
+
+  [spawn] stdout:  968444276dd6
+
+  [spawn] stdout:  b8a143e7d663
+
+  [spawn] stdout:  abf68565c73a
+
+  [spawn] stdout:  9e360620364b
+
+  [spawn] stdout:  c65c51dc3a00
+
+  [spawn] stdout:  9378c98b9597
+
+  [spawn] stdout:  344082f5fee2
+
+  [spawn] stdout:  ec89d601de8c
+
+  [spawn] stdout:  07dcebbe5433
+
+  [spawn] stdout:  6e24986fe4e3
+
+  [spawn] stdout:  943a855fc21b
+
+  [spawn] stdout:  5545e25a9d8d
+
+  [spawn] stdout:  8a2b3f8d2e88
+
+[spawn] childProcess.pid:  8304
+  [spawn] stdout:  0b24a3283f9b
+
+  [spawn] stdout:  d07f3ab3582c
+
+  [spawn] stdout:  8e45070daa52
+
+  [spawn] stdout:  13f09672ccc5
+
+  [spawn] stdout:  8394abe84e45
+
+  [spawn] stdout:  bd49760c7592
+
+  [spawn] stdout:  66486e7f7e44
+
+  [spawn] stdout:  e482131d2b3c
+
+  [spawn] stdout:  c415b652c6af
+
+  [spawn] stdout:  f8820d5cbb75
+
+  [spawn] stdout:  968444276dd6
+
+  [spawn] stdout:  b8a143e7d663
+
+  [spawn] stdout:  abf68565c73a
+
+  [spawn] stdout:  9e360620364b
+
+  [spawn] stdout:  c65c51dc3a00
+
+  [spawn] stdout:  9378c98b9597
+
+  [spawn] stdout:  344082f5fee2
+
+  [spawn] stdout:  ec89d601de8c
+
+  [spawn] stdout:  07dcebbe5433
+
+  [spawn] stdout:  6e24986fe4e3
+
+  [spawn] stdout:  943a855fc21b
+
+  [spawn] stdout:  5545e25a9d8d
+
+  [spawn] stdout:  8a2b3f8d2e88
+
+All containers stopped...
+Starting containers for 23 users...
+[spawn] childProcess.pid:  8327
+[spawn] childProcess.pid:  8329
+[spawn] childProcess.pid:  8331
+[spawn] childProcess.pid:  8333
+[spawn] childProcess.pid:  8336
+[spawn] childProcess.pid:  8344
+[spawn] childProcess.pid:  8355
+[spawn] childProcess.pid:  8365
+[spawn] childProcess.pid:  8374
+[spawn] childProcess.pid:  8382
+[spawn] childProcess.pid:  8389
+[spawn] childProcess.pid:  8398
+[spawn] childProcess.pid:  8403
+[spawn] childProcess.pid:  8422
+[spawn] childProcess.pid:  8426
+[spawn] childProcess.pid:  8429
+[spawn] childProcess.pid:  8436
+[spawn] childProcess.pid:  8443
+[spawn] childProcess.pid:  8448
+[spawn] childProcess.pid:  8457
+[spawn] childProcess.pid:  8463
+[spawn] childProcess.pid:  8475
+[spawn] childProcess.pid:  8485
+  [spawn] stdout:  f4261c0762ba402ecfd058ffeba3642c54bf329085a91ad8bf00515371d234a8
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  07e1d35898012928998541c9f1491c79c31af7b486b6d92fe8f1fb54fa566f70
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  46f778cbcd84ba8b24aac5809a98569b7d6d01fd3129ec7eaa065214f4806bc9
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  27b051f61fcdcfe3176acadf36b2dbae50c59e56a11d2d7d1081621cf0cb7156
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  edac719b893cde4c88aa25a7cc7b5d63d5d1e729ad232e22a3ead6a2c24ac8a8
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b694c5afaaff9733edeadcee262b895bcc102e91181e07d5ff0eb257d05a97a5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  34e315ade7e9e1b31158d4ae0f5f71c891c4d13eae80eedafa5b5671350d9342
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b8147049d7c1d3ec06776294c1aa36bb5b9dc14c7fb55f9978ff19064726e82c
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  6790c4e1972f8a68a8bac78fe85824fc1465f398a09fc7668cc2ced40ddbb77f
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0b9f7a73a2db44957b90153d430c6a9aa79129b0a71093d09e1223bf41385654
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8214e91b69b4c90866c343b0b88a511c1bb738afc7351c55a7ea22ed1b48a6de
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  283cf3bc7c2b3b4248c22d18d13a34f60756dcd2d8449df0e6f2cf8d702e9e4e
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  dbec1af4c5dd39bd29d4e13e9894837caac3485905213f92cab85b2d41dc53ee
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  3465dec13bbe3141193f842f26a81220086cdf828409f7083b0a2a7cea50acd6
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  545bbaf0b860755712a92627eac9b1947f1185fb3d6d5d89734aa4170f6d3536
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5e9fab4606f42ede4c79ff0b40d79ec346333571c3784b28d362744dd11d55d8
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c7b1e941a9ae6ed554ddf1d08b010c9be2da5651fa2e43a0f6b62babae2afd49
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d892de349e2f68780149f97a2551bd31c1694e637096c33d6ae6a379d80e3f9d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a4901b3f56e08e69839315de1bd4a4b7054c4706797031afe4eb04dc9360a883
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a763cf2ecafe6b25a3582461658bf1590c56220a82690089e201c104e7ad966a
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b882bce2a6a07dc3d21ef8fa65ce58605014218cd831d84c9317b8ecfc736081
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b6c5ae65c32e4cd5cd206f4ac141ca02d1f41b4a43d7e710abacf8dd8da6d504
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d16c579422887ff6016e4be4e110051a962b9a3630e7a6a758289d8e8e1b5a59
+
+All containers started successfully
+Container at port 12516 is not yet ready...trying again
+Container at port 12516 is not yet ready...trying again
+Container at port 12518 is not yet ready...trying again
+Container at port 12503 is not yet ready...trying again
+All containers are ready!
+Attempted to send hero file to user fakeUser172
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser77
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser190
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser107
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser161
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser106
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser148
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser85
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser186
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser29
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser68
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser134
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser151
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser79
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser65
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser175
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser151
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser4
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser142
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser35
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser192
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser147
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser109
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser172
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser77
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser190
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser107
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser161
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser106
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser148
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser85
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser186
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser29
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser68
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser134
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser151
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser79
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser65
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser175
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser151
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser4
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser142
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser35
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser192
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser147
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser109
+No file found...file not transferred!
+Finished sending files (if available) to all user containers
+Killing all currently running containers to start...
+[spawn] childProcess.pid:  9406
+  [spawn] stdout:  b882bce2a6a0
+
+  [spawn] stdout:  5e9fab4606f4
+
+  [spawn] stdout:  d16c57942288
+
+  [spawn] stdout:  545bbaf0b860
+
+  [spawn] stdout:  a763cf2ecafe
+
+  [spawn] stdout:  b6c5ae65c32e
+
+  [spawn] stdout:  283cf3bc7c2b
+
+  [spawn] stdout:  c7b1e941a9ae
+
+  [spawn] stdout:  a4901b3f56e0
+
+  [spawn] stdout:  dbec1af4c5dd
+
+  [spawn] stdout:  d892de349e2f
+
+  [spawn] stdout:  f4261c0762ba
+
+  [spawn] stdout:  3465dec13bbe
+
+  [spawn] stdout:  6790c4e1972f
+
+  [spawn] stdout:  b8147049d7c1
+
+  [spawn] stdout:  8214e91b69b4
+
+  [spawn] stdout:  0b9f7a73a2db
+
+  [spawn] stdout:  edac719b893c
+
+  [spawn] stdout:  34e315ade7e9
+
+  [spawn] stdout:  b694c5afaaff
+
+  [spawn] stdout:  27b051f61fcd
+
+  [spawn] stdout:  46f778cbcd84
+
+  [spawn] stdout:  07e1d3589801
+
+[spawn] childProcess.pid:  9594
+  [spawn] stdout:  b882bce2a6a0
+
+  [spawn] stdout:  5e9fab4606f4
+
+  [spawn] stdout:  d16c57942288
+
+  [spawn] stdout:  545bbaf0b860
+
+  [spawn] stdout:  a763cf2ecafe
+
+  [spawn] stdout:  b6c5ae65c32e
+
+  [spawn] stdout:  283cf3bc7c2b
+
+  [spawn] stdout:  c7b1e941a9ae
+
+  [spawn] stdout:  a4901b3f56e0
+
+  [spawn] stdout:  dbec1af4c5dd
+
+  [spawn] stdout:  d892de349e2f
+
+  [spawn] stdout:  f4261c0762ba
+
+  [spawn] stdout:  3465dec13bbe
+
+  [spawn] stdout:  6790c4e1972f
+
+  [spawn] stdout:  b8147049d7c1
+
+  [spawn] stdout:  8214e91b69b4
+
+  [spawn] stdout:  0b9f7a73a2db
+
+  [spawn] stdout:  edac719b893c
+
+  [spawn] stdout:  34e315ade7e9
+
+  [spawn] stdout:  b694c5afaaff
+
+  [spawn] stdout:  27b051f61fcd
+
+  [spawn] stdout:  46f778cbcd84
+
+  [spawn] stdout:  07e1d3589801
+
+All containers stopped...
+Starting containers for 23 users...
+[spawn] childProcess.pid:  9617
+[spawn] childProcess.pid:  9619
+[spawn] childProcess.pid:  9621
+[spawn] childProcess.pid:  9623
+[spawn] childProcess.pid:  9626
+[spawn] childProcess.pid:  9633
+[spawn] childProcess.pid:  9642
+[spawn] childProcess.pid:  9654
+[spawn] childProcess.pid:  9663
+[spawn] childProcess.pid:  9667
+[spawn] childProcess.pid:  9671
+[spawn] childProcess.pid:  9676
+[spawn] childProcess.pid:  9691
+[spawn] childProcess.pid:  9697
+[spawn] childProcess.pid:  9709
+[spawn] childProcess.pid:  9716
+[spawn] childProcess.pid:  9723
+[spawn] childProcess.pid:  9735
+[spawn] childProcess.pid:  9753
+[spawn] childProcess.pid:  9758
+[spawn] childProcess.pid:  9768
+[spawn] childProcess.pid:  9771
+[spawn] childProcess.pid:  9787
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5235b2545561f1aff8fdfead77c30063ce9839a069d7acf42a70bc928fc7a316
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c6a9d5f464ff769e7a0e72a2c40bcdf27528224490e97738dc5eb077184e2880
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  b233de962823abf86db2369a50383abbcc17bb93580dc8f459c3e2d2184362c5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d99caea39e80781f8d61016d6527e5fb0b8c9f7c2e0f26524c7b965b6f9cfa09
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  9512bae964e454c5a864a8945b6fa10c97844fd4a0f2c3972784673b55027f45
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e81ea3a7434c9a8f7a6507f59a2aadfb27621d0f82d8a77533c7f34467b11c71
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  14217e733d598ce8b5a91cb746a970f1f0f964276cb0e2e9ce72e51406c720b0
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  5f4c2f915550d0590ed4556209c942c1f3043a63bf849cd91ad65758b816811d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  1fa617c25a58ba46f8b32d4b729dc2cd0cb762592aa8786a91e101622a444025
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  be84bd9d43184f99870a3f503eed1d8fbc3713eba0d4ccb67464a628622ec0c2
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8f208bc336cb95e46b873715f389233ed7e9da4c3520439fa4ae86b905b3ab4d
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  615f71d8e147836fbdd00faa54a36f65943118e67e6baca356a0e8cd96112956
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  09450ff8f78f11a4033368d124115860f407249cdbe2daa69062ec47a8de900b
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  14e3c89342a284b46ba16922506d87fb706a1523586b2eeafb1f355f7eb89114
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e7848cc50b9b8032ded9d5c728bb24a3ff6706feac3ae9dec5268eee1212a80a
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f10049f6260029d94f4290773fc62c1ce6f08412b8490f4cbe182e95dca1c197
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  c5a31c8f6bd647f83855e30937c5878385503b109462b7a681dd7f1a01f39a17
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  e69548c91ddf4fe9c35e45ea91b551e71cd2527392ab04c9c14bfe900a9a3093
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  92bcfbd0c9f829978661fc6ce9b559578ba4564859f50081337c1be6d7badb64
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f87a768d768fa303867f0d3285ba84c22b5f968e4bf8350337c14c833cf10316
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0df9df6495f29aa707873dde62dfb20cc7199b8abb1a422cb11e949984ac373f
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  dd25359a1d7406d53bf9079324e3fb84289de82baffce638a2243bdffa2be306
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  552f2a9ce937dd62aa8d3ac793d86fea3350bacece68831cb95fd418375fb457
+
+All containers started successfully
+Container at port 12510 is not yet ready...trying again
+Container at port 12522 is not yet ready...trying again
+All containers are ready!
+Attempted to send hero file to user fakeUser76
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser111
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser174
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser191
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser85
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser93
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser35
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser61
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser30
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser110
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser52
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser39
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser105
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser183
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser116
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser104
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser120
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser25
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser144
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser20
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser26
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser167
+No file found...file not transferred!
+Attempted to send hero file to user fakeUser176
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser76
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser111
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser174
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser191
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser85
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser93
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser35
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser61
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser30
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser110
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser52
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser39
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser105
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser183
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser116
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser104
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser120
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser25
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser144
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser20
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser26
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser167
+No file found...file not transferred!
+Attempted to send helper file to user fakeUser176
+No file found...file not transferred!
+Finished sending files (if available) to all user containers
+Killing all currently running containers to start...
+[spawn] childProcess.pid:  10711
+  [spawn] stdout:  e69548c91ddf
+
+  [spawn] stdout:  92bcfbd0c9f8
+
+  [spawn] stdout:  dd25359a1d74
+
+  [spawn] stdout:  c5a31c8f6bd6
+
+  [spawn] stdout:  0df9df6495f2
+
+  [spawn] stdout:  09450ff8f78f
+
+  [spawn] stdout:  14e3c89342a2
+
+  [spawn] stdout:  f87a768d768f
+
+  [spawn] stdout:  552f2a9ce937
+
+  [spawn] stdout:  e7848cc50b9b
+
+  [spawn] stdout:  615f71d8e147
+
+  [spawn] stdout:  f10049f62600
+
+  [spawn] stdout:  1fa617c25a58
+
+  [spawn] stdout:  be84bd9d4318
+
+  [spawn] stdout:  8f208bc336cb
+
+  [spawn] stdout:  5f4c2f915550
+
+  [spawn] stdout:  e81ea3a7434c
+
+  [spawn] stdout:  9512bae964e4
+
+  [spawn] stdout:  d99caea39e80
+
+  [spawn] stdout:  14217e733d59
+
+  [spawn] stdout:  b233de962823
+
+  [spawn] stdout:  c6a9d5f464ff
+
+  [spawn] stdout:  5235b2545561
+
+[spawn] childProcess.pid:  10901
+  [spawn] stdout:  e69548c91ddf
+
+  [spawn] stdout:  92bcfbd0c9f8
+
+  [spawn] stdout:  dd25359a1d74
+
+  [spawn] stdout:  c5a31c8f6bd6
+
+  [spawn] stdout:  0df9df6495f2
+
+  [spawn] stdout:  09450ff8f78f
+
+  [spawn] stdout:  14e3c89342a2
+
+  [spawn] stdout:  f87a768d768f
+
+  [spawn] stdout:  552f2a9ce937
+
+  [spawn] stdout:  e7848cc50b9b
+
+  [spawn] stdout:  615f71d8e147
+
+  [spawn] stdout:  f10049f62600
+
+  [spawn] stdout:  1fa617c25a58
+
+  [spawn] stdout:  be84bd9d4318
+
+  [spawn] stdout:  8f208bc336cb
+
+  [spawn] stdout:  5f4c2f915550
+
+  [spawn] stdout:  e81ea3a7434c
+
+  [spawn] stdout:  9512bae964e4
+
+  [spawn] stdout:  d99caea39e80
+
+  [spawn] stdout:  14217e733d59
+
+  [spawn] stdout:  b233de962823
+
+  [spawn] stdout:  c6a9d5f464ff
+
+  [spawn] stdout:  5235b2545561
+
+All containers stopped...
+Starting containers for 23 users...
+[spawn] childProcess.pid:  10921
+[spawn] childProcess.pid:  10923
+[spawn] childProcess.pid:  10925
+[spawn] childProcess.pid:  10927
+[spawn] childProcess.pid:  10930
+[spawn] childProcess.pid:  10937
+[spawn] childProcess.pid:  10943
+[spawn] childProcess.pid:  10954
+[spawn] childProcess.pid:  10957
+[spawn] childProcess.pid:  10960
+[spawn] childProcess.pid:  10975
+[spawn] childProcess.pid:  10987
+[spawn] childProcess.pid:  11003
+[spawn] childProcess.pid:  11007
+[spawn] childProcess.pid:  11013
+[spawn] childProcess.pid:  11031
+[spawn] childProcess.pid:  11040
+[spawn] childProcess.pid:  11044
+[spawn] childProcess.pid:  11047
+[spawn] childProcess.pid:  11051
+[spawn] childProcess.pid:  11055
+[spawn] childProcess.pid:  11068
+[spawn] childProcess.pid:  11078
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  bdee6c3c5331e3d04ebeaa83e76a57dcb2ee972e2d87f60ee41df41dc0637390
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8eee9c9b0ebf5b8a2775672d8093e2908e700ed02e995febef5769684dde49fb
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f1efbc6c71844d3c9c4491ad9815d2c628a8890833e7178ff2c4fd8a3f57a94a
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  13b0882feda03f99ed48122746580b4a97ddb991e11088a4114e438a6b0f8bd1
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  2a6c9c5cc9d59682d029f706cc8893c3892e7d568831e622d528ef8837e55b18
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  84d2dacf93ca58f9751bab9d9eb70bb03be5d0b5672a0bcf4c30df738751f2e7
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ea314154813afdcdbd1a2a8f0712ff553b45e53b6265a992736db99f2f89bec5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  2a5e27d82cd72406e67d2c9e45432f105e9d39d48450598db62a5c48492b37dc
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  6c64087efec0c67d12e0d34acd1f5b49ac83a3a4ca0f67e68236e15075844544
+
+  [spawn] stdout:  ff94b81219a799203b583f3cce1af37067b741ce85979b984ae59ed80208dfe8
+
+  [spawn] stderr:  2014/08/28 11:22:42 Error: Conflict, The name clever_wozniak is already assigned to ff94b81219a7. You have to delete (or rename) that container to be able to assign clever_wozniak to a container again.
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  8f27d2b238fe4d649389cd3dff4302c34da4f668dcaa0027565d50ad3f5c2b05
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  67ccad12f9936d8e72864193fcbd134aafd266e6d6a83bcebbf67f2a8d7131c4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  df0bcd19893f9b1763760ae28b7acba7245807cf0bc03ceb080eccf74a6b9d46
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  a6a7c63f6acf5f3c363aceba7c69f2aa09fd7a8a59f928032b3f4ff6e53aa0c5
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  0678aa82927be7e454b11ad0671b3f95623d4179041ecd12838238122706ad36
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  ed407d7fed8a7914c6b5a8910164ed6af8b6850b8e546773ef78dae8c0b4ceed
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  1c7aaf81e34578547b24f7920fcaa924ee8ee341d315856a66e10fcde29ff63f
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  d1ce81c73ebc90c574b2ce99587c8f61267050749e4410a95c26fa11f4434709
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  3ad6fbec973647aae330924a0dcec4832c6a81d52e69620d36ca45915a202531
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  42c7a310135263f422401d44f05a94b0fdbaa133d6e0eeb714fd3562125dad09
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  596920f317e7720638833a239a8435166707c19cd54d85135fc2514932408ff4
+
+  [spawn] stderr:  WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+
+  [spawn] stdout:  f03b385f6927fe054990d429ac38e08480697913eff382a60076951d69799a28
+

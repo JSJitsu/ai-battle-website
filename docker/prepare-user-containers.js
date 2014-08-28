@@ -12,8 +12,7 @@ var prepareUserContainers = function(users) {
 
   //The starting port
   var port = 12499;
-
-
+  
 
   //Make sure all containers are stopped and removed to begin
   console.log('Killing all currently running containers to start...');
@@ -25,7 +24,7 @@ var prepareUserContainers = function(users) {
 
   //Start a docker container for each user
   }).then(function() {
-    console.log('Starting all containers...');
+    console.log('Starting containers for ' + users.length + ' users...');
 
     return Q.all(users.map(function(user) {
       //assign a port to each
