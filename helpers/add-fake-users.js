@@ -16,7 +16,30 @@ var addFakeUsers = function(numberOfFakeUsers) {
         mostRecentGameNumber: undefined,
         port: undefined,
         codeRepo: 'hero-starter',
-        codeRepoBranch: 'master'
+        codeRepoBranch: 'master',
+        lifetimeStats: {
+          kills: 0,
+          deaths: 0,
+          damageDealt: 0,
+          minesCaptured: 0,
+          diamondsEarned: 0,
+          healthRecovered: 0,
+          healthGiven: 0,
+          gravesRobbed: 0,
+          wins: 0,
+          losses: 0
+        },
+        mostRecentStats: {
+          gameResult: 'N/A',
+          survived: false,
+          kills: 0,
+          damageDealt: 0,
+          minesCaptured: 0,
+          diamondsEarned: 0,
+          healthRecovered: 0,
+          healthGiven: 0,
+          gravesRobbed: 0
+        }
       });
     }
     return Q.all(fakeUserPromises).then(function() {

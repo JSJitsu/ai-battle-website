@@ -1,12 +1,10 @@
 var planAllGames = require('./plan-all-games.js');
 var prepareUserContainers = require('../docker/prepare-user-containers.js');
+var saveUserStats = require('./save-user-stats.js')
+var secrets = require('../secrets.js');
+var Q = require('q');
+var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
 
-// var Q = require('q');
-// var Game = require('./game_classes/Game.js');
-// var secrets = require('../secrets.js');
-// var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
-
-// var saveUserStats = require('./save-user-stats.js')
 
 var completeAllGames = function(users, mongoData) {
 
@@ -38,9 +36,9 @@ var prepRunAndSaveAllGames = function(mongoData, games, gameIndex, userLookup) {
 //Then runs and saves that game to the database
 var prepRunAndSaveGame = function(mongoData, game, gameIndex, userLookup) {
   return prepGame(game, userLookup).then(function() {
-    return runAndSaveGame(game);
+    return runAndSaveGame(mongoData, game, gameIndex, userLookup);
   }).then(function() {
-
+    return updateMaxGameTurn(mongoData, game);
   });
 };
 
@@ -54,120 +52,122 @@ var prepGame = function(game, userLookup) {
   return prepareUserContainers(usersInGame);
 };
 
-var updateMaxGameTurn = function(mongoData, game) {
-
-};
 
 var runAndSaveGame = function(mongoData, game, gameIndex, userLookup) {
 
-  // //The collection we're inserting into
-  // var mongoCollection = mongoData.gameDataCollection;
+  console.log('Running and saving game ' + gameIndex);
 
-  // //The database we're inserting into
-  // var mongoDb = mongoData.db;
+  //The collection we're inserting into
+  var gameDataCollection = mongoData.gameDataCollection;
 
-  // //Get date string for use in game ID (helpful saving uniquely to mongo db)
-  // var getDateString = function() {
-  //   var dayOffset = secrets.dayOffset;
-  //   var d = new Date((new Date()).getTime() + dayOffset*24*60*60*1000);
-  //   var result = (d.getMonth() + 1).toString();
-  //   result += '/' + d.getDate();
-  //   result += '/' + d.getFullYear();
-  //   return result;
-  // };
+  //The database we're inserting into
+  var mongoDb = mongoData.db;
 
-  // //Loops through the entire game, saves each turn to the database
-  // var resolveGameAndSaveTurnsToDB = function(game) {
-  //   //Get today's date in string form
-  //   var date = getDateString();
-  //   game.date = date;
+  //Get date string for use in game ID (helpful saving uniquely to mongo db)
+  var getDateString = function() {
+    var dayOffset = secrets.dayOffset;
+    var d = new Date((new Date()).getTime() + dayOffset*24*60*60*1000);
+    var result = (d.getMonth() + 1).toString();
+    result += '/' + d.getDate();
+    result += '/' + d.getFullYear();
+    return result;
+  };
 
-  //   //Manually set the ID so Mongo doesn't just keep writing to the same document
-  //   game._id = gameIndex.toString() + '|' + game.turn.toString() + '|' + date;
+  //Loops through the entire game, saves each turn to the database
+  var resolveGameAndSaveTurnsToDB = function(game) {
+    //Get today's date in string form
+    var date = getDateString();
+    game.date = date;
 
-  //   //Save the number of the game
-  //   game.gameNumber = gameIndex;
+    //Manually set the ID so Mongo doesn't just keep writing to the same document
+    game._id = gameIndex.toString() + '|' + game.turn.toString() + '|' + date;
 
-  //   //Save the game to the database
-  //   return Q.npost(mongoCollection, 'update', [
-  //     {
-  //       '_id':game._id
-  //     }, game, {
-  //       upsert:true
-  //     }
+    //Save the number of the game
+    game.gameNumber = gameIndex;
 
-  //   //Then get the next direction the activeHero wants to move
-  //   ]).then(function(result) {
+    //Save the game to the database
+    return Q.npost(gameDataCollection, 'update', [
+      {
+        '_id':game._id
+      }, game, {
+        upsert:true
+      }
 
-  //     //Get the current hero
-  //     var activeHero = game.activeHero;
+    //Then get the next direction the activeHero wants to move
+    ]).then(function(result) {
 
-  //     console.log('Turn is: ' + game.turn);
+      //Get the current hero
+      var activeHero = game.activeHero;
 
-  //     //Get the direction the currently active hero wants to move
-  //     var port = userLookup[activeHero.name].port;
-  //     console.log('Port is: ' + port);
 
-  //     console.log('User is: ' + activeHero.name);
+      //Get the direction the currently active hero wants to move
+      var port = userLookup[activeHero.name].port;
+      
+      console.log('Turn: ' + game.turn + ', Port: ' + port + ', User: ' + activeHero.name);
 
-  //     return communicateWithContainers.postGameData(port, game)
+      return communicateWithContainers.postGameData(port, game)
+      
 
-  //   //Then move the active hero in that direction
-  //   }).then(function(direction) {
+    //Then move the active hero in that direction
+    }).then(function(direction) {
 
-  //     console.log('Direction is: ' + direction);
+      console.log('Direction is: ' + direction);
 
-  //     //If game has ended, stop looping and set the max turn
-  //     if (game.ended) {
-  //       maxTurn = game.maxTurn;
-  //       return game;
+      //If game has ended, stop looping and set the max turn
+      if (game.ended) {
+        maxTurn = game.maxTurn;
+        return game;
 
-  //     //Otherwise, continue with next turn and save that turn
-  //     } else {
-  //       //Advances the game one turn
-  //       game.handleHeroTurn(direction);
+      //Otherwise, continue with next turn and save that turn
+      } else {
+        //Advances the game one turn
+        game.handleHeroTurn(direction);
 
-  //       //Manually set the ID so Mongo doesn't just keep writing to the same document
-  //       game._id = game.turn + '|' + game.date;
+        //Manually set the ID so Mongo doesn't just keep writing to the same document
+        game._id = game.turn + '|' + game.date;
 
-  //       return resolveGameAndSaveTurnsToDB(game);
-  //     }
-  //   }).catch(function(err) {
-  //     console.trace();
-  //     console.log('---------')
-  //     console.log(err);
-  //     throw err;
-  //   });
-  // };
+        return resolveGameAndSaveTurnsToDB(game);
+      }
+    }).catch(function(err) {
+      console.trace();
+      console.log('---------')
+      console.log(err);
+      throw err;
+    });
+  };
 
-  // //Runs the game and saves the result to DB
-  // var saveGameData = resolveGameAndSaveTurnsToDB(game);
-
-  // //Updates the game turn objects to have the correct maxTurn
-  // //This is necessary for the front end to know the total # of turns
-  // return saveGameData.then(function(game) {
-  //   console.log('Game done, updating maxTurn for each turn...');
-  //   console.log(game.maxTurn);
-  //   return Q.npost(mongoCollection, 'update', [
-  //     {
-  //       date: game.date
-  //     },
-  //     {
-  //       $set: {
-  //         maxTurn: game.maxTurn
-  //       }
-  //     },
-  //     {
-  //       multi: true
-  //     }
-  //   ]).then(function() {
-  //     console.log('Game turns updated!');
-  //     console.log('Updating all user stats...');
-  //     return Q.all(game.heroes.map(function(hero) {
-  //       return saveUserStats(mongoData, hero, game.gameNumber);
-  //     }));
-  //   });
-  // });
+  //Runs the game and saves the result to DB
+  return resolveGameAndSaveTurnsToDB(game);
 }
+
+var updateMaxGameTurn = function(mongoData, game) {
+  //Updates the game turn objects to have the correct maxTurn
+  //This is necessary for the front end to know the total # of turns
+  console.log('Updating maxTurn for each turn...');
+  console.log(game.maxTurn);
+
+  var gameDataCollection = mongoData.gameDataCollection;
+
+  return Q.npost(gameDataCollection, 'update', [
+    {
+      date: game.date
+    },
+    {
+      $set: {
+        maxTurn: game.maxTurn
+      }
+    },
+    {
+      multi: true
+    }
+  ]).then(function() {
+    console.log('Game turns updated!');
+    console.log('Updating all user stats...');
+    return Q.all(game.heroes.map(function(hero) {
+      return saveUserStats(mongoData, hero, game.gameNumber);
+    }));
+  });
+};
+
 
 module.exports = completeAllGames;
