@@ -73,4 +73,49 @@ communicateWithContainersObj.postFile = function(port, filePath, fileType) {
   return deferred.promise;
 };
 
+//Returns a promise that resolves to true if the container is ready
+//Rejects if the container takes too long to get ready
+communicateWithContainersObj.checkIfContainerIsReady = function(port) {
+  var deferred = Q.defer();
+
+  var maxAttempts = 90;
+  var msDelay = 1000;
+  var attempts = 0;
+
+  var url = 'http://localhost:' + port;
+  var fakeForm = {
+    form: {
+      key: 'value'
+    }
+  };
+
+
+  var pingContainer = function() {
+    attempts++;
+    if (attempts >= maxAttempts) {
+      deferred.reject('Container at port ' + port + ' not ready after ' + maxAttempts + ' attempts!')
+    } else {
+      request.post(url, fakeForm, function(err, response, body) {
+        if (err) {
+          deferred.reject(err);
+        } else {
+          if (body === '"Not yet loaded"') {
+            deferred.resolve(true);        
+          } else {
+            console.log('Container at port ' + port + ' is not yet ready...trying again');
+
+            //Keeps looping until the container is ready
+            process.setTimeout(pingContainer, msDelay); 
+          }
+        }
+      });
+    }
+  };
+
+  pingContainer();
+
+  return deferred.promise;
+  
+};
+
 module.exports = communicateWithContainersObj;
