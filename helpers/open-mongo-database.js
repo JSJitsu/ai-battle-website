@@ -13,7 +13,8 @@ var openDatabase = function(mongoConnectionURL) {
       db: db,
       gameDataCollection: db.collection('jsBattleGameData'),
       userCollection: db.collection('users'),
-      miscCollection: db.collection('misc')
+      miscCollection: db.collection('misc'),
+      leaderboardCollection: db.collection('leaderboard')
     };
   }, function(err) {
     console.log('Error opening database!');

@@ -2,6 +2,7 @@ var Q = require('q');
 var secrets = require('./secrets.js');
 var openDatabase = require('./helpers/open-mongo-database.js');
 var completeAllGames = require('./game_logic/complete-all-games.js');
+var updateLeaderboard = require('./update-leaderboard.js');
 
 
 //Saves all user data
@@ -18,12 +19,12 @@ var runDailyGames = function() {
     //Get all user containers ready for game
     }).then(function(users) {
 
-      return completeAllGames(users, mongoData);      
+      return completeAllGames(users, mongoData).then(function() {
+        console.log('All games completed!');
+        console.log('Updating leaderboard...!');
+        return updateLeaderboard(users, mongoData);
+      })     
 
-    //All user containers are 100% ready--run this game
-    }).then(function() {
-      console.log('All user containers are prepared!');
-      console.log('Running game!')
     }).then(function() {
       console.log('All done!');
       console.log('Closing database...');
