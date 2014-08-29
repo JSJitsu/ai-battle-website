@@ -12,7 +12,7 @@ var planAllGames = function(users) {
 
   //Helper function for generating random indices
   var randomIndex = function(maxExcl) {
-    return Math.floor(Math.random() * maxExcl);
+    return Math.floor(Math.random(Date.now()) * maxExcl);
   };
 
   //Set up game
@@ -60,13 +60,6 @@ var planAllGames = function(users) {
       alternateTeams[currentGameIndex] = 0;
     }
 
-    //Loops through each game
-    if (currentGameIndex < games.length - 1) {
-      currentGameIndex++;
-    } else {
-      currentGameIndex = 0;
-    }
-
     //Get a random user from the user list
     var nextUserIndex = randomIndex(users.length);
     var user = users.splice(nextUserIndex, 1)[0];
@@ -75,6 +68,13 @@ var planAllGames = function(users) {
     userLookup[user.githubHandle] = user;
 
     console.log('Adding user: ' + user.githubHandle + ' to game ' + currentGameIndex + ', team ' + team);
+
+    //Loops through each game
+    if (currentGameIndex < games.length - 1) {
+      currentGameIndex++;
+    } else {
+      currentGameIndex = 0;
+    }
 
     //Put hero at random location in the current game
     while (!game.addHero(randomIndex(boardSize), randomIndex(boardSize), user.githubHandle, team)) {
