@@ -3,15 +3,11 @@ var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var fs = require('fs');
 
-var createAndSaveAllGames = require('./game_logic/create-and-save-all-games.js')
-
 // generate leaderboard data and put in MongoDB as arrays
-var updateLeaderboard = function(mongoData, users) {
+var updateLeaderboard = function(users, mongoData) {
 
   var userCollection = mongoData.userCollection;
   var leaderboardCollection = mongoData.leaderboardCollection;
-  var db = mongoData.db;
-
   
   // generates an array for the leaderboard
   var getArrays = function(prop, recentLifetimeAverage) {
@@ -38,8 +34,8 @@ var updateLeaderboard = function(mongoData, users) {
     } 
 
     // sort the array of stats from greatest to lowest
-    leaderboardArray.sort(function(a, b){
-        return b.value - a.value;
+    leaderboardArray.sort(function(a, b) {
+      return b.value - a.value;
     });
 
     // take the 10 highest values for our leaderboard
@@ -51,6 +47,7 @@ var updateLeaderboard = function(mongoData, users) {
         leaderboardArray[j].value = leaderboardArray[j].value + ' per game';
       }
     }
+
     return leaderboardArray;
   };
 
@@ -142,19 +139,12 @@ var updateLeaderboard = function(mongoData, users) {
     generateUpdatePromises.push(generateUpdate(statsTuples[j]));
   }
   // pass the array of promises in to Q.all
-  return Q.all(generateUpdatePromises)
-    // when entire array of promises resolve do this
-    .then(function() {
-        console.log('leaderboardCollection updated');
-        db.close();
-    // error handling
-    }).catch(function(error) {
-      console.error("Error in writing leaderboard data to database: ", error);
-    });
+  return Q.all(generateUpdatePromises).then(function() {
+    console.log('leaderboardCollection updated');
+  // error handling
+  }).catch(function(error) {
+    console.error("Error in writing leaderboard data to database: ", error);
   });
 };
 
-// run update leader board
-// so we can run this file from the command line
-// or a cron job
-updateLeaderboard();
+module.exports = updateLeaderboard;

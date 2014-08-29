@@ -7,6 +7,9 @@ var planAllGames = function(users) {
 
   console.log('Planning games for ' + users.length + ' users.');
 
+  //Makes it so the passed-in users array is not mutated
+  var users = users.slice()
+
   //Helper function for generating random indices
   var randomIndex = function(maxExcl) {
     return Math.floor(Math.random() * maxExcl);
