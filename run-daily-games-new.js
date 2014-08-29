@@ -2,7 +2,7 @@ var Q = require('q');
 var secrets = require('./secrets.js');
 var openDatabase = require('./helpers/open-mongo-database.js');
 var completeAllGames = require('./game_logic/complete-all-games.js');
-var updateLeaderboard = require('./update-leaderboard.js');
+var updateLeaderboard = require('./stats/update-leaderboard.js');
 var startStopContainers = require('./docker/container_interaction/start-stop-containers.js');
 
 //Saves all user data
