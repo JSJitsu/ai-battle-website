@@ -1,28 +1,54 @@
-var request = require('request');
-var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var fs = require('fs');
-var secrets = require('./secrets.js');
-var mongoConnectionURL = secrets.mongoKey;
-var createAndSaveAllGames = require('./game_logic/create-and-save-all-games.js')
-
+var secrets = require('../secrets.js');
+var createAndSaveGame = require('./create-and-save-game.js');
+var openGameDatabase = require('../helpers/open-mongo-database.js');
 var communicateWithContainers = require('./docker/container_interaction/communicate-with-containers.js');
 
-//This script requires that all docker containers at the specified user ports are ALREADY running
+openGameDatabase().then(function(mongoDataObject) {
+  var userCollection = mongoDataObject.userCollection;
+  var miscCollection = mongoDataObject.miscCollection;
+  var gameDataCollection = mongoDataObject.gameDataCollection;
+  var db = mongoDataObject.db;
 
-//Returns a promise that resolves when the database opens
-var openGameDatabase = function() {
-  return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
-    console.log('open!');
-    return {
-      db: db,
-      userCollection: db.collection('users'),
-      gameDataCollection: db.collection('jsBattleGameData')
-    };
+  return Q.ninvoke(miscCollection, 'findOne', { '_id': 'gameQueue' }).then(function(gameQueue) {
+    var gameRunPromises = [];
+    for (var i=0; i<gameQueue.numberOfGames; i++) {
+      var game = gameQueue.gamesToPlay[i];
+
+      if (game.status === 'Containers Started') {
+        //This game needs to be run (and is ready)
+        var gameRunPromise = runGame(i, mongoDataObject).then(function() {
+          game.status = 'Completed';
+
+          //After the game is run, save it as being "completed"
+          return Q.npost(miscCollection, 'update', [
+            {
+              '_id': gameQueue._id
+            }, gameQueue, {
+              upsert: true
+            }
+          ]).then(function() {
+            console.log('Game completed and updated in the game queue');
+          });
+        });
+
+        //Add promise to array
+        gameRunPromises.push(gameRunPromise);
+
+      } else if (game.status === 'Completed') {
+        //This game has already been fully completed
+        //skip it
+      } else if (game.status === 'Not Started') {
+        //Containers for this and all remaining games have not yet been started
+        //Stop the loop here
+        break;
+      }
+    }
   });
-};
 
-//Saves all user data
+});
+
+
 var usersCodeRequest = function() {
 
   //Opens connection to mongo database

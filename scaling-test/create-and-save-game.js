@@ -1,6 +1,5 @@
-var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var Game = require('./game_classes/Game.js');
+var Game = require('../game_logic/game_classes/Game.js');
 var secrets = require('../secrets.js');
 var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
 var createGameFromMap = require('./create-game-from-map.js');
