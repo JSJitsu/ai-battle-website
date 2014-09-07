@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
-var Game = require('./game_logic/game_classes/Game.js');
-var secrets = require('./secrets.js');
+var Game = require('../game_logic/game_classes/Game.js');
+var secrets = require('../secrets.js');
 
 var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
