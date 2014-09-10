@@ -81,8 +81,8 @@ router.get('/gameDataForUser/:turn', function(req, res){
   var gameId = '0|' + getDateString(req.params.dayOffset) + '|' + req.params.turn 
 
   //Otherwise, use the most recent gameId of the user
-  if (req.user) {
-    gameId = req.user.mostRecentGameNumber + '|' + req.params.turn;
+  if (req.user && req.user.mostRecentGameId) {
+    gameId = req.user.mostRecentGameId + '|' + req.params.turn;
   }
 
   openMongoDatabase.then(function(db) {
