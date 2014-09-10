@@ -12,6 +12,7 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
+var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 // Connect to mongo
 var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
@@ -75,16 +76,19 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
 });
 
 // Returns the state of the game on the given day and turn
-// If dayOffset is -1, will get yesterday's data, if 0, will get today's data
-router.get('/gameData/:dayOffset/:turn', function(req, res){
-  var gameNumber = '0';
+router.get('/gameDataForUser/:turn', function(req, res){
+  //If there is no user logged in, default to today's first game
+  var gameId = '0|' + getDateString(req.params.dayOffset) + '|' + req.params.turn 
+
+  //Otherwise, use the most recent gameId of the user
   if (req.user) {
-    gameNumber = req.user.mostRecentGameNumber;
+    gameId = req.user.mostRecentGameNumber + '|' + req.params.turn;
   }
+
   openMongoDatabase.then(function(db) {
     var collection = db.collection('jsBattleGameData');
     collection.find({
-      '_id': gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
+      '_id': gameId
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
@@ -100,11 +104,11 @@ router.get('/gameData/:dayOffset/:turn', function(req, res){
 
 // Returns the state of the given game on the given day and turn
 // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
-router.get('/gameData/:dayOffset/:turn/:gameNumber', function(req, res){
+router.get('/gameData/:dayOffset/:turn/:gameIndex', function(req, res){
   openMongoDatabase.then(function(db) {
     var collection = db.collection('jsBattleGameData');
     collection.find({
-      '_id': req.params.gameNumber + '|' + req.params.turn + '|' + getDateString(req.params.dayOffset)
+      '_id': req.params.gameIndex + '|' + getDateString(req.params.dayOffset) + '|' + req.params.turn
     }).toArray(function(err,results) {
       if (err) {
         res.send(err);
