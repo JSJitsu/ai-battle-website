@@ -12,7 +12,6 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
-var mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
 
 // Connect to mongo
 var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
