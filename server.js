@@ -77,6 +77,7 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
 
 // Returns the state of the game on the given day and turn
 router.get('/gameDataForUser/:turn', function(req, res){
+
   //If there is no user logged in, default to today's first game
   var gameId = '0|' + getDateString(req.params.dayOffset) + '|' + req.params.turn 
 
