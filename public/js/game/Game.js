@@ -1,6 +1,7 @@
 
 var Game = Backbone.Model.extend({
-  url: 'api/gameData/0/1',
+  url: 'api/gameDataForUser/1',
+
   initialize: function() {
     var userModel = new User();
     this.set('userModel', userModel);
@@ -55,6 +56,6 @@ var Game = Backbone.Model.extend({
     this.set('board', board);
   },
   updateTurn: function(turn) {
-    this.url = '/api/gameData/0/' + turn;
+    this.url = '/api/gameDataForUser/' + turn;
   }
 });
