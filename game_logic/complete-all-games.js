@@ -17,6 +17,7 @@ var completeAllGames = function(users, mongoData) {
 
 //Runs and saves all games and returns a promise
 var prepRunAndSaveAllGames = function(mongoData, games, gameIndex, userLookup) {
+  console.log(games.length + ' games left to play!');
   var game = games.shift(games);
 
   //Run and save the first game in the queue
@@ -76,11 +77,11 @@ var runAndSaveGame = function(mongoData, game, gameIndex, userLookup) {
   //Loops through the entire game, saves each turn to the database
   var resolveGameAndSaveTurnsToDB = function(game) {
     //Get today's date in string form
-    var date = getDateString();
-    game.date = date;
+    game.date = getDateString();
 
     //Manually set the ID so Mongo doesn't just keep writing to the same document
-    game._id = gameIndex.toString() + '|' + game.turn.toString() + '|' + date;
+    game.baseId = gameIndex.toString() + '|' + game.date;
+    game._id = game.baseId + '|' + game.turn.toString();
 
     //Save the number of the game
     game.gameNumber = gameIndex;
@@ -115,16 +116,12 @@ var runAndSaveGame = function(mongoData, game, gameIndex, userLookup) {
 
       //If game has ended, stop looping and set the max turn
       if (game.ended) {
-        maxTurn = game.maxTurn;
         return game;
 
       //Otherwise, continue with next turn and save that turn
       } else {
         //Advances the game one turn
         game.handleHeroTurn(direction);
-
-        //Manually set the ID so Mongo doesn't just keep writing to the same document
-        game._id = game.turn + '|' + game.date;
 
         return resolveGameAndSaveTurnsToDB(game);
       }
@@ -164,7 +161,7 @@ var updateMaxGameTurn = function(mongoData, game) {
     console.log('Game turns updated!');
     console.log('Updating all user stats...');
     return Q.all(game.heroes.map(function(hero) {
-      return saveUserStats(mongoData, hero, game.gameNumber);
+      return saveUserStats(mongoData, hero, game.baseId);
     }));
   });
 };
