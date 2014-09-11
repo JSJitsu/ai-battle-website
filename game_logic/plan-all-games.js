@@ -19,7 +19,7 @@ var planAllGames = function(users) {
   var boardSize = 12;
 
   //Maximum # of users per team?
-  var maxUsersPerTeam = 7;
+  var maxUsersPerTeam = 12;
 
   //Used to look up hero port numbers
   var userLookup = {};
@@ -36,7 +36,7 @@ var planAllGames = function(users) {
   for (var gameIndex=0; gameIndex<numberOfGames; gameIndex++) {
     var game = createGameFromMap(secrets.rootDirectory + 
         '/game_logic/maps/' + secrets.map + '.txt');
-    game.maxTurn = 750;
+    game.maxTurn = 1250;
     games.push(game);
 
     //Keeps track of which team to add the
