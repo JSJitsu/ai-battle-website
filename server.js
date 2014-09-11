@@ -78,7 +78,7 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
 router.get('/gameDataForUser/:turn', function(req, res){
 
   //If there is no user logged in, default to today's first game
-  var gameId = '0|' + getDateString(req.params.dayOffset) + '|' + req.params.turn 
+  var gameId = '0|' + getDateString(0) + '|' + req.params.turn 
 
   //Otherwise, use the most recent gameId of the user
   if (req.user && req.user.mostRecentGameId) {
