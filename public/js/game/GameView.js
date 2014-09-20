@@ -3,12 +3,9 @@ var GameView = Backbone.View.extend({
   className: 'outer',
   initialize: function(){
     this.updateTurn(0);
-    this.playSrc = 'http://icons.iconarchive.com/icons/hopstarter/button/256/Button-Play-icon.png';
-    this.pauseSrc = 'http://icons.iconarchive.com/icons/hopstarter/button/256/Button-Pause-icon.png';
     this.paused = true;
     this.playInProgress = false;
     this.sliderInitialized = false;
-
     this.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
     this.$el.append('<input class="row slider" />' +
                     '</div>');
@@ -75,8 +72,11 @@ var GameView = Backbone.View.extend({
         });
       }.bind(this),
       error: function(collection, response, options){
-        console.log('error', collection);
-      }
+        var siteDownView = new SiteDownView();
+        // console.log('error', collection);
+        this.$el.html('');
+        this.$el.append(siteDownView.$el);
+      }.bind(this)
     });
   },
   sendSliderToTurn: function(turn) {
