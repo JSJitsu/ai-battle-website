@@ -12,9 +12,17 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 
 // Defines mongo connection for azure deploy (or, failing that, for local deploy)
 var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
+var mongoConnectionOptions = {
+  server: {
+    socketOptions: {
+      keepAlive: 30000
+    },
+    auto_reconnect: true
+  }
+};
 
 // Connect to mongo
-var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
+var openMongoDatabase = Q.ninvoke(MongoClient, 'connect', mongoConnectionURL, mongoConnectionOptions).then(function(db) {
   console.log('open!');
   return db;
 });
@@ -75,8 +83,7 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
 });
 
 // Returns the state of the game on the given day and turn
-router.get('/gameDataForUser/:turn', function(req, res){
-
+router.get('/gameDataForUser/:turn', function(req, res) {
   //If there is no user logged in, default to today's first game
   var gameId = '0|' + getDateString(0) + '|' + req.params.turn 
 
@@ -87,40 +94,35 @@ router.get('/gameDataForUser/:turn', function(req, res){
 
   openMongoDatabase.then(function(db) {
     var collection = db.collection('jsBattleGameData');
-    collection.find({
+    return Q.ninvoke(collection, 'findOne', { 
       '_id': gameId
-    }).toArray(function(err,results) {
-      if (err) {
-        res.send(err);
-        return;
-      }
-      res.send(results[0]);
+    }).then(function(game) {
+      res.send(game);
     });
   }).catch(function(err) {
-    //If something goes wrong, respond with error
     res.send(err);
   });
 });
 
-// Returns the state of the given game on the given day and turn
-// If dayOffset is -1, will get yesterday's data, if 0, will get today's data
-router.get('/gameData/:dayOffset/:turn/:gameIndex', function(req, res){
-  openMongoDatabase.then(function(db) {
-    var collection = db.collection('jsBattleGameData');
-    collection.find({
-      '_id': req.params.gameIndex + '|' + getDateString(req.params.dayOffset) + '|' + req.params.turn
-    }).toArray(function(err,results) {
-      if (err) {
-        res.send(err);
-        return;
-      }
-      res.send(results[0]);
-    });
-  }).catch(function(err) {
-    //If something goes wrong, respond with error
-    res.send(err);
-  });
-});
+// // Returns the state of the given game on the given day and turn
+// // If dayOffset is -1, will get yesterday's data, if 0, will get today's data
+// router.get('/gameData/:dayOffset/:turn/:gameIndex', function(req, res){
+//   openMongoDatabase.then(function(db) {
+//     var collection = db.collection('jsBattleGameData');
+//     collection.find({
+//       '_id': req.params.gameIndex + '|' + getDateString(req.params.dayOffset) + '|' + req.params.turn
+//     }).toArray(function(err,results) {
+//       if (err) {
+//         res.send(err);
+//         return;
+//       }
+//       res.send(results[0]);
+//     });
+//   }).catch(function(err) {
+//     //If something goes wrong, respond with error
+//     res.send(err);
+//   });
+// });
 
 // Set root route for app's data
 app.use('/api', router);
