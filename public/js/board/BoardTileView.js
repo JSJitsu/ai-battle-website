@@ -3,7 +3,7 @@ var BoardTileView = Backbone.View.extend({
   className: 'battle-tile',
   initialize: function() {
     if (this.model === undefined) {
-      console.log('UNDEFINED!');
+      console.log(undefined);
     }
     this.render();
     this.model.on('change', this.render());
