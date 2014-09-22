@@ -17,9 +17,8 @@ var Mongo = require('mongodb');
 var MongoClient = Mongo.MongoClient;
 
 //Constructor
-var JsBattleConnection = function(secondsBetweenRefresh) {
-  this.mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
-  this.mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
+var JsBattleConnection = function(mongoConnectionUrl, secondsBetweenRefresh) {
+  this.mongoConnectionUrl = mongoConnectionUrl;
   this.mongoConnectionOptions = {
     server: {
       socketOptions: {
@@ -44,7 +43,7 @@ JsBattleConnection.prototype.closeConnection = function() {
 };
 
 JsBattleConnection.prototype.openConnection = function() {
-  return Q.ninvoke(MongoClient, 'connect', this.mongoConnectionURL, this.mongoConnectionOptions).then(function(db) {
+  return Q.ninvoke(MongoClient, 'connect', this.mongoConnectionUrl, this.mongoConnectionOptions).then(function(db) {
     console.log('Connection Opened!');
 
     //Save connection object and the time it was opened
@@ -87,6 +86,8 @@ JsBattleConnection.prototype.getConnection = function() {
     }
   }.bind(this));
 };
+
+module.exports = JsBattleConnection;
 
 // jsbc = new JsBattleConnection(5);
 
