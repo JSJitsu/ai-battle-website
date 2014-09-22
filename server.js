@@ -9,6 +9,7 @@ var helpers = require('./server/helpers');
 
 var app = express();
 var port = process.env.port || 8080;
+var productionMode = process.env.PRODUCTION_MODE || 'local';
 var mongoConnectionUrl = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
 var mongoConnectionUrl = 'mongodb://localhost/javascriptBattle';
 
@@ -34,7 +35,7 @@ var router = express.Router();
 // Returns the state of the game on the given day and turn
 router.get('/gameDataForUser/:turn', function(req, res) {
   //If there is no user logged in, default to today's first game
-  var gameId = '0|' + helpers.getDateString(0) + '|' + req.params.turn 
+  var gameId = '0|' + helpers.getDateString(0, productionMode) + '|' + req.params.turn 
 
   //Otherwise, use the most recent gameId of the user
   if (req.user && req.user.mostRecentGameId) {

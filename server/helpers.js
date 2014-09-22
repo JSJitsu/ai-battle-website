@@ -1,7 +1,7 @@
 var helpers = {};
 
 //Used in the gameData end point (below) 
-helpers.getDateString = function(dayOffset) {
+helpers.getDateString = function(dayOffset, productionMode) {
   if (dayOffset === undefined) {
     dayOffset = 0;
   }
