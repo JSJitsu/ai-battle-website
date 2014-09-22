@@ -19,6 +19,7 @@ var MongoClient = Mongo.MongoClient;
 //Constructor
 var JsBattleConnection = function(secondsBetweenRefresh) {
   this.mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
+  this.mongoConnectionURL = 'mongodb://localhost/javascriptBattle';
   this.mongoConnectionOptions = {
     server: {
       socketOptions: {
@@ -38,8 +39,8 @@ var JsBattleConnection = function(secondsBetweenRefresh) {
 // Closes the connection and returns a promise
 JsBattleConnection.prototype.closeConnection = function() {
   return Q.ninvoke(this.db, 'close').then(function() {
-    console.log('Connection closed!');
-  });
+    console.log('Connection Closed!');
+  }.bind(this));
 };
 
 JsBattleConnection.prototype.openConnection = function() {
@@ -49,19 +50,17 @@ JsBattleConnection.prototype.openConnection = function() {
     //Save connection object and the time it was opened
     this.db = db;
     this.lastConnectionTimestamp = new Date();
-    console.log(this.lastConnectionTimestamp);
-
 
     //Not strictly needed for this implementation, but good to return the result of the connect
     //query in the promise itself
     return db;
-  });
+  }.bind(this));
 };
 
 JsBattleConnection.prototype.refreshConnection = function() {
   return this.closeConnection().then(function() {
     return this.openConnection();
-  });
+  }.bind(this));
 };
 
 // Creates a connection to the mongo server if one
@@ -71,13 +70,14 @@ JsBattleConnection.prototype.refreshConnection = function() {
 JsBattleConnection.prototype.getConnection = function() {
   // We do this outer promise layer b/c we want to always return a promise,
   // regardless of whether we are returning the current connection,
-  // or a promise to a connection that is getting refreshed. 
+  // or a promise to a connection that is getting refreshed.
   return this.connectionPromise.then(function() {
 
     // If too long has elapsed, refreshes the connection
     var currentTime = new Date();
     // The "* 1000" is necessary because timestamps are stored in ms
     if (this.lastConnectionTimestamp <= currentTime - this.secondsBetweenRefresh * 1000) {
+      console.log('Connection is stale! Refreshing connection...');
       return this.refreshConnection().then(function() {
         return this.db;
       });
@@ -85,27 +85,28 @@ JsBattleConnection.prototype.getConnection = function() {
     } else {
       return this.db;
     }
-  });
+  }.bind(this));
 };
 
-jsbc = new JsBattleConnection(5);
+// jsbc = new JsBattleConnection(5);
 
-jsbc.getConnection().then(function(db) {
-  console.log('Connection 0!');
-  console.log(jsbc.lastConnectionTimestamp);
-  console.log(db);
-  setTimeout(function() {
-    jsbc.getConnection().then(function() {
-      console.log('Connection 2!');
-      console.log(jsbc.lastConnectionTimestamp);
-      jsbc.closeConnection();
-    });
-  },8000);
-});
+// jsbc.getConnection().then(function(db) {
+//   console.log('Connection 0!');
+//   console.log(jsbc.lastConnectionTimestamp);
+//   setTimeout(function() {
+//     jsbc.getConnection().then(function() {
+//       console.log('Connection 2!');
+//       console.log(jsbc.lastConnectionTimestamp);
+//       jsbc.getConnection().then(function() {
+//         console.log('Connection 3!');
+//       });
+//     });
+//   },8000);
+// });
 
-setTimeout(function() {
-  jsbc.getConnection().then(function() {
-    console.log('Connection 1!');
-    console.log(jsbc.lastConnectionTimestamp);
-  });
-},500);
+// setTimeout(function() {
+//   jsbc.getConnection().then(function() {
+//     console.log('Connection 1!');
+//     console.log(jsbc.lastConnectionTimestamp);
+//   });
+// },500);
