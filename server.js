@@ -10,6 +10,7 @@ var helpers = require('./server/helpers');
 var app = express();
 var port = process.env.port || 8080;
 var productionMode = process.env.PRODUCTION_MODE || 'local';
+var secondsBetweenRefresh = process.env.SECONDS_BETWEEN_REFRESH || 600;
 var mongoConnectionUrl = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
 
 //Connection to database will refresh every ten minutes (600 seconds)
