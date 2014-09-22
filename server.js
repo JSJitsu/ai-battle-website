@@ -3,7 +3,6 @@ var fs = require('fs');
 var Q = require('q');
 var Mongo = require('mongodb');
 var MongoClient = Mongo.MongoClient;
-var MongoObjectId = Mongo.ObjectID;
 var OAuthGithub = require('./server/OAuthGithub');
 
 var app = express();
@@ -15,7 +14,7 @@ var mongoConnectionURL = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://local
 var mongoConnectionOptions = {
   server: {
     socketOptions: {
-      keepAlive: 30000
+      keepAlive: 1000
     },
     auto_reconnect: true
   }
