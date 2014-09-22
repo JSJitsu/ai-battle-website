@@ -79,7 +79,7 @@ JsBattleConnection.prototype.getConnection = function() {
       console.log('Connection is stale! Refreshing connection...');
       return this.refreshConnection().then(function() {
         return this.db;
-      });
+      }.bind(this));
     // Otherwise simply return the current connection
     } else {
       return this.db;
