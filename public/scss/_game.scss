@@ -84,6 +84,14 @@
 
 .hero-header {
   span {
-    font-weight: bold;
+    font-weight: 700;
+    width: 75px;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    postion: relative;
+    position: relative;
+    top: 5px;
   }
 }
