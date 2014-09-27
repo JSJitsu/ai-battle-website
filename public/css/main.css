@@ -823,6 +823,10 @@ body {
 
     .sprite {
       max-height: 2.8vw; } } }
+@media (max-width: 767px) {
+  .team-info {
+    top: 0;
+    width: 18vw; } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
