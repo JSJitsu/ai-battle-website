@@ -1,5 +1,5 @@
 // A wrapper around the mongo connection object
-// It's main purpose is to simply return the
+// Its main purpose is to simply return the
 // open database connection.
 
 // However, it will also refresh this connection
