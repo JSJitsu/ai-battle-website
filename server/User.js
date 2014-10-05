@@ -1,7 +1,19 @@
 var mongoose = require('mongoose');
+var options = {
+  server: {
+    socketOptions: {
+      keepAlive: 1
+    }
+  },
+  replset: {
+    socketOptions: {
+      keepAlive: 1
+    }
+  }
+};
 
 module.exports = function(mongoConnectionUrl) {
-  mongoose.connect(mongoConnectionUrl);
+  mongoose.connect(mongoConnectionUrl, options);
 
   var UserSchema = mongoose.Schema({
     githubHandle: String,
