@@ -41,5 +41,5 @@ var transferUsersBetweenDatabases = function(fromConnectionUrl, toConnectionUrl)
     console.dir(err);
   });
 };
-// transferUsersBetweenDatabases('mongodb://localhost/javascriptBattle', 'mongodb://localhost/javascriptBattle2');
+
 module.exports = transferUsersBetweenDatabases;

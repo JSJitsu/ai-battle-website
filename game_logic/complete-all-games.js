@@ -147,7 +147,8 @@ var updateMaxGameTurn = function(mongoData, game) {
 
   return Q.npost(gameDataCollection, 'update', [
     {
-      date: game.date
+      date: game.date,
+      gameNumber: game.gameNumber
     },
     {
       $set: {
