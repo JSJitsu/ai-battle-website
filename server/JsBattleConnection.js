@@ -22,9 +22,13 @@ var JsBattleConnection = function(mongoConnectionUrl, secondsBetweenRefresh) {
   this.mongoConnectionOptions = {
     server: {
       socketOptions: {
-        keepAlive: 1000
-      },
-      auto_reconnect: true
+        keepAlive: 1
+      }
+    },
+    replset: {
+      socketOptions: {
+        keepAlive: 1
+      }
     }
   };
 
