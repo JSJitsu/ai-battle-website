@@ -826,7 +826,7 @@ body {
 @media (max-width: 767px) {
   .team-info {
     top: 0;
-    width: 18vw; } }
+    width: 20vw; } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
