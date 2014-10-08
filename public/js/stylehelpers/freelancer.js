@@ -25,7 +25,7 @@ $(function() {
         $(this).removeClass("floating-label-form-group-with-focus");
     });
     $('.hide-tip').click(function(){
-      $('.game-tips').remove();
+      $('.game-tips').fadeOut('slow');
     });
 });
 

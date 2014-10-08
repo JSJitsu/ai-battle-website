@@ -521,6 +521,9 @@ body {
   .game-tips .fa-times {
     cursor: pointer; }
 
+#replay {
+  min-height: 1094px; }
+
 .outer {
   bottom: 37px;
   position: relative; }
