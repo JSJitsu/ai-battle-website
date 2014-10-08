@@ -511,15 +511,17 @@ body {
   text-align: -moz-center; }
 
 .game-tips {
-  border: solid 1px black;
-  width: 28%;
-  color: #551717;
-  margin: 0 auto;
-  background: #62B4B1;
-  opacity: .6;
-  box-shadow: 2px 2px 3px 1px; }
-  .game-tips .fa-times {
-    cursor: pointer; }
+  position: relative; }
+  .game-tips aside {
+    border: solid 1px black;
+    width: 28%;
+    color: #551717;
+    margin: 0 auto;
+    background: #62B4B1;
+    opacity: .6;
+    box-shadow: 2px 2px 3px 1px; }
+    .game-tips aside .fa-times {
+      cursor: pointer; }
 
 #replay {
   min-height: 1094px; }
