@@ -511,7 +511,8 @@ body {
   text-align: -moz-center; }
 
 .game-tips {
-  position: relative; }
+  position: relative;
+  bottom: 120px; }
   .game-tips aside {
     border: solid 1px black;
     width: 28%;
@@ -847,7 +848,10 @@ body {
 @media (max-width: 767px) {
   .team-info {
     top: 0;
-    width: 20vw; } }
+    width: 20vw; }
+
+  .game-tips {
+    bottom: 50px; } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
