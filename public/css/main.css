@@ -512,7 +512,7 @@ body {
 
 .game-tips {
   position: relative;
-  bottom: 120px; }
+  bottom: 55px; }
   .game-tips aside {
     border: solid 1px black;
     width: 28%;
@@ -851,7 +851,7 @@ body {
     width: 20vw; }
 
   .game-tips {
-    bottom: 50px; } }
+    bottom: 25px; } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
