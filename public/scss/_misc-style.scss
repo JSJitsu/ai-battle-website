@@ -155,3 +155,16 @@
   text-align: -webkit-center;
   text-align: -moz-center;
 }
+
+.game-tips {
+  .fa-times{
+    cursor: pointer;
+  }
+  border: solid 1px rgb(0, 0, 0);
+  width: 28%;
+  color: rgb(85, 23, 23);
+  margin: 0 auto;
+  background: #62B4B1;
+  opacity: .6;
+  box-shadow: 2px 2px 3px 1px;
+}

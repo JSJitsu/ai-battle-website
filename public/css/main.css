@@ -75,8 +75,7 @@ header .container {
   padding-top: 100px;
   padding-bottom: 50px; }
 
-header img,
-.site-down img {
+header .img-responsive {
   display: block;
   margin: 0 auto 20px;
   width: 350px; }
@@ -510,6 +509,17 @@ body {
   display: block;
   text-align: -webkit-center;
   text-align: -moz-center; }
+
+.game-tips {
+  border: solid 1px black;
+  width: 28%;
+  color: #551717;
+  margin: 0 auto;
+  background: #62B4B1;
+  opacity: .6;
+  box-shadow: 2px 2px 3px 1px; }
+  .game-tips .fa-times {
+    cursor: pointer; }
 
 .outer {
   bottom: 37px;

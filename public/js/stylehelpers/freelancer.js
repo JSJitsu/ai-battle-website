@@ -24,6 +24,9 @@ $(function() {
     }).on("blur", ".floating-label-form-group", function() {
         $(this).removeClass("floating-label-form-group-with-focus");
     });
+    $('.hide-tip').click(function(){
+      $('.game-tips').remove();
+    });
 });
 
 // Highlight the top nav as scrolling occurs
@@ -35,3 +38,4 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+

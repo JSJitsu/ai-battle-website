@@ -75,11 +75,13 @@ header .container {
   padding-top: 100px;
   padding-bottom: 50px; }
 
-header img,
-.site-down img {
-  display: block;
-  margin: 0 auto 20px;
-  width: 350px; }
+header {
+    .img-responsive {
+      display: block;
+      margin: 0 auto 20px;
+      width: 350px; 
+    }
+}
 
 
 
