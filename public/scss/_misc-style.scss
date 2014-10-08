@@ -12,7 +12,9 @@
     padding: 10px;
   }
 }
-
+.ft {
+  font-size: 3px;
+}
 .submitRepo {
   color: white;
   width: 10rem;
@@ -21,6 +23,10 @@
   &:hover {
     color: #18bc9c;
   }
+}
+
+.fb_iframe_widget {
+  display: block !important;
 }
 
 .nav-buttons {
