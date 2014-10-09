@@ -13,7 +13,7 @@ var productionMode = process.env.PRODUCTION_MODE || 'local';
 var secondsBetweenRefresh = process.env.SECONDS_BETWEEN_REFRESH || 120;
 var mongoConnectionUrl = process.env.CUSTOMCONNSTR_MONGO_URI || 'mongodb://localhost/javascriptBattle';
 
-//Connection to database will refresh every 2 minutes (120 seconds)
+// Connection to database will refresh every 2 minutes (120 seconds)
 var jsBattleConnection = new JsBattleConnection(mongoConnectionUrl, secondsBetweenRefresh);
 
 // Serve up files in public folder
@@ -34,10 +34,10 @@ var router = express.Router();
 
 // Returns the state of the game on the given day and turn
 router.get('/gameDataForUser/:turn', function(req, res) {
-  //If there is no user logged in, default to today's first game
+  // If there is no user logged in, default to today's first game
   var gameId = '0|' + helpers.getDateString(0, productionMode) + '|' + req.params.turn 
 
-  //Otherwise, use the most recent gameId of the user
+  // Otherwise, use the most recent gameId of the user
   if (req.user && req.user.mostRecentGameId) {
     gameId = req.user.mostRecentGameId + '|' + req.params.turn;
   }
@@ -54,7 +54,7 @@ router.get('/gameDataForUser/:turn', function(req, res) {
   });
 });
 
-//Returns the leaderboard data for the specified time period and stat
+// Returns the leaderboard data for the specified time period and stat
 router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
   var timePeriod = req.params.timePeriod;
   var stat = req.params.stat;
@@ -77,6 +77,19 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
   });
 });
 
+// Returns the current announcement
+router.get('/announcement', function(req, res) {
+  jsBattleConnection.getConnection().then(function(db) {
+    var collection = db.collection('general');
+    return Q.ninvoke(collection, 'findOne', {
+      'type': 'announcement'
+    }).then(function(announcementData) {
+      res.send(announcementData.message);
+    })
+  }).catch(function(err) {
+    res.send(err);
+  });
+});
 
 // Set root route for app's data
 app.use('/api', router);
