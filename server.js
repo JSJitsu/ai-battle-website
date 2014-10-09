@@ -80,6 +80,7 @@ router.get('/announcement', function(req, res) {
     return Q.ninvoke(collection, 'findOne', {
       'type': 'announcement'
     }).then(function(announcementData) {
+      delete announcementData._id;
       res.json(announcementData);
     })
   }).catch(function(err) {
