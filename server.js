@@ -62,13 +62,9 @@ router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
   jsBattleConnection.getConnection().then(function(db) {
     var collection = db.collection('leaderboard');
     var id = timePeriod + '|' + stat;
-    collection.findOne({
+    return Q.ninvoke(collection, 'findOne', {
       '_id': id
-    }, function(err, results) {
-      if (err) {
-        res.send(err);
-        return;
-      }
+    }).then(function(results) {
       res.send(results);
     });
   }).catch(function(err) {
@@ -84,7 +80,8 @@ router.get('/announcement', function(req, res) {
     return Q.ninvoke(collection, 'findOne', {
       'type': 'announcement'
     }).then(function(announcementData) {
-      res.send(announcementData.message);
+      delete announcementData._id;
+      res.json(announcementData);
     })
   }).catch(function(err) {
     res.send(err);
