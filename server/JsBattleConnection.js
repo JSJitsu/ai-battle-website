@@ -11,6 +11,9 @@
 // timeouts when the connection is stale (and the
 // keepAlive & auto_reconnect flags don't seem to 
 // entirely fix the issue)
+// Additionally, we need to set the connectionTimeout 
+// for socket options to longer than the default, which 
+// is one second. 
 
 var Q = require('q');
 var Mongo = require('mongodb');
@@ -22,12 +25,14 @@ var JsBattleConnection = function(mongoConnectionUrl, secondsBetweenRefresh) {
   this.mongoConnectionOptions = {
     server: {
       socketOptions: {
-        keepAlive: 1
+        keepAlive: 1,
+        connectTimeoutMS: 30000
       }
     },
     replset: {
       socketOptions: {
-        keepAlive: 1
+        keepAlive: 1,
+        connectTimeoutMS: 30000
       }
     }
   };
