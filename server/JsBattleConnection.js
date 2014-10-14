@@ -25,14 +25,12 @@ var JsBattleConnection = function(mongoConnectionUrl, secondsBetweenRefresh) {
   this.mongoConnectionOptions = {
     server: {
       socketOptions: {
-        keepAlive: 1,
-        connectTimeoutMS: 30000
+        keepAlive: 1
       }
     },
     replset: {
       socketOptions: {
-        keepAlive: 1,
-        connectTimeoutMS: 30000
+        keepAlive: 1
       }
     }
   };
