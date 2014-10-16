@@ -12,9 +12,7 @@
     padding: 10px;
   }
 }
-.ft {
-  font-size: 3px;
-}
+
 .submitRepo {
   color: white;
   width: 10rem;
@@ -23,10 +21,6 @@
   &:hover {
     color: #18bc9c;
   }
-}
-
-.fb_iframe_widget {
-  display: block !important;
 }
 
 .nav-buttons {
@@ -77,39 +71,6 @@
   top: 50px;
 }
 
-.leaderboard-table {
-  background-color: white;
-  color: black;
-  text-align: center;
-  width: 60vw;
-}
-
-.leaderboard-headers {
-  th {
-    text-align: center;
-  }
-}
-
-.leaderboard-time-param {
-  margin: 0 25px 25px 0;
-}
-
-.leaderboard-data {
-  width: 33%;
-}
-
-.leaderboard-rank {
-  width: 6vw;
-}
-
-.leaderboard-name {
-  width: 26vw;
-}
-
-.leaderboard-damage {
-  width: 26vw;
-}
-
 .lifetime-table-header {
   font-weight: bold;
 }
@@ -156,23 +117,15 @@
   text-align: -moz-center;
 }
 
-.game-tips {
-  position: relative;
-  bottom: 55px;
-  aside{
-    .fa-times{
-      cursor: pointer;
-    }
-    border: solid 1px rgb(0, 0, 0);
-    width: 28%;
-    color: rgb(85, 23, 23);
-    margin: 0 auto;
-    background: #62B4B1;
-    opacity: .6;
-    box-shadow: 2px 2px 3px 1px;
-  }
+.announce {
+  position: absolute;
+  top: 8vw;
+  width: 100%;
+  height: 5vw;
+  background-color: yellow;
+  border: 4px solid black;
 }
 
-#replay {
-  min-height: 1094px;
+.knight {
+  z-index: 1;
 }

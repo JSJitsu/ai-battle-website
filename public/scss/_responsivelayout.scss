@@ -61,6 +61,14 @@
   .turn {
     bottom: none;
   }
+  .announce {
+    position: absolute;
+    top: 8vw;
+    width: 100%;
+    height: 8vw;
+    background-color: yellow;
+    border: 4px solid black;
+  }
 }
 
 @media (max-width: 1098px){
@@ -71,6 +79,14 @@
     left: 3px;
     margin: -3px;
   }
+  .announce {
+    position: absolute;
+    top: 8vw;
+    width: 100%;
+    height: 12vw;
+    background-color: yellow;
+    border: 4px solid black;
+  }
 }
 
 @media (max-width: 991px) {
@@ -79,12 +95,30 @@
     padding-right: 8%;
     padding-left: 12%;
   }
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2;
+  }
 }
 
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;  
     height: 3.9vw;
+  }
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2;
   }
   @-moz-document url-prefix() {
     .battle-tile {
@@ -97,16 +131,28 @@
   }
 }
 
-@media (max-width: 767px){
-  .team-info {
-    top: 0;
-    width: 20vw;
+@media (max-width: 763px) {
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2;
   }
-  .game-tips {
-    bottom: 25px;
+  @-moz-document url-prefix() {
+    .team-info {
+      visibility: hidden;
+    }
+    .life-capacity {
+      width: 111%;
+    }
+    .sprite {
+      max-height: 3.1vw;
+    }
   }
 }
-
 
 @media (max-width: 678px) {
   .messages {
@@ -155,6 +201,15 @@
       font-size: 11px;
     }
   }
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2;
+  }
   @-moz-document url-prefix() {
     .battle-tile {
       width: 7.1vw;
@@ -166,17 +221,15 @@
   }
 }
 
-@media (max-width: 763px) {
-  @-moz-document url-prefix() {
-    .team-info {
-      visibility: hidden;
-    }
-    .life-capacity {
-      width: 111%;
-    }
-    .sprite {
-      max-height: 3.1vw;
-    }
+@media (max-width: 590px) {
+  .announce {
+    position: absolute;
+    top: 10vw;
+    width: 100%;
+    height: 175px;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2;
   }
 }
 
