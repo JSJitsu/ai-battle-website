@@ -527,6 +527,17 @@ body {
 #replay {
   min-height: 1094px; }
 
+.announce {
+  position: absolute;
+  top: 8vw;
+  width: 100%;
+  height: 5vw;
+  background-color: yellow;
+  border: 4px solid black; }
+
+.knight {
+  z-index: 1; }
+
 .outer {
   bottom: 37px;
   position: relative; }
@@ -820,23 +831,57 @@ body {
     padding-left: 3%; }
 
   .turn {
-    bottom: none; } }
+    bottom: none; }
+
+  .announce {
+    position: absolute;
+    top: 8vw;
+    width: 100%;
+    height: 8vw;
+    background-color: yellow;
+    border: 4px solid black; } }
 @media (max-width: 1098px) {
   .lifebar {
     width: 31%;
     height: 96%;
     bottom: -12%;
     left: 3px;
-    margin: -3px; } }
+    margin: -3px; }
+
+  .announce {
+    position: absolute;
+    top: 8vw;
+    width: 100%;
+    height: 12vw;
+    background-color: yellow;
+    border: 4px solid black; } }
 @media (max-width: 991px) {
   .portfolio-item {
     float: left;
     padding-right: 8%;
-    padding-left: 12%; } }
+    padding-left: 12%; }
+
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2; } }
 @media (max-width: 800px) {
   .battle-tile {
     width: 3.9vw;
     height: 3.9vw; }
+
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2; }
 
   @-moz-document url-prefix() {
     .battle-tile {
@@ -851,7 +896,16 @@ body {
     width: 20vw; }
 
   .game-tips {
-    bottom: 25px; } }
+    bottom: 25px; }
+
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2; } }
 @media (max-width: 678px) {
   .messages {
     top: 3vw; }
@@ -898,6 +952,15 @@ body {
     .nav-buttons .btn {
       font-size: 11px; }
 
+  .announce {
+    position: absolute;
+    top: 12vw;
+    width: 100%;
+    height: 18vw;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2; }
+
   @-moz-document url-prefix() {
     .battle-tile {
       width: 7.1vw;
@@ -915,6 +978,15 @@ body {
 
     .sprite {
       max-height: 3.1vw; } } }
+@media (max-width: 590px) {
+  .announce {
+    position: absolute;
+    top: 10vw;
+    width: 100%;
+    height: 175px;
+    background-color: yellow;
+    border: 4px solid black;
+    z-index: 2; } }
 @media (max-width: 398px) {
   .indicator {
     font-size: 3.5vw;
