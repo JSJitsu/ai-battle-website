@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/', function(req, res) {
-  var sandbox = {move: move, data: req.body, helpers: helpers, moveResult: undefined};
+  var sandbox = {move: move, data: req.body, helpers: helpers};
   vm.runInNewContext('moveResult=move(data, helpers)', sandbox);
   res.json(sandbox.moveResult);
 });
