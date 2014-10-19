@@ -2,7 +2,6 @@ var planAllGames = require('./plan-all-games.js');
 var prepareUserContainers = require('../docker/prepare-user-containers.js');
 var saveUserStats = require('../stats/save-user-stats.js')
 var secrets = require('../secrets.js');
-var Q = require('q');
 var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
 
 var gamesCompleted = 0;
