@@ -10,15 +10,15 @@ startStopContainersObj.spinUpContainer = function(port) {
   return spawn(secrets.rootDirectory + 
       '/docker/container_interaction/start-hero-brain-container.sh', [port])
 
-    .progress(function(childProcess) {
-      console.log('[spawn] childProcess.pid: ', childProcess.pid);
-      childProcess.stdout.on('data', function(data) {
-          console.log('  [spawn] stdout: ', data.toString());
-      });
-      childProcess.stderr.on('data', function(data) {
-          console.log('  [spawn] stderr: ', data.toString()); 
-      });
+  .progress(function(childProcess) {
+    console.log('[spawn] childProcess.pid: ', childProcess.pid);
+    childProcess.stdout.on('data', function(data) {
+        console.log('  [spawn] stdout: ', data.toString().trim());
     });
+    childProcess.stderr.on('data', function(data) {
+        console.log('  [spawn] stderr: ', data.toString().trim()); 
+    });
+  });
     
 };
 
@@ -26,26 +26,31 @@ startStopContainersObj.spinUpContainer = function(port) {
 //then removing all containers
 startStopContainersObj.shutDownAllContainers = function() {
   return exec('sudo docker stop $(sudo docker ps -q -a)')
+
+  .progress(function(childProcess) {
+    console.log('[spawn] childProcess.pid: ', childProcess.pid);
+    childProcess.stdout.on('data', function(data) {
+        console.log('  [spawn] stdout: ', data.toString().trim());
+    });
+    childProcess.stderr.on('data', function(data) {
+        console.log('  [spawn] stderr: ', data.toString().trim()); 
+    });
+  })
+
+  .then(function() {
+    return exec('sudo docker rm -f $(sudo docker ps -a -q)')
+
     .progress(function(childProcess) {
       console.log('[spawn] childProcess.pid: ', childProcess.pid);
       childProcess.stdout.on('data', function(data) {
-          console.log('  [spawn] stdout: ', data.toString());
+          console.log('  [spawn] stdout: ', data.toString().trim());
       });
       childProcess.stderr.on('data', function(data) {
-          console.log('  [spawn] stderr: ', data.toString()); 
+          console.log('  [spawn] stderr: ', data.toString().trim()); 
       });
-    }).then(function() {
-      return exec('sudo docker rm -f $(sudo docker ps -a -q)')
-        .progress(function(childProcess) {
-          console.log('[spawn] childProcess.pid: ', childProcess.pid);
-          childProcess.stdout.on('data', function(data) {
-              console.log('  [spawn] stdout: ', data.toString());
-          });
-          childProcess.stderr.on('data', function(data) {
-              console.log('  [spawn] stderr: ', data.toString()); 
-          });
-        });
     });
+
+  });
 };
 
 module.exports = startStopContainersObj;
