@@ -1,13 +1,5 @@
-var request = require('request');
-var MongoClient = require('mongodb').MongoClient;
-var Q = require('q');
-var fs = require('fs');
-
 // generate leaderboard data and put in MongoDB as arrays
-var updateLeaderboard = function(users, mongoData) {
-
-  var userCollection = mongoData.userCollection;
-  var leaderboardCollection = mongoData.leaderboardCollection;
+var updateLeaderboard = function(users, mongoConnection) {
   
   // generates an array for the leaderboard
   var getArrays = function(prop, recentLifetimeAverage) {
@@ -114,8 +106,11 @@ var updateLeaderboard = function(users, mongoData) {
                      ['average|losses', lossesAverage]];
 
   // generate a promise from a post of a leader array
-  var generateUpdate = function(statsTuple) {
-    return Q.npost(leaderboardCollection, 'update', [
+  var generateUpdatePromise = function(statsTuple) {
+    console.log('Updating leaderboard for: ' + statsTuple[0] + '...');
+    return mongoConnection.safeInvoke(
+      'leaderboard',
+      'update',
       // query document to update
       {
         '_id': statsTuple[0]
@@ -129,22 +124,23 @@ var updateLeaderboard = function(users, mongoData) {
       { 
         upsert: true 
       }
-    ]);
+    );
   };
 
-  var generateUpdatePromises = [];
+  // Recursively update all leaderboard categories
+  var updateNextStat = function() {
+    nextTuple = statsTuples.pop();
+    
+    return generateUpdatePromise(nextTuple)
+    .then(function() {
+      if (statsTuples.length > 0) {
+        return updateNextStat();
+      }
+    });
+  };
 
-  // generate an array of promises for each leaderboard top ten array
-  for (var j = 0; j < statsTuples.length; j++) {
-    generateUpdatePromises.push(generateUpdate(statsTuples[j]));
-  }
-  // pass the array of promises in to Q.all
-  return Q.all(generateUpdatePromises).then(function() {
-    console.log('leaderboardCollection updated');
-  // error handling
-  }).catch(function(error) {
-    console.error("Error in writing leaderboard data to database: ", error);
-  });
+  return updateNextStat();
+
 };
 
 module.exports = updateLeaderboard;
