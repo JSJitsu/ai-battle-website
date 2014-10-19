@@ -13,10 +13,10 @@ startStopContainersObj.spinUpContainer = function(port) {
   .progress(function(childProcess) {
     console.log('[spawn] childProcess.pid: ', childProcess.pid);
     childProcess.stdout.on('data', function(data) {
-        console.log('  [spawn] stdout: ', data.toString());
+        console.log('  [spawn] stdout: ', data.toString().trim());
     });
     childProcess.stderr.on('data', function(data) {
-        console.log('  [spawn] stderr: ', data.toString()); 
+        console.log('  [spawn] stderr: ', data.toString().trim()); 
     });
   });
     
@@ -30,10 +30,10 @@ startStopContainersObj.shutDownAllContainers = function() {
   .progress(function(childProcess) {
     console.log('[spawn] childProcess.pid: ', childProcess.pid);
     childProcess.stdout.on('data', function(data) {
-        console.log('  [spawn] stdout: ', data.toString());
+        console.log('  [spawn] stdout: ', data.toString().trim());
     });
     childProcess.stderr.on('data', function(data) {
-        console.log('  [spawn] stderr: ', data.toString()); 
+        console.log('  [spawn] stderr: ', data.toString().trim()); 
     });
   })
 
@@ -43,13 +43,13 @@ startStopContainersObj.shutDownAllContainers = function() {
     .progress(function(childProcess) {
       console.log('[spawn] childProcess.pid: ', childProcess.pid);
       childProcess.stdout.on('data', function(data) {
-          console.log('  [spawn] stdout: ', data.toString());
+          console.log('  [spawn] stdout: ', data.toString().trim());
       });
       childProcess.stderr.on('data', function(data) {
-          console.log('  [spawn] stderr: ', data.toString()); 
+          console.log('  [spawn] stderr: ', data.toString().trim()); 
       });
     });
-    
+
   });
 };
 
