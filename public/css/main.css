@@ -532,7 +532,7 @@ body {
   top: 8vw;
   width: 100%;
   height: 5vw;
-  background-color: yellow;
+  background-color: #27e833;
   border: 4px solid black; }
 
 .knight {
@@ -835,10 +835,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 8vw;
+    top: 10vw;
     width: 100%;
     height: 8vw;
-    background-color: yellow;
+    background-color: #27e833;
     border: 4px solid black; } }
 @media (max-width: 1098px) {
   .lifebar {
@@ -850,10 +850,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 8vw;
+    top: 10vw;
     width: 100%;
-    height: 12vw;
-    background-color: yellow;
+    height: 8vw;
+    background-color: #27e833;
     border: 4px solid black; } }
 @media (max-width: 991px) {
   .portfolio-item {
@@ -863,10 +863,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 13vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2; } }
 @media (max-width: 800px) {
@@ -876,10 +876,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 14vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2; }
 
@@ -900,10 +900,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 8vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2; } }
 @media (max-width: 678px) {
@@ -954,10 +954,10 @@ body {
 
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 8vw;
     width: 100%;
     height: 18vw;
-    background-color: yellow;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2; }
 
@@ -981,10 +981,10 @@ body {
 @media (max-width: 590px) {
   .announce {
     position: absolute;
-    top: 10vw;
+    top: 9vw;
     width: 100%;
-    height: 175px;
-    background-color: yellow;
+    height: 100px;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2; } }
 @media (max-width: 398px) {
@@ -1010,4 +1010,12 @@ body {
       height: 5vw; }
 
     .sprite {
-      max-height: 5vw; } } }
+      max-height: 5vw; } }
+  .announce {
+    position: absolute;
+    top: 10vw;
+    width: 100%;
+    height: 150px;
+    background-color: #27e833;
+    border: 4px solid black;
+    z-index: 2; } }

@@ -63,10 +63,10 @@
   }
   .announce {
     position: absolute;
-    top: 8vw;
+    top: 10vw;
     width: 100%;
     height: 8vw;
-    background-color: yellow;
+    background-color: #27e833;
     border: 4px solid black;
   }
 }
@@ -81,10 +81,10 @@
   }
   .announce {
     position: absolute;
-    top: 8vw;
+    top: 10vw;
     width: 100%;
-    height: 12vw;
-    background-color: yellow;
+    height: 8vw;
+    background-color: #27e833;
     border: 4px solid black;
   }
 }
@@ -97,10 +97,10 @@
   }
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 13vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2;
   }
@@ -113,10 +113,10 @@
   }
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 14vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2;
   }
@@ -141,10 +141,10 @@
   }
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 8vw;
     width: 100%;
-    height: 18vw;
-    background-color: yellow;
+    height: 12vw;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2;
   }
@@ -200,10 +200,10 @@
   }
   .announce {
     position: absolute;
-    top: 12vw;
+    top: 8vw;
     width: 100%;
     height: 18vw;
-    background-color: yellow;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2;
   }
@@ -235,10 +235,10 @@
 @media (max-width: 590px) {
   .announce {
     position: absolute;
-    top: 10vw;
+    top: 9vw;
     width: 100%;
-    height: 175px;
-    background-color: yellow;
+    height: 100px;
+    background-color: #27e833;
     border: 4px solid black;
     z-index: 2;
   }
@@ -269,5 +269,14 @@
     .sprite{
       max-height: 5vw;
     } 
+  }
+  .announce {
+    position: absolute;
+    top: 10vw;
+    width: 100%;
+    height: 150px;
+    background-color: #27e833;
+    border: 4px solid black;
+    z-index: 2;
   }
 }
