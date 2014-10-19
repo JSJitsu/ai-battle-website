@@ -167,9 +167,14 @@ var updateMaxGameTurn = function(mongoConnection, game) {
   .then(function() {
     console.log('Game turns updated successfully!');
     console.log('Updating all user stats...');
+
     return Q.all(game.heroes.map(function(hero) {
       return saveUserStats(mongoConnection, hero, game.baseId);
-    }));
+    }))
+
+    .then(function() {
+      console.log('All user stats updated for game #' + game.gameNumber);
+    });
   });
 };
 
