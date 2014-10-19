@@ -107,6 +107,7 @@ var updateLeaderboard = function(users, mongoConnection) {
 
   // generate a promise from a post of a leader array
   var generateUpdatePromise = function(statsTuple) {
+    console.log('Updating leaderboard for: ' + statsTuple[0] + '...');
     return mongoConnection.safeInvoke(
       'leaderboard',
       'update',
@@ -139,7 +140,7 @@ var updateLeaderboard = function(users, mongoConnection) {
   };
 
   return updateNextStat();
-  
+
 };
 
 module.exports = updateLeaderboard;

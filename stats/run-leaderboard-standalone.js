@@ -1,5 +1,7 @@
+var Q = require('../node_modules/q/q.js');
 var secrets = require('../secrets.js');
 var SafeMongoConnection = require('../helpers/safe-mongo-connection.js');
+var updateLeaderboard = require('./update-leaderboard.js');
 
 var mongoOptions = {
   server: {
@@ -32,7 +34,7 @@ mongoConnection.connect()
   .then(function(users) {
 
     console.log('Updating leaderboard...');
-    return updateLeaderboard(users, mongoConnection);
+    return updateLeaderboard(users, mongoConnection)
 
     .then(function() {
       console.log('Leaderboard updated successfully!');
