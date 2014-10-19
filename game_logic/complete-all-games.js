@@ -168,10 +168,23 @@ var updateMaxGameTurn = function(mongoConnection, game) {
     console.log('Game turns updated successfully!');
     console.log('Updating all user stats...');
 
-    return Q.all(game.heroes.map(function(hero) {
-      return saveUserStats(mongoConnection, hero, game.baseId);
-    }))
+    // Save each hero's stats for the most recent game
+    // Loop recursively until complete, return a promise
+    var saveStatsForNextHero = function() {
+      var hero = heroesToSave.pop();
 
+      return saveUserStats(mongoConnection, hero, game.baseId)
+
+      .then(function() {
+        if (heroesToSave.length > 0) {
+          return saveAllHeroStats();
+        }
+      });
+    };
+
+    var heroesToSave = game.heroes.slice();
+
+    return saveStatsForNextHero()
     .then(function() {
       console.log('All user stats updated for game #' + game.gameNumber);
     });
