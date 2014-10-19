@@ -177,7 +177,7 @@ var updateMaxGameTurn = function(mongoConnection, game) {
 
       .then(function() {
         if (heroesToSave.length > 0) {
-          return saveAllHeroStats();
+          return saveStatsForNextHero();
         }
       });
     };
