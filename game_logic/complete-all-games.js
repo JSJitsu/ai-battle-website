@@ -47,6 +47,7 @@ var prepRunAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) 
   // Update each game turn to have the correct "maxTurn"
   // attribute (after the max turn for the game is known)
   .then(function() {
+    gamesCompleted++;
     return updateMaxGameTurn(mongoConnection, game);
   });
 
