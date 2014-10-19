@@ -1,13 +1,17 @@
-var Q = require('q');
-
 //Saves the user stats to the database
 //Returns a promise that resolves to the user object
-module.exports = function(mongoData, hero, gameId) {
-  var userCollection = mongoData.userCollection;
-  var deferred = Q.defer();
+module.exports = function(mongoConnection, hero, gameId) {
 
   //Grab the user from the database
-  return Q.ninvoke(userCollection, 'findOne', { githubHandle: hero.name }).then(function(user) {
+  return mongoConnection.safeInvoke(
+    'users',
+    'findOne',
+    {
+      githubHandle: hero.name
+    }
+  )
+
+  .then(function(user) {
 
     //Update the number of the most recently played game
     user.mostRecentGameId = gameId;
@@ -56,17 +60,23 @@ module.exports = function(mongoData, hero, gameId) {
 
     return user;
 
-  }).then(function(user) {
+  })
+
+  .then(function(user) {
     console.log('  Saving stats for user: ' + user.githubHandle);
 
     //Save the user stats
-    return Q.npost(mongoData.userCollection, 'update', [
+    return mongoConnection.safeInvoke(
+      'users',
+      'update',
       {
         '_id': user._id
-      }, user, {
+      },
+      user,
+      {
         upsert: true
       }
-    ]);
+    );
   });
 };
 
