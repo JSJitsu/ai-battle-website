@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var vm = require('vm');
 var app = express();
 
 //Placeholders for to-be-passed-in files
@@ -12,8 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/', function(req, res) {
-  var result = move(req.body, helpers);
-  res.json(result);
+  var sandbox = {move: move, data: req.body, helpers: helpers};
+  vm.runInNewContext('moveResult=move(data, helpers)', sandbox);
+  res.json(sandbox.moveResult);
 });
 
 app.post('/heroFilesHere', multer({ 
