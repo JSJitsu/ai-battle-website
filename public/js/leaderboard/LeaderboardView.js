@@ -178,7 +178,7 @@ var LeaderboardView = Backbone.View.extend({
 
         //Add the rank of the user to table
         tableHtml += '<td>' + (i + 1) + '</td>';
-        tableHtml += '<td>' + user.name + '</td>';
+        tableHtml += '<td><a href="https://github.com/' + encodeURIComponent(user.name) + '/hero-starter">' + user.name + '</a></td>';
         tableHtml += '<td>' + user.value + '</td>';
 
 
