@@ -91,7 +91,7 @@ SafeMongoConnection.prototype.disconnect = function() {
 // Make sure database is still connected
 // If it is not connected, attempt to reconnect
 // Always returns a promise
-SafeMongoConnection.prototype.confirmConnection = function() {
+SafeMongoConnection.prototype._confirmConnection = function() {
   var handleDownedConnection = function() {
     if (this.connecting) {
       console.log('Connection is down, already in the process of reconnecting...', new Date());
@@ -157,7 +157,7 @@ SafeMongoConnection.prototype.safeInvoke = function(collectionName, methodName) 
   var args = Array.prototype.slice.call(arguments, 2);
 
   // Confirms connection beforehand
-  return this.confirmConnection()
+  return this._confirmConnection()
 
   // Once database connection is confirmed, runs the function
   .then(function() {
