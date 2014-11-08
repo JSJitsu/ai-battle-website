@@ -26,9 +26,8 @@ var mongoOptions = {
     }
   }
 };
-console.log(mongoConnectionUrl);
-var safeMongoConnection = new SafeMongoConnection(mongoConnectionUrl, mongoOptions);
 
+var safeMongoConnection = new SafeMongoConnection(mongoConnectionUrl, mongoOptions);
 safeMongoConnection.connect()
 .done(
   // If all goes well, app starts after DB is connected
@@ -58,7 +57,6 @@ safeMongoConnection.connect()
       if (req.user && req.user.mostRecentGameId) {
         gameId = req.user.mostRecentGameId + '|' + req.params.turn;
       }
-
       safeMongoConnection.safeInvoke('jsBattleGameData', 'findOne', {
         '_id': gameId
       })
