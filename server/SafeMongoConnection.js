@@ -122,7 +122,7 @@ SafeMongoConnection.prototype._confirmConnection = function() {
     // Ping the mongo server to make sure connection is up
     return Q.ninvoke(this.db, 'command', { ping: 1 })
     
-    .then(function(pingResult) {
+    .timeout(5000).then(function(pingResult) {
       // If the connection is up, return the database
       if (pingResult) {
         return this.db;
