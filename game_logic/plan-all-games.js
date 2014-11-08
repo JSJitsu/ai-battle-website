@@ -1,6 +1,19 @@
 var createGameFromMap = require('./create-game-from-map.js');
 var secrets = require('../secrets.js');
 
+//Helper function for generating random indices
+var randomIndex = function(maxExcl) {
+  return Math.floor(Math.random(Date.now()) * maxExcl);
+};
+
+var pickMap = function(map) {
+  if (Array.isArray(map)) {
+    return map[randomIndex(map.length)];
+  } else {
+    return map;
+  }
+};
+
 //Synchronous, returns an array of all games that need
 //to be run and a lookup for finding user info
 var planAllGames = function(users) {
@@ -9,11 +22,6 @@ var planAllGames = function(users) {
 
   //Makes it so the passed-in users array is not mutated
   var users = users.slice()
-
-  //Helper function for generating random indices
-  var randomIndex = function(maxExcl) {
-    return Math.floor(Math.random(Date.now()) * maxExcl);
-  };
 
   //Set up game
   var boardSize = 12;
@@ -34,8 +42,9 @@ var planAllGames = function(users) {
 
   //Create games
   for (var gameIndex=0; gameIndex<numberOfGames; gameIndex++) {
+    var map = pickMap(secrets.map);
     var game = createGameFromMap(secrets.rootDirectory + 
-        '/game_logic/maps/' + secrets.map + '.txt');
+        '/game_logic/maps/' + map + '.txt');
     game.maxTurn = 1250;
     games.push(game);
 
