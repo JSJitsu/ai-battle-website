@@ -23,6 +23,7 @@ var User = Backbone.Model.extend({
       minesCaptured: numbersForDisplay('minesCaptured'),
       diamondsEarned: numbersForDisplay('diamondsEarned'),
       healthRecovered: numbersForDisplay('healthRecovered'),
+      healthGiven: numbersForDisplay('healthGiven'),
       gravesRobbed: numbersForDisplay('gravesRobbed')
     }; 
     return aveStats;
