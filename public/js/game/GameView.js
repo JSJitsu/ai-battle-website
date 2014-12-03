@@ -84,7 +84,6 @@ var GameView = Backbone.View.extend({
             }
           }.bind(this),
           error: function(collection, response, options){
-            alert("error")
             this.initializeSlider();
             this.render();
           }.bind(this)    
