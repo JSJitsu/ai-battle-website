@@ -52,6 +52,24 @@ var GameView = Backbone.View.extend({
     this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
   },
   updateTurn: function(turn) {
+    function isLoading () {
+      console.log('loading')
+      if (!$('.battle-tile').length && !$('.leaderboard-table').children().length) {
+        $('.gamegrid-content, .game-tips').hide();
+        if (!$('.spinner').length) {
+          $('#replay').css('min-height', '500px').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');
+        }
+        setTimeout(isLoading,500);
+      }
+      else {
+        $('.spinner').hide();
+        setTimeout(function () {
+          $('#replay').css('min-height', '1094px');
+          $('.gamegrid-content, .game-tips').show()}, 500);
+        return;
+      }
+    }
+    isLoading();
     this.model.updateTurn(turn); 
     return this.model.fetch({
       success: function() {
@@ -66,6 +84,7 @@ var GameView = Backbone.View.extend({
             }
           }.bind(this),
           error: function(collection, response, options){
+            alert("error")
             this.initializeSlider();
             this.render();
           }.bind(this)    
