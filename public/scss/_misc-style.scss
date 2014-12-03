@@ -174,8 +174,18 @@
 }
 
 #replay {
+  position: relative;
   min-height: 1094px;
 }
+
+.spinner {
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 250px;
+}
+
 
 .announce {
   position: absolute;
