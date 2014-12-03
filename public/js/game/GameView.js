@@ -56,15 +56,17 @@ var GameView = Backbone.View.extend({
       if (!$('.battle-tile').length && !$('.leaderboard-table').children().length) {
         $('.gamegrid-content, .game-tips').hide();
         if (!$('.spinner').length) {
-          $('#replay').css('min-height', '500px').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');
+          // ('#replay').css('min-height', '500px');
+          $('#replay').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');
         }
         setTimeout(isLoading,500);
       }
       else {
         $('.spinner').hide();
         setTimeout(function () {
-          $('#replay').css('min-height', '1094px');
-          $('.gamegrid-content, .game-tips').show()}, 500);
+          // $('#replay').css('min-height', '1094px');
+          $('.gamegrid-content, .game-tips').show();
+        }, 500);
         return;
       }
     }
