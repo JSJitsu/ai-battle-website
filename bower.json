@@ -22,5 +22,12 @@
     "bootstrap": "~3.2.0",
     "chartjs": "~0.2.0",
     "bootstrap-social": "~4.6.0"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+        "js": "dist/js/*.js",
+        "css": "dist/css/*.css",
+        "fonts": "dist/fonts/*.*"
+    }
   }
 }
