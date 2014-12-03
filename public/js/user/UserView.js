@@ -76,7 +76,13 @@ var UserView = Backbone.View.extend({
     var githubHandle = this.model.get('githubHandle');
     var html;
     if(githubHandle) {
-      cbpAnimatedHeader();
+      $('.page-scroll a').bind('click', function(event) {
+          var $anchor = $(this);
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+          event.preventDefault();
+      });
     }
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
