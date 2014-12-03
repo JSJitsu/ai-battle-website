@@ -53,7 +53,6 @@ var GameView = Backbone.View.extend({
   },
   updateTurn: function(turn) {
     function isLoading () {
-      console.log('loading')
       if (!$('.battle-tile').length && !$('.leaderboard-table').children().length) {
         $('.gamegrid-content, .game-tips').hide();
         if (!$('.spinner').length) {

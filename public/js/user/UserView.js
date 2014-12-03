@@ -75,6 +75,9 @@ var UserView = Backbone.View.extend({
   render: function() {
     var githubHandle = this.model.get('githubHandle');
     var html;
+    if(githubHandle) {
+      cbpAnimatedHeader();
+    }
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
     } else if (githubHandle && this.viewing === 'lifetime') {
