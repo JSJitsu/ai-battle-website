@@ -76,13 +76,17 @@ var UserView = Backbone.View.extend({
     var githubHandle = this.model.get('githubHandle');
     var html;
     if(githubHandle) {
-      $('.page-scroll a').bind('click', function(event) {
+      var hasGitHubClickHandler = function () {
+        $('.page-scroll a').bind('click', function(event) {
           var $anchor = $(this);
           $('html, body').stop().animate({
-              scrollTop: $($anchor.attr('href')).offset().top
+            scrollTop: $($anchor.attr('href')).offset().top
           }, 1500, 'easeInOutExpo');
           event.preventDefault();
-      });
+        });
+        $('body').off('click', hasGitHubClickHandler);
+      };
+      $('body').on('click', '.navbar', hasGitHubClickHandler);
     }
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
