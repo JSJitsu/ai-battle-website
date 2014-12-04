@@ -7,15 +7,46 @@ var GameView = Backbone.View.extend({
     this.playInProgress = false;
     this.sliderInitialized = false;
     this.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
-    this.$el.append('<input class="row slider" />' +
-                    '</div>');
-    this.$el.append('<div class="row play-controls">' +
-                      '<span class="play-pause-game glyphicon glyphicon-play">' +
-                      '</span>' +
-                      '<span class="restart-game glyphicon glyphicon-repeat">' +
-                      '</span>' +
-                    '</div>');
-    this.$el.append('<span class="turn"></span>');
+    this.initialLoad = true;
+    var isLoaded = function () {
+      console.log('hi')
+      var gameRendered = this.$el.find('.battle-tile').length;
+      if (!gameRendered) {
+        if(this.initialLoad) {
+          this.initialLoad = false;
+          $('#replay').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');          
+        }
+        setTimeout(isLoaded, 750);
+      }
+      else {
+        $('.spinner').hide();
+        this.$el.append('<input class="row slider" />' + '</div>');
+        this.initializeSlider();
+
+        this.$el.append('<div class="row play-controls">' +
+                          '<span class="play-pause-game glyphicon glyphicon-play">' + '</span>' +
+                          '<span class="restart-game glyphicon glyphicon-repeat">' + '</span>' +
+                          '</div>');
+        this.$el.append('<span class="turn"></span>');
+        this.$el.append('<div class="game-tips">
+                          <aside title="Click to hide" class="game-tips">
+                          <div class="row">
+                          <div class="col-lg-12 text-center">
+                          <i class="hide-tip fa fa-times"></i>
+                          Hero not doing anything? Make sure to check your code for endless loops and errors!
+                          </div>
+                          </div>
+                          <div class="row">
+                          <div class="col-lg-12 text-center">
+                          Can\'t see your hero? Don\'t forget to login!
+                          </div>
+                          </div> 
+                          </aside>
+                          </div>');
+      }
+    }.bind(this);
+    isLoaded();
+    
   },
   events: {
     'click .play-pause-game': 'togglePlayGame',
@@ -52,25 +83,6 @@ var GameView = Backbone.View.extend({
     this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
   },
   updateTurn: function(turn) {
-    function isLoading () {
-      if (!$('.battle-tile').length && !$('.leaderboard-table').children().length) {
-        $('.gamegrid-content, .game-tips').hide();
-        if (!$('.spinner').length) {
-          // ('#replay').css('min-height', '500px');
-          $('#replay').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');
-        }
-        setTimeout(isLoading,500);
-      }
-      else {
-        $('.spinner').hide();
-        setTimeout(function () {
-          // $('#replay').css('min-height', '1094px');
-          $('.gamegrid-content, .game-tips').show();
-        }, 500);
-        return;
-      }
-    }
-    setTimeout(isLoading,950);
     this.model.updateTurn(turn); 
     return this.model.fetch({
       success: function() {
@@ -85,7 +97,6 @@ var GameView = Backbone.View.extend({
             }
           }.bind(this),
           error: function(collection, response, options){
-            this.initializeSlider();
             this.render();
           }.bind(this)    
         });
