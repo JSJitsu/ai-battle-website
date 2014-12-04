@@ -8,8 +8,8 @@ var GameView = Backbone.View.extend({
     this.sliderInitialized = false;
     this.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
     this.initialLoad = true;
+    this.$el.append('<input class="row slider" style="visibility: hidden;"/>' + '</div>');
     var isLoaded = function () {
-      console.log('hi')
       var gameRendered = this.$el.find('.battle-tile').length;
       if (!gameRendered) {
         if(this.initialLoad) {
@@ -20,9 +20,8 @@ var GameView = Backbone.View.extend({
       }
       else {
         $('.spinner').hide();
-        this.$el.append('<input class="row slider" />' + '</div>');
         this.initializeSlider();
-
+        this.$el.find('.slider').show;
         this.$el.append('<div class="row play-controls">' +
                           '<span class="play-pause-game glyphicon glyphicon-play">' + '</span>' +
                           '<span class="restart-game glyphicon glyphicon-repeat">' + '</span>' +
