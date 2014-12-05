@@ -13,15 +13,7 @@ var BoardTileView = Backbone.View.extend({
     var type = this.model.get('type');
     var teamId = this.model.get('team');
     if (subType !== 'Unoccupied') {
-      var assets = {
-        Tree: '../img/tree.png',
-        Adventurer: '../img/bkknight.png',
-        BlackKnight: '../img/black-knight.png',
-        DiamondMine: '../img/diamond.png',
-        HealthWell: '../img/pot.png',
-        Bones: '../img/grave.png'
-      };
-      var html = '<img src="' + assets[subType] + '" class="sprite">';
+      var html = '<img src="' + gameAssets[subType] + '" class="sprite">';
         var colors = {
           0: "team-yellow",
           1: "team-blue"
@@ -35,7 +27,7 @@ var BoardTileView = Backbone.View.extend({
         if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
           this.$('.sprite').addClass('current-turn');
         }
-        html = '<img src="' + assets[subType] + '" id="H' + heroId +'" class="sprite">';
+        html = '<img src="' + gameAssets[subType] + '" id="H' + heroId +'" class="sprite">';
         
         html += '<span class="indicator ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
         html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
