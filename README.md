@@ -1,6 +1,6 @@
 ![](https://circleci.com/gh/JavascriptBattle/javascript-battle-website.png?circle-token=936dcd0da6a58265e76d86b8d5a6b4abcaaeb985)
 
-![](https://raw.githubusercontent.com/JavascriptBattle/javascript-battle-website/master/public/img/black-knight.png)
+
 # Javascript Battle
 
 Every day there is an epic battle between legendary heroes.  Control your hero with either a pre-defined function from our repo or your own submitted function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
