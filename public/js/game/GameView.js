@@ -14,7 +14,7 @@ var GameView = Backbone.View.extend({
       if (!gameRendered) {
         if(this.initialLoad) {
           this.initialLoad = false;
-          $('#replay').append('<img class="spinner" src="https://s3.amazonaws.com/jharclerode/350+(2).GIF">');          
+          $('#replay').append('<img class="spinner" src="../../img/spinner.GIF">');          
         }
         setTimeout(isLoaded, 750);
       }
