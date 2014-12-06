@@ -67,12 +67,12 @@ module.exports = function(grunt) {
         }
       }
     },
-    uglify: {
-      dist: {
-        src: 'public/dist/<%= pkg.name %>.js',
-        dest: 'public/dist/<%= pkg.name %>.min.js'
-      }
-    },
+    // uglify: {
+    //   dist: {
+    //     src: 'public/dist/<%= pkg.name %>.js',
+    //     dest: 'public/dist/<%= pkg.name %>.min.js'
+    //   }
+    // },
     clean: {
       build: {
         src: ['public/dist/<%= pkg.name %>.js']
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
       tasks: [
         'sass',
         'concat',
-        'uglify',
+        // 'uglify',
         'cssmin',
         'clean'
       ] 
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['concat', 'cssmin']);
 
 
   // grunt.registerTask('upload', function(n) {
