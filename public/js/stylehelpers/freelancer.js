@@ -28,7 +28,7 @@ $(function() {
       $('body').off('click', hideTip);
     };
 
-    $('body').on('click', 'hide-tip', hideTip);
+    $('body').on('click', '.hide-tip', hideTip);
 });
 
 // Highlight the top nav as scrolling occurs
