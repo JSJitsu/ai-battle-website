@@ -25,7 +25,7 @@ $(function() {
     });
     var hideTip = function () {
       $('.game-tips').fadeOut('slow');
-      $('body').off('click', hideTip)
+      $('body').off('click', hideTip);
     };
 
     $('body').on('click', 'hide-tip', hideTip);
