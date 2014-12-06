@@ -50,8 +50,6 @@ module.exports = function(grunt) {
             'public/lib/jquery/dist/jquery.js',
             'public/lib/jquery-ui/jquery-ui.min.js',
             'public/lib/bootstrap/dist/js/bootstrap.min.js',
-            'public/lib/lodash/dist/lodash.min.js',
-            'public/lib/backbone/backbone.js',
             'public/lib/powerange/dist/powerange.min.js',
             'public/ejs_templates/ejs/ejs_production.js',
             'public/js/**/*.js',
