@@ -45,7 +45,18 @@ module.exports = function(grunt) {
         separator: ';'
       },
       js: {
-        src: ['public/js/**/*.js','public/app.js'],
+        src:
+          [
+            'public/lib/jquery/dist/jquery.js',
+            'public/lib/jquery-ui/jquery-ui.min.js',
+            'public/lib/bootstrap/dist/js/bootstrap.min.js',
+            'public/lib/lodash/dist/lodash.min.js',
+            'public/lib/backbone/backbone.js',
+            'public/lib/powerange/dist/powerange.min.js',
+            'public/ejs_templates/ejs/ejs_production.js',
+            'public/js/**/*.js',
+            'public/app.js'
+          ],
         dest: 'public/dist/<%= pkg.name %>.js'
       }
     },

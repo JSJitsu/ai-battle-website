@@ -21,13 +21,14 @@
     "bower": "*",
     "bootstrap": "~3.2.0",
     "chartjs": "~0.2.0",
-    "bootstrap-social": "~4.6.0"
+    "bootstrap-social": "~4.6.0",
+    "jquery-ui": "~1.11.2"
   },
   "exportsOverride": {
     "bootstrap": {
-        "js": "dist/js/*.js",
-        "css": "dist/css/*.css",
-        "fonts": "dist/fonts/*.*"
+      "js": "dist/js/*.js",
+      "css": "dist/css/*.css",
+      "fonts": "dist/fonts/*.*"
     }
   }
 }
