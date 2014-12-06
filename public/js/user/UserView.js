@@ -75,19 +75,6 @@ var UserView = Backbone.View.extend({
   render: function() {
     var githubHandle = this.model.get('githubHandle');
     var html;
-    if(githubHandle) {
-      var hasGitHubClickHandler = function () {
-        $('.page-scroll a').bind('click', function(event) {
-          var $anchor = $(this);
-          $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-          }, 1500, 'easeInOutExpo');
-          event.preventDefault();
-        });
-        $('body').off('click', hasGitHubClickHandler);
-      };
-      $('body').on('click', '.navbar', hasGitHubClickHandler);
-    }
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
     } else if (githubHandle && this.viewing === 'lifetime') {
