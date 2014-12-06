@@ -47,7 +47,6 @@ module.exports = function(grunt) {
       js: {
         src:
           [
-            'public/lib/jquery/dist/jquery.js',
             'public/lib/jquery-ui/jquery-ui.min.js',
             'public/lib/bootstrap/dist/js/bootstrap.min.js',
             'public/lib/powerange/dist/powerange.min.js',
@@ -65,12 +64,12 @@ module.exports = function(grunt) {
         }
       }
     },
-    // uglify: {
-    //   dist: {
-    //     src: 'public/dist/<%= pkg.name %>.js',
-    //     dest: 'public/dist/<%= pkg.name %>.min.js'
-    //   }
-    // },
+    uglify: {
+      dist: {
+        src: 'public/dist/<%= pkg.name %>.js',
+        dest: 'public/dist/<%= pkg.name %>.min.js'
+      }
+    },
     clean: {
       build: {
         src: ['public/dist/<%= pkg.name %>.js']
@@ -85,7 +84,7 @@ module.exports = function(grunt) {
       tasks: [
         'sass',
         'concat',
-        // 'uglify',
+        'uglify',
         'cssmin',
         'clean'
       ] 
@@ -131,7 +130,7 @@ module.exports = function(grunt) {
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', ['concat', 'cssmin']);
+  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'clean']);
 
 
   // grunt.registerTask('upload', function(n) {
