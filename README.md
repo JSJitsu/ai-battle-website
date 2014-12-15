@@ -73,7 +73,6 @@ For the website, our stack includes the above dependencies, which you can read m
 Our game engine is hosted on [Microsoft Azure](https://azure.microsoft.com/en-us/), with the following stack:
 - [Linux Ubuntu VM](http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-tutorial/)
 - [Docker](https://www.docker.com/)
-- [Cron](https://help.ubuntu.com/community/CronHowto)
 
 ## Contributing
 
