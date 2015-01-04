@@ -535,7 +535,9 @@ body {
   position: absolute;
   right: 0;
   left: 0;
-  top: 250px; }
+  top: 250px;
+  height: 180px;
+  width: 180px; }
 
 .announce {
   position: absolute;
