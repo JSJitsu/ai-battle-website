@@ -2,7 +2,7 @@ var BoardView = Backbone.View.extend({
   tagName: 'section',
   className: 'battle-map',
   initialize: function() {
-    this.render()
+    this.render();
   },
   render: function() {
     this.$el.html('');

@@ -18,7 +18,7 @@ var HeroView = Backbone.View.extend({
     var heroName = '<div class="hero-header h-i' + heroId + '">(id:' + heroId + ') ' + 
       '<a href="https://github.com/' + encodeURIComponent(name) + '/hero-starter">' + 
       name + '</a>' + ' </div>';
-    var heroHP = '<div class="health-info h-i' + heroId + '">' + heroHP + '</div>';
+    var heroHP = '<div class="health-info h-i' + heroId + '">' + health + '</div>';
     this.$el.append(heroName + heroHP);
   }
 });
