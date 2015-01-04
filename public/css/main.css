@@ -630,7 +630,6 @@ body {
   display: inline-block;
   text-overflow: ellipsis;
   white-space: nowrap;
-  postion: relative;
   position: relative;
   top: 5px; }
 

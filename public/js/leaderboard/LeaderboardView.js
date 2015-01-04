@@ -105,7 +105,7 @@ var LeaderboardView = Backbone.View.extend({
           inList = true;
           return;
         }
-      });
+      }.bind(this));
       
       //If last selected stat is not valid for this time frame,
       //default to the first stat
@@ -156,7 +156,7 @@ var LeaderboardView = Backbone.View.extend({
           headerItem = item[1];
           return;
         }
-      });
+      }.bind(this));
 
       var tableHtml =
         '<tr class="lifetime-table-header leaderboard-headers">' +
