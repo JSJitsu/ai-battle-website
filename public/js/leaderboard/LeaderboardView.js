@@ -2,7 +2,6 @@ var LeaderboardView = Backbone.View.extend({
   tagName: 'div',
   className: 'centered',
   initialize: function() {
-    
     //Current leaderboard settings
     this.leaderboardParams = {
       stat: 'damageDealt',
@@ -54,7 +53,6 @@ var LeaderboardView = Backbone.View.extend({
 
     var timeHtml = timeFrames.map(function(timeFrame) {
       return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
-      console.log(timeFrame);
     });
 
     var statsHtml = this.statItems[this.leaderboardParams.timeFrame].map(function(stat) {
@@ -92,7 +90,7 @@ var LeaderboardView = Backbone.View.extend({
       this.leaderboardParams.timeFrame = clickEvent.currentTarget.value;
 
       //Update the dropdown stats list for the new time frame
-      var statItemsForTimeFrame = this.statItems[this.leaderboardParams.timeFrame]
+      var statItemsForTimeFrame = this.statItems[this.leaderboardParams.timeFrame];
       var statsHtml = statItemsForTimeFrame.map(function(stat) {
         return '<option value="' + stat[0] + '">' + stat[1] + '</option>';
       });
@@ -101,13 +99,13 @@ var LeaderboardView = Backbone.View.extend({
 
       //If last selected stat is in the new stat list, keep it
       var inList = false;
-      for (var i=0; i<statItemsForTimeFrame.length; i++) {
-        if (statItemsForTimeFrame[i][0] === this.leaderboardParams.stat) {
+      statItemsForTimeFrame.forEach( function (statItem) {
+        if (statItem[0] === this.leaderboardParams.stat) {
           $statSelect.val(this.leaderboardParams.stat);
           inList = true;
-          break;
+          return;
         }
-      }
+      });
       
       //If last selected stat is not valid for this time frame,
       //default to the first stat
@@ -146,23 +144,19 @@ var LeaderboardView = Backbone.View.extend({
     var $table = this.$el.find('table.leaderboard-table');
     
     if (failed) {
-
-      $table.html('<tr><th>Rank</th><th>Name</th><th>Failed To Load</th></tr>')
-
+      $table.html('<tr><th>Rank</th><th>Name</th><th>Failed To Load</th></tr>');
     } else {
       var headerItem = 'Failed To Load';
-
       //Replace with object-based logic eventually
       //Gets the nicely formatted label to display in the table header
       var statItems = this.statItems[this.leaderboardParams.timeFrame];
-
-      for (var i=0; i<statItems.length; i++) {
-        var value = statItems[i][0];
+      statItems.forEach( function (item) { 
+        var value = item[0];
         if (value === this.leaderboardParams.stat) {
-          headerItem = statItems[i][1];
-          break;
+          headerItem = item[1];
+          return;
         }
-      }
+      });
 
       var tableHtml =
         '<tr class="lifetime-table-header leaderboard-headers">' +
@@ -172,18 +166,17 @@ var LeaderboardView = Backbone.View.extend({
         '</tr>';
 
       var topUsers = this.model.get('topUsers');
-      for (var i=0; i<topUsers.length; i++) {
-        var user = topUsers[i];
+      topUsers.forEach( function (user, idx) {
         tableHtml += '<tr>';
 
         //Add the rank of the user to table
-        tableHtml += '<td>' + (i + 1) + '</td>';
+        tableHtml += '<td>' + (idx + 1) + '</td>';
         tableHtml += '<td><a href="https://github.com/' + encodeURIComponent(user.name) + '/hero-starter">' + user.name + '</a></td>';
         tableHtml += '<td>' + user.value + '</td>';
 
 
         tableHtml += '</tr>';
-      }
+      });
       tableHtml += '</table>';
       $table.html(tableHtml);
     }
