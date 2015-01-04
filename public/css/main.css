@@ -622,8 +622,9 @@ body {
     font-size: 2em;
     margin: 8% 8%; }
 
-.hero-header span {
+.hero-header a {
   font-weight: 700;
+  color: #31708f;
   width: 75px;
   overflow: hidden;
   display: inline-block;
