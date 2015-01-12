@@ -2,13 +2,12 @@ var GitHubStrategy = require('passport-github').Strategy;
 var passport = require('passport');
 var express = require('express');
 var session = require('express-session');
-var Q = require('q');
 var bodyParser = require('body-parser');
 
 
-module.exports = function(app, mongoConnectionURL) {
+module.exports = function(app, safeMongoConnection) {
   //Creates mongoose User model connected to the mongo URL
-  var User = require('./User')(mongoConnectionURL);
+  var User = require('./User');
 
   app.use(session({ secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle' }));
   app.use(passport.initialize());
@@ -19,62 +18,86 @@ module.exports = function(app, mongoConnectionURL) {
     res.json(req.user);
   });
 
-  //Make the current user's info updatable
+  //Make the current user's code repository updatable
   app.put('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
+
     var newUserParams = req.body;
     if (newUserParams.codeRepo) {
       req.user.codeRepo = newUserParams.codeRepo;
-      Q.ninvoke(req.user, 'save', {
-        githubHandle: req.user.githubHandle
-      }).then(function(user) {
-        res.json(user);
-      }).catch(function(err) {
-        res.send('An error occurred...are you logged in?');
-      });
+      safeMongoConnection.safeInvoke(
+        'users',
+        'update',
+        {
+          _id: req.user._id
+        },
+        req.user,
+        {}
+      )
+      .done(
+        function(user) {
+          res.json(user);
+        },
+        function(err) {
+          res.send('An error occurred...are you logged in?');
+        }
+      );
     } else {
       res.send('user.codeRepo must be truthy in order to update.');
     }
+
   });
 
   //Convert the user object from github into something smaller that
   //can be stored in a cookie
   passport.serializeUser(function(githubUser, done) {
+    var githubHandle = githubUser.username;
+
     //Check if user exists
-    Q.ninvoke(User, 'find', {
-      githubHandle: githubUser.username
+    safeMongoConnection.safeInvoke('users', 'findOne', {
+      githubHandle: githubHandle
     }).then(function(user) {
-      //No user found, need to create one
-      if (user.length === 0) {
-        //Create new user object
-        var user = new User({
-          githubHandle: githubUser.username
-        });
 
-        //Save user (return the promise of saving the user)
-        return Q.ninvoke(user, 'save').then(function(user) {
-          return user[0];
-        });
+      //If user does exist, pass user to next "then" statmement
+      if (user) {
+        return user;
 
-      //This user already exists, return it
+      //If user does not exist, create and save new user,
+      //then pass user to next "then" (or done) statement
       } else {
-        return user[0];
+        user = new User(githubHandle);
+        return safeMongoConnection.safeInvoke('users', 'insert', user)
+        .then(function(userArr) {
+          return userArr[0];
+        });
       }
-    }).then(function(user) {
-      done(null, user._id);
-    }).catch(function(err) {
-      console.log(err);
-    });
+
+    }).done(
+      function(user) {
+        //The done here is different than the one above--this one
+        //is from passport, and lets passport know we're "done"
+        //serializing the user
+        done(null, user.githubHandle);
+      },
+      function(err) {
+        console.log('SERIALIZE ERROR!');
+        console.log(err);
+      }
+    );
+
   });
 
   //Convert the hero id stored in the cookie into the user object
   //in our database
-  passport.deserializeUser(function(mongoId, done) {
-    //continue with the user with the matching Id
-    Q.ninvoke(User, 'findById', mongoId).then(function(user) {
-      done(null, user);
-    }).catch(function(err) {
-      res.send(err);
-    });
+  passport.deserializeUser(function(githubHandle, done) {
+    safeMongoConnection.safeInvoke('users', 'findOne', { githubHandle: githubHandle })
+    .done(
+      function(user) {
+        done(null, user);
+      },
+      function(err) {
+        console.log(err);
+      }
+    );
   });
   
   var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
