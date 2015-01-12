@@ -43,7 +43,7 @@ safeMongoConnection.connect()
     });
 
     // Add github authentication
-    OAuthGithub(app, mongoConnectionUrl);
+    OAuthGithub(app, safeMongoConnection);
 
     // The router for the API
     var router = express.Router();

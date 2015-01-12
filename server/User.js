@@ -1,93 +1,34 @@
-var mongoose = require('mongoose');
-var options = {
-  server: {
-    socketOptions: {
-      keepAlive: 1
-    }
-  },
-  replset: {
-    socketOptions: {
-      keepAlive: 1
-    }
-  }
+
+var User = function(githubHandle) {
+  this.githubHandle = githubHandle;
+  this.mostRecentGameId = '';
+  this.port = 0;
+  this.codeRepo = 'hero-starter';
+  this.codeRepoBranch = 'master';
+  this.lifetimeStats = {
+    kills: 0,
+    deaths: 0,
+    damageDealt: 0,
+    minesCaptured: 0,
+    diamondsEarned: 0,
+    healthRecovered: 0,
+    healthGiven: 0,
+    gravesRobbed: 0,
+    wins: 0,
+    losses: 0
+  };
+  this.mostRecentStats = {
+    gameResult: 'N/A',
+    survived: false,
+    kills: 0,
+    damageDealt: 0,
+    minesCaptured: 0,
+    diamondsEarned: 0,
+    healthRecovered: 0,
+    healthGiven: 0,
+    gravesRobbed: 0
+  };
 };
 
-module.exports = function(mongoConnectionUrl) {
-  mongoose.connect(mongoConnectionUrl, options);
+module.exports = User;
 
-  var UserSchema = mongoose.Schema({
-    githubHandle: String,
-    mostRecentGameId: {
-      type: String,
-      default: ''
-    },
-    port: Number,
-    codeRepo: {
-      type: String,
-      default: 'hero-starter'
-    },
-    codeRepoBranch: {
-      type: String,
-      default: 'master'
-    },
-    lifetimeStats: {
-      kills: {
-        type: Number,
-        default: 0
-      },
-      deaths: {
-        type: Number,
-        default: 0
-      },
-      damageDealt: {
-        type: Number,
-        default: 0
-      },
-      minesCaptured: {
-        type: Number,
-        default: 0
-      },
-      diamondsEarned: {
-        type: Number,
-        default: 0
-      },
-      healthRecovered: {
-        type: Number,
-        default: 0
-      },
-      healthGiven: {
-        type: Number,
-        default: 0
-      },
-      gravesRobbed: {
-        type: Number,
-        default: 0
-      },
-      wins: {
-        type: Number,
-        default: 0
-      },
-      losses: {
-        type: Number,
-        default: 0
-      }
-    },
-    mostRecentStats: {
-      gameResult: {
-        type: String,
-        default: 'N/A'
-      },
-      survived: Boolean,
-      kills: Number,
-      damageDealt: Number,
-      minesCaptured: Number,
-      diamondsEarned: Number,
-      healthRecovered: Number,
-      healthGiven: Number,
-      gravesRobbed: Number
-    }
-  });
-
-  //Returns the user model
-  return mongoose.model('User', UserSchema);
-};
