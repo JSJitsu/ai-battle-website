@@ -125,12 +125,12 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', ['cssmin'
+  grunt.registerTask('build', [
   ]);
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', ['concat', 'uglify','sass', 'cssmin', 'clean']);
+  grunt.registerTask('default', ['concat', 'uglify', 'sass', 'cssmin', 'clean']);
 
 
   // grunt.registerTask('upload', function(n) {
