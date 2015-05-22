@@ -87,11 +87,11 @@ module.exports = function(grunt) {
         'uglify',
         'cssmin',
         'clean'
-      ] 
+      ]
     }
   });
 
-  
+
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -125,12 +125,12 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build', ['cssmin'
   ]);
   grunt.registerTask('local', ['jshint', 'test', 'nodemon']);
 
 
-  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'clean']);
+  grunt.registerTask('default', ['concat', 'uglify','sass', 'cssmin', 'clean']);
 
 
   // grunt.registerTask('upload', function(n) {

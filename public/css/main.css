@@ -1049,3 +1049,21 @@ body {
     background-color: #27e833;
     border: 4px solid black;
     z-index: 2; } }
+@media (min-width: 2065px) {
+  .battle-tile {
+    width: 2.5vw;
+    height: 2.7vw; }
+
+  .game-tips {
+    bottom: 40px; }
+
+  .range-bar {
+    bottom: 110px; }
+
+  .play-controls {
+    bottom: 100px; }
+
+  .team-info {
+    width: 165px; } }
+
+/*# sourceMappingURL=main.css.map */
