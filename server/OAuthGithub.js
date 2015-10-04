@@ -9,7 +9,14 @@ module.exports = function(app, safeMongoConnection) {
   //Creates mongoose User model connected to the mongo URL
   var User = require('./User');
 
-  app.use(session({ secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle' }));
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle',
+      resave: false,
+      saveUninitialized: true
+    })
+  );
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -19,7 +26,11 @@ module.exports = function(app, safeMongoConnection) {
   });
 
   //Make the current user's code repository updatable
-  app.put('/userInfo', bodyParser.json(), bodyParser.urlencoded(), function(req, res) {
+  var urlEncodedBodyParser = bodyParser.urlencoded({
+    extended: false
+  });
+
+  app.put('/userInfo', bodyParser.json(), urlEncodedBodyParser, function(req, res) {
 
     var newUserParams = req.body;
     if (newUserParams.codeRepo) {
