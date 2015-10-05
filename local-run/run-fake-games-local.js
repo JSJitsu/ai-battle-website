@@ -12,6 +12,9 @@ var openGameDatabase = function() {
       collection: db.collection('jsBattleGameData'),
       db: db
     };
+  })
+  .catch(function (error) {
+    console.error("Problem opening game database:", error);
   });
 };
 
