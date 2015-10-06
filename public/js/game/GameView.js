@@ -14,38 +14,18 @@ var GameView = Backbone.View.extend({
       if (!gameRendered) {
         if(this.initialLoad) {
           this.initialLoad = false;
-          $('#replay').append('<img class="spinner" src="../../img/spinner.GIF">');          
+          $('#replay').append('<img class="spinner" src="../../img/spinner.GIF">');
         }
         setTimeout(isLoaded, 750);
       }
       else {
         $('.spinner').hide();
         this.initializeSlider();
-        this.$el.find('.slider').show;
-        this.$el.append('<div class="row play-controls">' +
-                          '<span class="play-pause-game glyphicon glyphicon-play">' + '</span>' +
-                          '<span class="restart-game glyphicon glyphicon-repeat">' + '</span>' +
-                          '</div>');
-        this.$el.append('<span class="turn"></span>');
-        this.$el.append('<div class="game-tips">
-                          <aside title="Click to hide" class="game-tips">
-                          <div class="row">
-                          <div class="col-lg-12 text-center">
-                          <i class="hide-tip fa fa-times"></i>
-                          Hero not doing anything? Make sure to check your code for endless loops and errors!
-                          </div>
-                          </div>
-                          <div class="row">
-                          <div class="col-lg-12 text-center">
-                          Can\'t see your hero? Don\'t forget to login!
-                          </div>
-                          </div> 
-                          </aside>
-                          </div>');
+        this.renderControlArea();
       }
     }.bind(this);
     isLoaded();
-    
+
   },
   events: {
     'click .play-pause-game': 'togglePlayGame',
@@ -81,12 +61,50 @@ var GameView = Backbone.View.extend({
     $gameHtml.append(blueTeamView.$el);
     this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
   },
+  renderControlArea: function () {
+    var playControlsHtml,
+        currentTurnHtml,
+        gameTipsHtml;
+
+    playControlsHtml = [
+      '<div class="row play-controls">',
+      '  <span class="play-pause-game glyphicon glyphicon-play"></span>',
+      '  <span class="restart-game glyphicon glyphicon-repeat"></span>',
+      '</div>'
+    ].join('');
+
+    currentTurnHtml = '<span class="turn"></span>';
+
+    gameTipsHtml = [
+      '<div class="game-tips">',
+      '  <aside title="Click to hide" class="game-tips">',
+      '    <div class="row">',
+      '      <div class="col-lg-12 text-center">',
+      '        <i class="hide-tip fa fa-times"></i>',
+      '        Hero not doing anything? Make sure to check your code for endless loops and errors!',
+      '      </div>',
+      '    </div>',
+      '    <div class="row">',
+      '      <div class="col-lg-12 text-center">',
+      '        Can\'t see your hero? Don\'t forget to login!',
+      '      </div>',
+      '    </div> ',
+      '  </aside>',
+      '</div>'
+    ].join('');
+
+    this.$el.find('.slider').show();
+    this.$el.append(playControlsHtml);
+    this.$el.append(currentTurnHtml);
+    this.$el.append(gameTipsHtml);
+  },
   updateTurn: function(turn) {
-    this.model.updateTurn(turn); 
+    this.model.updateTurn(turn);
     return this.model.fetch({
       success: function() {
         this.initializeSlider();
         var userModel = this.model.get('userModel');
+        this.render();
         userModel.fetch({
           success: function() {
             this.render();
@@ -97,7 +115,7 @@ var GameView = Backbone.View.extend({
           }.bind(this),
           error: function(collection, response, options){
             this.render();
-          }.bind(this)    
+          }.bind(this)
         });
       }.bind(this),
       error: function(collection, response, options){
@@ -253,10 +271,10 @@ var GameView = Backbone.View.extend({
         //until paused)
         this.autoPlayGame();
       }.bind(this));
-    }  
+    }
   },
   checkWinner: function() {
-    var winner = this.model.get('winningTeam'); 
+    var winner = this.model.get('winningTeam');
     var message = $('.winner-msg');
     if (winner === 0) {
       message.text('Yellow Team Wins!');
