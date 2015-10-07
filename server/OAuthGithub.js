@@ -5,7 +5,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 
-module.exports = function(app, safeMongoConnection) {
+module.exports = function(app, safeMongoConnection, argv) {
   //Creates mongoose User model connected to the mongo URL
   var User = require('./User');
 
@@ -110,15 +110,15 @@ module.exports = function(app, safeMongoConnection) {
       }
     );
   });
-  
+
   var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
   var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
   var callbackURL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
 
   var strategy = new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
+    clientID: argv['github-client-id'] || GITHUB_CLIENT_ID,
+    clientSecret: argv['github-client-secret'] || GITHUB_CLIENT_SECRET,
     callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done) {
     done(null, profile);
@@ -136,7 +136,7 @@ module.exports = function(app, safeMongoConnection) {
   });
 
   //This is where github sends us after it finishes authenticating us
-  app.get('/auth/github/callback', passport.authenticate('github', { 
+  app.get('/auth/github/callback', passport.authenticate('github', {
     successRedirect: '/',
     failureRedirect: '/'
   }));

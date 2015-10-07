@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var OAuthGithub = require('./server/OAuthGithub');
 var SafeMongoConnection = require('./server/SafeMongoConnection');
 var helpers = require('./server/helpers');
+var argv = require('minimist')(process.argv.slice(2));
 
 var app = express();
 var port = process.env.port || 8080;
@@ -27,6 +28,23 @@ var mongoOptions = {
   }
 };
 
+if ((!argv['github-client-id'] || !argv['github-client-secret']) && argv.github === undefined) {
+  var usage = [
+    'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [options]',
+    '',
+    'Required Options: ',
+    '',
+    '  --github-client-id      GitHub Application Client ID',
+    '  --github-client-secret  GitHub Application Client Secret',
+    '        OR',
+    '  --no-github             Do not connect to the GitHub application.',
+    ''
+  ].join('\n');
+
+  console.log(usage);
+  return;
+}
+
 var safeMongoConnection = new SafeMongoConnection(mongoConnectionUrl, mongoOptions);
 safeMongoConnection.connect()
 .done(
@@ -43,7 +61,9 @@ safeMongoConnection.connect()
     });
 
     // Add github authentication
-    OAuthGithub(app, safeMongoConnection);
+    if (argv.github !== false) {
+      OAuthGithub(app, safeMongoConnection, argv);
+    }
 
     // The router for the API
     var router = express.Router();
@@ -51,7 +71,7 @@ safeMongoConnection.connect()
     // Returns the state of the game on the given day and turn
     router.get('/gameDataForUser/:turn', function(req, res) {
       // If there is no user logged in, default to today's first game
-      var gameId = '0|' + helpers.getDateString(0, productionMode) + '|' + req.params.turn 
+      var gameId = '0|' + helpers.getDateString(0, productionMode) + '|' + req.params.turn;
 
       // Otherwise, use the most recent gameId of the user
       if (req.user && req.user.mostRecentGameId) {
