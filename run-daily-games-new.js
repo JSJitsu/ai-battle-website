@@ -4,7 +4,6 @@ var secrets = require('./secrets.js');
 var SafeMongoConnection = require('./helpers/safe-mongo-connection.js');
 var completeAllGames = require('./game_logic/complete-all-games.js');
 var updateLeaderboard = require('./stats/update-leaderboard.js');
-var startStopContainers = require('./docker/container_interaction/start-stop-containers.js');
 
 var mongoOptions = {
   server: {
@@ -54,22 +53,16 @@ var runDailyGames = function() {
       });
 
     })
-    
+
     // Clean up after everything finishes (regardless of errors)
     .finally(function() {
       console.log('Closing database connection before the script ends.');
       return mongoConnection.disconnect()
 
       .then(function() {
-        console.log('Database closed successfully.')
-        console.log('Shutting down all containers before the script ends.');
-        return startStopContainers.shutDownAllContainers()
-      })
-
-      .then(function() {
-        console.log('Containers closed successfully');
+        console.log('Database closed successfully.');
       });
-      
+
     });
   })
 

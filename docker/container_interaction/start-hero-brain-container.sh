@@ -1,1 +1,0 @@
-sudo docker run -d --cap-drop=all -p $1:8080 hero_brain_wrapper

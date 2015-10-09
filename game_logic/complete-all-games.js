@@ -1,8 +1,8 @@
 var planAllGames = require('./plan-all-games.js');
-var prepareUserContainers = require('../docker/prepare-user-containers.js');
-var saveUserStats = require('../stats/save-user-stats.js')
+var saveUserStats = require('../stats/save-user-stats.js');
 var secrets = require('../secrets.js');
-var communicateWithContainers = require('../docker/container_interaction/communicate-with-containers.js');
+var fs = require('fs');
+var vm = require('vm');
 
 var gamesCompleted = 0;
 
@@ -36,14 +36,7 @@ var prepRunAndSaveAllGames = function(mongoConnection, games, gameIndex, userLoo
 };
 
 var prepRunAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
-  // Prepare the user containers for the upcoming game
-  return prepGame(game, userLookup)
-
-  // Run and save that game to the database
-  .then(function() {
-    return runAndSaveGame(mongoConnection, game, gameIndex, userLookup);
-  })
-
+  return runAndSaveGame(mongoConnection, game, gameIndex, userLookup)
   // Update each game turn to have the correct "maxTurn"
   // attribute (after the max turn for the game is known)
   .then(function() {
@@ -52,17 +45,6 @@ var prepRunAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) 
   });
 
 };
-
-
-// Start the user containers for each hero in the given game
-var prepGame = function(game, userLookup) {
-  var usersInGame = game.heroes.map(function(hero) {
-    return userLookup[hero.name];
-  });
-
-  return prepareUserContainers(usersInGame);
-};
-
 
 var runAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
 
@@ -92,7 +74,7 @@ var runAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
     //Save the game to the database
     return mongoConnection.safeInvoke(
       'jsBattleGameData',
-      'update', 
+      'update',
       {
         '_id':game._id
       },
@@ -110,10 +92,10 @@ var runAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
 
       //Get the direction the currently active hero wants to move
       var port = userLookup[activeHero.name].port;
-      
+
       console.log('Turn: ' + game.turn + ', Port: ' + port + ', User: ' + activeHero.name);
 
-      return communicateWithContainers.postGameData(port, game)
+      return runHeroBrain(game, userLookup[activeHero.name]);
     })
 
     //Then move the active hero in that direction
@@ -140,6 +122,53 @@ var runAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
 
   return resolveGameAndSaveTurnsToDB(game);
 }
+
+var runHeroBrain = function (game, user) {
+  var rootPath = __dirname + '/../user_code',
+      heroFilePath = rootPath + '/hero/' + user.githubHandle + '_hero.js',
+      helperFilePath = rootPath + '/helpers/' + user.githubHandle + '_helpers.js',
+      heroFile,
+      helperFile,
+      script,
+      result,
+      sandbox,
+      vmOptions,
+      safeGameData;
+
+  heroFile = fs.readFileSync(heroFilePath, 'utf8');
+  helperFile = fs.readFileSync(helperFilePath, 'utf8');
+
+  safeGameData = JSON.parse(JSON.stringify(game));
+
+  try {
+    // Anything that goes into the sandbox MUST BE a copy so that the hero AI
+    // is unable to cause trouble in the rest of the application.
+    sandbox = {
+      gameData: safeGameData,
+      helpers: require(helperFilePath),
+      move: require(heroFilePath)
+    };
+
+    vmOptions = {
+      displayErrors: true,
+      filename: user.githubHandle,
+      timeout: 3000
+    };
+
+    vm.runInNewContext('moveResult=move(gameData, helpers)', sandbox, vmOptions);
+
+    // Anything coming out of the sandbox MUST BE sanitized.
+    result = sandbox.moveResult;
+
+    if (result !== undefined) {
+      result = result.toString();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result;
+};
 
 var updateMaxGameTurn = function(mongoConnection, game) {
   //Updates the game turn objects to have the correct maxTurn
