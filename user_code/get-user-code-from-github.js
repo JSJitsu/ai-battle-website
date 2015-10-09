@@ -44,12 +44,11 @@ var usersCodeRequest = function(fileType) {
 
         var options = {
           //Saves the URL at which the code can be found
-          url: 'https://' + secrets.apiUser + ':' + secrets.apiPass + '@api.github.com/repos/' + user.githubHandle + 
-          '/' + user.codeRepo + '/contents/' + fileType +'.js',
-
-          //Needed by the github API
+          url: 'https://api.github.com/repos/' + user.githubHandle +
+          '/' + user.codeRepo + '/contents/' + fileType +'.js' +
+          '?client_id=' + secrets.appKey + '&client_secret=' + secrets.appSecret,
           headers: {
-            'User-Agent': secrets.apiUser
+            'User-Agent': secrets.appName
           }
         };
 
@@ -60,9 +59,9 @@ var usersCodeRequest = function(fileType) {
           console.log('Saving code for: ' + user.githubHandle);
           if (error){
             console.log('Error sending request!');
-            console.log(error)
+            console.log(error);
             return;
-          };
+          }
 
           //If everything is ok, save the file
           if (response.statusCode == 200) {
@@ -82,7 +81,7 @@ var usersCodeRequest = function(fileType) {
               return;
             }
 
-            var filePath = secrets.rootDirectory + '/user_code/' + fileType 
+            var filePath = secrets.rootDirectory + '/user_code/' + fileType
                 + '/' + user.githubHandle + '_' + fileType + '.js';
             console.log(filePath);
 
@@ -98,6 +97,7 @@ var usersCodeRequest = function(fileType) {
             });
           } else {
             console.log('Unexpected response code:' + response.statusCode + '!');
+            console.log(body);
           }
         });
 

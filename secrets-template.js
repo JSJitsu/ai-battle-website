@@ -1,13 +1,41 @@
-//Use this as a template for creating your own local secrets.js file
-
+/**
+ * Copy this file to secrets.js and fill it in with your own information.
+ */
 var secrets = module.exports = {};
 
-secrets.mongoKey = 'mongo connection url here';
+/**
+ * The connection string to reach MongoDB.
+ * @type {String}
+ */
+secrets.mongoKey = '';
 
-secrets.apiUser = 'a github account handle here';
+/**
+ * Sent to GitHub as the User-Agent as required by their API.
+ * @type {String}
+ */
+secrets.appName = '';
 
-secrets.apiPass = 'password to the github account here';
+/**
+ * Sent to GitHub to connect to their API.
+ * @type {String}
+ */
+secrets.appKey = '';
 
-secrets.rootDirectory = 'the local address of the root of this repo';
+/**
+ * Sent to GitHub to connect to their API.
+ * @type {String}
+ */
+secrets.appSecret = '';
 
-secrets.map = 'mapnamewithoutfileextension';
+/**
+ * Used to get a bearing on where to save and retrieve user code.
+ * @type {String}
+ */
+secrets.rootDirectory = '.';
+
+/**
+ * The map to use for the battle. See game_logic/maps for a list.
+ * Do not include the file extension.
+ * @type {String}
+ */
+secrets.map = '';
