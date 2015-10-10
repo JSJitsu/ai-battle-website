@@ -1,12 +1,6 @@
 
 var Game = Backbone.Model.extend({
   url: 'api/gameDataForUser/1',
-
-  initialize: function() {
-    var userModel = new User();
-    this.set('userModel', userModel);
-  },
-  
   parse: function(response) {
     this.set('turn', response.turn);
     this.set('maxTurn', response.maxTurn);
@@ -39,10 +33,10 @@ var Game = Backbone.Model.extend({
       teamBlue.add(hero);
     });
 
-    
+
 
     _.each(_.flatten(response.board.tiles), function(tileObject, key, list) {
-      //The id from our game model was overwriting 
+      //The id from our game model was overwriting
       tileObject.battleId = tileObject.id;
       delete tileObject.id;
       tileObject.gameTurn = this.get('turn');

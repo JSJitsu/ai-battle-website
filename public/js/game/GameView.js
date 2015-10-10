@@ -1,7 +1,8 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
   className: 'outer',
-  initialize: function(){
+  initialize: function (config){
+    this.userModel = config.userModel;
     this.updateTurn(0);
     this.paused = true;
     this.playInProgress = false;
@@ -99,27 +100,28 @@ var GameView = Backbone.View.extend({
     this.$el.append(gameTipsHtml);
   },
   updateTurn: function(turn) {
-    this.model.updateTurn(turn);
-    return this.model.fetch({
+    var view = this;
+
+    view.model.updateTurn(turn);
+
+    return view.model.fetch({
       success: function() {
-        this.initializeSlider();
-        var userModel = this.model.get('userModel');
-        this.render();
-        userModel.fetch({
-          success: function() {
-            this.render();
-            var currentUserHandle = userModel.get('githubHandle');
-            if (currentUserHandle) {
-              this.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
-            }
-          }.bind(this),
-          error: function(collection, response, options){
-            this.render();
-          }.bind(this)
-        });
-      }.bind(this),
+        var userModel,
+            currentUserHandle;
+
+        view.initializeSlider();
+        view.render();
+
+        userModel = view.userModel;
+        currentUserHandle = userModel.get('githubHandle');
+
+        if (currentUserHandle) {
+          view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
+        }
+      },
       error: function(collection, response, options){
-      }.bind(this)
+        console.warn('Unable to fetch turn!', response);
+      }
     });
   },
   sendSliderToTurn: function(turn) {

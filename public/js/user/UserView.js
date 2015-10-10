@@ -1,15 +1,13 @@
 var UserView = Backbone.View.extend({
-  
+
   initialize: function() {
-    this.viewing = {};
-    this.viewing = "settings";
-    this.render();
-    // fetch will get object at model's url
-    // can use 'parse' as middleware for object
-    // jQuery promise
-    $.when(this.model.fetch()).then(function() {
-      this.render();
-    }.bind(this));
+    var view = this;
+
+    view.viewing = {};
+    view.viewing = 'settings';
+    view.render();
+
+    view.model.on('change', view.render, view);
   },
 
   events: {
@@ -50,7 +48,7 @@ var UserView = Backbone.View.extend({
     this.render();
     this.$el.find('.settings').tab('show');
   },
-  
+
    showRecent: function(event) {
     event.preventDefault();
     this.viewing = "recent";

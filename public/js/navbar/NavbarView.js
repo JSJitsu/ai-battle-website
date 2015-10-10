@@ -1,10 +1,10 @@
 var NavbarView = Backbone.View.extend({
 
   initialize: function(){
-    this.render();
-    $.when(this.model.fetch()).then(function() {
-      this.render();
-    }.bind(this));
+    var view = this;
+
+    view.render();
+    view.model.on('change', view.render, view);
   },
 
   render: function(){
@@ -17,7 +17,7 @@ var NavbarView = Backbone.View.extend({
     } else {
       html = new EJS({url: '../ejs_templates/navbarNotLoggedIn'}).render(this.model);
     }
-    
+
     this.$el.html(html);
   }
 });
