@@ -28,16 +28,29 @@ var mongoOptions = {
   }
 };
 
-if ((!argv['github-client-id'] || !argv['github-client-secret']) && argv.github === undefined) {
+var options = {
+  useGithubApp: (argv.github === undefined),
+  github: {
+    clientId: argv['github-client-id'],
+    clientSecret: argv['github-client-secret'],
+    callbackUrl: argv['github-callback-url']
+  }
+};
+
+if (options.useGithubApp && (!options.github.clientId || !options.github.clientSecret)) {
   var usage = [
-    'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [options]',
+    'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [parameters]',
     '',
-    'Required Options: ',
+    'Required Parameters:',
     '',
     '  --github-client-id      GitHub Application Client ID',
     '  --github-client-secret  GitHub Application Client Secret',
     '        OR',
     '  --no-github             Do not connect to the GitHub application.',
+    '',
+    'Optional Parameters:',
+    '',
+    '  --github-callback-url   Specify the callback used for user auth.',
     ''
   ].join('\n');
 
@@ -61,8 +74,8 @@ safeMongoConnection.connect()
     });
 
     // Add github authentication
-    if (argv.github !== false) {
-      OAuthGithub(app, safeMongoConnection, argv);
+    if (options.useGithubApp) {
+      OAuthGithub(app, safeMongoConnection, options);
     }
 
     // The router for the API

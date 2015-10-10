@@ -5,7 +5,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 
-module.exports = function(app, safeMongoConnection, argv) {
+module.exports = function(app, safeMongoConnection, options) {
   //Creates mongoose User model connected to the mongo URL
   var User = require('./User');
 
@@ -111,14 +111,14 @@ module.exports = function(app, safeMongoConnection, argv) {
     );
   });
 
-  var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-  var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+  var clientId = options.github.clientId || process.env.GITHUB_CLIENT_ID;
+  var clientSecret = options.github.clientSecret || process.env.GITHUB_CLIENT_SECRET;
 
-  var callbackURL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
+  var callbackURL = options.github.callbackUrl || process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
 
   var strategy = new GitHubStrategy({
-    clientID: argv['github-client-id'] || GITHUB_CLIENT_ID,
-    clientSecret: argv['github-client-secret'] || GITHUB_CLIENT_SECRET,
+    clientID: clientId,
+    clientSecret: clientSecret,
     callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done) {
     done(null, profile);
