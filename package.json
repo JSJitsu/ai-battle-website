@@ -23,8 +23,8 @@
     "express": "^4.7.2",
     "express-session": "^1.7.4",
     "mongodb": "^1.4.8",
-    "passport": "^0.2.0",
-    "passport-github": "^0.1.5",
+    "passport": "^0.3.0",
+    "passport-github": "^1.0.0",
     "q": "^1.0.1",
     "body-parser": "^1.6.2"
   },
