@@ -14,7 +14,6 @@ var addFakeUsers = function(numberOfFakeUsers) {
       fakeUserPromises[i] = Q.ninvoke(userCollection, 'insert', {
         githubHandle: 'fakeUser' + i,
         mostRecentGameId: '',
-        port: undefined,
         codeRepo: 'hero-starter',
         codeRepoBranch: 'master',
         lifetimeStats: {
