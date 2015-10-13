@@ -29,7 +29,7 @@ var planAllGames = function(users) {
   //Maximum # of users per team?
   var maxUsersPerTeam = 12;
 
-  //Used to look up hero port numbers
+  //Used to look up hero
   var userLookup = {};
 
   //Stores all the game objects
@@ -43,7 +43,7 @@ var planAllGames = function(users) {
   //Create games
   for (var gameIndex=0; gameIndex<numberOfGames; gameIndex++) {
     var map = pickMap(secrets.map);
-    var game = createGameFromMap(secrets.rootDirectory + 
+    var game = createGameFromMap(secrets.rootDirectory +
         '/game_logic/maps/' + map + '.txt');
     game.maxTurn = 1250;
     games.push(game);
@@ -73,7 +73,7 @@ var planAllGames = function(users) {
     var nextUserIndex = randomIndex(users.length);
     var user = users.splice(nextUserIndex, 1)[0];
 
-    //Save the user (be able to get the hero port, etc later)
+    //Save the user (be able to get the hero data later)
     userLookup[user.githubHandle] = user;
 
     console.log('Adding user: ' + user.githubHandle + ' to game ' + currentGameIndex + ', team ' + team);
@@ -92,7 +92,7 @@ var planAllGames = function(users) {
       // onto occupied squares do nothing and return false, hence the loop)
     }
   }
-  
+
   return {
     games: games,
     userLookup: userLookup

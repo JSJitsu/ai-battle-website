@@ -91,9 +91,7 @@ var runAndSaveGame = function(mongoConnection, game, gameIndex, userLookup) {
       var activeHero = game.activeHero;
 
       //Get the direction the currently active hero wants to move
-      var port = userLookup[activeHero.name].port;
-
-      console.log('Turn: ' + game.turn + ', Port: ' + port + ', User: ' + activeHero.name);
+      console.log('Turn: ' + game.turn + ', User: ' + activeHero.name);
 
       return runHeroBrain(game, userLookup[activeHero.name]);
     })
