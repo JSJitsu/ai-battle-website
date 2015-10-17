@@ -20,7 +20,7 @@
   "dependencies": {
     "child-process-promise": "^0.2.0-SNAPSHOT.1389671754086",
     "express": "^4.8.2",
-    "mongodb": "^1.4.8",
+    "mongodb": "^2.0.45",
     "q": "^1.0.1",
     "request": "^2.40.0",
     "unirest": "^0.2.7"

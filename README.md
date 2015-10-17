@@ -25,7 +25,7 @@ Once your dependencies are installed, look for the configuration file "secrets-t
 
 To run the test battle:
 ```sh
-node local-run/run-fake-games-local.js
+node run-test-game.js
 ```
 
 ### Stack

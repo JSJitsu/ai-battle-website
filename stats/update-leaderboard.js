@@ -1,6 +1,8 @@
+var Q = require('q');
+
 // generate leaderboard data and put in MongoDB as arrays
-var updateLeaderboard = function(users, mongoConnection) {
-  
+var updateLeaderboard = function(users, db) {
+
   // generates an array for the leaderboard
   var getArrays = function(prop, recentLifetimeAverage) {
     var leaderboardArray = [];
@@ -10,10 +12,10 @@ var updateLeaderboard = function(users, mongoConnection) {
         leaderboardArray[i] = {};
         leaderboardArray[i].name =  users[i].githubHandle;
         // generate totalgames by adding the users wins and losses
-        var totalGames = users[i]['lifetimeStats']['wins'] +
-                           users[i]['lifetimeStats']['losses'];
+        var totalGames = users[i].lifetimeStats.wins +
+                           users[i].lifetimeStats.losses;
         // generate an average value up to two decimal places
-        leaderboardArray[i].value = (Number(parseFloat(users[i]['lifetimeStats'][prop] / 
+        leaderboardArray[i].value = (Number(parseFloat(users[i].lifetimeStats[prop] /
                                       totalGames).toFixed(2)) || 0);
         // do not want an undefined property showing up in our leaderboard array
       } else if (users[i][recentLifetimeAverage][prop] !== undefined) {
@@ -21,9 +23,9 @@ var updateLeaderboard = function(users, mongoConnection) {
         // because we do not want an object instantiated when value is undefined
         leaderboardArray[i] = {};
         leaderboardArray[i].name =  users[i].githubHandle;
-        leaderboardArray[i].value = users[i][recentLifetimeAverage][prop];  
-      } 
-    } 
+        leaderboardArray[i].value = users[i][recentLifetimeAverage][prop];
+      }
+    }
 
     // sort the array of stats from greatest to lowest
     leaderboardArray.sort(function(a, b) {
@@ -108,21 +110,10 @@ var updateLeaderboard = function(users, mongoConnection) {
   // generate a promise from a post of a leader array
   var generateUpdatePromise = function(statsTuple) {
     console.log('Updating leaderboard for: ' + statsTuple[0] + '...');
-    return mongoConnection.safeInvoke(
-      'leaderboard',
-      'update',
-      // query document to update
-      {
-        '_id': statsTuple[0]
-      },                 
-      // update document with the new array generated
+    return Q.ninvoke(db.collection('leaderboard'), 'save',
       {
         '_id': statsTuple[0],
         'topUsers': statsTuple[1]
-      },                             
-      // upsert will update a document or create a new one
-      { 
-        upsert: true 
       }
     );
   };
@@ -130,7 +121,7 @@ var updateLeaderboard = function(users, mongoConnection) {
   // Recursively update all leaderboard categories
   var updateNextStat = function() {
     nextTuple = statsTuples.pop();
-    
+
     return generateUpdatePromise(nextTuple)
     .then(function() {
       if (statsTuples.length > 0) {
