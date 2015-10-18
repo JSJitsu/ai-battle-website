@@ -18,19 +18,6 @@ function GameRunner (database, users) {
 }
 
 /**
- * @todo  Refactor this old code.
- * @return {String} Date in mm/dd/yyyy format.
- */
-GameRunner.prototype.getDateString = function () {
-  var dayOffset = secrets.dayOffset;
-  var d = new Date((new Date()).getTime() + dayOffset*24*60*60*1000);
-  var result = (d.getMonth() + 1).toString();
-  result += '/' + d.getDate();
-  result += '/' + d.getFullYear();
-  return result;
-};
-
-/**
  * Plans the games that need to be played.
  * @param  {Object[]} users User information
  * @return {Game[]} An array of games that need to run
@@ -68,7 +55,6 @@ GameRunner.prototype.runGame = function (game) {
     );
 
     if (game.ended) {
-      console.log(game.heroes);
       return game;
     } else {
       // Store hero actions
@@ -181,30 +167,71 @@ GameRunner.prototype.runAndSaveAllGames = function () {
  */
 GameRunner.prototype.saveGame = function (game) {
   var me = this,
-      date = this.getDateString(),
-      gameId = game.gameNumber.toString() + '|' + date,
       db = this.database,
-      gameCollection;
+      gameCollection,
+      heroes;
 
-  console.log('Saving game ' + game.gameNumber + ' (' + gameId + ')');
+  console.log('Saving game ' + game.gameNumber);
 
-  game.gameId = gameId;
+  heroes = me.scrubHeroes(game.heroes);
+  players = me.getPlayers(game.heroes);
 
   gameCollection = db.collection('jsBattleGameData');
 
   return Q.ninvoke(gameCollection, 'save',
     {
-      _id: gameId,
-      ended: game.ended,
+      date: new Date(),
+      players: players,
       winningTeam: game.winningTeam,
       maxTurn: game.maxTurn,
-      date: date,
-      events: game.events,
-      gameNumber: game.gameNumber
+      heroes: heroes,
+      events: game.events
     }
-  ).then(function () {
+  ).then(function (result) {
+    game.gameId = result.ops[0]._id;
     return me.updateAndSaveAllHeroStats(game);
   });
+};
+
+/**
+ * Clean up hero data so we can store it in the database.
+ * @param  {Object[]} heroes Hero game data
+ * @return {Object[]} Scrubbed hero data
+ */
+GameRunner.prototype.scrubHeroes = function (heroes) {
+  var scrubbed = [],
+      hero;
+
+  for (var i=0; i < heroes.length; i++) {
+    hero = heroes[i];
+
+    scrubbed.push(
+      {
+        id: hero.id,
+        team: hero.team,
+        name: hero.name
+      }
+    );
+  }
+
+  return scrubbed;
+};
+
+/**
+ * Extract the player information from the heroes data.
+ * @param  {Object[]} heroes Hero game data
+ * @return {String[]} List of players
+ */
+GameRunner.prototype.getPlayers = function (heroes) {
+  var players = [],
+      hero;
+
+  for (var i=0; i < heroes.length; i++) {
+    hero = heroes[i];
+    players.push(hero.name);
+  }
+
+  return players;
 };
 
 /**
