@@ -1,9 +1,11 @@
 var fs = require('fs'),
     vm = require('vm'),
     Q = require('q'),
-    planAllGames = require('./plan-all-games.js'),
+    GameEngine = require('ai-battle-engine'),
+    engine = new GameEngine(),
     secrets = require('../secrets.js'),
     actions = require('./ActionConstants.js');
+
 
 /**
  * Class for running games. It will plan out the games that need to be run
@@ -23,7 +25,7 @@ function GameRunner (database, users) {
  * @return {Game[]} An array of games that need to run
  */
 GameRunner.prototype.planGames = function (users) {
-  var plannedGames = planAllGames(users);
+  var plannedGames = engine.planAllGames(users);
 
   this.games = plannedGames.games;
   this.userLookup = plannedGames.userLookup;
