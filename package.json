@@ -23,7 +23,8 @@
     "mongodb": "^2.0.45",
     "q": "^1.0.1",
     "request": "^2.40.0",
-    "unirest": "^0.2.7"
+    "unirest": "^0.2.7",
+    "ai-battle-engine":"jsjitsu/ai-battle-engine"
   },
   "devDependencies": {
     "blanket": "~1.1.6",

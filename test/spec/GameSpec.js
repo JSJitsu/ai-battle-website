@@ -1,5 +1,5 @@
 /* global projects, describe, it, expect, should */
-var chai = require('chai');
+/*var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 var spies = require('chai-spies');
@@ -659,4 +659,4 @@ describe('Board methods.', function() {
 
   });
 
-});
+});*/

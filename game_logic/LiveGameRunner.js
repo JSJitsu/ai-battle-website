@@ -41,7 +41,7 @@ function LiveGameRunner () {
   };
 
   this.showErrors = function (error) {
-    console.dir(error);
+    console.dir(error.stack);
     throw error;
   };
 
