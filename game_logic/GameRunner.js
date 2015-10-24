@@ -42,7 +42,11 @@ GameRunner.prototype.planGames = function (users) {
 GameRunner.prototype.runGame = function (game) {
 
   var userLookup = this.userLookup,
-      runGameTurnFn;
+      runGameTurnFn,
+      initialGameTiles;
+
+  // Store the initial game board so we have a starting point to replay battles
+  game.board.initialTiles = JSON.parse(JSON.stringify(game.board.tiles));
 
   runGameTurnFn = function(game) {
     var activeHero = game.activeHero,
@@ -171,12 +175,14 @@ GameRunner.prototype.saveGame = function (game) {
   var me = this,
       db = this.database,
       gameCollection,
-      heroes;
+      heroes,
+      initialMap;
 
   console.log('Saving game ' + game.gameNumber);
 
   heroes = me.scrubHeroes(game.heroes);
   players = me.getPlayers(game.heroes);
+  initialMap = game.board.initialTiles;
 
   gameCollection = db.collection('jsBattleGameData');
 
@@ -187,6 +193,7 @@ GameRunner.prototype.saveGame = function (game) {
       winningTeam: game.winningTeam,
       maxTurn: game.maxTurn,
       heroes: heroes,
+      initialMap: initialMap,
       events: game.events
     }
   ).then(function (result) {
