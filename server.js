@@ -82,17 +82,16 @@ safeMongoConnection.connect()
     var router = express.Router();
 
     // Returns the state of the game on the given day and turn
-    router.get('/gameDataForUser/:turn', function(req, res) {
-      // If there is no user logged in, default to today's first game
-      var gameId = '0|' + helpers.getDateString(0, productionMode) + '|' + req.params.turn;
-
+    router.get('/gameDataForUser/', function(req, res) {
+      var query = {};
       // Otherwise, use the most recent gameId of the user
       if (req.user && req.user.mostRecentGameId) {
-        gameId = req.user.mostRecentGameId + '|' + req.params.turn;
+        query = {
+          _id: req.user.mostRecentGameId
+        };
       }
-      safeMongoConnection.safeInvoke('jsBattleGameData', 'findOne', {
-        '_id': gameId
-      })
+
+      safeMongoConnection.safeInvoke('jsBattleGameData', 'findOne', query)
       .done(
         function(game) {
           res.status(200).send(game);
