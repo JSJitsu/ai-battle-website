@@ -1,10 +1,9 @@
+/* globals Backbone,HeroView,_ */
+/* exported TeamView */
 var TeamView = Backbone.View.extend({
   className: 'list-group',
   tagName: 'div',
   teamColor: undefined,
-  initialize: function(){
-    // this.render();
-  },
   render: function() {
     this.$el.html('');
     if(this.teamColor){
@@ -13,7 +12,7 @@ var TeamView = Backbone.View.extend({
     this.createTeamView();
   },
   createTeamView: function() {
-    _.each(this.collection.models, function(hero){
+    _.each(this.collection, function(hero){
       var heroView = new HeroView({
         model: hero
       });
