@@ -1,24 +1,36 @@
+/* globals _,Backbone,$,BoardTileView */
+/* exported BoardView */
 var BoardView = Backbone.View.extend({
   tagName: 'section',
   className: 'battle-map',
-  initialize: function() {
-    this.render()
+  initialize: function (config) {
+    this.board = config.board;
+    this.render();
   },
   render: function() {
     this.$el.html('');
     this.createBoardView();
   },
   createBoardView: function() {
-    var boardLength = this.collection.lengthOfSide;
-    for(var i = 0; i < boardLength; i++){
+    var me = this,
+        fragment = document.createDocumentFragment();
+
+    _.each(this.board.tiles, function (tileRow) {
       var $tr = $('<div class="tile-row">');
-      for(var j = 0; j < boardLength; j++){
-        var tileView = new BoardTileView({
-          model: this.collection.at(i * boardLength + j)
+
+      _.each(tileRow, function (tile) {
+        var tileView;
+
+        tileView = new BoardTileView({
+          tile: tile
         });
+
         $tr.append(tileView.$el);
-      }
-      this.$el.append($tr);
-    }
+      });
+
+      fragment.appendChild($tr[0]);
+    });
+
+    me.$el.append(fragment);
   }
 });
