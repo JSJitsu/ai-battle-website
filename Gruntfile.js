@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    
     mochaTest: {
       test: {
         options: {
@@ -84,10 +84,12 @@ module.exports = function(grunt) {
       tasks: [
         'sass',
         'concat',
-        'uglify',
         'cssmin',
         'clean'
-      ]
+      ],
+      options: {
+        debounceDelay: 250,
+      },
     }
   });
 
@@ -98,10 +100,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   // grunt.loadNpmTasks('grunt-blanket');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   // grunt.registerTask('server-dev', function (target) {
@@ -131,7 +133,6 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('default', ['concat', 'uglify', 'sass', 'cssmin', 'clean']);
-
 
   // grunt.registerTask('upload', function(n) {
   //   if(grunt.option('prod')) {
