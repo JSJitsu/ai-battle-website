@@ -3,22 +3,35 @@
 var Game = Backbone.Model.extend({
   url: 'api/gameDataForUser',
   parse: function(response) {
-    var engine = new GameEngine,
-        GameClass = engine.getGame(),
-        boardSize,
-        game;
-
-    boardSize = response.initialMap.length;
-    game = new GameClass(boardSize);
-    game.board.tiles = response.initialMap;
+    var game;
 
     console.info(response);
 
-    // Import the existing map to the game
-    _.each(response.initialMap, function (xRow) {
+    this.set('initialMap', response.initialMap);
+    this.set('events', response.events);
+    this.set('maxTurn', response.events.length);
+
+    game = this.createGame(response.initialMap);
+    this.set('game', game);
+  },
+  /**
+   * Creates a new game using the initial map.
+   * @param  {Object} map  Initial map state
+   * @return {Game} New game object
+   */
+  createGame: function (map) {
+    var boardSize = map.length,
+        engine = new GameEngine(),
+        GameClass = engine.getGame(),
+        game = new GameClass(boardSize),
+        events = this.get('events');
+
+    this.set('turn', 0);
+    game.maxTurn = events.length - 1;
+
+    _.each(map, function (xRow) {
       _.each(xRow, function (tile) {
         if (tile.type === 'Hero') {
-          tile.type = 'Unoccupied';
           game.addHero(
             tile.distanceFromTop,
             tile.distanceFromLeft,
@@ -28,7 +41,6 @@ var Game = Backbone.Model.extend({
         }
 
         if (tile.type === 'HealthWell') {
-          tile.type = 'Unoccupied';
           game.addHealthWell(
             tile.distanceFromTop,
             tile.distanceFromLeft
@@ -36,7 +48,6 @@ var Game = Backbone.Model.extend({
         }
 
         if (tile.type === 'DiamondMine') {
-          tile.type = 'Unoccupied';
           game.addDiamondMine(
             tile.distanceFromTop,
             tile.distanceFromLeft
@@ -44,7 +55,6 @@ var Game = Backbone.Model.extend({
         }
 
         if (tile.type === 'Impassable') {
-          tile.type = 'Unoccupied';
           game.addImpassable(
             tile.distanceFromTop,
             tile.distanceFromLeft
@@ -53,20 +63,71 @@ var Game = Backbone.Model.extend({
       });
     });
 
+    return game;
+  },
+  /**
+   * @public
+   *
+   * Jumps to a specific turn in the game by creating a new game and playing
+   * all of the turns needed to reach the given turn.
+   *
+   * @param  {Number} turn The turn to jump to
+   * @return {Game}      The game class
+   */
+  jumpToTurn: function (turn) {
+    console.info('Jumping to turn', turn);
+
+    var me = this,
+        initialMap = this.get('initialMap'),
+        events = this.get('events'),
+        game = this.createGame(initialMap);
+
+    _.find(events, function (eventData, index) {
+      if (index < turn) {
+        var heroAction = me.translateEnumToAction(eventData[1]);
+
+        game.handleHeroTurn(heroAction);
+      } else {
+        return true;
+      }
+    });
+
     this.set('game', game);
-    this.set('events', response.events);
-    this.set('maxTurn', response.events.length);
+    this.set('turn', turn);
 
-    game.maxTurn = response.events.length - 1;
+    return game;
+  },
+  /**
+   * Go the next turn of the game, if possible.
+   * @return {Boolean} True if turn happened.
+   */
+  nextTurn: function () {
+    var game = this.get('game'),
+        events = this.get('events'),
+        turn = game.turn,
+        heroAction;
 
-    /*
-    @todo Finish implementing potentially missing features below
+    if (events[turn] !== undefined) {
+      heroAction = this.translateEnumToAction(events[turn][1]);
+      game.handleHeroTurn(heroAction);
+      this.set('turn', turn + 1);
 
-    this.set('moveMessages', response.moveMessage);
-    this.set('winningTeam', response.winningTeam);
-    this.set('attackMessages', response.attackMessage);
-    this.set('killMessages', response.killMessage);
-    this.set('teamDiamonds', response.totalTeamDiamonds);
-    */
+      return true;
+    }
+
+    return false;
+  },
+  /**
+   * @todo  Do this on the server side?
+   */
+  translateEnumToAction: function (enumerable) {
+    var constants = {
+      1: 'North',
+      2: 'East',
+      3: 'South',
+      4: 'West'
+    };
+
+    return constants[enumerable];
   }
 });

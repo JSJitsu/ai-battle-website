@@ -1,7 +1,7 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
   className: 'outer',
-  gameSpeed: 100,
+  gameSpeed: 500,
   initialize: function (config) {
     var me = this;
 
@@ -36,23 +36,20 @@ var GameView = Backbone.View.extend({
 
     $gameHtml.html(boardView.$el);
 
-    this.$el.find('.turn').text('Turn: ' + game.turn);
+    this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
 
-    /*
     this.checkWinner();
-    var $gameHtml = this.$el.find('.map');
-    $gameHtml.html('');
+
     //Show game update messages
-    $('.messages').text('');
-    $('.messages').append(this.model.get('killMessages'));
-       //Add html for team info
-    */
+    $('.messages').text(game.killMessage || game.attackMessage);
+
+    //Add html for team info
     var yellowTeamView = new TeamView({
       collection: game.teams[1],
       className: 'team-info t-yellow',
     });
     yellowTeamView.teamColor = 'Team Yellow';
-    yellowTeamView.diamonds = 0;
+    yellowTeamView.diamonds = game.totalTeamDiamonds[0];
     yellowTeamView.render();
 
     var blueTeamView = new TeamView({
@@ -60,7 +57,7 @@ var GameView = Backbone.View.extend({
       className: 'team-info t-blue'
     });
     blueTeamView.teamColor = 'Team Blue';
-    blueTeamView.diamonds = 0;
+    blueTeamView.diamonds = game.totalTeamDiamonds[1];
     blueTeamView.render();
 
     //Add all board html
@@ -104,16 +101,14 @@ var GameView = Backbone.View.extend({
     this.$el.append(currentTurnHtml);
     this.$el.append(gameTipsHtml);
   },
-  updateTurn: function (turn) {
+  playNextTurn: function () {
     var view = this,
         userModel,
-        currentUserHandle,
-        heroAction;
+        currentUserHandle;
+
+    this.model.nextTurn();
 
     view.render();
-
-    heroAction = this.translateEnumToAction(view.model.get('events')[turn][1]);
-    this.model.get('game').handleHeroTurn(heroAction);
 
     userModel = view.userModel;
     currentUserHandle = userModel.get('githubHandle');
@@ -121,26 +116,6 @@ var GameView = Backbone.View.extend({
     if (currentUserHandle) {
       view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
     }
-  },
-  /**
-   * @todo  Do this on the server side?
-   */
-  translateEnumToAction: function (enumerable) {
-    var reversed = {},
-        constants;
-
-    constants = {
-        North: 1,
-        East: 2,
-        South: 3,
-        West: 4
-    };
-
-    for (var action in constants) {
-        reversed[constants[action]] = action;
-    }
-
-    return reversed[enumerable];
   },
   sendSliderToTurn: function(turn) {
     //The "track" the sword slides along
@@ -200,7 +175,8 @@ var GameView = Backbone.View.extend({
         this.pauseGame();
 
         //Slider value will range from the min to max
-        // this.updateTurn(slider.value);
+        this.model.jumpToTurn(slider.value);
+        this.render();
 
       }.bind(this)
     });
@@ -222,27 +198,21 @@ var GameView = Backbone.View.extend({
       this.pauseGame();
 
       //Updates the turn
-      var turn = this.model.get('turn');
-      var maxTurn = this.model.get('maxTurn');
-
-      //Adjusts the turn, but doesn't go below 0 or above the max turn
-      var newTurn = Math.max(Math.min(turn + turnAdjustment, maxTurn),0);
-
-      //Updates the model
-      this.updateTurn(newTurn);
-
-      //Send slider to new location
-      this.sendSliderToTurn(newTurn);
+      var turn = this.model.get('game').turn;
+      this.jumpToGameTurn(turn + turnAdjustment);
 
     }.bind(this));
+  },
+  jumpToGameTurn: function (turn) {
+    this.model.jumpToTurn(turn);
+    this.sendSliderToTurn(turn);
+    this.render();
   },
   restartGame: function() {
     this.pauseGame();
 
     //Send slider and game to turn 0
-    $.when(this.updateTurn(0)).then(function() {
-      this.sendSliderToTurn(0);
-    }.bind(this));
+    this.jumpToGameTurn(0);
   },
   pauseGame: function() {
     this.paused = true;
@@ -277,21 +247,13 @@ var GameView = Backbone.View.extend({
     //Store the current turn and the turn at which
     //the game will end
     var game = this.model.get('game');
-    var currTurn = game.turn;
-    var maxTurn = this.model.get('maxTurn');
 
     //If the game is not yet over, go to next turn
-    if (currTurn < maxTurn && this.paused === false && this.playInProgress === false) {
-      //Keeps track of whether we are waiting for the promise
-      //to resolve (used to prevent issues with users doubleclicking)
-      //the play button
-
+    if (!game.ended && this.paused === false && this.playInProgress === false) {
       this.tickTimer = setInterval(function () {
-        var turn = game.turn;
-
         this.playInProgress = true;
-        this.updateTurn(turn + 1);
-        this.sendSliderToTurn(currTurn + 1);
+        this.playNextTurn();
+        this.sendSliderToTurn(game.turn);
 
         this.playInProgress = false;
       }.bind(this), this.gameSpeed);
@@ -303,15 +265,14 @@ var GameView = Backbone.View.extend({
     }
   },
   checkWinner: function() {
-    var winner = this.model.get('winningTeam');
+    var winner = this.model.get('game').winningTeam;
     var message = $('.winner-msg');
     if (winner === 0) {
       message.text('Yellow Team Wins!');
     } else if (winner === 1) {
       message.text('Blue Team Wins!');
-
     } else {
-      message.text('See Today\'s Battle')
+      message.text('See Today\'s Battle');
     }
   }
 });
