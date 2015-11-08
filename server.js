@@ -81,8 +81,8 @@ safeMongoConnection.connect()
     // The router for the API
     var router = express.Router();
 
-    // Returns the state of the game on the given day and turn
-    router.get('/gameDataForUser/', function(req, res) {
+    // Returns the state of the latest game
+    router.get('/gameData/', function(req, res) {
       var query = {};
       // Otherwise, use the most recent gameId of the user
       if (req.user && req.user.mostRecentGameId) {
@@ -94,7 +94,11 @@ safeMongoConnection.connect()
       safeMongoConnection.safeInvoke('jsBattleGameData', 'findOne', query)
       .done(
         function(game) {
-          res.status(200).send(game);
+          if (game) {
+            res.status(200).send(game);
+          } else {
+            res.status(204).send();
+          }
         },
         function(err) {
           res.status(500).send('Something went wrong!');

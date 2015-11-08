@@ -1,18 +1,25 @@
 /* globals Backbone,GameEngine,_ */
 /* exported Game */
 var Game = Backbone.Model.extend({
-  url: 'api/gameDataForUser',
+  url: 'api/gameData',
   parse: function(response) {
-    var game;
+    if (!response) {
+      this.onGameDataNotFound();
+    } else {
+      this.onGameDataFound(response);
+    }
+  },
+  onGameDataNotFound: function () {
+    this.set('noGameData', true);
+  },
+  onGameDataFound: function (response) {
+    var model = this;
 
-    console.info(response);
+    model.set('initialMap', response.initialMap);
+    model.set('events', response.events);
+    model.set('maxTurn', response.events.length);
 
-    this.set('initialMap', response.initialMap);
-    this.set('events', response.events);
-    this.set('maxTurn', response.events.length);
-
-    game = this.createGame(response.initialMap);
-    this.set('game', game);
+    model.set('game', model.createGame(response.initialMap));
   },
   /**
    * Creates a new game using the initial map.

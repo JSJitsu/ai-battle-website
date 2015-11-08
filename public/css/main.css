@@ -526,7 +526,7 @@ body {
     .game-tips aside .fa-times {
       cursor: pointer; }
 
-#replay {
+#replay.battle-space {
   position: relative;
   min-height: 1094px; }
 

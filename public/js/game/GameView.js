@@ -2,28 +2,48 @@ var GameView = Backbone.View.extend({
   tagName: 'div',
   className: 'outer',
   gameSpeed: 500,
-  initialize: function (config) {
-    var me = this;
-
-    me.userModel = config.userModel;
-    me.paused = true;
-    me.playInProgress = false;
-    me.sliderInitialized = false;
-    me.initialLoad = true;
-
-    me.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
-    me.$el.append('<input class="row slider" style="visibility: hidden;">' + '</div>');
-
-    $('#replay .spinner').hide();
-    me.render();
-
-    me.initializeSlider();
-
-    me.renderControlArea();
-  },
   events: {
     'click .play-pause-game': 'togglePlayGame',
     'click .restart-game': 'restartGame'
+  },
+  initialize: function (config) {
+    var view = this;
+
+    if (view.model.get('noGameData')) {
+      view.renderError();
+    } else {
+      view.renderGame(config);
+    }
+
+    view.onAfterInitialize();
+  },
+  renderError: function () {
+    $('#replay').removeClass('battle-space');
+
+    this.$el.removeClass('outer');
+    this.$el.addClass('text-center');
+    this.$el.html("<h3>We weren't able to load it.</h3>");
+  },
+  renderGame: function (config) {
+    var view = this;
+
+    view.userModel = config.userModel;
+    view.paused = true;
+    view.playInProgress = false;
+    view.sliderInitialized = false;
+    view.initialLoad = true;
+
+    view.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
+    view.$el.append('<input class="row slider" style="visibility: hidden;">' + '</div>');
+
+    view.render();
+
+    view.initializeSlider();
+
+    view.renderControlArea();
+  },
+  onAfterInitialize: function () {
+    $('#replay .spinner').hide();
   },
   render: function() {
     var game = this.model.get('game'),
@@ -272,7 +292,7 @@ var GameView = Backbone.View.extend({
     } else if (winner === 1) {
       message.text('Blue Team Wins!');
     } else {
-      message.text('See Today\'s Battle');
+      message.text('Today\'s Battle');
     }
   }
 });
