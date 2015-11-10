@@ -1,66 +1,88 @@
 var GameView = Backbone.View.extend({
   tagName: 'div',
   className: 'outer',
-  initialize: function (config){
-    this.userModel = config.userModel;
-    this.updateTurn(0);
-    this.paused = true;
-    this.playInProgress = false;
-    this.sliderInitialized = false;
-    this.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
-    this.initialLoad = true;
-    this.$el.append('<input class="row slider" style="visibility: hidden;"/>' + '</div>');
-    var isLoaded = function () {
-      var gameRendered = this.$el.find('.battle-tile').length;
-      if (!gameRendered) {
-        if(this.initialLoad) {
-          this.initialLoad = false;
-          $('#replay').append('<img class="spinner" src="../../img/spinner.GIF">');
-        }
-        setTimeout(isLoaded, 750);
-      }
-      else {
-        $('.spinner').hide();
-        this.initializeSlider();
-        this.renderControlArea();
-      }
-    }.bind(this);
-    isLoaded();
-
-  },
+  gameSpeed: 500,
   events: {
     'click .play-pause-game': 'togglePlayGame',
     'click .restart-game': 'restartGame'
   },
-  render: function(){
+  initialize: function (config) {
+    var view = this;
+
+    if (view.model.get('noGameData')) {
+      view.renderError();
+    } else {
+      view.renderGame(config);
+    }
+
+    view.onAfterInitialize();
+  },
+  renderError: function () {
+    $('#replay').removeClass('battle-space');
+
+    this.$el.removeClass('outer');
+    this.$el.addClass('text-center');
+    this.$el.html("<h3>We weren't able to load it.</h3>");
+  },
+  renderGame: function (config) {
+    var view = this;
+
+    view.userModel = config.userModel;
+    view.paused = true;
+    view.playInProgress = false;
+    view.sliderInitialized = false;
+    view.initialLoad = true;
+
+    view.$el.html('<div class="messages"></div>' + '<div class="row map"></div>');
+    view.$el.append('<input class="row slider" style="visibility: hidden;">' + '</div>');
+
+    view.render();
+
+    view.initializeSlider();
+
+    view.renderControlArea();
+  },
+  onAfterInitialize: function () {
+    $('#replay .spinner').hide();
+  },
+  render: function() {
+    var game = this.model.get('game'),
+        $gameHtml = this.$el.find('.map'),
+        boardView;
+
+    boardView = new BoardView({
+      board: game.board
+    });
+
+    $gameHtml.html(boardView.$el);
+
+    this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
+
     this.checkWinner();
-    var $gameHtml = this.$el.find('.map');
-    $gameHtml.html('');
+
     //Show game update messages
-    $('.messages').text('');
-    $('.messages').append(this.model.get('killMessages'));
-       //Add html for team info
+    $('.messages').text(game.killMessage || game.attackMessage);
+
+    //Add html for team info
     var yellowTeamView = new TeamView({
-      collection: this.model.get('teamYellow'),
+      collection: game.teams[1],
       className: 'team-info t-yellow',
     });
     yellowTeamView.teamColor = 'Team Yellow';
-    yellowTeamView.diamonds = this.model.get('teamDiamonds')[0];
+    yellowTeamView.diamonds = game.totalTeamDiamonds[0];
     yellowTeamView.render();
+
     var blueTeamView = new TeamView({
-      collection: this.model.get('teamBlue'),
+      collection: game.teams[0],
       className: 'team-info t-blue'
     });
     blueTeamView.teamColor = 'Team Blue';
-    blueTeamView.diamonds = this.model.get('teamDiamonds')[1];
+    blueTeamView.diamonds = game.totalTeamDiamonds[1];
     blueTeamView.render();
 
-    var boardView = new BoardView({collection: this.model.get('board')});
     //Add all board html
     $gameHtml.append(yellowTeamView.$el);
-    $gameHtml.append(boardView.$el);
     $gameHtml.append(blueTeamView.$el);
-    this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
   },
   renderControlArea: function () {
     var playControlsHtml,
@@ -99,30 +121,21 @@ var GameView = Backbone.View.extend({
     this.$el.append(currentTurnHtml);
     this.$el.append(gameTipsHtml);
   },
-  updateTurn: function(turn) {
-    var view = this;
+  playNextTurn: function () {
+    var view = this,
+        userModel,
+        currentUserHandle;
 
-    view.model.updateTurn(turn);
+    this.model.nextTurn();
 
-    return view.model.fetch({
-      success: function() {
-        var userModel,
-            currentUserHandle;
+    view.render();
 
-        view.initializeSlider();
-        view.render();
+    userModel = view.userModel;
+    currentUserHandle = userModel.get('githubHandle');
 
-        userModel = view.userModel;
-        currentUserHandle = userModel.get('githubHandle');
-
-        if (currentUserHandle) {
-          view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
-        }
-      },
-      error: function(collection, response, options){
-        console.warn('Unable to fetch turn!', response);
-      }
-    });
+    if (currentUserHandle) {
+      view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
+    }
   },
   sendSliderToTurn: function(turn) {
     //The "track" the sword slides along
@@ -162,25 +175,28 @@ var GameView = Backbone.View.extend({
     }
 
     //Get slider
-    var $slider = this.$el.find('.slider');
-    var slider = $slider[0];
+    var $slider = this.$el.find('.slider'),
+        slider = $slider[0],
+        game = this.model.get('game'),
+        currentTurn,
+        maxTurn;
 
     //Get basic info about game state
-    var currentTurn = this.model.get('turn');
-    var maxTurn = this.model.get('maxTurn');
+    currentTurn = game.turn;
+    maxTurn = this.model.get('maxTurn');
 
     //Initialize new slider and set it to update
     //the turn on slide
     var init = new Powerange(slider, {
       min: 0,
       max: maxTurn,
-      step: 1,
       callback: function() {
         //Pause the game
         this.pauseGame();
 
         //Slider value will range from the min to max
-        this.updateTurn(slider.value);
+        this.model.jumpToTurn(slider.value);
+        this.render();
 
       }.bind(this)
     });
@@ -202,30 +218,26 @@ var GameView = Backbone.View.extend({
       this.pauseGame();
 
       //Updates the turn
-      var turn = this.model.get('turn');
-      var maxTurn = this.model.get('maxTurn');
-
-      //Adjusts the turn, but doesn't go below 0 or above the max turn
-      var newTurn = Math.max(Math.min(turn + turnAdjustment, maxTurn),0);
-
-      //Updates the model
-      this.updateTurn(newTurn);
-
-      //Send slider to new location
-      this.sendSliderToTurn(newTurn);
+      var turn = this.model.get('game').turn;
+      this.jumpToGameTurn(turn + turnAdjustment);
 
     }.bind(this));
+  },
+  jumpToGameTurn: function (turn) {
+    this.model.jumpToTurn(turn);
+    this.sendSliderToTurn(turn);
+    this.render();
   },
   restartGame: function() {
     this.pauseGame();
 
     //Send slider and game to turn 0
-    $.when(this.updateTurn(0)).then(function() {
-      this.sendSliderToTurn(0);
-    }.bind(this));
+    this.jumpToGameTurn(0);
   },
   pauseGame: function() {
     this.paused = true;
+
+    clearInterval(this.tickTimer);
 
     //Change pause button to a play button
     var $playPause = this.$el.find('.play-pause-game');
@@ -239,52 +251,48 @@ var GameView = Backbone.View.extend({
       //Change pause button to a play button
       $playPause.removeClass('glyphicon-pause');
       $playPause.addClass('glyphicon-play');
+
+      this.pauseGame();
     } else {
       //Change play button to a pause button
       $playPause.removeClass('glyphicon-play');
       $playPause.addClass('glyphicon-pause');
 
       //Start auto-playing the game
+      this.paused = false;
       this.autoPlayGame();
     }
   },
   autoPlayGame: function() {
     //Store the current turn and the turn at which
     //the game will end
-    var currTurn = this.model.get('turn');
-    var maxTurn = this.model.get('maxTurn');
+    var game = this.model.get('game');
 
     //If the game is not yet over, go to next turn
-    if (currTurn < maxTurn && this.paused === false && this.playInProgress === false) {
-      //Keeps track of whether we are waiting for the promise
-      //to resolve (used to prevent issues with users doubleclicking)
-      //the play button
-      this.playInProgress = true;
-      var updateTurnPromise = this.updateTurn(currTurn+1);
-      var gameView = this;
-      $.when(updateTurnPromise).then(function() {
-        //promise has resolved, no longer waiting
+    if (!game.ended && this.paused === false && this.playInProgress === false) {
+      this.tickTimer = setInterval(function () {
+        this.playInProgress = true;
+        this.playNextTurn();
+        this.sendSliderToTurn(game.turn);
+
         this.playInProgress = false;
+      }.bind(this), this.gameSpeed);
 
-        //Updates the slider location to track with the current turn
-        this.sendSliderToTurn(currTurn + 1);
-
-        //Runs this again (will run until no turns are left or
-        //until paused)
-        this.autoPlayGame();
-      }.bind(this));
+      console.warn('Auto-play timer started:', this.tickTimer);
+    } else {
+      clearInterval(this.tickTimer);
+      console.info('Auto-play timer stopped:', this.tickTimer);
     }
   },
   checkWinner: function() {
-    var winner = this.model.get('winningTeam');
+    var winner = this.model.get('game').winningTeam;
     var message = $('.winner-msg');
     if (winner === 0) {
       message.text('Yellow Team Wins!');
     } else if (winner === 1) {
       message.text('Blue Team Wins!');
-
     } else {
-      message.text('See Today\'s Battle')
+      message.text('Today\'s Battle');
     }
   }
 });

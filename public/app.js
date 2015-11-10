@@ -5,11 +5,17 @@ app.user = new User();
 app.user.fetch();
 
 app.game = new Game();
-app.gameView = new GameView({
-    model: app.game,
-    userModel: app.user
+
+app.game.fetch({
+    success: function () {
+        app.gameView = new GameView({
+            model: app.game,
+            userModel: app.user
+        });
+
+        $('.gamegrid-content').append(app.gameView.$el);
+    }
 });
-$('.gamegrid-content').append(app.gameView.$el);
 
 app.userView = new UserView({ model: app.user });
 $('#join').append(app.userView.$el);

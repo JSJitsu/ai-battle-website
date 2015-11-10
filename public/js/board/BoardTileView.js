@@ -1,44 +1,58 @@
+/* globals Backbone,gameAssets */
+/* exported BoardTileView */
 var BoardTileView = Backbone.View.extend({
   tagName: 'div',
   className: 'battle-tile',
-  initialize: function() {
-    if (this.model === undefined) {
-      console.log(undefined);
-    }
+  initialize: function (config) {
+    this.tile = config.tile;
     this.render();
-    this.model.on('change', this.render());
   },
   render: function() {
-    var subType = this.model.get('subType');
-    var type = this.model.get('type');
-    var teamId = this.model.get('team');
+    var tile = this.tile,
+        subType = tile.subType,
+        type = tile.type,
+        html,
+        colors,
+        owner;
+
     if (subType !== 'Unoccupied') {
-      var html = '<img src="' + gameAssets[subType] + '" class="sprite">';
-        var colors = {
-          0: "team-yellow",
-          1: "team-blue"
-        };
+      html = '<img src="' + gameAssets[subType] + '" class="sprite">';
+      colors = {
+        0: 'team-yellow',
+        1: 'team-blue'
+      };
+
       if (type === 'Hero') {
-        var name = this.model.get('name');
-        var heroId = this.model.get('battleId');
-        var HP = this.model.get('health');
-        var gameTurn = this.model.get('gameTurn');
-        var lastActiveTurn = this.model.get('lastActiveTurn');
-        if(lastActiveTurn === (gameTurn - 1) && gameTurn !== 1){
-          this.$('.sprite').addClass('current-turn');
-        }
-        html = '<img src="' + gameAssets[subType] + '" id="H' + heroId +'" class="sprite">';
-        
-        html += '<span class="indicator ' + colors[this.model.get('team')] +'">' + heroId + '</span>';
-        html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
-        this.$el.addClass('current-user-' + name);
+        html = this.buildHeroHtml(tile, colors);
       } else if (type === 'DiamondMine') {
-        var owner = this.model.get('owner');
+        owner = tile.owner;
         if (owner) {
           html += '<span class="indicator ' + colors[owner.team] +'">' + owner.id + '</span>';
-        } 
+        }
       }
+
       this.$el.html(html);
     }
+  },
+  buildHeroHtml: function (tile, colors) {
+    var name = tile.name,
+        heroId = tile.id,
+        HP = tile.health,
+        gameTurn = tile.gameTurn,
+        lastActiveTurn = tile.lastActiveTurn,
+        subType = tile.subType,
+        html = '';
+
+    if (lastActiveTurn === (gameTurn - 1) && gameTurn !== 1) {
+      this.$('.sprite').addClass('current-turn');
+    }
+
+    html = '<img src="' + gameAssets[subType] + '" id="H' + heroId +'" class="sprite">';
+    html += '<span class="indicator ' + colors[tile.team] +'">' + heroId + '</span>';
+    html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
+
+    this.$el.addClass('current-user-' + name);
+
+    return html;
   }
 });
