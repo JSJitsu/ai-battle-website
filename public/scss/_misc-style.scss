@@ -205,3 +205,35 @@
 .knight {
   z-index: 1;
 }
+
+a {
+  color: #428BCA;
+}
+
+a:visited:not(.btn) {
+  color: #9C27B0;
+}
+
+a:active, a:hover, a:focus {
+  color: #2C3E50;
+}
+
+a.btn {
+  font-weight: bold;
+}
+
+a.btn:hover,
+.success a:active,
+.success a:hover,
+.success a:focus,
+footer a:hover {
+  color: #d9edf7 !important;
+}
+
+.success .team-info a:focus, .success .team-info a:hover {
+  color: #2C3E50 !important
+}
+
+.engineer-social a {
+  text-decoration: none;
+}
