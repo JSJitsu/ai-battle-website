@@ -12,6 +12,7 @@ class Helper {
     buildSqlParts (table, values) {
 
         var namedParams = [],
+            combined = [],
             columns;
 
         columns = Object.keys(values);
@@ -24,12 +25,18 @@ class Helper {
             columns = columns.map(this.camelCaseToUnderscore);
         }
 
+        for (let i = 0; i < columns.length; i++) {
+            combined.push(`${columns[i]} = ${namedParams[i]}`);
+        }
+
         columns = columns.join(', ');
         namedParams = namedParams.join(', ');
+        combined = combined.join(', ');
 
         return {
             columns: columns,
-            namedParams: namedParams
+            namedParams: namedParams,
+            combined: combined
         };
     }
 
@@ -41,7 +48,7 @@ class Helper {
         var parts = this.buildSqlParts(table, values),
             sql;
 
-        sql = `UPDATE ${table} (${parts.columns}) VALUES (${parts.namedParams}) WHERE ${where}`;
+        sql = `UPDATE ${table} SET ${parts.combined} WHERE ${where}`;
 
         return sql;
     }

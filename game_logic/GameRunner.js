@@ -372,9 +372,11 @@ GameRunner.prototype.updateHeroStats = function (hero, stats) {
 GameRunner.prototype.updateStat = function (statName, object, addValue) {
   if (!object[statName]) {
     object[statName] = 0;
+  } else {
+    object[statName] = Number.parseInt(object[statName], 10);
   }
 
-  object[statName] += (addValue || 0);
+  object[statName] += (Number.parseInt(addValue, 10) || 0);
 
   return object[statName];
 }
