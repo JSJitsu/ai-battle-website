@@ -4,7 +4,8 @@
 
 var LiveGameRunner = require('./game_logic/LiveGameRunner.js'),
     GameRunner = require('./game_logic/GameRunner.js'),
-    testGameRunner = new LiveGameRunner();
+    testGameRunner = new LiveGameRunner(),
+    Q = require('q');
 
 testGameRunner.runGames = function () {
   var self = testGameRunner,
@@ -66,8 +67,11 @@ testGameRunner.runGames = function () {
   };
 
   gameResult = runner.runGame(game);
-  runner.saveGame(gameResult).then(function () {
-    console.log(gameResult);
+
+  return Q.fcall(function () {
+    runner.saveGame(gameResult).then(function () {
+      console.log(gameResult);
+    });
   });
 };
 
@@ -78,8 +82,7 @@ testGameRunner.updateAndSaveAllHeroStats = function () {
 testGameRunner.run = function () {
   var self = testGameRunner;
 
-  self.openDatabase()
-    .then(self.runGames)
+  self.runGames()
     .catch(self.showErrors)
     .finally(self.closeDatabase);
 };

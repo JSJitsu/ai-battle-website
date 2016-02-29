@@ -18,7 +18,7 @@ From within the root directory:
 ```sh
 npm install
 ```
-If you don't already have [MongoDB](http://www.mongodb.org/) installed, follow their instructions to install and start it for your OS.
+If you don't already have [PostgreSQL](http://www.postgresql.org/) installed, follow their instructions to install and start it for your OS.
 
 ### Generate Battle Data
 Once your dependencies are installed, look for the configuration file "secrets-template.js". Update it with your own settings and rename it to "secrets.js" so it can be found by the script.
@@ -32,5 +32,4 @@ node run-test-game.js
 
 Our stack includes the above dependencies, which you can read more about here:
 - [Node](http://nodejs.org/)
-- [Express](http://expressjs.com/)
-- [MongoDB](http://www.mongodb.org/)
+- [PostgreSQL](http://www.postgresql.org/)

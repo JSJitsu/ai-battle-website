@@ -4,10 +4,10 @@
 var secrets = module.exports = {};
 
 /**
- * The connection string to reach MongoDB.
+ * The connection string to reach PostgreSQL.
  * @type {String}
  */
-secrets.mongoKey = '';
+secrets.postgresUrl = '';
 
 /**
  * Sent to GitHub as the User-Agent as required by their API.
