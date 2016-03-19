@@ -1,7 +1,7 @@
 /* globals Backbone,GameEngine,_ */
 /* exported Game */
 var Game = Backbone.Model.extend({
-  url: 'api/gameData',
+  url: 'api/game/' + location.hash.split('/')[1],
   parse: function(response) {
     if (!response) {
       this.onGameDataNotFound();
@@ -9,17 +9,25 @@ var Game = Backbone.Model.extend({
       this.onGameDataFound(response);
     }
   },
+  setGameId: function (id) {
+    this.url = 'api/game';
+
+    if (id) {
+      this.url += '/' + id;
+    }
+  },
   onGameDataNotFound: function () {
     this.set('noGameData', true);
   },
   onGameDataFound: function (response) {
-    var model = this;
+    var model = this,
+        map = response.initial_map;
 
-    model.set('initialMap', response.initialMap);
+    model.set('initialMap', map);
     model.set('events', response.events);
     model.set('maxTurn', response.events.length);
 
-    model.set('game', model.createGame(response.initialMap));
+    model.set('game', model.createGame(map));
   },
   /**
    * Creates a new game using the initial map.
@@ -85,13 +93,13 @@ var Game = Backbone.Model.extend({
     console.info('Jumping to turn', turn);
 
     var me = this,
-        initialMap = this.get('initialMap'),
-        events = this.get('events'),
-        game = this.createGame(initialMap);
+        initialMap = me.get('initialMap'),
+        events = me.get('events'),
+        game = me.createGame(initialMap);
 
     _.find(events, function (eventData, index) {
       if (index < turn) {
-        var heroAction = me.translateEnumToAction(eventData[1]);
+        var heroAction = eventData.action;
 
         game.handleHeroTurn(heroAction);
       } else {
@@ -99,8 +107,8 @@ var Game = Backbone.Model.extend({
       }
     });
 
-    this.set('game', game);
-    this.set('turn', turn);
+    me.set('game', game);
+    me.set('turn', turn);
 
     return game;
   },
@@ -115,7 +123,7 @@ var Game = Backbone.Model.extend({
         heroAction;
 
     if (events[turn] !== undefined) {
-      heroAction = this.translateEnumToAction(events[turn][1]);
+      heroAction = events[turn].action;
       game.handleHeroTurn(heroAction);
       this.set('turn', turn + 1);
 
@@ -124,17 +132,4 @@ var Game = Backbone.Model.extend({
 
     return false;
   },
-  /**
-   * @todo  Do this on the server side?
-   */
-  translateEnumToAction: function (enumerable) {
-    var constants = {
-      1: 'North',
-      2: 'East',
-      3: 'South',
-      4: 'West'
-    };
-
-    return constants[enumerable];
-  }
 });

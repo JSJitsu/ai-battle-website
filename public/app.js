@@ -6,15 +6,20 @@ app.user.fetch();
 
 app.game = new Game();
 
-app.game.fetch({
+var fetchGameOpts = {
     success: function () {
         app.gameView = new GameView({
             model: app.game,
             userModel: app.user
         });
 
-        $('.gamegrid-content').append(app.gameView.$el);
+        $('.gamegrid-content').html(app.gameView.$el);
     }
+};
+
+router.addListenerAndTrigger('game/:id', function (id) {
+    app.game.setGameId(id);
+    app.game.fetch(fetchGameOpts);
 });
 
 app.userView = new UserView({ model: app.user });
