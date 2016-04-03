@@ -71,7 +71,7 @@ var UserView = Backbone.View.extend({
   },
 
   render: function() {
-    var githubHandle = this.model.get('githubHandle');
+    var githubHandle = this.model.get('github_login');
     var html;
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
@@ -81,7 +81,7 @@ var UserView = Backbone.View.extend({
       html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
     } else if (githubHandle && this.viewing === 'average') {
       var averageStats = this.model.average();
-      averageStats['githubHandle'] = this.model.get('githubHandle');
+      averageStats['githubHandle'] = this.model.get('github_login');
       html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
     } else if (!githubHandle) {
       html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);

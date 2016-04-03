@@ -3,7 +3,7 @@
 var Game = Backbone.Model.extend({
   url: 'api/game/' + location.hash.split('/')[1],
   parse: function(response) {
-    if (!response) {
+    if (!response || response.noData) {
       this.onGameDataNotFound();
     } else {
       this.onGameDataFound(response);

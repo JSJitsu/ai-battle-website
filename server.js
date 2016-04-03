@@ -1,13 +1,15 @@
 var express = require('express');
+var morgan = require('morgan');
 var fs = require('fs');
 var Q = require('q');
 
 var OAuthGithub = require('./server/OAuthGithub');
 var argv = require('minimist')(process.argv.slice(2));
-var secrets = require('./secrets.js');
 var db = require('./database/connect.js');
+var dbHelper = new (require('./database/helper.js'))(db);
 
 var app = express();
+app.use(morgan('dev'));
 var port = process.env.port || 8080;
 
 var options = {
@@ -52,7 +54,7 @@ app.get('/ejs_templates/:ejsTemplate', function(req, res) {
 
 // Add github authentication
 if (options.useGithubApp) {
-    OAuthGithub(app, safeMongoConnection, options);
+    OAuthGithub(app, db, dbHelper, options);
 }
 
 // The router for the API
@@ -80,7 +82,9 @@ router.get('/game(/:id)?', function(req, res) {
                         res.status(200).send(game);
                     });
             } else {
-                res.status(500).send();
+                res.status(200).send({
+                    noData: true
+                });
             }
         }
     );

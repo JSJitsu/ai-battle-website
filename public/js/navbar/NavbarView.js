@@ -9,7 +9,7 @@ var NavbarView = Backbone.View.extend({
 
   render: function(){
     var html;
-    var githubHandle = this.model.get('githubHandle');
+    var githubHandle = this.model.get('github_login');
 
     // if logged in
     if(githubHandle) {

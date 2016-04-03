@@ -1,13 +1,10 @@
-var GitHubStrategy = require('passport-github').Strategy;
+var GitHubStrategy = require('passport-github2').Strategy;
 var passport = require('passport');
-var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var Q = require('q');
 
-
-module.exports = function(app, safeMongoConnection, options) {
-  //Creates mongoose User model connected to the mongo URL
-  var User = require('./User');
+module.exports = function(app, db, dbHelper, options) {
 
   app.use(
     session({
@@ -35,15 +32,13 @@ module.exports = function(app, safeMongoConnection, options) {
     var newUserParams = req.body;
     if (newUserParams.codeRepo) {
       req.user.codeRepo = newUserParams.codeRepo;
-      safeMongoConnection.safeInvoke(
-        'users',
-        'update',
-        {
-          _id: req.user._id
-        },
-        req.user,
-        {}
-      )
+
+      var record = req.user;
+      var updateSql = dbHelper.updateSql('player', record);
+
+      return Q.ninvoke(db, 'query', updateSql, record).then(function (results) {
+        return results[0];
+      })
       .done(
         function(user) {
           res.json(user);
@@ -60,34 +55,44 @@ module.exports = function(app, safeMongoConnection, options) {
 
   //Convert the user object from github into something smaller that
   //can be stored in a cookie
-  passport.serializeUser(function(githubUser, done) {
-    var githubHandle = githubUser.username;
+  passport.serializeUser(function(githubData, done) {
+    // console.log('recieved data from github:', githubData);
 
     //Check if user exists
-    safeMongoConnection.safeInvoke('users', 'findOne', {
-      githubHandle: githubHandle
-    }).then(function(user) {
+    console.warn(`SELECT * FROM player WHERE github_login = '${githubData.username}'`);
+    Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubData.username}'`).then(function(users) {
+
+      var user = users[0];
 
       //If user does exist, pass user to next "then" statmement
       if (user) {
+        console.log('returning user', user);
         return user;
 
       //If user does not exist, create and save new user,
       //then pass user to next "then" (or done) statement
       } else {
-        user = new User(githubHandle);
-        return safeMongoConnection.safeInvoke('users', 'insert', user)
-        .then(function(userArr) {
-          return userArr[0];
+        var record = {
+          github_login: githubData.username,
+          github_id: githubData.id
+        };
+
+        var insertSql = dbHelper.insertSql('player', record, 'github_login');
+
+        console.warn(insertSql);
+
+        return Q.ninvoke(db, 'query', insertSql, record).then(function (results) {
+          console.log('returning new user', results[0]);
+          return results[0];
         });
       }
 
-    }).done(
+    }).then(
       function(user) {
         //The done here is different than the one above--this one
         //is from passport, and lets passport know we're "done"
         //serializing the user
-        done(null, user.githubHandle);
+        done(null, user.github_login);
       },
       function(err) {
         console.log('SERIALIZE ERROR!');
@@ -100,9 +105,11 @@ module.exports = function(app, safeMongoConnection, options) {
   //Convert the hero id stored in the cookie into the user object
   //in our database
   passport.deserializeUser(function(githubHandle, done) {
-    safeMongoConnection.safeInvoke('users', 'findOne', { githubHandle: githubHandle })
+    Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubHandle}'`)
     .done(
-      function(user) {
+      function(users) {
+        console.warn('found the following users', users);
+        var user = users[0];
         done(null, user);
       },
       function(err) {

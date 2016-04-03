@@ -22,7 +22,7 @@ var GameView = Backbone.View.extend({
 
     this.$el.removeClass('outer');
     this.$el.addClass('text-center');
-    this.$el.html("<h3>We weren't able to load it.</h3>");
+    this.$el.html("<h3>We weren't able to load the battle.</h3>");
   },
   renderGame: function (config) {
     var view = this;
@@ -131,7 +131,7 @@ var GameView = Backbone.View.extend({
     view.render();
 
     userModel = view.userModel;
-    currentUserHandle = userModel.get('githubHandle');
+    currentUserHandle = userModel.get('github_login');
 
     if (currentUserHandle) {
       view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
