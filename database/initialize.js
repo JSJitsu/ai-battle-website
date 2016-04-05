@@ -5,9 +5,8 @@ var tableSql = [
     github_login varchar(39),
     github_id int UNIQUE,
     avatar_url varchar(100),
-    github_url varchar(100),
     code_repo varchar(100) DEFAULT 'hero-starter',
-    code_branch varchar(100),
+    code_branch varchar(100) DEFAULT 'master',
     joined_at timestamp
 )`,
 `CREATE TABLE game (
