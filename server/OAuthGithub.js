@@ -30,6 +30,7 @@ module.exports = function(app, db, dbHelper, options) {
   app.put('/userInfo', bodyParser.json(), urlEncodedBodyParser, function(req, res) {
 
     var newUserParams = req.body;
+
     if (newUserParams.codeRepo) {
       req.user.codeRepo = newUserParams.codeRepo;
 
@@ -56,42 +57,31 @@ module.exports = function(app, db, dbHelper, options) {
   //Convert the user object from github into something smaller that
   //can be stored in a cookie
   passport.serializeUser(function(githubData, done) {
-    // console.log('recieved data from github:', githubData);
-
     //Check if user exists
-    console.warn(`SELECT * FROM player WHERE github_login = '${githubData.username}'`);
     Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubData.username}'`).then(function(users) {
 
       var user = users[0];
 
-      //If user does exist, pass user to next "then" statmement
       if (user) {
-        console.log('returning user', user);
         return user;
-
-      //If user does not exist, create and save new user,
-      //then pass user to next "then" (or done) statement
       } else {
+        // Create a new user if we couldn't find one
         var record = {
           github_login: githubData.username,
-          github_id: githubData.id
+          github_id: githubData.id,
+          avatar_url: githubData.avatar_url,
+          joined_at: new Date()
         };
 
         var insertSql = dbHelper.insertSql('player', record, 'github_login');
 
-        console.warn(insertSql);
-
         return Q.ninvoke(db, 'query', insertSql, record).then(function (results) {
-          console.log('returning new user', results[0]);
           return results[0];
         });
       }
 
     }).then(
       function(user) {
-        //The done here is different than the one above--this one
-        //is from passport, and lets passport know we're "done"
-        //serializing the user
         done(null, user.github_login);
       },
       function(err) {
@@ -102,13 +92,10 @@ module.exports = function(app, db, dbHelper, options) {
 
   });
 
-  //Convert the hero id stored in the cookie into the user object
-  //in our database
   passport.deserializeUser(function(githubHandle, done) {
     Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubHandle}'`)
     .done(
       function(users) {
-        console.warn('found the following users', users);
         var user = users[0];
         done(null, user);
       },
