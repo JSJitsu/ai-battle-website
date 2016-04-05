@@ -271,11 +271,15 @@ var GameView = Backbone.View.extend({
     //If the game is not yet over, go to next turn
     if (!game.ended && this.paused === false && this.playInProgress === false) {
       this.tickTimer = setInterval(function () {
-        this.playInProgress = true;
-        this.playNextTurn();
-        this.sendSliderToTurn(game.turn);
+        if (game.ended) {
+          clearInterval(this.tickTimer);
+        } else {
+          this.playInProgress = true;
+          this.playNextTurn();
+          this.sendSliderToTurn(game.turn);
 
-        this.playInProgress = false;
+          this.playInProgress = false;
+        }
       }.bind(this), this.gameSpeed);
 
       console.warn('Auto-play timer started:', this.tickTimer);
