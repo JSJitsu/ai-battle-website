@@ -54,8 +54,8 @@ function retrieveCode (users, category) {
     request(options, function (error, response, body) {
       console.log('Saving code for: ' + githubHandle);
       if (error){
-        console.log('Error sending request!');
-        console.log(error);
+        console.warn('Error sending request!');
+        console.warn(error);
         return;
       }
 
@@ -72,8 +72,8 @@ function retrieveCode (users, category) {
 
         //Check for "docker" anywhere in the file
         var regEx = usersCode.match(/\bdocker\b/gi);
-        if (regEx){
-          console.log("Possible Malicious Code.");
+        if (regEx) {
+          console.warn('Possible malicious code from user', githubHandle);
           return;
         }
 
@@ -83,6 +83,16 @@ function retrieveCode (users, category) {
           category,
           githubHandle + '_' + category + '.js'
         );
+
+        var directory = path.dirname(filePath);
+
+        // See if our target directory exists and create it if it doesn't
+        try {
+          fs.statSync(directory);
+        } catch (e) {
+          console.log('Making directory', directory);
+          fs.mkdirSync(directory);
+        }
 
         //Write the file to a predefined folder and file name
         fs.writeFile(filePath, usersCode, function(err) {
@@ -98,8 +108,7 @@ function retrieveCode (users, category) {
          * @todo Detect 404 responses and have the ability to prune dead accounts after a certain
          * number of failures.
          */
-        console.log('Unexpected response code:' + response.statusCode + '!');
-        console.log(body);
+        console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
       }
     });
   });
