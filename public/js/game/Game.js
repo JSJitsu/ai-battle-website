@@ -42,7 +42,7 @@ var Game = Backbone.Model.extend({
         events = this.get('events');
 
     this.set('turn', 0);
-    game.maxTurn = events.length - 1;
+    game.maxTurn = events.length;
 
     _.each(map, function (xRow) {
       _.each(xRow, function (tile) {
