@@ -3,7 +3,7 @@
     <div class="col-lg-12 text-center">
       <h2><%= get('github_login') %></h2>
         <hr class="star-primary">
-    </div> 
+    </div>
   </div>
   <div class="row nav-buttons">
     <div class="btn-group btn-group-justified">
@@ -20,7 +20,7 @@
         <button type="button" class="btn btn-default">Average Stats</button>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row info-list">
     <p class="col-lg-8 col-lg-offset-2">
       You are currently signed up for the next JavaScript Battle.  We will pull your code from the GitHub repository listed below. Feel free to update this repository at any time (we will pull your most up-to-date code from your GitHub account before each battle).
@@ -37,15 +37,15 @@
     <form class="form-inline repoInput text-center" role="form">
       <div class="form-group">
         <label class="control-label" for="inputRepo">GitHub Repository</label>
-        <input type="text" class="form-control" id="inputRepo" value="<%= get('codeRepo') %>">
-        <span class="glyphicon glyphicon-ok form-control-feedback"></span>  
+        <input type="text" class="form-control" id="inputRepo" value="<%= get('code_repo') %>">
+        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
         <button type="submit" class="btn btn-default submitRepo">Save</button>
       </div>
     </form>
   </div>
   <div class="text-center">
     <button type="button" class="btn btn-default btn-lg logoutButton">
-      <a class="glyphicon glyphicon-log-out" href="/logout">Log-out</a> 
+      <a class="glyphicon glyphicon-log-out" href="/logout">Log-out</a>
     </button>
   </div>
 </div>

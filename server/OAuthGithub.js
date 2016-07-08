@@ -27,29 +27,30 @@ module.exports = function(app, db, dbHelper, options) {
     extended: false
   });
 
-  app.put('/userInfo', bodyParser.json(), urlEncodedBodyParser, function(req, res) {
+  app.post('/userInfo', bodyParser.json(), urlEncodedBodyParser, function(req, res) {
 
     var newUserParams = req.body;
 
-    if (newUserParams.codeRepo) {
-      req.user.codeRepo = newUserParams.codeRepo;
+    if (!req.user) {
+      res.status(401).end();
+      return;
+    }
+
+    if (newUserParams.code_repo) {
+      req.user.code_repo = newUserParams.code_repo;
 
       var record = req.user;
-      var updateSql = dbHelper.updateSql('player', record);
+      var updateSql = dbHelper.updateSql('player', record, `github_login = '${record.github_login}'`);
 
-      return Q.ninvoke(db, 'query', updateSql, record).then(function (results) {
-        return results[0];
+      return Q.ninvoke(db, 'query', updateSql, record).catch(function (error) {
+        console.error(error);
+        res.status(500).end();
       })
-      .done(
-        function(user) {
-          res.json(user);
-        },
-        function(err) {
-          res.send('An error occurred...are you logged in?');
-        }
-      );
+      .done(function () {
+        res.send(record);
+      });
     } else {
-      res.send('user.codeRepo must be truthy in order to update.');
+      res.send('user.code_repo must be truthy in order to update.');
     }
 
   });
