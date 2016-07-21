@@ -94,10 +94,20 @@ module.exports = function(app, db, dbHelper, options) {
   });
 
   passport.deserializeUser(function(githubHandle, done) {
-    Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubHandle}'`)
+    Q.ninvoke(db, 'query', `SELECT * FROM player WHERE github_login = '${githubHandle}'`).then(function (users) {
+
+      var user = users[0];
+
+      return Q.ninvoke(db, 'query', `SELECT * FROM player_lifetime_stats WHERE github_login = '${githubHandle}'`).then(function (stats) {
+        if (stats[0]) {
+          user.lifetime_stats = stats[0];
+        }
+
+        return user;
+      });
+    })
     .done(
-      function(users) {
-        var user = users[0];
+      function(user) {
         done(null, user);
       },
       function(err) {

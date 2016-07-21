@@ -46,28 +46,24 @@ var UserView = Backbone.View.extend({
     event.preventDefault();
     this.viewing = "settings";
     this.render();
-    this.$el.find('.settings').tab('show');
   },
 
    showRecent: function(event) {
     event.preventDefault();
     this.viewing = "recent";
     this.render();
-    this.$el.find('.recentStats').tab('show');
   },
 
    showLifetime: function(event) {
     event.preventDefault();
     this.viewing = "lifetime";
     this.render();
-    this.$el.find('.lifetimeStats').tab('show');
   },
 
    showAverage: function(event) {
     event.preventDefault();
     this.viewing = "average";
     this.render();
-    this.$el.find('.averageStats').tab('show');
   },
 
   render: function() {
