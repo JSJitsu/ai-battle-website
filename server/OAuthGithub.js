@@ -39,7 +39,11 @@ module.exports = function(app, db, dbHelper, options) {
     if (newUserParams.code_repo) {
       req.user.code_repo = newUserParams.code_repo;
 
-      var record = req.user;
+      var record = {
+        github_login: req.user.github_login,
+        code_repo: req.user.code_repo
+      };
+
       var updateSql = dbHelper.updateSql('player', record, `github_login = '${record.github_login}'`);
 
       return Q.ninvoke(db, 'query', updateSql, record).catch(function (error) {
