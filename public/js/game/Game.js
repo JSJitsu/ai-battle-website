@@ -51,7 +51,8 @@ var Game = Backbone.Model.extend({
             tile.distanceFromTop,
             tile.distanceFromLeft,
             tile.name,
-            tile.team
+            tile.team,
+            tile.id
           );
         }
 
@@ -77,6 +78,12 @@ var Game = Backbone.Model.extend({
         }
       });
     });
+
+    // Because we aren't adding heroes in the correct order, we need to sort them by ID to ensure
+    // nobody goes out of turn.
+    game.heroes.sort(function (a, b) {
+      return a.id - b.id;
+    })
 
     return game;
   },
