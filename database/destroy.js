@@ -12,6 +12,7 @@ var db = require('./connect.js');
 
 var dropSql = [
     'DROP TABLE IF EXISTS player',
+    'DROP TABLE IF EXISTS game_results',
     'DROP TABLE IF EXISTS game',
     'DROP TYPE IF EXISTS actor_action CASCADE',
     'DROP TABLE IF EXISTS game_events',
@@ -21,6 +22,7 @@ var dropSql = [
 dropSql.forEach(function (sql) {
     db.execute(sql, function (err, result) {
         if (err) {
+            console.error(`Error in: ${sql}`);
             throw err;
         }
     });

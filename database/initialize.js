@@ -10,13 +10,18 @@ var tableSql = [
     joined_at timestamp
 )`,
 `CREATE TABLE game (
-    id bigserial,
-    winning_team varchar(39),
+    id bigserial UNIQUE,
     total_turns int,
     played_at timestamp,
     players varchar(39)[],
     heroes jsonb,
     initial_map jsonb
+)`,
+`CREATE TABLE game_results (
+    game_id bigint references game(id) UNIQUE,
+    winning_team varchar(39),
+    players varchar(39)[],
+    heroes jsonb
 )`,
 `CREATE TYPE actor_action AS ENUM ('North', 'East', 'South', 'West');
 CREATE TABLE game_events (
@@ -44,6 +49,7 @@ CREATE TABLE game_events (
 tableSql.forEach(function (sql) {
     db.execute(sql, function (err, result) {
         if (err) {
+            console.error(`Error in: ${sql}`);
             throw err;
         }
     });

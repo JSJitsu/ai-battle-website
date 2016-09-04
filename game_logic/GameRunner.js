@@ -206,8 +206,8 @@ GameRunner.prototype.saveGame = function (game) {
   players = me.getPlayers(game.heroes);
   initialMap = game.board.initialTiles;
 
+  // This data is necessary to start the game
   record = {
-    winningTeam: game.winningTeam,
     totalTurns: game.maxTurn,
     playedAt: new Date(),
     players: players,
@@ -224,6 +224,7 @@ GameRunner.prototype.saveGame = function (game) {
 
     game.gameId = gameId;
 
+    // This data is necessary to replay the game
     game.events.forEach(function (turn, index) {
       inserts.push(Q.ninvoke(db, 'update',
         `INSERT INTO game_events (
@@ -243,28 +244,52 @@ GameRunner.prototype.saveGame = function (game) {
   })
   .then(function (results) {
     return me.updateAndSaveAllHeroStats(game);
+  })
+  .then(function () {
+    return me.saveGameResults(game);
   });
 };
 
 /**
  * Clean up hero data so we can store it in the database.
  * @param  {Object[]} heroes Hero game data
+ * @param  {String} [type] The type of scrubbing to do
  * @return {Object[]} Scrubbed hero data
  */
-GameRunner.prototype.scrubHeroes = function (heroes) {
+GameRunner.prototype.scrubHeroes = function (heroes, type) {
   var scrubbed = [],
       hero;
 
   for (var i=0; i < heroes.length; i++) {
     hero = heroes[i];
 
-    scrubbed.push(
-      {
-        id: hero.id,
-        team: hero.team,
-        name: hero.name
-      }
-    );
+    if (type === 'stats') {
+      // Data for game_results table
+      scrubbed.push(
+        {
+          id: hero.id,
+          team: hero.team,
+          name: hero.name,
+          dead: hero.dead,
+          kills: hero.heroesKilled.length,
+          damageGiven: hero.damageDone,
+          minesTaken: hero.minesCaptured,
+          diamondsEarned: hero.diamondsEarned,
+          healthRecovered: hero.healthRecovered,
+          gravesTaken: hero.gravesRobbed,
+          healthGiven: hero.healthGiven
+        }
+      );
+    } else {
+      // Data for game table
+      scrubbed.push(
+        {
+          id: hero.id,
+          team: hero.team,
+          name: hero.name
+        }
+      );
+    }
   }
 
   return scrubbed;
@@ -336,7 +361,25 @@ GameRunner.prototype.findPlayerRecord = function (playerName, records) {
       return records[i];
     }
   }
-}
+};
+
+GameRunner.prototype.saveGameResults = function (game) {
+  let me = this;
+  let heroes = me.scrubHeroes(game.heroes, 'stats');
+  let players = me.getPlayers(game.heroes);
+
+  // This data is necessary to start the game
+  let record = {
+    gameId: game.gameId,
+    winningTeam: game.winningTeam,
+    players: players,
+    heroes: JSON.stringify(heroes)
+  };
+
+  let insertSql = dbHelper.insertSql('game_results', record, 'game_id');
+
+  return Q.ninvoke(db, 'query', insertSql, record);
+};
 
 /**
  * Performs the update of the hero statistics and applies the changes to te user record.
@@ -379,7 +422,7 @@ GameRunner.prototype.updateStat = function (statName, object, addValue) {
   object[statName] += (Number.parseInt(addValue, 10) || 0);
 
   return object[statName];
-}
+};
 
 /**
  * Saves user stats to the database.
@@ -397,8 +440,6 @@ GameRunner.prototype.saveUserStats = function (stats, insert) {
   } else {
     sql = dbHelper.updateSql('player_lifetime_stats', stats, `github_login = '${githubHandle}'`);
   }
-
-  console.log(sql);
 
   return Q.ninvoke(db, 'query', sql, stats);
 };
