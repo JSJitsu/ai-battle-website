@@ -50,8 +50,14 @@ var UserView = Backbone.View.extend({
 
    showRecent: function(event) {
     event.preventDefault();
-    this.viewing = "recent";
-    this.render();
+
+    var me = this;
+
+    me.model.fetchRecent(function () {
+      me.render();
+    });
+
+    me.viewing = "recent";
   },
 
    showLifetime: function(event) {
@@ -62,8 +68,13 @@ var UserView = Backbone.View.extend({
 
    showAverage: function(event) {
     event.preventDefault();
-    this.viewing = "average";
-    this.render();
+    var me = this;
+
+    me.model.fetchAverage(function () {
+      me.render();
+    });
+
+    me.viewing = "average";
   },
 
   render: function() {
