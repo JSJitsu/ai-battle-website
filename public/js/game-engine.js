@@ -205,7 +205,7 @@ GameEngine.prototype.pickMap = function() {
 
 
 module.exports = GameEngine;
-}).call(this,"/engine")
+}).call(this,"/")
 },{"./lib/game_classes/Board.js":2,"./lib/game_classes/DiamondMine.js":3,"./lib/game_classes/Game.js":4,"./lib/game_classes/HealthWell.js":5,"./lib/game_classes/Hero.js":6,"./lib/game_classes/Impassable.js":7,"./lib/game_classes/Unoccupied.js":8,"fs":9,"vm":11}],2:[function(require,module,exports){
 var Unoccupied = require('./Unoccupied.js');
 
@@ -478,10 +478,6 @@ Game.prototype.handleHeroTurn = function(direction) {
 
   var hero = this.activeHero;
 
-  console.log(this.turn, hero.name, 'moved', direction);
-
-  // console.log(this.turn, hero.name, 'health at', hero.health, (hero.dead ? 'and is dead' : 'and is alive'));
-
   // Only resolves the turn if the hero is not dead
   if (!hero.dead) {
     //Used to determine which hero is "active" at each point in the game on the front-end
@@ -606,7 +602,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
       this.heroDied(hero);
-      this.moveMessage += ', died trying to capture a diamond mine.';
+      this.moveMessage += ', and died trying to capture a diamond mine.';
       return;
 
     // If he survives, he is now the owner of the mine
@@ -811,7 +807,7 @@ Hero.prototype.takeDamage = function(amount) {
   this.health -= amount;
   if (this.health <= 0) {
     this.dead = true;
-
+    
     // Only return the damage actually needed
     // to kill this hero
     return amount + this.health;
