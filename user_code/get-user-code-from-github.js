@@ -1,117 +1,118 @@
 var request = require('request');
-var MongoClient = require('mongodb').MongoClient;
 var Q = require('q');
 var fs = require('fs');
+var path = require('path');
 var secrets = require('../secrets.js');
-var mongoConnectionURL = secrets.mongoKey;
+var db = require('../database/connect.js');
 
-//Returns a promise that resolves when the database opens
-var openGameDatabase = function() {
-  return Q.ninvoke(MongoClient, 'connect', mongoConnectionURL).then(function(db) {
-    console.log('open!');
-    return {
-      db: db,
-      userCollection: db.collection('users')
-    };
+function initiateCodeRequest (fileType) {
+  db.query("SELECT * FROM player", function(err, users) {
+    if (err) {
+      throw err;
+    }
+
+    db.end();
+
+    if (!users.length) {
+      console.log('No users were found in the database, so user code could not be retrieved from Github.');
+    } else {
+      /**
+       * @todo Get hero and helper code for a single user at the same time rather than getting
+       * all of the hero code and then all of the helper code.
+       */
+      retrieveCode(users, 'hero');
+      retrieveCode(users, 'helpers');
+    }
+
   });
-};
+}
 
-//Saves all user data
-var usersCodeRequest = function(fileType) {
+function retrieveCode (users, category) {
+  users.forEach(function(user) {
 
-  if (fileType !== 'hero' & fileType !== 'helpers') {
-    throw new Error('Invalid file type!  Must be either "hero" or "helpers"!');
-  }
+    var githubHandle = user.github_login,
+        codeRepo = user.code_repo;
 
-  //Opens connection to mongo database
-  var openDatabasePromise = openGameDatabase();
+    if (!githubHandle || !codeRepo) {
+      console.log('Skipping bad user record:', user);
+      return;
+    }
 
-  openDatabasePromise.then(function(mongoDataObject) {
-    var userCollection = mongoDataObject.userCollection;
-    var db = mongoDataObject.db;
+    var options = {
+      //Saves the URL at which the code can be found
+      url: 'https://api.github.com/repos/' + githubHandle +
+        '/' + codeRepo + '/contents/' + category +'.js' +
+        '?client_id=' + secrets.appKey + '&client_secret=' + secrets.appSecret,
+      headers: {
+        'User-Agent': secrets.appName
+      }
+    };
 
-    //Gets all users in the database
-    userCollection.find().toArray(function(err, users) {
-      if (err) {
-        console.log('Error finding users!');
-        console.log(err);
-        db.close();
+    console.log(options.url);
+
+    //Sends the request for each user's hero.js and helper.js file to the github API
+    request(options, function (error, response, body) {
+      console.log('Saving code for: ' + githubHandle);
+      if (error){
+        console.warn('Error sending request!');
+        console.warn(error);
         return;
       }
 
-      //Loops through all users
-      users.forEach(function(user, ind) {
+      //If everything is ok, save the file
+      if (response.statusCode == 200) {
+        //Get response as JSON
+        var info = JSON.parse(body);
 
-        var options = {
-          //Saves the URL at which the code can be found
-          url: 'https://api.github.com/repos/' + user.githubHandle +
-          '/' + user.codeRepo + '/contents/' + fileType +'.js' +
-          '?client_id=' + secrets.appKey + '&client_secret=' + secrets.appSecret,
-          headers: {
-            'User-Agent': secrets.appName
-          }
-        };
+        //Set up buffer to write file
+        var buffer = new Buffer(info.content, 'base64');
 
-        console.log(options.url);
+        //Convert buffer to long string
+        var usersCode = buffer.toString('utf8');
 
-        //Sends the request for each user's hero.js and helper.js file to the github API
-        request(options, function (error, response, body) {
-          console.log('Saving code for: ' + user.githubHandle);
-          if (error){
-            console.log('Error sending request!');
-            console.log(error);
-            return;
-          }
+        //Check for "docker" anywhere in the file
+        var regEx = usersCode.match(/\bdocker\b/gi);
+        if (regEx) {
+          console.warn('Possible malicious code from user', githubHandle);
+          return;
+        }
 
-          //If everything is ok, save the file
-          if (response.statusCode == 200) {
-            //Get response as JSON
-            var info = JSON.parse(body);
+        var filePath = path.resolve(
+          secrets.rootDirectory,
+          'user_code',
+          category,
+          githubHandle + '_' + category + '.js'
+        );
 
-            //Set up buffer to write file
-            var buffer = new Buffer(info.content, 'base64');
+        var directory = path.dirname(filePath);
 
-            //Convert buffer to long string
-            var usersCode = buffer.toString('utf8');
+        // See if our target directory exists and create it if it doesn't
+        try {
+          fs.statSync(directory);
+        } catch (e) {
+          console.log('Making directory', directory);
+          fs.mkdirSync(directory);
+        }
 
-            //Check for "docker" anywhere in the file
-            var regEx = usersCode.match(/\bdocker\b/gi);
-            if (regEx){
-              console.log("Possible Malicious Code.");
-              return;
-            }
-
-            var filePath = secrets.rootDirectory + '/user_code/' + fileType
-                + '/' + user.githubHandle + '_' + fileType + '.js';
-            console.log(filePath);
-
-
-            //Write the file to a predefined folder and file name
-            fs.writeFile(filePath, usersCode, function(err) {
-              if (err) {
-                console.log('Error writing file: ' + fileType + '!');
-                console.log(err);
-              } else {
-                console.log('Hero code saved: ' + fileType + '!');
-              }
-            });
+        //Write the file to a predefined folder and file name
+        fs.writeFile(filePath, usersCode, function(err) {
+          if (err) {
+            console.log('Error writing file: ' + category + '!');
+            console.log(err);
           } else {
-            console.log('Unexpected response code:' + response.statusCode + '!');
-            console.log(body);
+            console.log('Hero code saved: ' + category + '!');
           }
         });
-
-        //Close the database connection when everything is finished
-        db.close();
-
-      });
+      } else {
+        /**
+         * @todo Detect 404 responses and have the ability to prune dead accounts after a certain
+         * number of failures.
+         */
+        console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
+      }
     });
-  }).catch(function(err) {
-    console.log('Error opening database!');
-    console.log(err);
   });
-};
+}
 
-//Kick off the whole process
-usersCodeRequest('hero');
-usersCodeRequest('helpers');
+
+initiateCodeRequest();

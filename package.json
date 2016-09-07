@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/gjtrowbridge/javascript-battle-webworkers",
   "dependencies": {
+    "ai-battle-engine": "jsjitsu/ai-battle-engine",
     "child-process-promise": "^0.2.0-SNAPSHOT.1389671754086",
-    "express": "^4.8.2",
-    "mongodb": "^2.0.45",
+    "pg": "^4.4.3",
+    "pg-db": "^1.0.2",
     "q": "^1.0.1",
     "request": "^2.40.0",
-    "unirest": "^0.2.7",
-    "ai-battle-engine":"jsjitsu/ai-battle-engine"
+    "sql": "^0.64.1",
+    "unirest": "^0.2.7"
   },
   "devDependencies": {
     "blanket": "~1.1.6",

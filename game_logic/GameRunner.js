@@ -1,20 +1,20 @@
+'use strict';
+
 var fs = require('fs'),
     vm = require('vm'),
     Q = require('q'),
     GameEngine = require('ai-battle-engine'),
     engine = new GameEngine(),
     secrets = require('../secrets.js'),
-    actions = require('./ActionConstants.js');
-
+    db = require('../database/connect.js'),
+    dbHelper = new (require('../database/helper.js'))(db);
 
 /**
  * Class for running games. It will plan out the games that need to be run
  * immediately.
- * @param {SafeMongoConnection} database Database class
  * @param {Object[]} users User information
  */
-function GameRunner (database, users) {
-  this.database = database;
+function GameRunner (users) {
   this.users = users;
   this.gamesCompleted = 0;
 }
@@ -52,15 +52,22 @@ GameRunner.prototype.runGame = function (game) {
     var activeHero = game.activeHero,
         action = this.runHeroBrain(game, userLookup[activeHero.name]);
 
-    console.log(
-      [
-        'Turn: ' + game.turn,
-        'User: ' + activeHero.name,
-        'Action: ' + action
-      ].join(', ')
-    );
+    // console.log(
+    //   [
+    //     'Turn: ' + game.turn,
+    //     'User: ' + activeHero.name,
+    //     'Action: ' + action
+    //   ].join(', ')
+    // );
+
+    if (game.turn % 25 === 0 || game.ended) {
+      process.stdout.write('Playing game, turn ' + game.turn + '\r');
+    }
 
     if (game.ended) {
+      console.log('');
+      // console.log(game);
+      game.board.inspect();
       return game;
     } else {
       // Store hero actions
@@ -71,7 +78,7 @@ GameRunner.prototype.runGame = function (game) {
       game.events.push(
         [
           game.activeHero.id,
-          actions.toDatabase[action]
+          action
         ]
       );
 
@@ -95,9 +102,10 @@ GameRunner.prototype.runGame = function (game) {
  * @return {String}      The action to take
  */
 GameRunner.prototype.runHeroBrain = function (game, user) {
-  var rootPath = __dirname + '/../user_code',
-      heroFilePath = rootPath + '/hero/' + user.githubHandle + '_hero.js',
-      helperFilePath = rootPath + '/helpers/' + user.githubHandle + '_helpers.js',
+  var githubHandle = user.github_login,
+      rootPath = __dirname + '/../user_code',
+      heroFilePath = rootPath + '/hero/' + githubHandle + '_hero.js',
+      helperFilePath = rootPath + '/helpers/' + githubHandle + '_helpers.js',
       heroFile,
       helperFile,
       script,
@@ -122,7 +130,7 @@ GameRunner.prototype.runHeroBrain = function (game, user) {
 
     vmOptions = {
       displayErrors: true,
-      filename: user.githubHandle,
+      filename: githubHandle,
       timeout: 3000
     };
 
@@ -149,9 +157,21 @@ GameRunner.prototype.runAndSaveAllGames = function () {
       games,
       game;
 
+  if (!this.users.length) {
+    console.log('No users. Quitting.');
+    db.end();
+    return false;
+  }
+
   games = this.planGames(this.users);
 
-  console.log(this.gamesCompleted + ' games completed. ' + games.length + ' games left to play!');
+  if (!games.length) {
+    console.log('No games planned. Quitting.');
+    db.end();
+    return false;
+  }
+
+  console.log(`${games.length} games left to play!`);
 
   while (games.length) {
     game = games.shift();
@@ -173,10 +193,12 @@ GameRunner.prototype.runAndSaveAllGames = function () {
  */
 GameRunner.prototype.saveGame = function (game) {
   var me = this,
-      db = this.database,
       gameCollection,
       heroes,
-      initialMap;
+      players,
+      initialMap,
+      insertSql,
+      record;
 
   console.log('Saving game ' + game.gameNumber);
 
@@ -184,43 +206,90 @@ GameRunner.prototype.saveGame = function (game) {
   players = me.getPlayers(game.heroes);
   initialMap = game.board.initialTiles;
 
-  gameCollection = db.collection('jsBattleGameData');
+  // This data is necessary to start the game
+  record = {
+    totalTurns: game.maxTurn,
+    playedAt: new Date(),
+    players: players,
+    heroes: JSON.stringify(heroes),
+    initialMap: JSON.stringify(initialMap)
+  };
 
-  return Q.ninvoke(gameCollection, 'save',
-    {
-      date: new Date(),
-      players: players,
-      winningTeam: game.winningTeam,
-      maxTurn: game.maxTurn,
-      heroes: heroes,
-      initialMap: initialMap,
-      events: game.events
-    }
-  ).then(function (result) {
-    game.gameId = result.ops[0]._id;
+  insertSql = dbHelper.insertSql('game', record);
+
+  return Q.ninvoke(db, 'query', insertSql, record)
+  .then(function (results) {
+    var gameId = results[0].id,
+        inserts = [];
+
+    game.gameId = gameId;
+
+    // This data is necessary to replay the game
+    game.events.forEach(function (turn, index) {
+      inserts.push(Q.ninvoke(db, 'update',
+        `INSERT INTO game_events (
+          game_id,
+          turn,
+          actor,
+          action
+        ) VALUES ($1, $2, $3, $4)`,
+        [gameId, index].concat(turn)
+      ));
+    });
+
+    return Q.all(inserts);
+  })
+  .catch(function (err) {
+    console.log(err.stack);
+  })
+  .then(function (results) {
     return me.updateAndSaveAllHeroStats(game);
+  })
+  .then(function () {
+    return me.saveGameResults(game);
   });
 };
 
 /**
  * Clean up hero data so we can store it in the database.
  * @param  {Object[]} heroes Hero game data
+ * @param  {String} [type] The type of scrubbing to do
  * @return {Object[]} Scrubbed hero data
  */
-GameRunner.prototype.scrubHeroes = function (heroes) {
+GameRunner.prototype.scrubHeroes = function (heroes, type) {
   var scrubbed = [],
       hero;
 
   for (var i=0; i < heroes.length; i++) {
     hero = heroes[i];
 
-    scrubbed.push(
-      {
-        id: hero.id,
-        team: hero.team,
-        name: hero.name
-      }
-    );
+    if (type === 'stats') {
+      // Data for game_results table
+      scrubbed.push(
+        {
+          id: hero.id,
+          team: hero.team,
+          name: hero.name,
+          dead: hero.dead,
+          kills: hero.heroesKilled.length,
+          damageGiven: hero.damageDone,
+          minesTaken: hero.minesCaptured,
+          diamondsEarned: hero.diamondsEarned,
+          healthRecovered: hero.healthRecovered,
+          gravesTaken: hero.gravesRobbed,
+          healthGiven: hero.healthGiven
+        }
+      );
+    } else {
+      // Data for game table
+      scrubbed.push(
+        {
+          id: hero.id,
+          team: hero.team,
+          name: hero.name
+        }
+      );
+    }
   }
 
   return scrubbed;
@@ -251,79 +320,108 @@ GameRunner.prototype.getPlayers = function (heroes) {
 GameRunner.prototype.updateAndSaveAllHeroStats = function (game) {
   console.log('Updating all user stats...');
 
-  var heroes = game.heroes.slice(),
-      promises = [],
-      hero,
-      user;
+  var me = this;
 
-  while (heroes.length) {
-    hero = heroes.pop();
-    user = this.userLookup[hero.name];
+  return dbHelper.getAllPlayerLifetimeStats().then(function (playerStats) {
+    var heroes = game.heroes.slice(),
+        promises = [],
+        insert = false,
+        hero,
+        stats;
 
-    user = this.updateHeroStats(hero, user, game.gameId);
+    for (let i =0; i < heroes.length; i++){
+      hero = heroes[i];
+      stats = me.findPlayerRecord(hero.name, playerStats);
 
-    promises.push(this.saveUserStats(user));
+      if (!stats) {
+        console.info(`No statistics stored for ${hero.name}`);
+        insert = true;
+        stats = {
+          github_login: hero.name
+        };
+      } else {
+        console.info(`Statistics found for ${hero.name}`);
+      }
+
+      stats = me.updateHeroStats(hero, stats);
+
+      promises.push(me.saveUserStats(stats, insert));
+    }
+
+    console.log('All user stats updated for game #' + game.gameNumber);
+
+    return Q.all(promises);
+  });
+
+};
+
+GameRunner.prototype.findPlayerRecord = function (playerName, records) {
+  for (let i = 0; i < records.length; i++) {
+    if (records[i].github_login === playerName) {
+      return records[i];
+    }
   }
+};
 
-  console.log('All user stats updated for game #' + game.gameNumber);
+GameRunner.prototype.saveGameResults = function (game) {
+  let me = this;
+  let heroes = me.scrubHeroes(game.heroes, 'stats');
+  let players = me.getPlayers(game.heroes);
 
-  return Q.all(promises);
+  // This data is necessary to start the game
+  let record = {
+    gameId: game.gameId,
+    winningTeam: game.winningTeam,
+    players: players,
+    heroes: JSON.stringify(heroes)
+  };
+
+  let insertSql = dbHelper.insertSql('game_results', record, 'game_id');
+
+  return Q.ninvoke(db, 'query', insertSql, record);
 };
 
 /**
  * Performs the update of the hero statistics and applies the changes to te user record.
  * @param  {Hero} hero   The hero object
  * @param  {Object} user   The user record
- * @param  {String} gameId The game id
  * @return {Object}        The updated user record
  */
-GameRunner.prototype.updateHeroStats = function (hero, user, gameId) {
-  //Update the number of the most recently played game
-  user.mostRecentGameId = gameId;
+GameRunner.prototype.updateHeroStats = function (hero, stats) {
 
-  //Update the user's lifetime and most recent stats
-  user.lifetimeStats.kills += hero.heroesKilled.length;
-  user.mostRecentStats.kills = hero.heroesKilled.length;
+  var me = this;
 
   if (hero.dead) {
-    user.lifetimeStats.deaths++;
-    user.mostRecentStats.survived = false;
-  } else {
-    user.mostRecentStats.survived = true;
+    me.updateStat('deaths', stats, 1);
   }
 
-  user.lifetimeStats.damageDealt += hero.damageDone;
-  user.mostRecentStats.damageDealt = hero.damageDone;
-
-  user.lifetimeStats.minesCaptured += hero.minesCaptured;
-  user.mostRecentStats.minesCaptured = hero.minesCaptured;
-
-  user.lifetimeStats.diamondsEarned += hero.diamondsEarned;
-  user.mostRecentStats.diamondsEarned = hero.diamondsEarned;
-
-  user.lifetimeStats.healthRecovered += hero.healthRecovered;
-  user.mostRecentStats.healthRecovered = hero.healthRecovered;
-
-  if (user.lifetimeStats.healthGiven) {
-    user.lifetimeStats.healthGiven += hero.healthGiven;
-  } else {
-    user.lifetimeStats.healthGiven = hero.healthGiven;
-  }
-
-  user.mostRecentStats.healthGiven = hero.healthGiven;
-
-  user.lifetimeStats.gravesRobbed += hero.gravesRobbed;
-  user.mostRecentStats.gravesRobbed = hero.gravesRobbed;
+  me.updateStat('kills', stats, hero.heroesKilled.length);
+  me.updateStat('damage_given', stats, hero.damageDone);
+  me.updateStat('mines_taken', stats, hero.minesCaptured);
+  me.updateStat('diamonds_earned', stats, hero.diamondsEarned);
+  me.updateStat('health_recovered', stats, hero.healthRecovered);
+  me.updateStat('graves_taken', stats, hero.gravesRobbed);
+  me.updateStat('health_given', stats, hero.healthGiven);
 
   if (hero.won) {
-    user.lifetimeStats.wins++;
-    user.mostRecentStats.gameResult = 'Win';
+    me.updateStat('games_won', stats, 1);
   } else {
-    user.lifetimeStats.losses++;
-    user.mostRecentStats.gameResult = 'Loss';
+    me.updateStat('games_lost', stats, 1);
   }
 
-  return user;
+  return stats;
+};
+
+GameRunner.prototype.updateStat = function (statName, object, addValue) {
+  if (!object[statName]) {
+    object[statName] = 0;
+  } else {
+    object[statName] = Number.parseInt(object[statName], 10);
+  }
+
+  object[statName] += (Number.parseInt(addValue, 10) || 0);
+
+  return object[statName];
 };
 
 /**
@@ -331,14 +429,19 @@ GameRunner.prototype.updateHeroStats = function (hero, user, gameId) {
  * @param  {Object} user The user record
  * @return {Promise} A promise object
  */
-GameRunner.prototype.saveUserStats = function (user) {
-  console.log('  Saving stats for user: ' + user.githubHandle);
+GameRunner.prototype.saveUserStats = function (stats, insert) {
+  var githubHandle = stats.github_login,
+      sql;
 
-  var me = this,
-      userCollection = this.database.collection('users');
+  console.log('  Saving stats for user: ' + githubHandle);
 
-  return Q.ninvoke(userCollection, 'save', user);
+  if (insert) {
+    sql = dbHelper.insertSql('player_lifetime_stats', stats, 'github_login');
+  } else {
+    sql = dbHelper.updateSql('player_lifetime_stats', stats, `github_login = '${githubHandle}'`);
+  }
 
+  return Q.ninvoke(db, 'query', sql, stats);
 };
 
 module.exports = GameRunner;
