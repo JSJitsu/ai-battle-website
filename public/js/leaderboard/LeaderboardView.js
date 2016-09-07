@@ -1,86 +1,66 @@
 var LeaderboardView = Backbone.View.extend({
   tagName: 'div',
   className: 'centered',
+  events: {
+    'change select.leaderboard-time-param': 'updateLeaderboardTime',
+    'change select.leaderboard-stat-param': 'updateLeaderboardStat'
+  },
   initialize: function() {
+    var me = this;
+
     //Current leaderboard settings
-    this.leaderboardParams = {
-      stat: 'damageDealt',
+    me.leaderboardParams = {
+      stat: 'games_won',
       timeFrame: 'lifetime'
     };
 
-    //Dropdown items for lifetime stats
-    this.statItems = {
-      'lifetime': [
-        ['damageDealt', 'Damage Dealt'],
-        ['deaths', 'Deaths'],
-        ['diamondsEarned', 'Diamonds Earned'],
-        ['gravesRobbed', 'Graves Robbed'],
-        ['healthGiven', 'Health Given'],
-        ['healthRecovered', 'Health Recovered'],
-        ['kills', 'Kills'],
-        ['losses', 'Losses'],
-        ['minesCaptured', 'Mines Captured'],
-        ['wins', 'Wins']
-      ],
-      'average': [
-        ['damageDealt', 'Damage Dealt'],
-        ['deaths', 'Deaths'],
-        ['diamondsEarned', 'Diamonds Earned'],
-        ['gravesRobbed', 'Graves Robbed'],
-        ['healthGiven', 'Health Given'],
-        ['healthRecovered', 'Health Recovered'],
-        ['kills', 'Kills'],
-        ['losses', 'Losses'],
-        ['minesCaptured', 'Mines Captured'],
-        ['wins', 'Wins']
-      ],
-      'recent': [
-        ['damageDealt', 'Damage Dealt'],
-        ['diamondsEarned', 'Diamonds Earned'],
-        ['gravesRobbed', 'Graves Robbed'],
-        ['healthGiven', 'Health Given'],
-        ['healthRecovered', 'Health Recovered'],
-        ['kills', 'Kills'],
-        ['minesCaptured', 'Mines Captured'],
-      ]
-    };
-
-    var timeFrames = [
-      ['lifetime', 'Overall'],
-      ['average', 'Average'],
-      ['recent', 'Most Recent Battle']
+    // Used to render sorting options and table columns
+    me.displayStats = [
+      {
+        header: 'Wins',
+        mapping: 'games_won'
+      },
+      {
+        header: 'Kills',
+        mapping: 'kills'
+      },
+      {
+        header: 'Skulls',
+        mapping: 'graves_taken'
+      },
+      {
+        header: 'Diamonds',
+        mapping: 'diamonds_earned'
+      },
+      {
+        header: 'Healer',
+        mapping: 'health_given'
+      }
     ];
 
-    var timeHtml = timeFrames.map(function(timeFrame) {
-      return '<option class="leaderboard" value="' + timeFrame[0] + '">' + timeFrame[1] + '</option>';
-    });
-
-    var statsHtml = this.statItems[this.leaderboardParams.timeFrame].map(function(stat) {
-      return '<option value="' + stat[0] + '">' + stat[1] + '</option>';
+    var statsHtml = me.displayStats.map(function(displayStat) {
+      return '<option value="' + displayStat.mapping + '">' + displayStat.header + '</option>';
     });
 
     var initialHtml =
-        '<select class="leaderboard-time-param" name="stats">' + timeHtml.join('') + '</select>' +
-        '<select class="leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select>' +
+        'Sort by: ' +
+        '<select class="leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select><br><br>' +
         '<table class="table table-striped table-bordered table-responsive leaderboard-table">' + 
         '</table>';
 
 
-    this.$el.html(initialHtml);
+    me.$el.html(initialHtml);
 
     //Tells the model to get data
     //for the specified stat and type
-    this.model.updateLeaderboard(this.leaderboardParams);
+    me.model.updateLeaderboard(me.leaderboardParams);
 
     // Update the leaderboard model, then render on completion
-    $.when(this.model.fetch()).then(function() {
-      this.render();
-    }.bind(this));
-  },
-
-  events: {
-    'change select.leaderboard-time-param': 'updateLeaderboardTime',
-    'change select.leaderboard-stat-param': 'updateLeaderboardStat'
+    $.when(me.model.fetch()).then(function() {
+      me.render();
+    }).fail(function () {
+      me.render(true);
+    });
   },
   updateLeaderboardTime: function(clickEvent) {
     //Update dropdown for the time frame selected
@@ -133,7 +113,6 @@ var LeaderboardView = Backbone.View.extend({
     $.when(this.model.fetch()).then(function() {
       this.render();
     }.bind(this), function() {
-      console.log('Failed to retrieve leaderboard');
       this.render(true);
     }.bind(this));
   },
@@ -144,35 +123,29 @@ var LeaderboardView = Backbone.View.extend({
     var $table = this.$el.find('table.leaderboard-table');
     
     if (failed) {
-      $table.html('<tr><th>Rank</th><th>Name</th><th>Failed To Load</th></tr>');
+      $table.html('<tr><th>We couldn\'t find the information you\'re looking for.</th></tr>');
     } else {
-      var headerItem = 'Failed To Load';
-      //Replace with object-based logic eventually
-      //Gets the nicely formatted label to display in the table header
-      var statItems = this.statItems[this.leaderboardParams.timeFrame];
-      statItems.forEach( function (item) { 
-        var value = item[0];
-        if (value === this.leaderboardParams.stat) {
-          headerItem = item[1];
-          return;
-        }
-      }.bind(this));
+      var displayStats = this.displayStats;
 
       var tableHtml =
         '<tr class="lifetime-table-header leaderboard-headers">' +
           '<th class="leaderboard-rank">Rank</th>' +
           '<th class="leaderboard-name">Name</th>' +
-          '<th class="leaderboard-damage">' + headerItem + '</th>' +
+          displayStats.reduce(function (html, displayStat) {
+            return html + '<th class="leaderboard-damage">' + displayStat.header + '</th>';
+          }, displayStats[0]) +
         '</tr>';
 
-      var topUsers = this.model.get('topUsers');
-      topUsers.forEach( function (user, idx) {
+      var stats = this.model.get('stats');
+      stats.forEach( function (user, idx) {
         tableHtml += '<tr>';
 
         //Add the rank of the user to table
         tableHtml += '<td>' + (idx + 1) + '</td>';
-        tableHtml += '<td><a href="https://github.com/' + encodeURIComponent(user.name) + '/hero-starter">' + user.name + '</a></td>';
-        tableHtml += '<td>' + user.value + '</td>';
+        tableHtml += '<td><a href="https://github.com/' + encodeURIComponent(user.github_login) + '/hero-starter">' + user.github_login + '</a></td>';
+        tableHtml += displayStats.reduce(function (html, displayStat) {
+          return html + '<td>' + user[displayStat.mapping] + '</td>';
+        }, displayStats[0]);
 
 
         tableHtml += '</tr>';

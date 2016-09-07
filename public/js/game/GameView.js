@@ -22,7 +22,7 @@ var GameView = Backbone.View.extend({
 
     this.$el.removeClass('outer');
     this.$el.addClass('text-center');
-    this.$el.html("<h3>We weren't able to load it.</h3>");
+    this.$el.html("<h3>We weren't able to load the battle.</h3>");
   },
   renderGame: function (config) {
     var view = this;
@@ -131,7 +131,7 @@ var GameView = Backbone.View.extend({
     view.render();
 
     userModel = view.userModel;
-    currentUserHandle = userModel.get('githubHandle');
+    currentUserHandle = userModel.get('github_login');
 
     if (currentUserHandle) {
       view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
@@ -271,11 +271,15 @@ var GameView = Backbone.View.extend({
     //If the game is not yet over, go to next turn
     if (!game.ended && this.paused === false && this.playInProgress === false) {
       this.tickTimer = setInterval(function () {
-        this.playInProgress = true;
-        this.playNextTurn();
-        this.sendSliderToTurn(game.turn);
+        if (game.ended) {
+          clearInterval(this.tickTimer);
+        } else {
+          this.playInProgress = true;
+          this.playNextTurn();
+          this.sendSliderToTurn(game.turn);
 
-        this.playInProgress = false;
+          this.playInProgress = false;
+        }
       }.bind(this), this.gameSpeed);
 
       console.warn('Auto-play timer started:', this.tickTimer);

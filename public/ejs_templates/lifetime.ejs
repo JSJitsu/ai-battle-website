@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12 text-center">
-      <h2><%= get('githubHandle') %></h2>
+      <h2><%= get('github_login') %></h2>
         <hr class="star-primary">
     </div>
-  </div> 
+  </div>
   <div class="row nav-buttons">
     <div class="btn-group btn-group-justified">
       <div class="general btn-group settings">
@@ -20,54 +20,54 @@
         <button type="button" class="btn btn-default">Average Stats</button>
       </div>
     </div>
-  </div>  
+  </div>
     <table class="table table-striped table-bordered table-responsive lifetime-table">
       <tr class="lifetime-table-header">
         <td>Category</td>
-        <td>Stats</td>
+        <td>Total</td>
       </tr>
       <tr>
-        <td>Kills</td> 
-        <td><%= get('lifetimeStats').kills %></td>
+        <td>Kills</td>
+        <td><%= get('lifetime_stats').kills %></td>
       </tr>
       <tr>
-        <td>Deaths</td> 
-        <td><%= get('lifetimeStats').deaths %></td>
+        <td>Deaths</td>
+        <td><%= get('lifetime_stats').deaths %></td>
       </tr>
       <tr>
         <td>Damage Dealt</td>
-        <td><%= get('lifetimeStats').damageDealt %></td>
+        <td><%= get('lifetime_stats').damage_given %></td>
       </tr>
       <tr>
-        <td>Mines Captured</td> 
-        <td><%= get('lifetimeStats').minesCaptured %></td>
+        <td>Mines Captured</td>
+        <td><%= get('lifetime_stats').mines_taken %></td>
       </tr>
       <tr>
         <td>Diamonds Earned</td>
-        <td><%= get('lifetimeStats').diamondsEarned %></td>
+        <td><%= get('lifetime_stats').diamonds_earned %></td>
       </tr>
       <tr>
         <td>Health Recovered</td>
-        <td><%= get('lifetimeStats').healthRecovered %></td>
+        <td><%= get('lifetime_stats').health_recovered %></td>
       </tr>
       <tr>
         <td>Graves Robbed</td>
-        <td><%= get('lifetimeStats').gravesRobbed %></td>
+        <td><%= get('lifetime_stats').graves_taken %></td>
       </tr>
       <tr>
         <td>Wins</td>
-        <td><%= get('lifetimeStats').wins %></td>
+        <td><%= get('lifetime_stats').games_won %></td>
       </tr>
       <tr>
         <td>Losses</td>
-        <td><%= get('lifetimeStats').losses %></td>
+        <td><%= get('lifetime_stats').games_lost %></td>
       </tr>
     </table>
     <div class="row">
       <div class="text-center">
         <button type="button" class="btn btn-default btn-lg logoutButton">
-          <a class="glyphicon glyphicon-log-out" href="/logout">Log-out</a> 
+          <a class="glyphicon glyphicon-log-out" href="/logout">Log-out</a>
         </button>
       </div>
-    </div>  
+    </div>
 </div>

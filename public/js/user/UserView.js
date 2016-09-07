@@ -21,12 +21,12 @@ var UserView = Backbone.View.extend({
   handleSubmit: function(event) {
     event.preventDefault();
     var val = this.$el.find('#inputRepo').val();
-    var codeRepo = this.model.get('codeRepo');
+    var codeRepo = this.model.get('code_repo');
     // do not process if an empty string or equal to current code repo
     if (val.length !== 0 && val !== codeRepo) {
       // update the model with the new form data
       // escape the form input for security
-      this.model.set('codeRepo', _.escape(val));
+      this.model.set('code_repo', _.escape(val));
       //Save the model
       this.model.save();
       this.render();
@@ -46,32 +46,39 @@ var UserView = Backbone.View.extend({
     event.preventDefault();
     this.viewing = "settings";
     this.render();
-    this.$el.find('.settings').tab('show');
   },
 
    showRecent: function(event) {
     event.preventDefault();
-    this.viewing = "recent";
-    this.render();
-    this.$el.find('.recentStats').tab('show');
+
+    var me = this;
+
+    me.model.fetchRecent(function () {
+      me.render();
+    });
+
+    me.viewing = "recent";
   },
 
    showLifetime: function(event) {
     event.preventDefault();
     this.viewing = "lifetime";
     this.render();
-    this.$el.find('.lifetimeStats').tab('show');
   },
 
    showAverage: function(event) {
     event.preventDefault();
-    this.viewing = "average";
-    this.render();
-    this.$el.find('.averageStats').tab('show');
+    var me = this;
+
+    me.model.fetchAverage(function () {
+      me.render();
+    });
+
+    me.viewing = "average";
   },
 
   render: function() {
-    var githubHandle = this.model.get('githubHandle');
+    var githubHandle = this.model.get('github_login');
     var html;
     if (githubHandle && this.viewing === "settings") {
       html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
@@ -81,7 +88,7 @@ var UserView = Backbone.View.extend({
       html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
     } else if (githubHandle && this.viewing === 'average') {
       var averageStats = this.model.average();
-      averageStats['githubHandle'] = this.model.get('githubHandle');
+      averageStats['githubHandle'] = this.model.get('github_login');
       html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
     } else if (!githubHandle) {
       html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);

@@ -1,144 +1,236 @@
-var GitHubStrategy = require('passport-github').Strategy;
-var passport = require('passport');
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
+'use strict';
 
+let GitHubStrategy = require('passport-github2').Strategy;
+let passport = require('passport');
+let session = require('express-session');
+let pgSession = require('connect-pg-simple')(session);
+let bodyParser = require('body-parser');
+let Q = require('q');
 
-module.exports = function(app, safeMongoConnection, options) {
-  //Creates mongoose User model connected to the mongo URL
-  var User = require('./User');
+module.exports = function(app, db, dbHelper, options) {
 
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle',
-      resave: false,
-      saveUninitialized: true
-    })
-  );
+    app.use(
+        session({
+            store: new pgSession({
+                conString: db.config
+            }),
+            secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle',
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                // 30 days
+                maxAge: 30 * 24 * 60 * 60 * 1000
+            }
+        })
+    );
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-  //Makes the current user's info available
-  app.get('/userInfo', function(req, res) {
-    res.json(req.user);
-  });
-
-  //Make the current user's code repository updatable
-  var urlEncodedBodyParser = bodyParser.urlencoded({
-    extended: false
-  });
-
-  app.put('/userInfo', bodyParser.json(), urlEncodedBodyParser, function(req, res) {
-
-    var newUserParams = req.body;
-    if (newUserParams.codeRepo) {
-      req.user.codeRepo = newUserParams.codeRepo;
-      safeMongoConnection.safeInvoke(
-        'users',
-        'update',
-        {
-          _id: req.user._id
-        },
-        req.user,
-        {}
-      )
-      .done(
-        function(user) {
-          res.json(user);
-        },
-        function(err) {
-          res.send('An error occurred...are you logged in?');
+    function requireAuth (req, res, next) {
+        if (!req.user) {
+            res.status(401).end();
+            return false;
         }
-      );
-    } else {
-      res.send('user.codeRepo must be truthy in order to update.');
+
+        next();
     }
 
-  });
+    app.get('/userInfo/stats/recent', requireAuth, function (req, res) {
+        let user = req.user;
+        let username = user.github_login;
 
-  //Convert the user object from github into something smaller that
-  //can be stored in a cookie
-  passport.serializeUser(function(githubUser, done) {
-    var githubHandle = githubUser.username;
+        return dbHelper.getLatestGameResultByUsername(username).then(function(gameResults) {
+            let gameResult = gameResults[0];
+            let playerDataIndex = gameResult.players.indexOf(username);
 
-    //Check if user exists
-    safeMongoConnection.safeInvoke('users', 'findOne', {
-      githubHandle: githubHandle
-    }).then(function(user) {
+            if (playerDataIndex !== -1) {
+                user.recent_stats = gameResult.heroes[playerDataIndex];
 
-      //If user does exist, pass user to next "then" statmement
-      if (user) {
-        return user;
+                if (gameResult.winning_team === user.recent_stats.team) {
+                    user.recent_stats.gameResult = 'Winner!';
+                } else {
+                    user.recent_stats.gameResult = 'Second Place';
+                }
 
-      //If user does not exist, create and save new user,
-      //then pass user to next "then" (or done) statement
-      } else {
-        user = new User(githubHandle);
-        return safeMongoConnection.safeInvoke('users', 'insert', user)
-        .then(function(userArr) {
-          return userArr[0];
+            } else {
+                user.recent_stats = {};
+            }
+
+            res.send(user);
         });
-      }
+    });
 
-    }).done(
-      function(user) {
-        //The done here is different than the one above--this one
-        //is from passport, and lets passport know we're "done"
-        //serializing the user
-        done(null, user.githubHandle);
-      },
-      function(err) {
-        console.log('SERIALIZE ERROR!');
-        console.log(err);
-      }
-    );
+    app.get('/userInfo/stats/average', requireAuth, function (req, res) {
+        let user = req.user;
+        let username = user.github_login;
 
-  });
+        return dbHelper.getAllGameResultsByUsername(username).then(function (gameResults) {
 
-  //Convert the hero id stored in the cookie into the user object
-  //in our database
-  passport.deserializeUser(function(githubHandle, done) {
-    safeMongoConnection.safeInvoke('users', 'findOne', { githubHandle: githubHandle })
-    .done(
-      function(user) {
-        done(null, user);
-      },
-      function(err) {
-        console.log(err);
-      }
-    );
-  });
+            let kills = 0;
+            let minesTaken = 0;
+            let damageGiven = 0;
+            let gravesTaken = 0;
+            let healthGiven = 0;
+            let diamondsEarned = 0;
+            let healthRecovered = 0;
 
-  var clientId = options.github.clientId || process.env.GITHUB_CLIENT_ID;
-  var clientSecret = options.github.clientSecret || process.env.GITHUB_CLIENT_SECRET;
+            gameResults.forEach(function (gameResult) {
+                let playerDataIndex = gameResult.players.indexOf(username);
 
-  var callbackURL = options.github.callbackUrl || process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
+                if (playerDataIndex !== -1) {
+                    let stats = gameResult.heroes[playerDataIndex];
 
-  var strategy = new GitHubStrategy({
-    clientID: clientId,
-    clientSecret: clientSecret,
-    callbackURL: callbackURL
-  }, function(accessToken, refreshToken, profile, done) {
-    done(null, profile);
-  });
+                    kills += stats.kills;
+                    minesTaken += stats.minesTaken;
+                    damageGiven += stats.damageGiven;
+                    gravesTaken += stats.gravesTaken;
+                    healthGiven += stats.healthGiven;
+                    diamondsEarned += stats.diamondsEarned;
+                    healthRecovered += stats.healthRecovered;
+                }
+            });
 
-  passport.use('github', strategy);
+            let totalGames = gameResults.length;
 
-  //Go here to login
-  app.get('/auth/github',passport.authenticate('github'));
+            if (totalGames > 0) {
+                kills = kills / totalGames;
+                minesTaken = minesTaken / totalGames;
+                damageGiven = damageGiven / totalGames;
+                gravesTaken = gravesTaken / totalGames;
+                healthGiven = healthGiven / totalGames;
+                diamondsEarned = diamondsEarned / totalGames;
+                healthRecovered = healthRecovered / totalGames;
+            }
 
-  //Go here to log out
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
+            user.average_stats = {
+                gamesPlayed: totalGames,
+                kills,
+                minesTaken,
+                damageGiven,
+                gravesTaken,
+                healthGiven,
+                diamondsEarned,
+                healthRecovered
+            };
 
-  //This is where github sends us after it finishes authenticating us
-  app.get('/auth/github/callback', passport.authenticate('github', {
-    successRedirect: '/',
-    failureRedirect: '/'
-  }));
+            res.send(user);
+        });
+    });
+
+    //Makes the current user's info available
+    app.get('/userInfo', function(req, res) {
+        res.json(req.user);
+    });
+
+    //Make the current user's code repository updatable
+    var urlEncodedBodyParser = bodyParser.urlencoded({
+        extended: false
+    });
+
+    app.post('/userInfo', requireAuth, bodyParser.json(), urlEncodedBodyParser, function(req, res) {
+
+        let user = req.user;
+        let data = req.body;
+        let codeRepo = data.code_repo;
+
+        if (codeRepo && typeof codeRepo === 'string') {
+            user.code_repo = data.code_repo;
+
+            let record = {
+                github_login: user.github_login,
+                code_repo: user.code_repo
+            };
+
+            return dbHelper.updatePlayer(record).done(function () {
+                res.send(record);
+            });
+
+        } else {
+            res.send('user.code_repo must be a non-empty string');
+        }
+
+    });
+
+    /**
+     * Uses data from the Github login process to create a new player record, if needed.
+     *
+     * @param  {Object} githubData Github user data
+     * @param  {Function} done Callback to serialize the user data.
+     */
+    passport.serializeUser(function(githubData, done) {
+        dbHelper.getPlayer(githubData.username).then(function (users) {
+
+            let user = users[0];
+
+            if (user) {
+                return user;
+            } else {
+                // Create a new user if we couldn't find one
+                var record = {
+                    github_login: githubData.username,
+                    github_id: githubData.id,
+                    avatar_url: githubData.avatar_url,
+                    joined_at: new Date()
+                };
+
+                return dbHelper.addPlayer(record).then(dbHelper.getFirstResult);
+            }
+
+        }).then(function (user) {
+            done(null, user.github_login);
+        });
+    });
+
+    passport.deserializeUser(function(githubHandle, done) {
+        dbHelper.getPlayer(githubHandle).then(function (users) {
+            let user = users[0];
+
+            return dbHelper.getPlayerLifetimeStats(githubHandle).then(function (stats) {
+                if (stats[0]) {
+                    user.lifetime_stats = stats[0];
+                }
+
+                return user;
+            });
+        })
+        .done(
+            function(user) {
+                done(null, user);
+            },
+            function(err) {
+                console.error(err);
+            }
+        );
+    });
+
+    let clientId = options.github.clientId || process.env.GITHUB_CLIENT_ID;
+    let clientSecret = options.github.clientSecret || process.env.GITHUB_CLIENT_SECRET;
+    let callbackURL = options.github.callbackUrl || process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
+
+    passport.use('github', new GitHubStrategy(
+        {
+            clientID: clientId,
+            clientSecret: clientSecret,
+            callbackURL: callbackURL
+        }, function (accessToken, refreshToken, profile, done) {
+            done(null, profile);
+        }
+    ));
+
+    //Go here to login
+    app.get('/auth/github', passport.authenticate('github'));
+
+    //Go here to log out
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+
+    //This is where github sends us after it finishes authenticating us
+    app.get('/auth/github/callback', passport.authenticate('github', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
 
 };
