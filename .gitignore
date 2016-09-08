@@ -22,11 +22,9 @@ coverage
 build/
 
 # Dependency directorys
-# Deployed apps should consider commenting these lines out:
-# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 public/lib/
 bower_components
-
-# github oauth variables
-github.js
+secrets.js
+user_code/helpers/*.js
+user_code/hero/*.js

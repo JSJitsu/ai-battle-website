@@ -1,0 +1,37 @@
+{
+  "name": "workers",
+  "version": "0.0.0",
+  "description": "javascript-battle-webworkers ============================",
+  "main": "Board.js",
+  "scripts": {
+    "test": "npm run test-game",
+    "test-game": "mocha -R spec ./test/spec/GameSpec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gjtrowbridge/javascript-battle-webworkers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjtrowbridge/javascript-battle-webworkers/issues"
+  },
+  "homepage": "https://github.com/gjtrowbridge/javascript-battle-webworkers",
+  "dependencies": {
+    "ai-battle-engine": "jsjitsu/ai-battle-engine",
+    "child-process-promise": "^0.2.0-SNAPSHOT.1389671754086",
+    "pg": "^4.4.3",
+    "pg-db": "^1.0.2",
+    "q": "^1.0.1",
+    "request": "^2.40.0",
+    "sql": "^0.64.1",
+    "unirest": "^0.2.7"
+  },
+  "devDependencies": {
+    "blanket": "~1.1.6",
+    "chai": "^1.9.1",
+    "chai-spies": "^0.5.1",
+    "mocha": "^1.21.4",
+    "supertest": "^0.13.0"
+  }
+}
