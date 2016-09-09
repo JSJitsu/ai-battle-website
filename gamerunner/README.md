@@ -1,6 +1,6 @@
-# Javascript Battle Webworkers
+# Javascript Battle Game Runner
 
-Generates test data that the Javascript Battle Website can use to replay a battle.
+Tool to run the games that the website is able to replay. Real or test data can be used to generate a battle.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ From within the root directory:
 ```sh
 npm install
 ```
-If you don't already have [PostgreSQL](http://www.postgresql.org/) installed, follow their instructions to install and start it for your OS.
+If you don't already have [PostgreSQL](http://www.postgresql.org/) installed, you can likely use the helper script in `database/setup-postgres.sh` to get started.
 
 ### Generate Battle Data
 Once your dependencies are installed, look for the configuration file "secrets-template.js". Update it with your own settings and rename it to "secrets.js" so it can be found by the script.
