@@ -139,14 +139,12 @@ GameRunner.prototype.runHeroBrain = function (game, user) {
     // Anything coming out of the sandbox MUST BE sanitized.
     result = sandbox.moveResult;
 
-    if (result !== undefined) {
-      result = result.toString();
+    if (typeof result === "string" && result.length <= 10) {
+      return result;
     }
   } catch (e) {
     console.error(e);
   }
-
-  return result;
 };
 
 /**
