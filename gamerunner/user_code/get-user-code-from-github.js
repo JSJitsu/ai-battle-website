@@ -2,8 +2,8 @@ var request = require('request');
 var Q = require('q');
 var fs = require('fs');
 var path = require('path');
-var secrets = require('../secrets.js');
-var db = require('../database/connect.js');
+var secrets = require('../../secrets.js');
+var db = require('../../database/connect.js');
 
 function initiateCodeRequest (fileType) {
   db.query("SELECT * FROM player", function(err, users) {
