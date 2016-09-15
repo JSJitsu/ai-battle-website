@@ -28,13 +28,14 @@ function initiateCodeRequest (fileType) {
 }
 
 function retrieveCode (users, category) {
+
   users.forEach(function(user) {
 
     var githubHandle = user.github_login,
         codeRepo = user.code_repo;
 
     if (!githubHandle || !codeRepo) {
-      console.log('Skipping bad user record:', user);
+      console.warn('Skipping bad user record:', user);
       return;
     }
 
@@ -52,7 +53,8 @@ function retrieveCode (users, category) {
 
     //Sends the request for each user's hero.js and helper.js file to the github API
     request(options, function (error, response, body) {
-      console.log('Saving code for: ' + githubHandle);
+      console.log(`Saving code for ${githubHandle} / ${category}`);
+
       if (error){
         console.warn('Error sending request!');
         console.warn(error);
@@ -97,10 +99,8 @@ function retrieveCode (users, category) {
         //Write the file to a predefined folder and file name
         fs.writeFile(filePath, usersCode, function(err) {
           if (err) {
-            console.log('Error writing file: ' + category + '!');
-            console.log(err);
-          } else {
-            console.log('Hero code saved: ' + category + '!');
+            console.error(`Error writing file: ${filePath}`);
+            console.error(err);
           }
         });
       } else {
