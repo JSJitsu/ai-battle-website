@@ -66,18 +66,16 @@ function retrieveCode (users, category) {
         //Get response as JSON
         var info = JSON.parse(body);
 
+        if (info.size > 65536) {
+          console.warn(`${githubHandle} script size of ${info.size} is larger than 64k`)
+          return;
+        }
+
         //Set up buffer to write file
         var buffer = new Buffer(info.content, 'base64');
 
         //Convert buffer to long string
         var usersCode = buffer.toString('utf8');
-
-        //Check for "docker" anywhere in the file
-        var regEx = usersCode.match(/\bdocker\b/gi);
-        if (regEx) {
-          console.warn('Possible malicious code from user', githubHandle);
-          return;
-        }
 
         var filePath = path.resolve(
           secrets.rootDirectory,
