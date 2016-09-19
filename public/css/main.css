@@ -311,6 +311,9 @@ footer a:hover {
   .t-red .list-group-item a {
     color: #faa; }
 
+.list-group-item-danger, .t-red .list-group-item-danger {
+  background: #333; }
+
 select, option {
   color: #000; }
 
