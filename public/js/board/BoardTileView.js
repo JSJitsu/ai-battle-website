@@ -18,8 +18,8 @@ var BoardTileView = Backbone.View.extend({
     if (subType !== 'Unoccupied') {
       html = '<img src="' + gameAssets[subType] + '" class="sprite">';
       colors = {
-        0: 'team-yellow',
-        1: 'team-blue'
+        0: 'team-blue',
+        1: 'team-red'
       };
 
       if (type === 'Hero') {
@@ -49,7 +49,7 @@ var BoardTileView = Backbone.View.extend({
 
     html = '<img src="' + gameAssets[subType] + '" id="H' + heroId +'" class="sprite">';
     html += '<span class="indicator ' + colors[tile.team] +'">' + heroId + '</span>';
-    html += '<span class="lifebar"><span class="life-capacity" style="height:' + HP + '%"></span></span>';
+    html += '<span class="lifebar"><span class="life-capacity" style="background-color:hsl(' + HP + ', 60%,35%);height:' + (HP * .9) + '%"></span></span>';
 
     this.$el.addClass('current-user-' + name);
 

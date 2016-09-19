@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+
 .info-header{
   text-transform: uppercase;
   font: 700 18px Montserrat;
@@ -82,8 +84,7 @@
 }
 
 .leaderboard-table {
-  background-color: white;
-  color: black;
+  color: #eaeaea;
   text-align: center;
   width: 60vw;
 }
@@ -162,7 +163,6 @@
 
 .game-tips {
   position: relative;
-  bottom: 55px;
   aside{
     .fa-times{
       cursor: pointer;
@@ -237,3 +237,4 @@ footer a:hover {
 .engineer-social a {
   text-decoration: none;
 }
+
