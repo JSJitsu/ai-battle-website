@@ -43,7 +43,7 @@
 }
 
 .dead-info {
-  color: red; 
+  color: red;
 }
 
 .range-bar {
@@ -61,7 +61,7 @@
   position: absolute;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-radius: 0; 
+  border-radius: 0;
   background-image:url(../img/blue_sword.png);
   background-size:45px;
 }
@@ -75,7 +75,7 @@
   margin: 20px auto;
   .glyphicon {
     font-size: 2em;
-    margin: 8% 8%; 
+    margin: 8% 8%;
   }
   .glyphicon:hover {
     cursor:pointer;
@@ -107,7 +107,7 @@
 }
 
 .parallax-inner {
-  background:url(http://i.imgur.com/UZKEjzG.png) no-repeat;
+  background:url(//i.imgur.com/UZKEjzG.png) no-repeat;
   height:450px;
   position:relative;
   box-shadow:inset 0 0 20px rgba(0,0,0,.5);
@@ -142,7 +142,7 @@
 
 .t-red .list-group-item {
   background:#a00;
-  
+
   a {
     color: #faa;
   }
