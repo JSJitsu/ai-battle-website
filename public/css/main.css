@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+@import url(//fonts.googleapis.com/css?family=Press+Start+2P);
 .info-header {
   text-transform: uppercase;
   font: 700 18px Montserrat;
@@ -276,7 +276,7 @@ footer a:hover {
   overflow: hidden; }
 
 .parallax-inner {
-  background: url(http://i.imgur.com/UZKEjzG.png) no-repeat;
+  background: url(//i.imgur.com/UZKEjzG.png) no-repeat;
   height: 450px;
   position: relative;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); }
