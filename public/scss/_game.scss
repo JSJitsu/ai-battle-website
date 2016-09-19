@@ -126,6 +126,7 @@
   bottom:-32px;
   left:64px;
   background-size:256px;
+  z-index:90;
 }
 
 .parallax-hero.red {
@@ -136,6 +137,7 @@
   left:inherit;
   background:url(../img/red_knight.gif);
   background-size:64px;
+  z-index:85;
 }
 
 .t-red .list-group-item {
