@@ -36,8 +36,50 @@ $('body').scrollspy({
     target: '.navbar-fixed-top'
 });
 
+
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+
+// parallax
+
+var init = function() {
+  scrollIntervalId = setInterval(updatePage,10);
+};
+
+var setScrollTops = function() {
+  var $window = $(window);
+  scrollTop = $window.scrollTop();
+  pageWidth = $window.width();
+};
+
+var updatePage = function() {
+  if (window.requestAnimationFrame) {
+    window.requestAnimationFrame(function() {
+      setScrollTops();
+      animateObjects();
+    });
+  } else {
+    setScrollTops();
+    animateObjects();
+  }
+};
+
+var animateObjects = function() {
+  var $parallax = $(".parallax-inner"),
+      $hero = $(".parallax-hero.red");
+  
+  $parallax.css({
+    "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px "
+  });
+
+  $hero.css({
+    "bottom":scrollTop / 4 + 64 + "px"
+  });
+  
+}
+
+init();
 

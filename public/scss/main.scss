@@ -1,6 +1,9 @@
-@import "freelancer.scss";
 @import "misc-style.scss";
 @import "game.scss";
 @import "gamegrid.scss";
 @import "meetTeam.scss";
-@import "responsivelayout.scss";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../lib/bootstrap/fonts/glyphicons-halflings-regular.woff');
+}

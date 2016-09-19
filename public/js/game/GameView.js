@@ -64,13 +64,13 @@ var GameView = Backbone.View.extend({
     $('.messages').text(game.killMessage || game.attackMessage);
 
     //Add html for team info
-    var yellowTeamView = new TeamView({
+    var redTeamView = new TeamView({
       collection: game.teams[1],
-      className: 'team-info t-yellow',
+      className: 'team-info t-red',
     });
-    yellowTeamView.teamColor = 'Team Yellow';
-    yellowTeamView.diamonds = game.totalTeamDiamonds[0];
-    yellowTeamView.render();
+    redTeamView.teamColor = 'Team Red';
+    redTeamView.diamonds = game.totalTeamDiamonds[0];
+    redTeamView.render();
 
     var blueTeamView = new TeamView({
       collection: game.teams[0],
@@ -81,7 +81,7 @@ var GameView = Backbone.View.extend({
     blueTeamView.render();
 
     //Add all board html
-    $gameHtml.append(yellowTeamView.$el);
+    $gameHtml.append(redTeamView.$el);
     $gameHtml.append(blueTeamView.$el);
   },
   renderControlArea: function () {
@@ -292,7 +292,7 @@ var GameView = Backbone.View.extend({
     var winner = this.model.get('game').winningTeam;
     var message = $('.winner-msg');
     if (winner === 0) {
-      message.text('Yellow Team Wins!');
+      message.text('Red Team Wins!');
     } else if (winner === 1) {
       message.text('Blue Team Wins!');
     } else {
