@@ -278,7 +278,8 @@ footer a:hover {
 .parallax-inner {
   background: url(http://i.imgur.com/UZKEjzG.png) no-repeat;
   height: 450px;
-  position: relative; }
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); }
 
 .parallax-hero {
   image-rendering: -moz-crisp-edges;
@@ -292,7 +293,8 @@ footer a:hover {
   position: absolute;
   bottom: -32px;
   left: 64px;
-  background-size: 256px; }
+  background-size: 256px;
+  z-index: 90; }
 
 .parallax-hero.red {
   width: 64px;
@@ -301,7 +303,8 @@ footer a:hover {
   right: 256px;
   left: inherit;
   background: url(../img/red_knight.gif);
-  background-size: 64px; }
+  background-size: 64px;
+  z-index: 85; }
 
 .t-red .list-group-item {
   background: #a00; }

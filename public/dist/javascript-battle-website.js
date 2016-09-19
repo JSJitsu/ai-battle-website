@@ -123,7 +123,7 @@ var GameEngine = function(configs) {
 	this.healthWell = require("./lib/game_classes/HealthWell.js");
 	this.hero = require("./lib/game_classes/Hero.js");
 	this.impassable = require("./lib/game_classes/Impassable.js");
-	this.unoccupied = require("./lib/game_classes/Unoccupied.js");	
+	this.unoccupied = require("./lib/game_classes/Unoccupied.js");
 };
 
 GameEngine.prototype.buildConfigs = function(configs) {
@@ -212,9 +212,7 @@ GameEngine.prototype.planAllGames = function(originalUsers) {
       users = originalUsers.slice(),
       maxUsersPerTeam = me.configs.maxUsersPerTeam,
       boardSize = me.configs.boardSize,
-      //Used to look up hero port numbers
       userLookup = {},
-      //Stores all the game objects
       games = [],
       numberOfGames = 0,
       alternateTeams = [],
@@ -226,7 +224,7 @@ GameEngine.prototype.planAllGames = function(originalUsers) {
       thisTeam,
       nextUserIndex,
       nextUser;
-  
+
   //Calculate number of games needed
   numberOfGames = Math.ceil(users.length / maxUsersPerTeam / 2);
 
@@ -236,7 +234,7 @@ GameEngine.prototype.planAllGames = function(originalUsers) {
   for (gameIndex; gameIndex<numberOfGames; gameIndex++) {
     map = me.pickMap();
     game = me.createGameFromMap( __dirname + '/lib/maps/' + map );
-    game.maxTurn = me.configs.maxTurns; 
+    game.maxTurn = me.configs.maxTurns;
     games.push(game);
 
     //Keeps track of which team to add the
@@ -266,9 +264,10 @@ GameEngine.prototype.planAllGames = function(originalUsers) {
     nextUser = users.splice(nextUserIndex, 1)[0];
 
     //Save the user (be able to get the hero port, etc later)
-    userLookup[nextUser.githubHandle] = nextUser;
+    var githubHandle = nextUser.github_login;
+    userLookup[githubHandle] = nextUser;
 
-    console.log('Adding user: ' + nextUser.githubHandle + ' to game ' + currentGameIndex + ', team ' + thisTeam);
+    console.log('Adding user: ' + githubHandle + ' to game ' + currentGameIndex + ', team ' + thisTeam);
 
     //Loops through each game
     if (currentGameIndex < games.length - 1) {
@@ -278,13 +277,13 @@ GameEngine.prototype.planAllGames = function(originalUsers) {
     }
 
     //Put hero at random location in the current game
-    while (!thisGame.addHero(this.randomIndex(boardSize), this.randomIndex(boardSize), nextUser.githubHandle, thisTeam)) {
+    while (!thisGame.addHero(this.randomIndex(boardSize), this.randomIndex(boardSize), githubHandle, thisTeam)) {
       //Keep looping until the hero is successfully added
       //(Since we are choosing random locations, heroes that are added
       // onto occupied squares do nothing and return false, hence the loop)
     }
   }
-  
+
   return {
     games: games,
     userLookup: userLookup
@@ -319,7 +318,7 @@ GameEngine.prototype.pickMap = function() {
 
 module.exports = GameEngine;
 }).call(this,"/")
-},{"./lib/game_classes/Board.js":2,"./lib/game_classes/DiamondMine.js":3,"./lib/game_classes/Game.js":4,"./lib/game_classes/HealthWell.js":5,"./lib/game_classes/Hero.js":6,"./lib/game_classes/Impassable.js":7,"./lib/game_classes/Unoccupied.js":8,"fs":9,"vm":10}],2:[function(require,module,exports){
+},{"./lib/game_classes/Board.js":2,"./lib/game_classes/DiamondMine.js":3,"./lib/game_classes/Game.js":4,"./lib/game_classes/HealthWell.js":5,"./lib/game_classes/Hero.js":6,"./lib/game_classes/Impassable.js":7,"./lib/game_classes/Unoccupied.js":8,"fs":9,"vm":11}],2:[function(require,module,exports){
 var Unoccupied = require('./Unoccupied.js');
 
 var Board = function(lengthOfSide) {
@@ -475,7 +474,7 @@ var Game = function(n) {
 // Adds a new hero to the board
 // but ONLY if the game has not yet
 // started
-Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team) {
+Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team, id) {
   if (this.hasStarted) {
     throw new Error('Cannot add heroes after the game has started!')
   }
@@ -486,12 +485,16 @@ Game.prototype.addHero = function(distanceFromTop, distanceFromLeft, name, team)
     var hero = new Hero(distanceFromTop, distanceFromLeft, name, team);
 
     //First hero added is the active hero
-    if (this.heroes.length === 0) {
+    if (id === 0 || this.heroes.length === 0) {
       this.activeHero = hero;
     }
 
     // Saves hero id
-    hero.id = this.heroes.length;
+    if (id === 0 || id > 0) {
+      hero.id = id;
+    } else {
+      hero.id = this.heroes.length;
+    }
 
     // Puts hero on board
     this.board.tiles[distanceFromTop][distanceFromLeft] = hero;
@@ -621,6 +624,7 @@ Game.prototype.handleHeroTurn = function(direction) {
 
   //Exceeded maximum turns
   if (this.turn >= this.maxTurn) {
+    console.log('Game over. Maximum number of turns reached.');
     this.ended = true;
     var teamDiamonds0 = this._teamDiamonds(this.teams[0]);
     var teamDiamonds1 = this._teamDiamonds(this.teams[1]);
@@ -631,12 +635,14 @@ Game.prototype.handleHeroTurn = function(direction) {
     }
   //Team 0 are all dead
   } else if (this._teamIsDead(this.teams[0])) {
+    console.log('Game over. Team 0 is dead.');
     this.winningTeam = 1;
     this.maxTurn = this.turn;
     this.ended = true;
 
   //Team 1 are all dead
   } else if (this._teamIsDead(this.teams[1])) {
+    console.log('Game over. Team 1 is dead.');
     this.winningTeam = 0;
     this.maxTurn = this.turn;
     this.ended = true;
@@ -708,7 +714,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
     // If capturing the mine takes the hero to 0 HP, he dies
     if (hero.dead) {
       this.heroDied(hero);
-      this.moveMessage += ', tried to capture a diamond mine, but died';
+      this.moveMessage += ', and died trying to capture a diamond mine.';
       return;
 
     // If he survives, he is now the owner of the mine
@@ -1012,6 +1018,17 @@ module.exports = Unoccupied;
 },{}],9:[function(require,module,exports){
 
 },{}],10:[function(require,module,exports){
+
+var indexOf = [].indexOf;
+
+module.exports = function(arr, obj){
+  if (indexOf) return arr.indexOf(obj);
+  for (var i = 0; i < arr.length; ++i) {
+    if (arr[i] === obj) return i;
+  }
+  return -1;
+};
+},{}],11:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -1151,18 +1168,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":11}],11:[function(require,module,exports){
-
-var indexOf = [].indexOf;
-
-module.exports = function(arr, obj){
-  if (indexOf) return arr.indexOf(obj);
-  for (var i = 0; i < arr.length; ++i) {
-    if (arr[i] === obj) return i;
-  }
-  return -1;
-};
-},{}]},{},[1])(1)
+},{"indexof":10}]},{},[1])(1)
 });;/* globals Backbone,GameEngine,_ */
 /* exported Game */
 var Game = Backbone.Model.extend({
@@ -1216,7 +1222,8 @@ var Game = Backbone.Model.extend({
             tile.distanceFromTop,
             tile.distanceFromLeft,
             tile.name,
-            tile.team
+            tile.team,
+            tile.id
           );
         }
 
@@ -1242,6 +1249,12 @@ var Game = Backbone.Model.extend({
         }
       });
     });
+
+    // Because we aren't adding heroes in the correct order, we need to sort them by ID to ensure
+    // nobody goes out of turn.
+    game.heroes.sort(function (a, b) {
+      return a.id - b.id;
+    })
 
     return game;
   },
@@ -2132,24 +2145,36 @@ var TeamView = Backbone.View.extend({
     }.bind(this));
   }
 });;var User = Backbone.Model.extend({
-  
+
   // give model url attribute for server to handle
   url: '/userInfo',
 
   // set id attribute so that we can do put requests
   // backbone looks for 'id' otherwise
   idAttribute: '_id',
+  fetchRecent: function (callback) {
+    this.fetch({
+      url: this.url + '/stats/recent',
+      success: callback
+    });
+  },
+  fetchAverage: function (callback) {
+    this.fetch({
+      url: this.url + '/stats/average',
+      success: callback
+    });
+  },
 
   average: function() {
-    var gamesPlayed = this.get('lifetimeStats').wins + this.get('lifetimeStats').losses;
-    var that = this;
+    var me = this;
 
     var numbersForDisplay = function(prop) {
-      return (Number(parseFloat(that.get('lifetimeStats')[prop] / gamesPlayed).toFixed(2)) || 0) + ' per game';
+      return (Number(parseFloat(me.get('average_stats')[prop]).toFixed(2)) || 0);
     };
 
     var aveStats = {
-      gamesPlayed: gamesPlayed,
+      github_login: me.get('github_login'),
+      gamesPlayed: me.get('average_stats').gamesPlayed,
       kills: numbersForDisplay('kills'),
       deaths: numbersForDisplay('deaths'),
       damageDealt: numbersForDisplay('damageDealt'),
@@ -2158,7 +2183,8 @@ var TeamView = Backbone.View.extend({
       healthRecovered: numbersForDisplay('healthRecovered'),
       healthGiven: numbersForDisplay('healthGiven'),
       gravesRobbed: numbersForDisplay('gravesRobbed')
-    }; 
+    };
+
     return aveStats;
   }
 
@@ -2211,28 +2237,35 @@ var TeamView = Backbone.View.extend({
     event.preventDefault();
     this.viewing = "settings";
     this.render();
-    this.$el.find('.settings').tab('show');
   },
 
    showRecent: function(event) {
     event.preventDefault();
-    this.viewing = "recent";
-    this.render();
-    this.$el.find('.recentStats').tab('show');
+
+    var me = this;
+
+    me.model.fetchRecent(function () {
+      me.render();
+    });
+
+    me.viewing = "recent";
   },
 
    showLifetime: function(event) {
     event.preventDefault();
     this.viewing = "lifetime";
     this.render();
-    this.$el.find('.lifetimeStats').tab('show');
   },
 
    showAverage: function(event) {
     event.preventDefault();
-    this.viewing = "average";
-    this.render();
-    this.$el.find('.averageStats').tab('show');
+    var me = this;
+
+    me.model.fetchAverage(function () {
+      me.render();
+    });
+
+    me.viewing = "average";
   },
 
   render: function() {
