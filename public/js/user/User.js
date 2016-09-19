@@ -1,22 +1,34 @@
 var User = Backbone.Model.extend({
-  
+
   // give model url attribute for server to handle
   url: '/userInfo',
 
   // set id attribute so that we can do put requests
   // backbone looks for 'id' otherwise
   idAttribute: '_id',
+  fetchRecent: function (callback) {
+    this.fetch({
+      url: this.url + '/stats/recent',
+      success: callback
+    });
+  },
+  fetchAverage: function (callback) {
+    this.fetch({
+      url: this.url + '/stats/average',
+      success: callback
+    });
+  },
 
   average: function() {
-    var gamesPlayed = this.get('lifetimeStats').wins + this.get('lifetimeStats').losses;
-    var that = this;
+    var me = this;
 
     var numbersForDisplay = function(prop) {
-      return (Number(parseFloat(that.get('lifetimeStats')[prop] / gamesPlayed).toFixed(2)) || 0) + ' per game';
+      return (Number(parseFloat(me.get('average_stats')[prop]).toFixed(2)) || 0);
     };
 
     var aveStats = {
-      gamesPlayed: gamesPlayed,
+      github_login: me.get('github_login'),
+      gamesPlayed: me.get('average_stats').gamesPlayed,
       kills: numbersForDisplay('kills'),
       deaths: numbersForDisplay('deaths'),
       damageDealt: numbersForDisplay('damageDealt'),
@@ -25,7 +37,8 @@ var User = Backbone.Model.extend({
       healthRecovered: numbersForDisplay('healthRecovered'),
       healthGiven: numbersForDisplay('healthGiven'),
       gravesRobbed: numbersForDisplay('gravesRobbed')
-    }; 
+    };
+
     return aveStats;
   }
 

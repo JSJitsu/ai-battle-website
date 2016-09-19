@@ -25,7 +25,7 @@ Sign up is as easy as logging into your github account, forking a “starter” 
 
 ### Requirements
 - Node.js
-- MongoDB
+- PostgreSQL
 
 ### Installing Dependencies
 
