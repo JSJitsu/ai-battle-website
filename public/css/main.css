@@ -164,11 +164,11 @@
 a {
   color: #428BCA; }
 
-a:visited:not(.btn) {
-  color: #9C27B0; }
+a:visited {
+  color: #ee33ee; }
 
 a:active, a:hover, a:focus {
-  color: #2C3E50; }
+  color: #eee; }
 
 a.btn {
   font-weight: bold; }
