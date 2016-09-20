@@ -1,1 +1,3 @@
 * text=auto
+*.map -diff
+public/dist/** -diff
