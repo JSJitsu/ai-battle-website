@@ -13,10 +13,17 @@ var BoardTileView = Backbone.View.extend({
         type = tile.type,
         html,
         colors,
-        owner;
+        owner,
+        extraClasses = '';
 
     if (subType !== 'Unoccupied') {
-      html = '<img src="' + gameAssets[subType] + '" class="sprite">';
+      if (subType === 'BlueFainted' || subType === 'RedFainted') {
+        extraClasses = 'fainted';
+      }
+      html = '<img src="' + gameAssets[subType] + '" class="sprite ' + extraClasses + '">';
+      if (extraClasses === 'fainted') {
+	html += '<span class="indicator fainted">' + tile.id + '</span>';
+      }
       colors = {
         0: 'team-blue',
         1: 'team-red'

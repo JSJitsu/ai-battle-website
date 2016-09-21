@@ -581,7 +581,7 @@ Game.prototype._handleHeroMove = function(hero, direction) {
         new Unoccupied(hero.distanceFromTop, hero.distanceFromLeft);
 
     //Check whether the hero robbed a grave, if so give credit
-    if (tile.subType === 'Bones') {
+    if (tile.subType === 'RedFainted' || tile.subType === 'BlueFainted') {
       hero.gravesRobbed++;
     }
 
@@ -734,7 +734,9 @@ Game.prototype.heroDied = function(hero) {
   var top = hero.distanceFromTop;
   var left = hero.distanceFromLeft;
   var bones = new Unoccupied(top, left);
-  bones.subType = 'Bones';
+  var teamName = (hero.team === 1) ? 'Red' : 'Blue';
+  bones.subType = teamName + 'Fainted';
+  bones.id = hero.id;
   this.board.tiles[top][left] = bones;
 };
 

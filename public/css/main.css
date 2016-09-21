@@ -409,6 +409,16 @@ select, option {
   .sprite {
     max-width: 100%;
     max-height: 1.8vw; } }
+.fainted {
+  animation: deathflash 2s linear infinite alternate; }
+
+@keyframes deathflash {
+  from {
+    filter: invert(0%);
+    -webkit-filter: invert(0%); }
+  to {
+    filter: invert(90%);
+    -webkit-filter: invert(90%); } }
 .img-team {
   max-height: 201px;
   height: 201px;
