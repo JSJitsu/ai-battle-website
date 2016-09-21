@@ -25,7 +25,7 @@ var LeaderboardView = Backbone.View.extend({
         mapping: 'kills'
       },
       {
-        header: 'Skulls',
+        header: 'Souls',
         mapping: 'graves_taken'
       },
       {

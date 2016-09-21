@@ -105,3 +105,20 @@ $spritesheet: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVIAAAC+CAYAAABn
       max-height: 1.8vw;
   }
 }
+
+.fainted {
+  animation: deathflash 2s linear infinite alternate;
+}
+
+@keyframes deathflash {
+  from {
+    filter: invert(0%);
+    -webkit-filter: invert(0%);
+  }
+  
+  to {
+    filter: invert(90%);
+    -webkit-filter: invert(90%);
+  }
+  
+}
