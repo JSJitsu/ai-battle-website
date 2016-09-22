@@ -29,15 +29,16 @@ function LiveGameRunner () {
   };
 
   this.closeDatabase = function () {
-    database.end();
+    db.end();
     console.log('Database connection ended.');
   };
 
   this.run = function () {
     self.getUserRecords()
       .then(self.runGames)
+      .then(self.closeDatabase)
       .catch(self.showErrors)
-      .finally(self.closeDatabase);
+      .done();
   };
 }
 
