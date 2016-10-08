@@ -15,24 +15,39 @@ var BoardTileView = Backbone.View.extend({
         colors,
         owner,
         extraClasses = '';
+      
+    colors = {
+      0: 'team-blue',
+      1: 'team-red'
+    };
+
+    owner = tile.owner;
+
+    // TODO : make a factory pattern or something for this to be way less complicated and repetative     
 
     if (subType !== 'Unoccupied') {
       if (subType === 'BlueFainted' || subType === 'RedFainted') {
         extraClasses = 'fainted';
       }
-      html = '<img src="' + gameAssets[subType] + '" class="sprite ' + extraClasses + '">';
+      
+      if (type === 'DiamondMine') {
+        var spriteImg = gameAssets[subType];
+        if (owner && owner.team === 0) {
+          spriteImg = gameAssets[subType + 'Blue'];
+        } else if (owner && owner.team === 1) {
+          spriteImg = gameAssets[subType + 'Red'];
+        }
+        html = '<img src="' + spriteImg + '" class="sprite" ' + extraClasses + '">';
+      } else {
+        html = '<img src="' + gameAssets[subType] + '" class="sprite ' + extraClasses + '">';
+      }
       if (extraClasses === 'fainted') {
 	html += '<span class="indicator fainted">' + tile.id + '</span>';
       }
-      colors = {
-        0: 'team-blue',
-        1: 'team-red'
-      };
-
+      
       if (type === 'Hero') {
         html = this.buildHeroHtml(tile, colors);
       } else if (type === 'DiamondMine') {
-        owner = tile.owner;
         if (owner) {
           html += '<span class="indicator ' + colors[owner.team] +'">' + owner.id + '</span>';
         }
