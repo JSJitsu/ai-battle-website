@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 text-center info-header">
-      The Yellow King and the Blue King are at war!  Your Javascript skills are needed to determine the victor: can you code an effective AI for honor and glory?
+      The Red King and the Blue King are at war!  Your Javascript skills are needed to determine the victor: can you code an effective AI for honor and glory?
     </div>
   </div>
   <div class="row nav-buttons">
@@ -18,27 +18,26 @@
       <div class="active rules btn-group">
         <button type="button" class="btn btn-default active">Rules</button>
       </div>
-      <div class="btn-group improve">
-        <button type="button" class="btn btn-default">Improve Hero</button>
-      </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
       <ul class="info-list">
-        <ul class="rules-list">
-          <li>Each day your code will be assigned to a team at random and will fight for that king.</li>
-          <li>Teams can win by either 1) Killing every member of the opposing team, or 2) being in possession of more diamonds than the opposing team after 1250 turns.</li>
-          <li>Your hero's code will decide which way to travel depending on the state of the game.  There are only 5 choices: "North", "South", "East", "West", and "Stay."</li>
-          <li>"Stay" is the default choice, so if your hero's code responds with anything other than "North", "South", "East", or "West", the game engine will interpret it as a "Stay".</li>
-          <li>Every hero starts with the full 100 health points. If your hero's health drops to 0, it will die.</li>
-          <li>Moving into a diamond mine will capture the mine, but BEWARE...All diamond mines are magic, and will deal 20 damage points to the new owner any time they are captured.</li>
-          <li>Your hero will earn 1 diamond for each mine he/she owns at the start of his/her turn.</li>
-          <li>Moving into a "Health Well" tile will heal your hero by 30 hp.</li>
-          <li>Moving into a friendly hero will heal that hero for 40 health. Remember, there is no "I" in team.</li>
-          <li>Enemies are attacked automatically at the <em>end</em> of your hero's turn. Your hero will hit all adjacent enemies for 20 damage points each.</li>
-          <li>You can also attack by moving directly into an enemy.  This will deal 10 damage (in addition to the 20 damage described above, for up to 30 damage total)</li>
-        </ul>
+        <li>Each day your hero will be assigned to a team.</li>
+        <li>Teams can win by:
+          <ol class="info-list">
+            <li>Killing every member of the opposing team, or...</li>
+            <li>Being in possession of more diamonds than the opposing team after 1250 turns.</li>
+          </ol>
+        </li>
+        <li>Your hero's code will decide which way to travel.  There are 5 choices: "North", "South", "East", "West", and "Stay". "Stay" is the default choice and will automatically be chosen if your hero code doesn't return a direction.</li>
+        <li>Every hero starts with 100 health points. If your hero's health drops to 0, it will die.</li>
+        <li>Moving into a diamond mine will capture the mine, but BEWARE... all diamond mines are magic, and will deal 20 damage points to the new owner any time they are captured.</li>
+        <li>Your hero will earn 1 diamond for each mine he/she owns at the start of his/her turn.</li>
+        <li>Moving into a "Health Well" tile will heal your hero by 30 hp.</li>
+        <li>Moving into a friendly hero will heal that hero for 40 health. Remember, there is no "I" in team.</li>
+        <li>Enemies are attacked automatically at the <em>end</em> of your hero's turn. Your hero will hit all adjacent enemies for 20 damage points each.</li>
+        <li>You can also attack by moving directly into an enemy. This will deal 10 damage (in addition to the 20 damage described above, for up to 30 damage total).</li>
       </ul>
     </div>
   </div>
