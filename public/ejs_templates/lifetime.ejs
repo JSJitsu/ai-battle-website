@@ -21,6 +21,7 @@
       </div>
     </div>
   </div>
+  <div class="row">
     <table class="table table-striped table-bordered table-responsive lifetime-table">
       <tr class="lifetime-table-header">
         <td>Category</td>
@@ -63,11 +64,10 @@
         <td><%= get('lifetime_stats').games_lost %></td>
       </tr>
     </table>
-    <div class="row">
-      <div class="text-center">
-        <button type="button" class="btn btn-default btn-lg logoutButton">
-          <a class="glyphicon glyphicon-log-out" href="/logout">Log-out</a>
-        </button>
-      </div>
-    </div>
+  </div>
+  <div class="text-center">
+    <a href="/logout" type="button" class="btn btn-default logoutButton">
+      <i class="glyphicon glyphicon-log-out">&nbsp;</i>Log out
+    </a>
+  </div>
 </div>
