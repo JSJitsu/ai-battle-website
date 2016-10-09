@@ -53,7 +53,7 @@
   }
 }
 
-.btn-social {
+.btn-github {
   width: 19rem;
   text-align: center !important;
   margin: auto;
@@ -65,10 +65,21 @@
 .user-options-shrink {
   margin-top: 5px !important;
 }
+
+.navbar-default {
+  background: #2b3e50;
+  box-shadow: 0 0 10px #000000;
+}
+
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
   background: #1a242f;
+}
+
+.navbar-nav .btn-github {
+  width: auto;
+  font-size: 12px;
 }
 
 .lifetime-table {
@@ -113,7 +124,7 @@
 }
 
 .repoInput {
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .logoutButton {
