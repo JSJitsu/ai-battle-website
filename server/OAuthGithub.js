@@ -5,7 +5,6 @@ let passport = require('passport');
 let session = require('express-session');
 let pgSession = require('connect-pg-simple')(session);
 let bodyParser = require('body-parser');
-let Q = require('q');
 
 module.exports = function(app, db, dbHelper, options) {
 
@@ -174,7 +173,7 @@ module.exports = function(app, db, dbHelper, options) {
                     joined_at: new Date()
                 };
 
-                return dbHelper.addPlayer(record).then(dbHelper.getFirstResult);
+                return dbHelper.insertPlayer(record).then(dbHelper.getFirstResult);
             }
 
         }).then(function (user) {
