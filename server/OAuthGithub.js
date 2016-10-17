@@ -41,18 +41,23 @@ module.exports = function(app, db, dbHelper, options) {
 
         return dbHelper.getLatestGameResultByUsername(username).then(function(gameResults) {
             let gameResult = gameResults[0];
-            let playerDataIndex = gameResult.players.indexOf(username);
 
-            if (playerDataIndex !== -1) {
-                user.recent_stats = gameResult.heroes[playerDataIndex];
+            if (gameResult) {
+                let playerDataIndex = gameResult.players.indexOf(username);
 
-                if (gameResult.winning_team === user.recent_stats.team) {
-                    user.recent_stats.gameResult = 'Winner!';
-                } else {
-                    user.recent_stats.gameResult = 'Second Place';
+                if (playerDataIndex !== -1) {
+                    user.recent_stats = gameResult.heroes[playerDataIndex];
+
+                    if (gameResult.winning_team === user.recent_stats.team) {
+                        user.recent_stats.gameResult = 'Winner!';
+                    } else {
+                        user.recent_stats.gameResult = 'Second Place';
+                    }
                 }
+            }
 
-            } else {
+            // Player has not played any games yet
+            if (!user.recent_stats) {
                 user.recent_stats = {};
             }
 
