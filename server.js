@@ -10,7 +10,7 @@ var dbHelper = new (require('./database/helper.js'))(db);
 
 var app = express();
 app.use(morgan('dev'));
-var port = process.env.port || 8080;
+var port = process.env.PORT || 8080;
 
 var options = {
     useGithubApp: (argv.github === undefined),
