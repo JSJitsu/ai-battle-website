@@ -5,7 +5,6 @@ let passport = require('passport');
 let session = require('express-session');
 let pgSession = require('connect-pg-simple')(session);
 let bodyParser = require('body-parser');
-let Q = require('q');
 
 module.exports = function(app, db, dbHelper, options) {
 
@@ -42,18 +41,23 @@ module.exports = function(app, db, dbHelper, options) {
 
         return dbHelper.getLatestGameResultByUsername(username).then(function(gameResults) {
             let gameResult = gameResults[0];
-            let playerDataIndex = gameResult.players.indexOf(username);
 
-            if (playerDataIndex !== -1) {
-                user.recent_stats = gameResult.heroes[playerDataIndex];
+            if (gameResult) {
+                let playerDataIndex = gameResult.players.indexOf(username);
 
-                if (gameResult.winning_team === user.recent_stats.team) {
-                    user.recent_stats.gameResult = 'Winner!';
-                } else {
-                    user.recent_stats.gameResult = 'Second Place';
+                if (playerDataIndex !== -1) {
+                    user.recent_stats = gameResult.heroes[playerDataIndex];
+
+                    if (gameResult.winning_team === user.recent_stats.team) {
+                        user.recent_stats.gameResult = 'Winner!';
+                    } else {
+                        user.recent_stats.gameResult = 'Second Place';
+                    }
                 }
+            }
 
-            } else {
+            // Player has not played any games yet
+            if (!user.recent_stats) {
                 user.recent_stats = {};
             }
 
@@ -174,7 +178,7 @@ module.exports = function(app, db, dbHelper, options) {
                     joined_at: new Date()
                 };
 
-                return dbHelper.addPlayer(record).then(dbHelper.getFirstResult);
+                return dbHelper.insertPlayer(record).then(dbHelper.getFirstResult);
             }
 
         }).then(function (user) {

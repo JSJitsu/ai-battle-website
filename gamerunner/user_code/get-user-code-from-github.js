@@ -6,6 +6,9 @@ var secrets = require('../../secrets.js');
 var db = require('../../database/connect.js');
 
 function initiateCodeRequest (fileType) {
+
+  console.log('About to retrieve user code from Github...');
+
   db.query("SELECT * FROM player", function(err, users) {
     if (err) {
       throw err;
@@ -49,8 +52,6 @@ function retrieveCode (users, category) {
       }
     };
 
-    console.log(options.url);
-
     //Sends the request for each user's hero.js and helper.js file to the github API
     request(options, function (error, response, body) {
       console.log(`Saving code for ${githubHandle} / ${category}`);
@@ -67,7 +68,7 @@ function retrieveCode (users, category) {
         var info = JSON.parse(body);
 
         if (info.size > 65536) {
-          console.warn(`${githubHandle} script size of ${info.size} is larger than 64k`)
+          console.warn(`${githubHandle} script size of ${info.size} is larger than 64k`);
           return;
         }
 
@@ -78,8 +79,7 @@ function retrieveCode (users, category) {
         var usersCode = buffer.toString('utf8');
 
         var filePath = path.resolve(
-          secrets.rootDirectory,
-          'user_code',
+          __dirname,
           category,
           githubHandle + '_' + category + '.js'
         );
