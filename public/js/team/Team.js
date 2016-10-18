@@ -1,3 +1,3 @@
 var Team = Backbone.Collection.extend({
-  model: Hero
+    model: Hero
 });

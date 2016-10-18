@@ -8,79 +8,79 @@ var LiveGameRunner = require('./game_logic/LiveGameRunner.js'),
     Q = require('q');
 
 testGameRunner.runGames = function () {
-  var self = testGameRunner,
-      players = [];
+    var self = testGameRunner,
+        players = [];
 
-  console.log('Setting up to run a test game. The results will be stored in the database.');
+    console.log('Setting up to run a test game. The results will be stored in the database.');
 
-  let names = [
-    'Lyn',
-    'Eliwood',
-    'Hector',
-    'Sain',
-    'Kent',
-    'Marcus',
-    'Lowen',
-    'Isadora',
-    'Wallace',
-    'Oswin',
-    'Wil',
-    'Rebecca',
-    'Louise',
-    'Rath',
-    'Florina',
-    'Fiora',
-    'Farina',
-    'Heath',
-    'Vaida',
-    'Erk',
-    'Pent',
-    'Nino',
-    'Serra',
-    'Lucius'
-  ];
-
-  for (var i = 0; i < names.length; i++) {
-    players.push({
-      githubHandle: names[i]
-    });
-  }
-
-  let runner = new GameRunner(self.database);
-  let games = runner.planGames(players);
-
-  let game = games[0];
-  game.gameNumber = 0;
-
-  // Replace the hero brain that uses player files with this simpleton.
-  runner.runHeroBrain = function () {
-    var choices = [
-      'North',
-      'South',
-      'East',
-      'West'
+    let names = [
+        'Lyn',
+        'Eliwood',
+        'Hector',
+        'Sain',
+        'Kent',
+        'Marcus',
+        'Lowen',
+        'Isadora',
+        'Wallace',
+        'Oswin',
+        'Wil',
+        'Rebecca',
+        'Louise',
+        'Rath',
+        'Florina',
+        'Fiora',
+        'Farina',
+        'Heath',
+        'Vaida',
+        'Erk',
+        'Pent',
+        'Nino',
+        'Serra',
+        'Lucius'
     ];
 
-    return choices[Math.floor(Math.random()*4)];
-  };
+    for (var i = 0; i < names.length; i++) {
+        players.push({
+            githubHandle: names[i]
+        });
+    }
 
-  let gameResult = runner.runGame(game);
+    let runner = new GameRunner(self.database);
+    let games = runner.planGames(players);
 
-  return Q.fcall(function () {
-    runner.saveGame(gameResult).then(function () {
-      console.log(gameResult);
+    let game = games[0];
+    game.gameNumber = 0;
+
+  // Replace the hero brain that uses player files with this simpleton.
+    runner.runHeroBrain = function () {
+        var choices = [
+            'North',
+            'South',
+            'East',
+            'West'
+        ];
+
+        return choices[Math.floor(Math.random()*4)];
+    };
+
+    let gameResult = runner.runGame(game);
+
+    return Q.fcall(function () {
+        runner.saveGame(gameResult).then(function () {
+            console.log(gameResult);
+        });
     });
-  });
 };
 
 testGameRunner.updateAndSaveAllHeroStats = function () {
-  return Q.fcall(function () { return true; });
+    return Q.fcall(function () { return true; });
 };
 
 testGameRunner.run = function () {
-  var self = testGameRunner;
+    var self = testGameRunner;
 
-  self.runGames()
+    self.runGames()
     .catch(self.showErrors)
     .finally(self.closeDatabase);
 };

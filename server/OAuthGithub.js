@@ -6,7 +6,7 @@ let session = require('express-session');
 let pgSession = require('connect-pg-simple')(session);
 let bodyParser = require('body-parser');
 
-module.exports = function(app, db, dbHelper, options) {
+module.exports = function (app, db, dbHelper, options) {
 
     app.use(
         session({
@@ -39,7 +39,7 @@ module.exports = function(app, db, dbHelper, options) {
         let user = req.user;
         let username = user.github_login;
 
-        return dbHelper.getLatestGameResultByUsername(username).then(function(gameResults) {
+        return dbHelper.getLatestGameResultByUsername(username).then(function (gameResults) {
             let gameResult = gameResults[0];
 
             if (gameResult) {
@@ -122,17 +122,17 @@ module.exports = function(app, db, dbHelper, options) {
         });
     });
 
-    //Makes the current user's info available
-    app.get('/userInfo', function(req, res) {
+    // Makes the current user's info available
+    app.get('/userInfo', function (req, res) {
         res.json(req.user);
     });
 
-    //Make the current user's code repository updatable
+    // Make the current user's code repository updatable
     var urlEncodedBodyParser = bodyParser.urlencoded({
         extended: false
     });
 
-    app.post('/userInfo', requireAuth, bodyParser.json(), urlEncodedBodyParser, function(req, res) {
+    app.post('/userInfo', requireAuth, bodyParser.json(), urlEncodedBodyParser, function (req, res) {
 
         let user = req.user;
         let data = req.body;
@@ -162,7 +162,7 @@ module.exports = function(app, db, dbHelper, options) {
      * @param  {Object} githubData Github user data
      * @param  {Function} done Callback to serialize the user data.
      */
-    passport.serializeUser(function(githubData, done) {
+    passport.serializeUser(function (githubData, done) {
         dbHelper.getPlayer(githubData.username).then(function (users) {
 
             let user = users[0];
@@ -186,7 +186,7 @@ module.exports = function(app, db, dbHelper, options) {
         });
     });
 
-    passport.deserializeUser(function(githubHandle, done) {
+    passport.deserializeUser(function (githubHandle, done) {
         dbHelper.getPlayer(githubHandle).then(function (users) {
             let user = users[0];
 
@@ -199,10 +199,10 @@ module.exports = function(app, db, dbHelper, options) {
             });
         })
         .done(
-            function(user) {
+            function (user) {
                 done(null, user);
             },
-            function(err) {
+            function (err) {
                 console.error(err);
             }
         );
@@ -222,16 +222,16 @@ module.exports = function(app, db, dbHelper, options) {
         }
     ));
 
-    //Go here to login
+    // Go here to login
     app.get('/auth/github', passport.authenticate('github'));
 
-    //Go here to log out
-    app.get('/logout', function(req, res) {
+    // Go here to log out
+    app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
 
-    //This is where github sends us after it finishes authenticating us
+    // This is where github sends us after it finishes authenticating us
     app.get('/auth/github/callback', passport.authenticate('github', {
         successRedirect: '/',
         failureRedirect: '/'
