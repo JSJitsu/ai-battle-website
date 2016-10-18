@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/JSJitsu/ai-battle-website.svg?branch=master)](https://travis-ci.org/JSJitsu/ai-battle-website)
 # Javascript Battle
 
 Every day there is an epic battle between legendary heroes.  Control your hero with either a pre-defined function from our repo or your own submitted function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
