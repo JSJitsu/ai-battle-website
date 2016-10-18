@@ -1,4 +1,3 @@
-var pg = require('pg');
 var secrets = require('../secrets');
 var path = require('path');
 

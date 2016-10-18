@@ -9,13 +9,11 @@ var LiveGameRunner = require('./game_logic/LiveGameRunner.js'),
 
 testGameRunner.runGames = function () {
   var self = testGameRunner,
-      players = [],
-      runner,
-      names;
+      players = [];
 
   console.log('Setting up to run a test game. The results will be stored in the database.');
 
-  names = [
+  let names = [
     'Lyn',
     'Eliwood',
     'Hector',
@@ -48,10 +46,10 @@ testGameRunner.runGames = function () {
     });
   }
 
-  runner = new GameRunner(self.database);
-  games = runner.planGames(players);
+  let runner = new GameRunner(self.database);
+  let games = runner.planGames(players);
 
-  game = games[0];
+  let game = games[0];
   game.gameNumber = 0;
 
   // Replace the hero brain that uses player files with this simpleton.
@@ -66,7 +64,7 @@ testGameRunner.runGames = function () {
     return choices[Math.floor(Math.random()*4)];
   };
 
-  gameResult = runner.runGame(game);
+  let gameResult = runner.runGame(game);
 
   return Q.fcall(function () {
     runner.saveGame(gameResult).then(function () {

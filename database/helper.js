@@ -74,7 +74,6 @@ class Helper {
 
     errorHandler (error) {
         console.error(error);
-        res.status(500).send(error);
     }
 
     getFirstResult (results) {

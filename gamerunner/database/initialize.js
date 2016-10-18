@@ -47,7 +47,7 @@ CREATE TABLE game_events (
 ];
 
 tableSql.forEach(function (sql) {
-    db.execute(sql, function (err, result) {
+    db.execute(sql, function (err) {
         if (err) {
             console.error(`Error in: ${sql}`);
             throw err;
