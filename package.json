@@ -1,22 +1,23 @@
 {
   "name": "javascript-battle-website",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "> Pithy project description",
   "main": "server.js",
   "scripts": {
-    "test": "eslint gamerunner/ server.js server/ database/ public/js/",
+    "test": "npm run lint",
+    "lint": "eslint gamerunner/ server.js server/ database/ public/js/",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jamesyothers/javascript-battle-website.git"
+    "url": "https://github.com/JSJitsu/ai-battle-website.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jamesyothers/javascript-battle-website/issues"
+    "url": "https://github.com/JSJitsu/ai-battle-website/issues"
   },
-  "homepage": "https://github.com/jamesyothers/javascript-battle-website",
+  "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
     "blanket": "^1.1.6",
     "body-parser": "^1.6.2",
