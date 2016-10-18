@@ -1,7 +1,7 @@
 var db = require ('./connect.js');
 
 var tableSql = [
-`CREATE TABLE player (
+    `CREATE TABLE player (
     github_login varchar(39),
     github_id int UNIQUE,
     avatar_url varchar(100),
@@ -9,7 +9,7 @@ var tableSql = [
     code_branch varchar(100) DEFAULT 'master',
     joined_at timestamp
 )`,
-`CREATE TABLE game (
+    `CREATE TABLE game (
     id bigserial UNIQUE,
     total_turns int,
     played_at timestamp,
@@ -17,20 +17,20 @@ var tableSql = [
     heroes jsonb,
     initial_map jsonb
 )`,
-`CREATE TABLE game_results (
+    `CREATE TABLE game_results (
     game_id bigint references game(id) UNIQUE,
     winning_team varchar(39),
     players varchar(39)[],
     heroes jsonb
 )`,
-`CREATE TYPE actor_action AS ENUM ('North', 'East', 'South', 'West');
+    `CREATE TYPE actor_action AS ENUM ('North', 'East', 'South', 'West');
 CREATE TABLE game_events (
     game_id bigint,
     turn int,
     actor smallint,
     action actor_action
 )`,
-`CREATE TABLE player_lifetime_stats (
+    `CREATE TABLE player_lifetime_stats (
     github_login varchar(39),
     kills bigint DEFAULT 0,
     deaths bigint DEFAULT 0,
@@ -47,7 +47,7 @@ CREATE TABLE game_events (
 ];
 
 tableSql.forEach(function (sql) {
-    db.execute(sql, function (err, result) {
+    db.execute(sql, function (err) {
         if (err) {
             console.error(`Error in: ${sql}`);
             throw err;

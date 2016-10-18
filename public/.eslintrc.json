@@ -1,0 +1,21 @@
+{
+    "extends": [
+        "../.eslintrc.json"
+    ],
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 5
+    },
+    "globals": {
+        "EJS": true,
+        "$": true,
+        "_": true,
+        "Backbone": true,
+        "Hero": true,
+        "BoardView": true,
+        "TeamView": true,
+        "Powerange": true
+    }
+}

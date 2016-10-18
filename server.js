@@ -46,7 +46,7 @@ if (options.useGithubApp && (!options.github.clientId || !options.github.clientS
 app.use('/', express.static(__dirname + '/public'));
 
 // must serve up ejs files individually for Azure to accept in deployment
-app.get('/ejs_templates/:ejsTemplate', function(req, res) {
+app.get('/ejs_templates/:ejsTemplate', function (req, res) {
     // file server
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(fs.readFileSync(__dirname+'/public/ejs_templates/' +  req.params.ejsTemplate + '.ejs'));
@@ -61,7 +61,7 @@ if (options.useGithubApp) {
 var router = express.Router();
 
 // Returns the state of the latest game
-router.get('/game(/:id)?', function(req, res) {
+router.get('/game(/:id)?', function (req, res) {
     var gameId = req.params.id,
         query;
 
@@ -91,7 +91,7 @@ router.get('/game(/:id)?', function(req, res) {
 });
 
 // Returns the leaderboard data for the specified time period and stat
-router.get('/leaderboard/:timePeriod/:stat', function(req, res) {
+router.get('/leaderboard/:timePeriod/:stat', function (req, res) {
 
     var stat = req.params.stat;
     var allowedStats = {
