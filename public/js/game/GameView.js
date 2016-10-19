@@ -69,7 +69,7 @@ var GameView = Backbone.View.extend({
             className: 'team-info t-red',
         });
         redTeamView.teamColor = 'Team Red';
-        redTeamView.diamonds = game.totalTeamDiamonds[0];
+        redTeamView.diamonds = game.totalTeamDiamonds[1];
         redTeamView.render();
 
         var blueTeamView = new TeamView({
@@ -77,7 +77,7 @@ var GameView = Backbone.View.extend({
             className: 'team-info t-blue'
         });
         blueTeamView.teamColor = 'Team Blue';
-        blueTeamView.diamonds = game.totalTeamDiamonds[1];
+        blueTeamView.diamonds = game.totalTeamDiamonds[0];
         blueTeamView.render();
 
     // Add all board html
