@@ -76,7 +76,7 @@ router.get('/game(/:id)?', function (req, res) {
             var game = games.shift();
 
             if (game) {
-                return Q.ninvoke(db, 'query', `SELECT turn, actor, action FROM game_events WHERE game_id = ${game.id}`)
+                return Q.ninvoke(db, 'query', `SELECT turn, actor, action FROM game_events WHERE game_id = ${game.id} ORDER BY turn ASC`)
                     .then(function (gameEvents) {
                         game.events = gameEvents;
                         res.status(200).send(game);
