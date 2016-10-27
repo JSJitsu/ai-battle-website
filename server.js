@@ -62,13 +62,13 @@ var router = express.Router();
 
 // Returns the state of the latest game
 router.get('/game(/:id)?', function (req, res) {
-    var gameId = req.params.id,
+    var gameId = Number.parseInt(req.params.id, 10),
         query;
 
-    if (!gameId) {
-        query = "SELECT * FROM game ORDER BY id DESC LIMIT 1";
-    } else {
+    if (Number.isInteger(gameId) && gameId > 0) {
         query = `SELECT * FROM game WHERE id = ${gameId}`;
+    } else {
+        query = "SELECT * FROM game ORDER BY id DESC LIMIT 1";
     }
 
     return Q.ninvoke(db, 'query', query)
