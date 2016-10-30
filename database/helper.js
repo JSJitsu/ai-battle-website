@@ -96,6 +96,16 @@ class Helper {
         return this.performQuery(`SELECT * FROM game_results WHERE '${username}' = ANY(players) ORDER BY game_id DESC`);
     }
 
+    getGameResultsByUsername (username) {
+        return this.performQuery(`
+            SELECT id, total_turns, played_at, winning_team, game_results.heroes
+            FROM game
+            LEFT JOIN game_results ON game.id = game_results.game_id
+            WHERE '${username}' = ANY(game.players)
+            ORDER BY game_id DESC
+        `);
+    }
+
     getPlayer (username) {
         return this.performQuery(`SELECT * FROM player WHERE github_login = '${username}'`);
     }
