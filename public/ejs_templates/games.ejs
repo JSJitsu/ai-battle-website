@@ -1,0 +1,22 @@
+  <div class="centered">
+    <br>
+    <table class="table table-striped table-bordered table-responsive scaling-table">
+      <tr class="scaling-headers">
+        <td>Date</td>
+        <td>Final Turn</td>
+        <td>Team Placement</td>
+      </tr>
+      <% get('games').forEach(function (game) { %>
+      <tr>
+      	<td><a class="game-link" href="#game/<%= game.id %>"><%= game.played_at.split('T')[0] %></a></td>
+        <td><%= game.total_turns %></td>
+        <td><%= game.gameResult %></td>
+      </tr>
+      <% }); %>
+    </table>
+  </div>
+  <div class="text-center">
+    <a href="/logout" type="button" class="btn btn-default logoutButton">
+      <i class="glyphicon glyphicon-log-out">&nbsp;</i>Log out
+    </a>
+  </div>

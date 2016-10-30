@@ -88,21 +88,29 @@
   font-size: 12px;
 }
 
-.lifetime-table {
-  position: relative;
-  top: 50px;
+.leaderboard-table, .scaling-table {
+  width: auto;
+  color: #eaeaea;
 }
 
 .leaderboard-table {
-  color: #eaeaea;
   text-align: center;
   width: 60vw;
 }
 
-.leaderboard-headers {
+.scaling-table td {
+  text-align: left;
+  width: 150px;
+}
+
+.leaderboard-headers, .scaling-headers {
   th {
     text-align: center;
   }
+}
+
+.center-column-2 tr td:nth-child(2) {
+  text-align: center;
 }
 
 .leaderboard-time-param {
@@ -125,8 +133,8 @@
   width: 26vw;
 }
 
-.lifetime-table-header {
-  font-weight: bold;
+.scaling-table td {
+  padding: 0 20px
 }
 
 .repoInput {

@@ -6,12 +6,21 @@ var User = Backbone.Model.extend({
   // set id attribute so that we can do put requests
   // backbone looks for 'id' otherwise
     idAttribute: '_id',
+
+    fetchGames: function (callback) {
+        this.fetch({
+            url: this.url + '/games',
+            success: callback
+        });
+    },
+
     fetchRecent: function (callback) {
         this.fetch({
             url: this.url + '/stats/recent',
             success: callback
         });
     },
+
     fetchAverage: function (callback) {
         this.fetch({
             url: this.url + '/stats/average',

@@ -1,38 +1,16 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 text-center">
-      <h2><%= get('github_login') %></h2>
-        <hr class="star-primary">
-    </div>
-  </div>
-  <div class="row nav-buttons">
-    <div class="btn-group btn-group-justified">
-      <div class="general btn-group settings">
-        <button type="button" class="btn btn-default">Settings</button>
-      </div>
-      <div class="active rules btn-group recentStats">
-        <button type="button" class="btn btn-default active">Recent Stats</button>
-      </div>
-      <div class="btn-group lifetimeStats">
-        <button type="button" class="btn btn-default">Lifetime Stats</button>
-      </div>
-      <div class="btn-group averageStats">
-        <button type="button" class="btn btn-default">Average Stats</button>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <table class="table table-striped table-bordered table-responsive lifetime-table">
-      <tr class="lifetime-table-header">
-        <td>Category</td>
-        <td>Stats</td>
+  <div class="centered">
+    <br>
+    <table class="table table-striped table-bordered table-responsive scaling-table center-column-2">
+      <tr class="scaling-headers">
+        <th>Category</th>
+        <th>Stats</th>
       </tr>
       <tr>
-        <td>Team Result:</td>
+        <td>Team Result</td>
         <td><%= get('recent_stats').gameResult %></td>
       </tr>
       <tr>
-        <td>Survived:</td>
+        <td>Survived</td>
         <td><%
           var survived = (get('recent_stats').dead === false);
         %><%=
@@ -40,25 +18,25 @@
         %></td>
       </tr>
       <tr>
-        <td>Kills:</td>
+        <td>Kills</td>
         <td><%= get('recent_stats').kills %></td>
       </tr>
       <tr>
-        <td>Damage dealt:</td>
+        <td>Damage dealt</td>
         <td><%= get('recent_stats').damageGiven %></td>
       </tr>
       <tr>
-        <td>Mines captured:</td>
+        <td>Mines captured</td>
         <td><%= get('recent_stats').minesTaken %></td>
       </tr>
-        <td>Diamonds earned:</td>
+        <td>Diamonds earned</td>
         <td><%= get('recent_stats').diamondsEarned %></td>
       <tr>
-        <td>Health recovered:</td>
+        <td>Health recovered</td>
         <td><%= get('recent_stats').healthRecovered %></td>
       </tr>
       <tr>
-        <td>Graves robbed:</td>
+        <td>Graves robbed</td>
         <td><%= get('recent_stats').gravesTaken %></td>
       </tr>
     </table>
@@ -68,4 +46,3 @@
       <i class="glyphicon glyphicon-log-out">&nbsp;</i>Log out
     </a>
   </div>
-</div>

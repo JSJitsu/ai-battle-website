@@ -3,8 +3,6 @@ var UserView = Backbone.View.extend({
     initialize: function () {
         var view = this;
 
-        view.viewing = {};
-        view.viewing = 'settings';
         view.render();
 
         view.model.on('change', view.render, view);
@@ -12,10 +10,13 @@ var UserView = Backbone.View.extend({
 
     events: {
         'submit': 'handleSubmit',
+        'click .btn-group': 'toggleActive',
         'click .settings': 'showSettings',
+        'click .recentGames': 'showGames',
         'click .recentStats': 'showRecent',
         'click .lifetimeStats': 'showLifetime',
-        'click .averageStats': 'showAverage'
+        'click .averageStats': 'showAverage',
+        'click .game-link': 'scrollToGame'
     },
 
     handleSubmit: function (event) {
@@ -38,32 +39,46 @@ var UserView = Backbone.View.extend({
             this.$el.find(".form-group").removeClass("has-success");
             this.$el.find(".form-group").removeClass("has-feedback");
       // render to get current code repo value displayed rather than empty string
-            this.render();
+            this.showSettings();
         }
     },
 
+    toggleActive: function (activeEvent) {
+        this.$el.find('.btn-group > button').removeClass('active');
+
+        $(activeEvent.target).addClass('active');
+    },
+
     showSettings: function (event) {
-        event.preventDefault();
-        this.viewing = "settings";
-        this.render();
+        this.$el.find('#userview-contents').html(
+            new EJS({ url: '/ejs_templates/settings' }).render(this.model)
+        );
+    },
+
+    showGames: function (event) {
+        var me = this;
+
+        me.model.fetchGames(function () {
+            me.$el.find('#userview-contents').html(
+                new EJS({ url: '/ejs_templates/games' }).render(me.model)
+            );
+        });
     },
 
     showRecent: function (event) {
-        event.preventDefault();
-
         var me = this;
 
         me.model.fetchRecent(function () {
-            me.render();
+            me.$el.find('#userview-contents').html(
+                new EJS({ url: '/ejs_templates/recent' }).render(me.model)
+            );
         });
-
-        me.viewing = "recent";
     },
 
     showLifetime: function (event) {
-        event.preventDefault();
-        this.viewing = "lifetime";
-        this.render();
+        this.$el.find('#userview-contents').html(
+            new EJS({ url: '/ejs_templates/lifetime' }).render(this.model.get('lifetime_stats'))
+        );
     },
 
     showAverage: function (event) {
@@ -71,28 +86,31 @@ var UserView = Backbone.View.extend({
         var me = this;
 
         me.model.fetchAverage(function () {
-            me.render();
+            me.$el.find('#userview-contents').html(
+                new EJS({ url: '/ejs_templates/average' }).render(me.model.get('average_stats'))
+            );
         });
+    },
 
-        me.viewing = "average";
+    scrollToGame: function () {
+        $('html, body').animate({
+            scrollTop: $('#replay').offset().top
+        }, 500);
     },
 
     render: function () {
         var githubHandle = this.model.get('github_login');
         var html;
-        if (githubHandle && this.viewing === "settings") {
-            html = new EJS({url: '/ejs_templates/settings'}).render(this.model);
-        } else if (githubHandle && this.viewing === 'lifetime') {
-            html = new EJS({url: '/ejs_templates/lifetime'}).render(this.model);
-        } else if (githubHandle && this.viewing === 'recent') {
-            html = new EJS({url: '/ejs_templates/recent'}).render(this.model);
-        } else if (githubHandle && this.viewing === 'average') {
-            var averageStats = this.model.average();
-            averageStats['githubHandle'] = this.model.get('github_login');
-            html = new EJS({url: '/ejs_templates/average'}).render(averageStats);
-        } else if (!githubHandle) {
-            html = new EJS({url: '/ejs_templates/notLoggedIn'}).render(this.model);
+
+        if (!githubHandle) {
+            html = new EJS({ url: '/ejs_templates/notLoggedIn' }).render(this.model);
+        } else {
+            html = new EJS({ url: '/ejs_templates/userview' }).render({
+                username: githubHandle,
+                contents: new EJS({ url: '/ejs_templates/settings' }).render(this.model)
+            });
         }
+
         this.$el.html(html);
     }
 
