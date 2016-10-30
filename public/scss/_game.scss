@@ -95,6 +95,10 @@
     position: relative;
     top: 5px;
   }
+  .indicator {
+    position: initial;
+    padding-right: 5px !important;
+  }
 }
 
 .winner-msg {
