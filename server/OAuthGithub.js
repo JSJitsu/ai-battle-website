@@ -35,6 +35,34 @@ module.exports = function (app, db, dbHelper, options) {
         next();
     }
 
+    app.get('/userInfo/games', requireAuth, function (req, res) {
+        let user = req.user;
+        let username = user.github_login;
+
+        return dbHelper.getGameResultsByUsername(username).then(function (gameResults) {
+
+            user.games = gameResults || [];
+
+            user.games.forEach(function (game) {
+
+                game.gameResult = 'Second Place';
+
+                for (let hero of game.heroes) {
+                    if (hero.name === username) {
+                        if (hero.team.toString() === game.winning_team) {
+                            game.gameResult = 'Winner!';
+                            break;
+                        }
+                    }
+                }
+
+                delete game.heroes;
+            });
+
+            res.send(user);
+        });
+    });
+
     app.get('/userInfo/stats/recent', requireAuth, function (req, res) {
         let user = req.user;
         let username = user.github_login;
