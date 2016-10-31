@@ -23,10 +23,12 @@ var router = {
     },
     addListenerAndTrigger: function (route, handler) {
         this.on(route, handler);
-        this.trigger(arguments);
-    },
-    trigger: function (listenerSet) {
-        listenerSet[1]();
+
+        if (window.location.hash) {
+            this.handler();
+        } else {
+            handler();
+        }
     }
 };
 

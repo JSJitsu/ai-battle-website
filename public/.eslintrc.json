@@ -16,6 +16,7 @@
         "Hero": true,
         "BoardView": true,
         "TeamView": true,
-        "Powerange": true
+        "Powerange": true,
+        "app": true
     }
 }

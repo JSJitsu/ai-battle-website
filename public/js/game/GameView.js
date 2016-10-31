@@ -9,6 +9,8 @@ var GameView = Backbone.View.extend({
     initialize: function (config) {
         var view = this;
 
+        view.teamInfoViews = [];
+
         if (view.model.get('noGameData')) {
             view.renderError();
         } else {
@@ -46,43 +48,59 @@ var GameView = Backbone.View.extend({
         $('#replay .spinner').hide();
     },
     render: function () {
-        var game = this.model.get('game'),
-            $gameHtml = this.$el.find('.map'),
-            boardView;
+        var view = this,
+            game = view.model.get('game'),
+            $gameHtml = view.$el.find('.map');
 
-        boardView = new BoardView({
-            board: game.board
-        });
+        if (!view.boardView) {
+            view.boardView = new BoardView({
+                board: game.board
+            });
 
-        $gameHtml.html(boardView.$el);
+            $gameHtml.html(view.boardView.$el);
+        } else {
+            view.boardView.board = game.board;
+            view.boardView.render();
+        }
 
-        this.$el.find('.turn').text('Turn: ' + this.model.get('turn'));
+        view.$el.find('.turn').text('Turn: ' + view.model.get('turn'));
 
-        this.checkWinner();
+        view.checkWinner();
 
     // Show game update messages
         $('.messages').text(game.killMessage || game.attackMessage);
 
-    // Add html for team info
-        var redTeamView = new TeamView({
-            collection: game.teams[1],
-            className: 'team-info t-red',
-        });
-        redTeamView.teamColor = 'Team Red';
-        redTeamView.diamonds = game.totalTeamDiamonds[1];
-        redTeamView.render();
+        var teamConfigs = [
+            {
+                className: 'team-info t-blue',
+                teamColor: 'Team Blue'
+            },
+            {
+                className: 'team-info t-red',
+                teamColor: 'Team Red'
+            }
+        ];
 
-        var blueTeamView = new TeamView({
-            collection: game.teams[0],
-            className: 'team-info t-blue'
-        });
-        blueTeamView.teamColor = 'Team Blue';
-        blueTeamView.diamonds = game.totalTeamDiamonds[0];
-        blueTeamView.render();
+        // Add the team roster views for each team
+        game.teams.forEach(function (team, index) {
+            var teamView = view.teamInfoViews[index];
+            if (!teamView) {
+                teamView = view.teamInfoViews[index] = new TeamView({
+                    className: teamConfigs[index].className,
+                    collection: game.teams[index],
+                });
 
-    // Add all board html
-        $gameHtml.append(redTeamView.$el);
-        $gameHtml.append(blueTeamView.$el);
+                teamView.teamColor = teamConfigs[index].teamColor;
+                teamView.diamonds = game.totalTeamDiamonds[index];
+
+                teamView.render();
+                $gameHtml.append(teamView.$el);
+            } else {
+                teamView.collection = game.teams[index];
+                teamView.diamonds = game.totalTeamDiamonds[index];
+                teamView.render();
+            }
+        });
     },
     renderControlArea: function () {
         var playControlsHtml,
@@ -129,13 +147,6 @@ var GameView = Backbone.View.extend({
         this.model.nextTurn();
 
         view.render();
-
-        userModel = view.userModel;
-        currentUserHandle = userModel.get('github_login');
-
-        if (currentUserHandle) {
-            view.$el.find('.current-user-' + currentUserHandle).append('<span class="arrow"></span>');
-        }
     },
     sendSliderToTurn: function (turn) {
     // The "track" the sword slides along

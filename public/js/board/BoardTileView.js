@@ -11,11 +11,11 @@ var BoardTileView = Backbone.View.extend({
         var tile = this.tile,
             subType = tile.subType,
             type = tile.type,
-            html,
+            html = '',
             colors,
             owner,
             extraClasses = '';
-      
+
         colors = {
             0: 'team-blue',
             1: 'team-red'
@@ -23,13 +23,13 @@ var BoardTileView = Backbone.View.extend({
 
         owner = tile.owner;
 
-    // TODO : make a factory pattern or something for this to be way less complicated and repetative     
+        // TODO : make a factory pattern or something for this to be way less complicated and repetative
 
         if (subType !== 'Unoccupied') {
             if (subType === 'BlueFainted' || subType === 'RedFainted') {
                 extraClasses = 'fainted';
             }
-      
+
             if (type === 'DiamondMine') {
                 var spriteImg = gameAssets[subType];
                 if (owner && owner.team === 0) {
@@ -44,7 +44,7 @@ var BoardTileView = Backbone.View.extend({
             if (extraClasses === 'fainted') {
                 html += '<span class="indicator fainted">' + tile.id + '</span>';
             }
-      
+
             if (type === 'Hero') {
                 html = this.buildHeroHtml(tile, colors);
             } else if (type === 'DiamondMine') {
@@ -52,9 +52,15 @@ var BoardTileView = Backbone.View.extend({
                     html += '<span class="indicator ' + colors[owner.team] +'">' + owner.id + '</span>';
                 }
             }
+        }
 
+        // This section "diffs" the tile to see if its html should change. It provides a massive
+        // performance boost by only needing to update changed tiles instead of every tile.
+        if (this.lastHtml !== html) {
             this.$el.html(html);
         }
+
+        this.lastHtml = html;
     },
     buildHeroHtml: function (tile, colors) {
         var name = tile.name,
@@ -73,7 +79,9 @@ var BoardTileView = Backbone.View.extend({
         html += '<span class="indicator ' + colors[tile.team] +'">' + heroId + '</span>';
         html += '<span class="lifebar"><span class="life-capacity" style="background-color:hsl(' + HP + ', 60%,35%);height:' + (HP * .9) + '%"></span></span>';
 
-        this.$el.addClass('current-user-' + name);
+        if (app.user.get('github_login') === name) {
+            html += '<span class="arrow"></span>';
+        }
 
         return html;
     }
