@@ -93,11 +93,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     position: relative;
-    top: 5px;
+    top: 7px;
   }
   .indicator {
     position: initial;
-    padding-right: 5px !important;
+    margin-right: 5px !important;
+    display: inline-block;
+    line-height: 10px;
   }
 }
 
