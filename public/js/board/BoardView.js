@@ -5,32 +5,45 @@ var BoardView = Backbone.View.extend({
     className: 'battle-map',
     initialize: function (config) {
         this.board = config.board;
+        this.rows = [];
         this.render();
     },
     render: function () {
-        this.$el.html('');
         this.createBoardView();
+        this.rendered = true;
     },
     createBoardView: function () {
         var me = this,
             fragment = document.createDocumentFragment();
 
-        _.each(this.board.tiles, function (tileRow) {
+        _.each(this.board.tiles, function (tileRow, rowIndex) {
             var $tr = $('<div class="tile-row">');
 
-            _.each(tileRow, function (tile) {
-                var tileView;
+            if (!me.rows[rowIndex]) {
+                me.rows[rowIndex] = [];
+            }
 
-                tileView = new BoardTileView({
-                    tile: tile
-                });
+            _.each(tileRow, function (tile, tileIndex) {
+                var tileView = me.rows[rowIndex][tileIndex];
 
-                $tr.append(tileView.$el);
+                if (!tileView) {
+                    me.rows[rowIndex][tileIndex] = tileView = new BoardTileView({
+                        tile: tile
+                    });
+
+                    $tr.append(tileView.$el);
+                } else {
+                    tileView.tile = tile;
+                    tileView.render();
+                }
+
             });
 
             fragment.appendChild($tr[0]);
         });
 
-        me.$el.append(fragment);
+        if (!this.rendered) {
+            me.$el.html(fragment);
+        }
     }
 });

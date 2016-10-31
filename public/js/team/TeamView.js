@@ -3,7 +3,6 @@
 var TeamView = Backbone.View.extend({
     className: 'list-group',
     tagName: 'div',
-    teamColor: undefined,
     render: function () {
         this.$el.html('');
         if (this.teamColor){
