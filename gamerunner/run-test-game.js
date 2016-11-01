@@ -61,14 +61,14 @@ testGameRunner.runGames = function () {
             'West'
         ];
 
-        return choices[Math.floor(Math.random()*4)];
+        return choices[Math.floor(Math.random() * choices.length)];
     };
 
     let gameResult = runner.runGame(game);
 
     return Q.fcall(function () {
-        runner.saveGame(gameResult).then(function () {
-            console.log(gameResult);
+        return runner.saveGame(gameResult).then(function () {
+            console.log(`Game saved with id ${gameResult.gameId}.`);
         });
     });
 };
