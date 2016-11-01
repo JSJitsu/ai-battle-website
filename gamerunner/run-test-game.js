@@ -42,7 +42,7 @@ testGameRunner.runGames = function () {
 
     for (var i = 0; i < names.length; i++) {
         players.push({
-            githubHandle: names[i]
+            github_login: names[i]
         });
     }
 
