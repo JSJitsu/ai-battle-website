@@ -73,7 +73,7 @@ var animateObjects = function() {
       $hero = $(".parallax-hero.red");
   
   $parallax.css({
-    "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px ",
+    "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px "
   });
 
   $hero.css({
