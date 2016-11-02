@@ -1,3 +1,9 @@
+.body-holder {
+  width: 97%;
+  width:1060px;
+  margin:0 auto;
+}
+
 .outer {
   position: relative;
 }
@@ -24,6 +30,7 @@
 .team-info {
   top: 0;
   position: absolute;
+  width:140px;
 }
 
 .diamond-display {
@@ -113,10 +120,42 @@
 }
 
 .parallax-inner {
-  background:url(//i.imgur.com/UZKEjzG.png) no-repeat;
+  background-repeat: repeat-x;
   height:450px;
   position:relative;
   box-shadow:inset 0 0 20px rgba(0,0,0,.5);
+}
+
+.parallax-inner.afternoon {
+  background-image:url(../img/afternoon_header.png);
+}
+
+.parallax-inner.evening {
+  background-image:url(../img/evening_header.png);
+}
+
+.parallax-inner.late_afternoon {
+  background-image:url(../img/late_afternoon_header.png);
+}
+
+.parallax-inner.late_evening {
+  background-image:url(../img/late_evening_header.png);
+}
+
+.parallax-inner.late_morning {
+  background-image:url(../img/late_morning_header.png);
+}
+
+.parallax-inner.late_night {
+  background-image:url(../img/late_night_header.png);
+}
+
+.parallax-inner.morning {
+  background-image:url(../img/morning_header.png);
+}
+
+.parallax-inner.night {
+  background-image:url(../img/night_header.png);
 }
 
 .parallax-hero {
