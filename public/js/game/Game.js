@@ -138,5 +138,5 @@ var Game = Backbone.Model.extend({
         }
 
         return false;
-    },
+    }
 });

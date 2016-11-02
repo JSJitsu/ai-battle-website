@@ -87,7 +87,7 @@ var GameView = Backbone.View.extend({
             if (!teamView) {
                 teamView = view.teamInfoViews[index] = new TeamView({
                     className: teamConfigs[index].className,
-                    collection: game.teams[index],
+                    collection: game.teams[index]
                 });
 
                 teamView.teamColor = teamConfigs[index].teamColor;
