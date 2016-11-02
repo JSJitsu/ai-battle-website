@@ -47,6 +47,7 @@ $('.navbar-collapse ul li a').click(function() {
 
 var init = function() {
   scrollIntervalId = setInterval(updatePage,10);
+  $('.parallax-inner').addClass(getTime());
 };
 
 var setScrollTops = function() {
@@ -72,13 +73,35 @@ var animateObjects = function() {
       $hero = $(".parallax-hero.red");
   
   $parallax.css({
-    "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px "
+    "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px ",
   });
 
   $hero.css({
     "bottom":scrollTop / 4 + 64 + "px"
   });
   
+}
+
+function getTime() {
+  var hour = new Date().getHours();
+  var times = [
+    {hour: 0,name: 'late_night'},
+    {hour: 5, name: 'morning'},
+    {hour: 11, name: 'late_morning'},
+    {hour: 13, name: 'afternoon'},
+    {hour: 15, name: 'late_afternoon'},
+    {hour: 17, name: 'evening'},
+    {hour: 19, name: 'late_evening'},
+    {hour: 21, name: 'night'}
+  ];
+  
+  for (var i in times) {
+    console.warn(hour,times[i].hour);
+    if (hour < times[i].hour) {
+      return times[i].name;
+    }
+  }
+  return times[times.length].name;
 }
 
 init();
