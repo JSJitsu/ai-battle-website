@@ -99,7 +99,9 @@ module.exports = function (app, db, dbHelper, options) {
 
         return dbHelper.getAllGameResultsByUsername(username).then(function (gameResults) {
 
+            let deaths = 0;
             let kills = 0;
+            let kdRatio = 0;
             let minesTaken = 0;
             let damageGiven = 0;
             let gravesTaken = 0;
@@ -113,7 +115,9 @@ module.exports = function (app, db, dbHelper, options) {
                 if (playerDataIndex !== -1) {
                     let stats = gameResult.heroes[playerDataIndex];
 
+                    deaths += (stats.dead ? 1 : 0);
                     kills += stats.kills;
+                    kdRatio += (kills / deaths);
                     minesTaken += stats.minesTaken;
                     damageGiven += stats.damageGiven;
                     gravesTaken += stats.gravesTaken;
@@ -126,17 +130,19 @@ module.exports = function (app, db, dbHelper, options) {
             let totalGames = gameResults.length;
 
             if (totalGames > 0) {
-                kills = kills / totalGames;
-                minesTaken = minesTaken / totalGames;
-                damageGiven = damageGiven / totalGames;
-                gravesTaken = gravesTaken / totalGames;
-                healthGiven = healthGiven / totalGames;
-                diamondsEarned = diamondsEarned / totalGames;
-                healthRecovered = healthRecovered / totalGames;
+                kills = (kills / totalGames).toFixed(2);
+                kdRatio = (kdRatio / totalGames).toFixed(2);
+                minesTaken = (minesTaken / totalGames).toFixed(2);
+                damageGiven = (damageGiven / totalGames).toFixed(2);
+                gravesTaken = (gravesTaken / totalGames).toFixed(2);
+                healthGiven = (healthGiven / totalGames).toFixed(2);
+                diamondsEarned = (diamondsEarned / totalGames).toFixed(2);
+                healthRecovered = (healthRecovered / totalGames).toFixed(2);
             }
 
             user.average_stats = {
                 gamesPlayed: totalGames,
+                kdRatio,
                 kills,
                 minesTaken,
                 damageGiven,
