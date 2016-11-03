@@ -71,7 +71,7 @@ var updatePage = function() {
 var animateObjects = function() {
   var $parallax = $(".parallax-inner"),
       $hero = $(".parallax-hero.red");
-  
+
   $parallax.css({
     "background-position":"50% -"+ (( scrollTop / 4 ) + 500 )+ "px "
   });
@@ -79,7 +79,7 @@ var animateObjects = function() {
   $hero.css({
     "bottom":scrollTop / 4 + 64 + "px"
   });
-  
+
 }
 
 function getTime() {
@@ -94,14 +94,14 @@ function getTime() {
     {hour: 19, name: 'late_evening'},
     {hour: 21, name: 'night'}
   ];
-  
+
   for (var i in times) {
-    console.warn(hour,times[i].hour);
     if (hour < times[i].hour) {
       return times[i].name;
     }
   }
-  return times[times.length].name;
+
+  return times[times.length - 1].name;
 }
 
 init();
