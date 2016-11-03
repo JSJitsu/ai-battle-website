@@ -256,6 +256,17 @@ footer {
   margin-top: 20px;
 }
 
+.team-name {
+  padding: 0 0 0 4px;
+  font-size: 16pt;
+}
+
+.team-diamonds {
+  padding: 5px 4px;
+  background-color: #555;
+  color: #ddd;
+}
+
 .success .team-info a:focus, .success .team-info a:hover {
   color: #2C3E50 !important
 }

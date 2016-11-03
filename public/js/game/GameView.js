@@ -67,8 +67,17 @@ var GameView = Backbone.View.extend({
 
         view.checkWinner();
 
-    // Show game update messages
-        $('.messages').text(game.killMessage || game.attackMessage);
+        // Show game update messages
+        var messageText = game.killMessage || game.attackMessage;
+        var $messageEl = view.$('.messages');
+
+        if (messageText) {
+            $messageEl.css('opacity', 1);
+            $messageEl.text(messageText);
+        } else {
+            var opacity = $messageEl.css('opacity');
+            $messageEl.css('opacity', opacity - 0.2);
+        }
 
         var teamConfigs = [
             {
