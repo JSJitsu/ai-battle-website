@@ -117,7 +117,7 @@ module.exports = function (app, db, dbHelper, options) {
 
                     deaths += (stats.dead ? 1 : 0);
                     kills += stats.kills;
-                    kdRatio += (kills / deaths);
+                    kdRatio += (kills / (deaths || 1));
                     minesTaken += stats.minesTaken;
                     damageGiven += stats.damageGiven;
                     gravesTaken += stats.gravesTaken;
