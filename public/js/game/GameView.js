@@ -45,7 +45,7 @@ var GameView = Backbone.View.extend({
         view.renderControlArea();
     },
     onAfterInitialize: function () {
-        $('#replay .spinner').hide();
+        $('#replay .spinner').remove();
     },
     render: function () {
         var view = this,
