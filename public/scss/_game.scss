@@ -7,10 +7,12 @@
 .outer {
   position: relative;
 }
+
 .turn{
   font-size: 12px;
   font-family:"Press Start 2P";
-  bottom: 19%;
+  left: 14%;
+  bottom: 17%;
   position: absolute;
 }
 
@@ -56,22 +58,21 @@
 
 .range-bar {
   margin: 0 auto;
-  width: 43%;
+  width: 420px;
 }
 
 .range-handle {
-  bottom: 10px;
-  height: 45px;
-  width: 45px;
-  right: 20px;
   background-color: transparent;
-  top: -13px;
-  position: absolute;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0;
-  background-image:url(../img/blue_sword.png);
-  background-size:45px;
+  background-size: 39px;
+  background-image: url(../img/blue_sword.png);
+  background-position: 0;
+}
+
+.range-min, .range-max {
+  color: #ddd;
 }
 
 .play-controls {

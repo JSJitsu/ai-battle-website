@@ -45,7 +45,7 @@ var LeaderboardView = Backbone.View.extend({
         var initialHtml =
         'Sort by: ' +
         '<select class="leaderboard-stat-param" name="time">' + statsHtml.join('') + '</select><br><br>' +
-        '<table class="table table-striped table-bordered table-responsive leaderboard-table">' + 
+        '<table class="table table-striped table-bordered table-responsive leaderboard-table">' +
         '</table>';
 
 
@@ -86,7 +86,7 @@ var LeaderboardView = Backbone.View.extend({
                     return;
                 }
             }.bind(this));
-      
+
       // If last selected stat is not valid for this time frame,
       // default to the first stat
             if (!inList) {
@@ -119,15 +119,16 @@ var LeaderboardView = Backbone.View.extend({
 
     render: function (failed) {
 
-    // Update Leaderboard
+        // Update Leaderboard
         var $table = this.$el.find('table.leaderboard-table');
-    
+
         if (failed) {
             $table.html('<tr><th>We couldn\'t find the information you\'re looking for.</th></tr>');
         } else {
             var displayStats = this.displayStats;
 
             var tableHtml =
+        '<tbody>' +
         '<tr class="lifetime-table-header leaderboard-headers">' +
           '<th class="leaderboard-rank">Rank</th>' +
           '<th class="leaderboard-name">Name</th>' +
@@ -140,7 +141,7 @@ var LeaderboardView = Backbone.View.extend({
             stats.forEach( function (user, idx) {
                 tableHtml += '<tr>';
 
-        // Add the rank of the user to table
+                // Add the rank of the user to table
                 tableHtml += '<td>' + (idx + 1) + '</td>';
                 tableHtml += '<td><a href="https://github.com/' + encodeURIComponent(user.github_login) + '/hero-starter">' + user.github_login + '</a></td>';
                 tableHtml += displayStats.reduce(function (html, displayStat) {
@@ -150,7 +151,7 @@ var LeaderboardView = Backbone.View.extend({
 
                 tableHtml += '</tr>';
             });
-            tableHtml += '</table>';
+            tableHtml += '</tbody></table>';
             $table.html(tableHtml);
         }
     }

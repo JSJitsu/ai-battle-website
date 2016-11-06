@@ -80,7 +80,7 @@ var BoardTileView = Backbone.View.extend({
         html += '<span class="lifebar"><span class="life-capacity" style="background-color:hsl(' + HP + ', 60%,35%);height:' + (HP * .9) + '%"></span></span>';
 
         if (app.user.get('github_login') === name) {
-            html += '<span class="arrow"></span>';
+            html += '<span class="user-arrow glyphicon glyphicon-triangle-bottom"></span>';
         }
 
         return html;

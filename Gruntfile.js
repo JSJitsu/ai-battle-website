@@ -47,7 +47,6 @@ module.exports = function(grunt) {
       js: {
         src:
           [
-            'public/lib/jquery-ui/jquery-ui.min.js',
             'public/lib/bootstrap/dist/js/bootstrap.min.js',
             'public/lib/powerange/dist/powerange.min.js',
             'public/ejs_templates/ejs/ejs_production.js',
