@@ -161,11 +161,10 @@
 }
 
 .parallax-hero {
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  -ms-interpolation-mode: nearest-neighbor;
   image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
   background: url(../img/blue_knight.gif);
   width:256px;
   height:256px;
@@ -202,4 +201,8 @@
 
 select, option {
   color:#000;
+}
+
+section {
+  overflow:hidden;
 }
