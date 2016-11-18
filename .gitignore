@@ -23,6 +23,7 @@ build/
 public/css/
 public/dist/
 public/js/game-engine.js
+public/index.html
 
 # Dependency directorys
 node_modules/
