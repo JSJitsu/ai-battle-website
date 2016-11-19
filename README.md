@@ -1,42 +1,33 @@
-[![Build Status](https://travis-ci.org/JSJitsu/ai-battle-website.svg?branch=master)](https://travis-ci.org/JSJitsu/ai-battle-website)
-# Javascript Battle
+# Javascript Battle Game Runner
 
-Every day there is an epic battle between legendary heroes.  Control your hero with either a pre-defined function from our repo or your own submitted function (your hero’s “brain”), and see the results of each day’s battle as your hero’s prowess is tested against the competition.
+Tool to run the games that the website is able to replay. Real or test data can be used to generate a battle.
 
-Sign up is as easy as logging into your github account, forking a “starter” repository, and opting in to the daily battle.  Learn from your past mistakes and make your hero smarter by customizing your hero.js file, and feel the power as your hero dominates the battlefield.
-
-
-## Table of Contents
-
-1. [Team](#team)
-1. [Development](#development)
-	1. [Requirements](#requirements)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Contributing](#contributing)
-
-
-## Team
-
-- John Krull
-- Nathan St. Pierre
-- Jared Sartin
-
+# Playing The Game
+Visit [jsfight.club](https://jsfight.club) to get started.
 
 ## Development
 
 ### Requirements
-- Node.js
-- PostgreSQL
 
-### Installing Dependencies
+To work on this application, you must have the following installed:
+- [Node](http://nodejs.org/) 6.x minimum
+- [PostgreSQL](http://www.postgresql.org/) 9.5 minimum
+
+### Initial Setup
 
 From within the root directory:
 
 ```sh
 npm install
-bower install
 ```
 
-### Contributing
+If you don't already have [PostgreSQL](http://www.postgresql.org/) installed, you can likely use the helper script in `database/setup-postgres.sh` to get started.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+### Generate Battle Data
+Once your dependencies are installed, look for the configuration file "secrets-template.js". Update it with your own settings and rename it to "secrets.js" so it can be found by the script.
+
+To run the test battle:
+
+```sh
+node run-test-game.js
+```
