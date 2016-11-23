@@ -1,13 +1,16 @@
-var secrets = require('../secrets');
-var path = require('path');
+const console = require('better-console');
+const config = require('../config');
+const path = require('path');
 
-if (!secrets.postgresUrl) {
-    var message = 'PostgreSQL connection string must be defined in ',
-        location = path.resolve(path.dirname(require.main.filename), 'secrets.js');
+let dbConf = config && config.database;
 
-    throw new Error(message + location);
+if (!dbConf) {
+    let location = path.resolve(path.dirname(require.main.filename), 'config.js');
+
+    throw new Error(`Database connection information must be defined in ${location}`);
 }
 
-var db = require('pg-db')(secrets.postgresUrl);
+let dbUri = `postgresql://${dbConf.user}:${dbConf.password}@${dbConf.address}/${dbConf.name}`;
+let db = require('pg-db')(dbUri);
 
 module.exports = db;
