@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
+    "better-console": "^0.2.4",
     "blanket": "^1.1.6",
     "body-parser": "^1.6.2",
     "express": "^4.7.2",
@@ -53,6 +54,7 @@
     "gulp-uglify": "^2.0.0",
     "minimist": "^1.2.0",
     "mocha": "^1.21.3",
+    "request": "^2.40.0",
     "supertest": "^0.13.0"
   },
   "config": {
