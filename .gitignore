@@ -32,3 +32,4 @@ bower_components
 config.js
 user_code/helpers/*.js
 user_code/hero/*.js
+yarn.lock
