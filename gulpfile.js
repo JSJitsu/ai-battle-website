@@ -29,12 +29,6 @@ gulp.task('build', ['sass'], function () {
                         .pipe(uglify())
                         .pipe(concat('build/app.js'))
                         .pipe(rev());
-                },
-                css: function (files) {
-                    return files
-                        .pipe(cleanCss())
-                        .pipe(concat('build/app.css'))
-                        .pipe(rev());
                 }
             }
         }))
