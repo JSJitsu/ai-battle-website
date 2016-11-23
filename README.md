@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/JSJitsu/ai-battle-website.svg?branch=master)](https://travis-ci.org/JSJitsu/ai-battle-website)
-# Javascript Battle Game Runner
+# Javascript Fight Club
 
 Tool to run the games that the website is able to replay. Real or test data can be used to generate a battle.
 
