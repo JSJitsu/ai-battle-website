@@ -54,8 +54,7 @@
     "gulp-uglify": "^2.0.0",
     "minimist": "^1.2.0",
     "mocha": "^1.21.3",
-    "request": "^2.40.0",
-    "supertest": "^0.13.0"
+    "request": "^2.40.0"
   },
   "config": {
     "blanket": {
