@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/JSJitsu/ai-battle-website.svg?branch=master)](https://travis-ci.org/JSJitsu/ai-battle-website)
 # Javascript Fight Club
 
-Tool to run the games that the website is able to replay. Real or test data can be used to generate a battle.
+This repository contains the code that powers the website. By forking this, you will be able to develop the site code, or use real (github player ai code) or test (just local versions of those scripts) data to generate a battle.
 
 ## Playing The Game
-Visit [https://jsfight.club](https://jsfight.club).
+Visit [https://jsfight.club](https://jsfight.club) to play the game. You do not need a copy of this repo to play.
 
 ## Development
 
