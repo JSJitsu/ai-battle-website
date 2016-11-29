@@ -7,7 +7,7 @@ var fs = require('fs'),
     engine = new GameEngine(),
     secrets = require('../../secrets.js'),
     db = require('../../database/connect.js'),
-    dbHelper = new (require('../database/helper.js'))(db);
+    dbHelper = new (require('../../database/helper.js'))(db);
 
 /**
  * Class for running games. It will plan out the games that need to be run

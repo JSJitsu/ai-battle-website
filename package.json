@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint gamerunner/ server.js server/ database/ public/js/",
+    "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/js/",
     "start": "node server.js",
     "build-engine": "browserify ./node_modules/ai-battle-engine/index.js --standalone GameEngine > public/js/game-engine.js",
     "build": "npm run build-engine && gulp build"
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
+    "better-console": "^0.2.4",
     "blanket": "^1.1.6",
     "body-parser": "^1.6.2",
     "express": "^4.7.2",
@@ -53,7 +54,7 @@
     "gulp-uglify": "^2.0.0",
     "minimist": "^1.2.0",
     "mocha": "^1.21.3",
-    "supertest": "^0.13.0"
+    "request": "^2.40.0"
   },
   "config": {
     "blanket": {

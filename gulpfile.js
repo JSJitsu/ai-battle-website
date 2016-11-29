@@ -1,11 +1,11 @@
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let spa = require("gulp-spa");
-let uglify = require('gulp-uglify');
-let cleanCss = require('gulp-clean-css');
-let concat = require('gulp-concat');
-let rev = require('gulp-rev');
-let rename = require('gulp-rename');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const spa = require("gulp-spa");
+const uglify = require('gulp-uglify');
+const cleanCss = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const rev = require('gulp-rev');
+const rename = require('gulp-rename');
 
 gulp.task('sass', function () {
     return gulp.src('./public/sass/**/*.scss')
@@ -28,12 +28,6 @@ gulp.task('build', ['sass'], function () {
                     return files
                         .pipe(uglify())
                         .pipe(concat('build/app.js'))
-                        .pipe(rev());
-                },
-                css: function (files) {
-                    return files
-                        .pipe(cleanCss())
-                        .pipe(concat('build/app.css'))
                         .pipe(rev());
                 }
             }

@@ -29,6 +29,7 @@ public/index.html
 node_modules/
 public/lib/
 bower_components
-secrets.js
+config.js
 user_code/helpers/*.js
 user_code/hero/*.js
+yarn.lock
