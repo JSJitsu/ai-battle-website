@@ -17,11 +17,15 @@ To work on this application, you must have the following installed:
 
 ### Initial Setup
 
-The first step is to install PostgreSQL. Run the following command and carefully follow the prompts. It will have you install PostgreSQL, create a user, and give that user permission to modify the `jsfightclub` database. Simply read the output to know what to do at each step.
+#### Database Setup
+
+Run the following command and carefully follow the prompts to install PostgreSQL, create a user, and give that user permission to modify the `jsfightclub` database. Simply read the output to know what to do at each step.
 
 ```sh
 database/setup-postgres.sh
 ```
+
+#### Configuration
 
 Next, copy the config file template so you can configure the application. This file will not be tracked, so you don't have to worry about accidentally committing your passwords and such.
 
@@ -29,16 +33,16 @@ Next, copy the config file template so you can configure the application. This f
 cp config-template.js config.js
 ```
 
-Don't forget to fill _config.js_ with your information!
+The most important pieces of information to add to  _config.js_ are the database user and database password. Everything else can be skipped for now.
 
-Install necessary dependencies.
+#### Dependency Installation
 
 ```sh
 npm install
 bower install
 ```
 
-Set up the database tables.
+#### Add Database Tables
 
 ```sh
 database/initialize.js
@@ -47,13 +51,15 @@ psql jsfightclub < ./node_modules/connect-pg-simple/table.sql
 
 ### Running a Battle
 
+Running battles does not require the web server in order to run.
+
 To run a test battle:
 
 ```sh
 node gamerunner/run-test-game.js
 ```
 
-### Starting the Server
+### Starting the Web Server
 
 The website is not built automatically, but you can do so via the following command:
 
@@ -69,7 +75,9 @@ To start the server without connecting to Github, run:
 node server.js --no-github
 ```
 
+You can also run `node server.js` with no options to show the help screen.
+
 Once it's running, you can navigate to http://localhost:8080/ to view the site.
 
 ### Changing the Website
-In order to speed up development of the website, you can view the "dev build" of the site at "dev.html" while the built version will be accessible from "index.html". There are no pre-compilation steps for doing basic site development. Once you're happy with the dev version of the site, re-build it using the previously-mentioned command and verify that your changes are alive and well in the built version.
+You can view the "dev build" of the site at _dev.html_ while the built version will be accessible from _index.html_. There are no pre-compilation steps for doing development via _dev.html_. Once you're happy with the dev version of the site, re-build it using `npm run build` and verify that your changes are alive and well in the built version.
