@@ -45,6 +45,11 @@ module.exports = function (app, db, dbHelper, options) {
 
             user.games.forEach(function (game) {
 
+                if (!game.heroes) {
+                    game.gameResult = 'Incomplete';
+                    return;
+                }
+
                 game.gameResult = 'Second Place';
 
                 for (let hero of game.heroes) {
