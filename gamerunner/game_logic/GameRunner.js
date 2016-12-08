@@ -79,7 +79,7 @@ GameRunner.prototype.runGame = function (game) {
                     game.activeHero.id,
                     action
                 ]
-      );
+            );
 
       // Advance the game one turn
             game.handleHeroTurn(action);
@@ -101,33 +101,34 @@ GameRunner.prototype.runGame = function (game) {
  * @return {String}      The action to take
  */
 GameRunner.prototype.runHeroBrain = function (game, user) {
-    var githubHandle = user.github_login,
-        rootPath = __dirname + '/../user_code',
-        heroFilePath = rootPath + '/hero/' + githubHandle + '_hero.js',
-        helperFilePath = rootPath + '/helpers/' + githubHandle + '_helpers.js',
-        heroFile,
-        helperFile,
-        script,
-        result,
-        sandbox,
-        vmOptions,
-        safeGameData;
+    let githubHandle = user.github_login;
+    let rootPath = __dirname + '/../user_code';
+    let heroFilePath = rootPath + '/hero/' + githubHandle + '_hero.js';
+    let helperFilePath = rootPath + '/helpers/' + githubHandle + '_helpers.js';
+    let heroFile = fs.readFileSync(heroFilePath, 'utf8');
+    let helperFile = fs.readFileSync(helperFilePath, 'utf8');
 
-    heroFile = fs.readFileSync(heroFilePath, 'utf8');
-    helperFile = fs.readFileSync(helperFilePath, 'utf8');
+    let safeGameData = JSON.parse(JSON.stringify(game));
+    let emptyFn = function () {};
 
-    safeGameData = JSON.parse(JSON.stringify(game));
+    let allowed = {
+        'North': 'North',
+        'East': 'East',
+        'South': 'South',
+        'West': 'West',
+        'Stay': null
+    };
 
     try {
-    // Anything that goes into the sandbox MUST BE a copy so that the hero AI
-    // is unable to cause trouble in the rest of the application.
-        sandbox = {
+        // Anything that goes into the sandbox MUST BE a copy so that the hero AI
+        // is unable to cause trouble in the rest of the application.
+        let sandbox = {
             gameData: safeGameData,
             helpers: require(helperFilePath),
             move: require(heroFilePath)
         };
 
-        vmOptions = {
+        let vmOptions = {
             displayErrors: true,
             filename: githubHandle,
             timeout: 3000
@@ -135,11 +136,15 @@ GameRunner.prototype.runHeroBrain = function (game, user) {
 
         vm.runInNewContext('moveResult=move(gameData, helpers)', sandbox, vmOptions);
 
-    // Anything coming out of the sandbox MUST BE sanitized.
-        result = sandbox.moveResult;
+        // Anything coming out of the sandbox MUST BE sanitized.
+        let result = sandbox.moveResult;
 
         if (typeof result === "string" && result.length <= 10) {
-            return result;
+            if (allowed.hasOwnProperty(result)) {
+                return allowed[result];
+            } else {
+                console.warn(`Invalid move (${result}) by ${githubHandle}`);
+            }
         }
     } catch (e) {
         console.error(e);
