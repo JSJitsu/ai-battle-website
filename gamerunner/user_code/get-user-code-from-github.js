@@ -7,7 +7,7 @@ const config = require('../../config.js');
 const db = require('../../database/connect.js');
 
 if (!config || !config.github || !config.github.appKey || !config.github.appSecret || !config.github.appName) {
-    console.error('Missing github configuration needed to retrieve user code. Check config.json.');
+    console.error('Missing github configuration needed to retrieve user code. Check config.js.');
     process.exit(1);
 }
 
