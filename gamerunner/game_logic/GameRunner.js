@@ -5,7 +5,6 @@ var fs = require('fs'),
     Q = require('q'),
     GameEngine = require('ai-battle-engine'),
     engine = new GameEngine(),
-    secrets = require('../../secrets.js'),
     db = require('../../database/connect.js'),
     dbHelper = new (require('../../database/helper.js'))(db);
 

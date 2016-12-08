@@ -1,6 +1,5 @@
 var Q = require('q');
 var GameRunner = require('./GameRunner.js');
-var secrets = require('../../secrets.js');
 var db = require('../../database/connect.js');
 
 Q.longStackSupport = true;
