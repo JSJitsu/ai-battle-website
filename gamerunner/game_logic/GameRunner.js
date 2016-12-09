@@ -105,6 +105,12 @@ GameRunner.prototype.runHeroBrain = function (game, user) {
     let rootPath = __dirname + '/../user_code';
     let heroFilePath = rootPath + '/hero/' + githubHandle + '_hero.js';
     let helperFilePath = rootPath + '/helpers/' + githubHandle + '_helpers.js';
+
+    if (!fs.existsSync(heroFilePath) || !fs.existsSync(helperFilePath)) {
+        console.warn(`No AI found for ${githubHandle}`);
+        return;
+    }
+
     let heroFile = fs.readFileSync(heroFilePath, 'utf8');
     let helperFile = fs.readFileSync(helperFilePath, 'utf8');
 
