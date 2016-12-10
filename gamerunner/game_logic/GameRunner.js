@@ -342,13 +342,10 @@ GameRunner.prototype.updateAndSaveAllHeroStats = function (game) {
             stats = me.findPlayerRecord(hero.name, playerStats);
 
             if (!stats) {
-                console.info(`No statistics stored for ${hero.name}`);
                 insert = true;
                 stats = {
                     github_login: hero.name
                 };
-            } else {
-                console.info(`Statistics found for ${hero.name}`);
             }
 
             stats = me.updateHeroStats(hero, stats);
@@ -441,13 +438,13 @@ GameRunner.prototype.saveUserStats = function (stats, insert) {
     var githubHandle = stats.github_login,
         sql;
 
-    console.log('  Saving stats for user: ' + githubHandle);
-
     if (insert) {
-        sql = dbHelper.insertSql('player_lifetime_stats', stats, 'github_login');
+        console.info(`  Storing new statistics for ${stats.github_login}`);
     } else {
-        sql = dbHelper.updateSql('player_lifetime_stats', stats, `github_login = '${githubHandle}'`);
+        console.info(`  Updating statistics for ${stats.github_login}`);
     }
+
+    sql = dbHelper.upsertSql('player_lifetime_stats', stats, `github_login`);
 
     return Q.ninvoke(db, 'query', sql, stats);
 };

@@ -64,6 +64,19 @@ class Helper {
         return sql;
     }
 
+    upsertSql (table, values, primaryKey) {
+        let parts = this.buildSqlParts(table, values);
+
+        primaryKey = primaryKey || 'id';
+
+        return `
+            INSERT INTO ${table} (${parts.columns})
+            VALUES (${parts.namedParams})
+            ON CONFLICT (${primaryKey})
+            DO UPDATE SET ${parts.combined}
+        `;
+    }
+
     performQuery (query) {
         return Q.ninvoke(this.database, 'query', query).catch(this.errorHandler);
     }
