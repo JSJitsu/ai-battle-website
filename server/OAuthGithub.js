@@ -46,7 +46,7 @@ module.exports = function (app, db, dbHelper, options) {
             user.games.forEach(function (game) {
 
                 if (!game.heroes) {
-                    game.gameResult = 'Incomplete';
+                    game.gameResult = 'Missing Data';
                     return;
                 }
 
