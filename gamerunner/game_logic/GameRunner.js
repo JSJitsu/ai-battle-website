@@ -135,12 +135,15 @@ GameRunner.prototype.runHeroBrain = function (game, user) {
         };
 
         let vmOptions = {
-            displayErrors: true,
             filename: githubHandle,
             timeout: 3000
         };
 
-        vm.runInNewContext('moveResult=move(gameData, helpers)', sandbox, vmOptions);
+        try {
+            vm.runInNewContext('moveResult=move(gameData, helpers)', sandbox, vmOptions);
+        } catch (ex) {
+            console.warn(`(${ex.stack}) caused by ${githubHandle}`);
+        }
 
         // Anything coming out of the sandbox MUST BE sanitized.
         let result = sandbox.moveResult;
