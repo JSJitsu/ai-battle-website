@@ -115,7 +115,7 @@ class Helper {
             FROM game
             LEFT JOIN game_results ON game.id = game_results.game_id
             WHERE '${username}' = ANY(game.players)
-            ORDER BY game_id DESC
+            ORDER BY id DESC
         `);
     }
 
