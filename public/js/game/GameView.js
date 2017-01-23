@@ -310,16 +310,17 @@ var GameView = Backbone.View.extend({
     },
     checkWinner: function () {
         var game = this.model.get('game');
+        var raw = this.model.get('raw');
         var winner = game.winningTeam;
         var message = $('.winner-msg');
         if (winner === 1) {
             message.text('Red Team Wins!');
         } else if (winner === 0) {
             message.text('Blue Team Wins!');
-        } else if (game.latest) {
+        } else if (raw.latest) {
             message.text('Today\'s Battle');
         } else {
-            message.text('Battle #' + this.model.get('raw').id);
+            message.text('Battle #' + raw.id);
         }
     }
 });
