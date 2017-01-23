@@ -9,12 +9,14 @@ const dbHelper = new (require('../database/helper.js'))(db);
  * Retrieves the latest game or the game with the given id.
  */
 router.get('(/:id)?', function (req, res) {
-    var gameId = Number.parseInt(req.params.id, 10),
-        query;
+    let gameId = Number.parseInt(req.params.id, 10);
+    let latest = false;
+    let query;
 
     if (Number.isInteger(gameId) && gameId > 0) {
         query = `SELECT * FROM game WHERE id = ${gameId}`;
     } else {
+        latest = true;
         query = "SELECT * FROM game ORDER BY id DESC LIMIT 1";
     }
 
@@ -26,7 +28,11 @@ router.get('(/:id)?', function (req, res) {
                 return Q.ninvoke(db, 'query', `SELECT turn, actor, action FROM game_events WHERE game_id = ${game.id} ORDER BY turn ASC`)
                     .then(function (gameEvents) {
                         game.events = gameEvents;
-                        game.latest = true;
+
+                        if (latest) {
+                            game.latest = true;
+                        }
+
                         res.status(200).send(game);
                     });
             } else {
