@@ -61,6 +61,7 @@ function startServer () {
     app.use(morgan('dev'));
 
     app.use('/api/game', require('./routes/game'));
+    app.use('/api/games', require('./routes/games'));
     app.use('/api/leaderboard', require('./routes/leaderboard'));
 
     // Serve up files in public folder

@@ -26,6 +26,7 @@ router.get('(/:id)?', function (req, res) {
                 return Q.ninvoke(db, 'query', `SELECT turn, actor, action FROM game_events WHERE game_id = ${game.id} ORDER BY turn ASC`)
                     .then(function (gameEvents) {
                         game.events = gameEvents;
+                        game.latest = true;
                         res.status(200).send(game);
                     });
             } else {

@@ -34,3 +34,5 @@ $('#rules').append(app.rulesView.$el);
 app.leaderboard = new Leaderboard();
 app.leaderboardView = new LeaderboardView({ model: app.leaderboard });
 $('#leaderboard div.container').append(app.leaderboardView.$el);
+
+new BattleList({ el: '.game-list' });

@@ -27,6 +27,7 @@ var Game = Backbone.Model.extend({
         model.set('events', response.events);
         model.set('maxTurn', response.events.length);
 
+        model.set('raw', response);
         model.set('game', model.createGame(map));
     },
   /**
