@@ -46,7 +46,9 @@ $('.navbar-collapse ul li a').click(function() {
 // parallax
 
 var init = function() {
-  scrollIntervalId = setInterval(updatePage,10);
+  // scrollIntervalId = setInterval(updatePage,10);
+  $(window).scroll(updatePage);
+  updatePage();
   $('.parallax-inner').addClass(getTime());
 };
 
