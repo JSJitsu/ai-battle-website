@@ -17,7 +17,7 @@ var BoardView = Backbone.View.extend({
             fragment = document.createDocumentFragment();
 
         // Shows the team that won the game
-        fragment.appendChild($('<div class="battle-map-message">')[0])
+        fragment.appendChild($('<div class="battle-map-message">')[0]);
 
         _.each(this.board.tiles, function (tileRow, rowIndex) {
             var $tr = $('<div class="tile-row">');
