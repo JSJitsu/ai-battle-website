@@ -114,8 +114,7 @@ var GameView = Backbone.View.extend({
     },
     renderControlArea: function () {
         var playControlsHtml,
-            currentTurnHtml,
-            gameTipsHtml;
+            currentTurnHtml;
 
         playControlsHtml = [
             '<div class="row play-controls">',
@@ -126,28 +125,9 @@ var GameView = Backbone.View.extend({
 
         currentTurnHtml = '<span class="turn"></span>';
 
-        gameTipsHtml = [
-            '<div class="game-tips">',
-            '  <aside title="Click to hide" class="game-tips">',
-            '    <div class="row">',
-            '      <div class="col-lg-12 text-center">',
-            '        <i class="hide-tip fa fa-times"></i>',
-            '        Hero not doing anything? Make sure to check your code for endless loops and errors!',
-            '      </div>',
-            '    </div>',
-            '    <div class="row">',
-            '      <div class="col-lg-12 text-center">',
-            '        Can\'t see your hero? Don\'t forget to login!',
-            '      </div>',
-            '    </div> ',
-            '  </aside>',
-            '</div>'
-        ].join('');
-
         this.$el.find('.slider').show();
         this.$el.append(playControlsHtml);
         this.$el.append(currentTurnHtml);
-        this.$el.append(gameTipsHtml);
     },
     playNextTurn: function () {
         var view = this,

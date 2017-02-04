@@ -181,21 +181,10 @@
 }
 
 .game-tips {
-  position: relative;
-  aside{
-    .fa-times{
-      cursor: pointer;
-      float: right;
-    }
-    border: solid 1px rgb(0, 0, 0);
-    color: rgb(85, 23, 23);
-    margin: 0 auto;
-    background: #62B4B1;
-    opacity: .6;
-    box-shadow: 2px 2px 3px 1px;
-    padding: 8px;
-    width: 316px;
-  }
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ebebeb;
 }
 
 #replay.battle-space {
