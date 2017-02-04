@@ -58,6 +58,7 @@ var GameView = Backbone.View.extend({
             });
 
             $gameHtml.html(view.boardView.$el);
+            view.updateHeader();
         } else {
             view.boardView.board = game.board;
             view.boardView.render();
@@ -310,17 +311,27 @@ var GameView = Backbone.View.extend({
     },
     checkWinner: function () {
         var game = this.model.get('game');
-        var raw = this.model.get('raw');
         var winner = game.winningTeam;
-        var message = $('.winner-msg');
-        if (winner === 1) {
-            message.text('Red Team Wins!');
-        } else if (winner === 0) {
-            message.text('Blue Team Wins!');
-        } else if (raw.latest) {
-            message.text('Today\'s Battle');
+        var gameoverEl = $('.battle-map-message');
+
+        if (game.ended) {
+            if (winner === 1) {
+                gameoverEl.text('Red Team Wins!').show();
+            } else if (winner === 0) {
+                gameoverEl.text('Blue Team Wins!').show();
+            }
         } else {
-            message.text('Battle #' + raw.id);
+            gameoverEl.hide();
+        }
+    },
+    updateHeader: function () {
+        var headerEl = $('.battle-header');
+        var raw = this.model.get('raw');
+        
+        if (raw.latest) {
+            headerEl.text('Today\'s Battle');
+        } else {
+            headerEl.text('Battle #' + raw.id);
         }
     }
 });

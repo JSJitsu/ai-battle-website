@@ -20,6 +20,19 @@
   padding: 4px;
 }
 
+.battle-map-message {
+  width: 100%;
+  background-color: rgba(44,44,44,0.8);
+  position: absolute;
+  top: 350px;
+  z-index: 1;
+  font-size: 2em;
+  text-align: center;
+  font-family: "Press Start 2P";
+  padding: 0.5em;
+  display: none;
+}
+
 .messages {
   top: 2vw;
   width: 100%;
