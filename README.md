@@ -8,6 +8,8 @@ Visit [https://jsfight.club](https://jsfight.club) to play the game. You do not 
 
 ## Development
 
+Initial set-up can be avoided by using the provided Vagrant environment. See the [Vagrant website](https://www.vagrantup.com/) for more information. If you're already set up with Vagrant, run `vagrant up`, then `vagrant ssh`, and navigate to the _/vagrant_ directory. Once you're there, you can skip down to [Dependency Installation](#dependency-installation) for initial set-up.
+
 ### Requirements
 
 To work on this application, you must have the following installed:
@@ -77,7 +79,7 @@ node server.js --no-github
 
 You can also run `node server.js` with no options to show the help screen.
 
-Once it's running, you can navigate to http://localhost:8080/ to view the site.
+Once it's running, you can navigate to http://localhost:8080/ to view the site. (if you're using the Vagrant environment, navigate to http://localhost:4000/ instead)
 
 ### Changing the Website
 You can view the "dev build" of the site at _dev.html_ while the built version will be accessible from _index.html_. There are no pre-compilation steps for doing development via _dev.html_. Once you're happy with the dev version of the site, re-build it using `npm run build` and verify that your changes are alive and well in the built version.

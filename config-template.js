@@ -23,13 +23,13 @@ module.exports = {
          *
          * @type {String}
          */
-        user: '',
+        user: process.env.USER,
         /**
          * The database password.
          *
          * @type {String}
          */
-        password: '',
+        password: '1234',
         /**
          * The IP address of the database.
          * The default is "127.0.0.1".
