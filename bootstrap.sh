@@ -19,7 +19,8 @@ DBUSER='vagrant'
 service postgresql start
 
 # Only create the database user if needed
-if [[ $(sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$DBUSER'") != "1" ]]; then
+user_check=$(sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$DBUSER'")
+if [[ "$user_check" != "1" ]]; then
     sudo -u postgres createuser --superuser $DBUSER
     sudo -u postgres psql -c "ALTER USER $DBUSER WITH PASSWORD '1234';"
 fi
