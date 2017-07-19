@@ -36,3 +36,7 @@ yarn.lock
 
 # Vagrant
 .vagrant
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
