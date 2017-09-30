@@ -51,9 +51,11 @@ function retrieveCode (users, category) {
 
         const options = {
             // Saves the URL at which the code can be found
-            url: 'https://api.github.com/repos/' + githubHandle +
-            '/' + codeRepo + '/contents/' + category + '.js' +
-            '?client_id=' + config.github.appKey + '&client_secret=' + config.github.appSecret,
+            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js`,
+            qs: {
+                client_id: config.github.appKey,
+                client_secret: config.github.appSecret,
+            },
             headers: {
                 'User-Agent': config.github.appName
             }
