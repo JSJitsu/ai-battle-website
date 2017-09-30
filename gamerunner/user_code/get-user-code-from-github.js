@@ -84,11 +84,7 @@ function retrieveCode (users, category) {
                 // Convert buffer to long string
                 const usersCode = buffer.toString('utf8');
 
-                const filePath = path.resolve(
-                    __dirname,
-                    category,
-                    githubHandle + '_' + category + '.js'
-                );
+                const filePath = path.resolve(__dirname, category, `${githubHandle}_${category}.js`);
 
                 const directory = path.dirname(filePath);
 
