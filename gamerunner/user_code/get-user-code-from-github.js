@@ -40,19 +40,19 @@ function retrieveCode (users, category) {
 
     users.forEach(function (user) {
 
-        var githubHandle = user.github_login,
-            codeRepo = user.code_repo;
+        const githubHandle = user.github_login;
+        const codeRepo = user.code_repo;
 
         if (!githubHandle || !codeRepo) {
             console.warn('Skipping bad user record:', user);
             return;
         }
 
-        var options = {
+        const options = {
             // Saves the URL at which the code can be found
             url: 'https://api.github.com/repos/' + githubHandle +
-               '/' + codeRepo + '/contents/' + category +'.js' +
-                '?client_id=' + config.github.appKey + '&client_secret=' + config.github.appSecret,
+            '/' + codeRepo + '/contents/' + category + '.js' +
+            '?client_id=' + config.github.appKey + '&client_secret=' + config.github.appSecret,
             headers: {
                 'User-Agent': config.github.appName
             }
@@ -62,16 +62,16 @@ function retrieveCode (users, category) {
         request(options, function (error, response, body) {
             console.log(`Saving code for ${githubHandle} / ${category}`);
 
-            if (error){
+            if (error) {
                 console.warn('Error sending request!');
                 console.warn(error);
                 return;
             }
 
             // If everything is ok, save the file
-            if (response.statusCode == 200) {
+            if (response.statusCode === 200) {
                 // Get response as JSON
-                var info = JSON.parse(body);
+                const info = JSON.parse(body);
 
                 if (info.size > 65536) {
                     console.warn(`${githubHandle} script size of ${info.size} is larger than 64k`);
@@ -79,18 +79,18 @@ function retrieveCode (users, category) {
                 }
 
                 // Set up buffer to write file
-                var buffer = new Buffer(info.content, 'base64');
+                const buffer = new Buffer(info.content, 'base64');
 
                 // Convert buffer to long string
-                var usersCode = buffer.toString('utf8');
+                const usersCode = buffer.toString('utf8');
 
-                var filePath = path.resolve(
-                  __dirname,
-                  category,
-                  githubHandle + '_' + category + '.js'
+                const filePath = path.resolve(
+                    __dirname,
+                    category,
+                    githubHandle + '_' + category + '.js'
                 );
 
-                var directory = path.dirname(filePath);
+                const directory = path.dirname(filePath);
 
                 // See if our target directory exists and create it if it doesn't
                 try {

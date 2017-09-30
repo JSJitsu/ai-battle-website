@@ -1,13 +1,13 @@
-var Q = require('q');
-var GameRunner = require('./GameRunner.js');
-var db = require('../../database/connect.js');
+const Q = require('q');
+const GameRunner = require('./GameRunner.js');
+const db = require('../../database/connect.js');
 
 Q.longStackSupport = true;
 
 function LiveGameRunner () {
 
-    var self = this,
-        userRecords;
+    // TODO not sure where this is used?
+    let userRecords;
 
     this.getUserRecords = function () {
         return Q.ninvoke(db, 'query', "SELECT * FROM player");
@@ -18,7 +18,7 @@ function LiveGameRunner () {
 
         userRecords = users;
 
-        var runner = new GameRunner(users);
+        const runner = new GameRunner(users);
 
         return runner.runAndSaveAllGames();
     };
@@ -32,11 +32,11 @@ function LiveGameRunner () {
         console.log('Database connection ended.');
     };
 
-    this.run = function () {
-        self.getUserRecords()
-      .then(self.runGames)
-      .then(self.closeDatabase)
-      .catch(self.showErrors)
+    this.run = () => {
+        this.getUserRecords()
+      .then(this.runGames)
+      .then(this.closeDatabase)
+      .catch(this.showErrors)
       .done();
     };
 }
