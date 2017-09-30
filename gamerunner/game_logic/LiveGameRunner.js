@@ -4,41 +4,39 @@ const db = require('../../database/connect.js');
 
 Q.longStackSupport = true;
 
-function LiveGameRunner () {
+class LiveGameRunner {
 
-    // TODO not sure where this is used?
-    let userRecords;
-
-    this.getUserRecords = function () {
+    getUserRecords () {
         return Q.ninvoke(db, 'query', "SELECT * FROM player");
-    };
+    }
 
-    this.runGames = function (users) {
+    runGames (users) {
         console.log('Retrieved ' + users.length + ' user(s).');
 
-        userRecords = users;
+        // TODO not sure where this is used?
+        this.userRecords = users;
 
         const runner = new GameRunner(users);
 
         return runner.runAndSaveAllGames();
-    };
+    }
 
-    this.showErrors = function (error) {
+    showErrors (error) {
         console.log(error.stack);
-    };
+    }
 
-    this.closeDatabase = function () {
+    closeDatabase () {
         db.end();
         console.log('Database connection ended.');
-    };
+    }
 
-    this.run = () => {
+    run () {
         this.getUserRecords()
-      .then(this.runGames)
-      .then(this.closeDatabase)
-      .catch(this.showErrors)
-      .done();
-    };
+            .then(this.runGames)
+            .then(this.closeDatabase)
+            .catch(this.showErrors)
+            .done();
+    }
 }
 
-module.exports = LiveGameRunner;
+module.exports = new LiveGameRunner();
