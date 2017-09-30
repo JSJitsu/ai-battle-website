@@ -36,4 +36,4 @@ class LiveGameRunner {
     }
 }
 
-module.exports = new LiveGameRunner();
+module.exports = LiveGameRunner;
