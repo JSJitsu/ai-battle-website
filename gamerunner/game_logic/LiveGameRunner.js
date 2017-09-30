@@ -13,9 +13,6 @@ class LiveGameRunner {
     runGames (users) {
         console.log('Retrieved ' + users.length + ' user(s).');
 
-        // TODO not sure where this is used?
-        this.userRecords = users;
-
         const runner = new GameRunner(users);
 
         return runner.runAndSaveAllGames();
