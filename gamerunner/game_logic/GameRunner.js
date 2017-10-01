@@ -301,7 +301,7 @@ class GameRunner {
     updateAndSaveAllHeroStats (game) {
         console.log('Updating all user stats...');
 
-        return dbHelper.getAllPlayerLifetimeStats().then(function (playerStats) {
+        return dbHelper.getAllPlayerLifetimeStats().then(playerStats => {
             const heroes = game.heroes.slice();
 
             const promises = heroes.map(hero => {
