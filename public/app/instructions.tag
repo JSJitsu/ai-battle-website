@@ -1,5 +1,5 @@
 <instructions>
-  <h3>About the Game</h3>
+  <h2>About the Game</h2>
   <p>
     The Red King and the Blue King are at war! Your JavaScript skills are needed to determine the victor. Can you code an effective AI for honor and glory?
   </p>
