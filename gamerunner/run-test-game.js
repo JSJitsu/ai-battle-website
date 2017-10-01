@@ -80,7 +80,7 @@ class TestGameRunner extends LiveGameRunner {
         this.runGames()
             .catch(this.showErrors)
             .finally(this.closeDatabase);
-    };
+    }
 }
 
 const testGameRunner = new TestGameRunner();
