@@ -1,44 +1,39 @@
-var Q = require('q');
-var GameRunner = require('./GameRunner.js');
-var db = require('../../database/connect.js');
+const Q = require('q');
+const GameRunner = require('./GameRunner.js');
+const db = require('../../database/connect.js');
 
 Q.longStackSupport = true;
 
-function LiveGameRunner () {
+class LiveGameRunner {
 
-    var self = this,
-        userRecords;
-
-    this.getUserRecords = function () {
+    getUserRecords () {
         return Q.ninvoke(db, 'query', "SELECT * FROM player");
-    };
+    }
 
-    this.runGames = function (users) {
+    runGames (users) {
         console.log('Retrieved ' + users.length + ' user(s).');
 
-        userRecords = users;
-
-        var runner = new GameRunner(users);
+        const runner = new GameRunner(users);
 
         return runner.runAndSaveAllGames();
-    };
+    }
 
-    this.showErrors = function (error) {
+    showErrors (error) {
         console.log(error.stack);
-    };
+    }
 
-    this.closeDatabase = function () {
+    closeDatabase () {
         db.end();
         console.log('Database connection ended.');
-    };
+    }
 
-    this.run = function () {
-        self.getUserRecords()
-      .then(self.runGames)
-      .then(self.closeDatabase)
-      .catch(self.showErrors)
-      .done();
-    };
+    run () {
+        this.getUserRecords()
+            .then(this.runGames)
+            .then(this.closeDatabase)
+            .catch(this.showErrors)
+            .done();
+    }
 }
 
 module.exports = LiveGameRunner;
