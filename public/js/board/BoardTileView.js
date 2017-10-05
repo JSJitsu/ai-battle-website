@@ -1,6 +1,5 @@
 /* globals Backbone,gameAssets */
-/* exported BoardTileView */
-var BoardTileView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
     tagName: 'div',
     className: 'battle-tile',
     initialize: function (config) {

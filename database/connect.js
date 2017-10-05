@@ -1,4 +1,3 @@
-const console = require('better-console');
 const config = require('../config');
 const path = require('path');
 

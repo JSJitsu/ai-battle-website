@@ -1,6 +1,6 @@
 /* globals Backbone,GameEngine,_ */
 /* exported Game */
-var Game = Backbone.Model.extend({
+module.exports = Backbone.Model.extend({
     url: 'api/game/' + location.hash.split('/')[1],
     parse: function (response) {
         if (!response || response.noData) {

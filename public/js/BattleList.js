@@ -1,4 +1,4 @@
-var BattleList = Backbone.View.extend({
+Backbone.View.extend({
     events: {
         'click .game-link': 'scrollToGame'
     },
@@ -8,7 +8,7 @@ var BattleList = Backbone.View.extend({
     template: _.template(
         '<a class="game-link" href="#game/<%= id %>">Game #<%= id %> (<% print(players.join(", ")); %>)</a>'
     ),
-    initialize: function (config) {
+    initialize: function () {
         var view = this;
 
         view.model = new view.model;

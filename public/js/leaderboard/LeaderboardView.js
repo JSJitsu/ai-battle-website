@@ -1,4 +1,4 @@
-var LeaderboardView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
     tagName: 'div',
     className: 'centered',
     events: {

@@ -1,27 +1,48 @@
 {
-    "extends": "eslint:recommended",
-    "env": {
-        "node": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
-    "rules": {
-        "no-console": 0,
-        "no-unused-vars": 0,
-        "prefer-const": 0,
-        "indent": ["error", 4],
-        "comma-dangle": ["error", "never"],
-        "semi": ["error", "always"],
-        "spaced-comment": ["error", "always"],
-        "space-before-function-paren": ["error", "always"],
-        "key-spacing": ["error", {
-            "beforeColon": false,
-            "afterColon": true
-        }],
-        "keyword-spacing": ["error", {
-            "before": true,
-            "after": true
-        }]
-    }
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "no-console": 0,
+    "no-unused-vars": 1,
+    "prefer-const": 0,
+    "indent": [
+      "error",
+      4
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "spaced-comment": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true
+      }
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ]
+  }
 }

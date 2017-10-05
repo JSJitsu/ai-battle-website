@@ -1,5 +1,5 @@
-var RulesView = Backbone.View.extend({
-  
+module.exports = Backbone.View.extend({
+
     initialize: function (){
         this.viewing = {};
         this.viewing = "general";
@@ -18,7 +18,7 @@ var RulesView = Backbone.View.extend({
         this.render();
         $('.rules').tab('show');
     },
-  
+
     showGeneral: function (event) {
         event.preventDefault();
         this.viewing = "general";
