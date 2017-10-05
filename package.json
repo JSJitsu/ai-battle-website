@@ -4,7 +4,7 @@
   "description": "> Pithy project description",
   "main": "server.js",
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && mocha ./gamerunner/test/index.js",
     "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/js/",
     "start": "node server.js",
     "build-engine": "browserify ./node_modules/ai-battle-engine/index.js --standalone GameEngine > public/js/game-engine.js",
@@ -37,7 +37,8 @@
   "devDependencies": {
     "ai-battle-engine": "git+https://github.com/JSJitsu/ai-battle-engine.git",
     "browserify": "^13.1.1",
-    "chai": "^1.9.1",
+    "chai": "^1.10.0",
+    "chai-spies": "^0.7.1",
     "connect-pg-simple": "^3.1.0",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
@@ -53,7 +54,7 @@
     "gulp-spa": "^0.2.2",
     "gulp-uglify": "^2.0.0",
     "minimist": "^1.2.0",
-    "mocha": "^1.21.3",
+    "mocha": "^1.21.5",
     "request": "^2.40.0"
   },
   "config": {
