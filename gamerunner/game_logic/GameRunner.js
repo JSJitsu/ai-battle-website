@@ -87,7 +87,9 @@ class GameRunner {
             }
         };
 
-        console.log('Running game ' + game.gameNumber);
+        let time = (new Date()).toISOString();
+
+        console.log(`Running game ${game.gameNumber} at ${time}`);
 
         return runGameTurnFn.call(this, game);
     }
