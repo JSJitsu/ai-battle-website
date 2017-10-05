@@ -112,12 +112,7 @@ class GameRunner {
             return;
         }
 
-        // TODO 3 unuseds
-        const heroFile = fs.readFileSync(heroFilePath, 'utf8');
-        const helperFile = fs.readFileSync(helperFilePath, 'utf8');
-
         const safeGameData = JSON.parse(JSON.stringify(game));
-        const emptyFn = function () {};
 
         const allowed = {
             'North': 'North',
@@ -244,7 +239,7 @@ class GameRunner {
         .catch(err => {
             console.log(err.stack);
         })
-        .then(results => {
+        .then(() => {
             return this.updateAndSaveAllHeroStats(game);
         })
         .then(() => {

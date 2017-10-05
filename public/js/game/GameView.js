@@ -1,4 +1,4 @@
-var GameView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
     tagName: 'div',
     className: 'outer',
     gameSpeed: 500,
@@ -130,9 +130,7 @@ var GameView = Backbone.View.extend({
         this.$el.append(currentTurnHtml);
     },
     playNextTurn: function () {
-        var view = this,
-            userModel,
-            currentUserHandle;
+        var view = this;
 
         this.model.nextTurn();
 
@@ -178,17 +176,14 @@ var GameView = Backbone.View.extend({
     // Get slider
         var $slider = this.$el.find('.slider'),
             slider = $slider[0],
-            game = this.model.get('game'),
-            currentTurn,
             maxTurn;
 
     // Get basic info about game state
-        currentTurn = game.turn;
         maxTurn = this.model.get('maxTurn');
 
     // Initialize new slider and set it to update
     // the turn on slide
-        var init = new Powerange(slider, {
+        new Powerange(slider, {
             min: 0,
             max: maxTurn,
             callback: function () {
@@ -307,7 +302,7 @@ var GameView = Backbone.View.extend({
     updateHeader: function () {
         var headerEl = $('.battle-header');
         var raw = this.model.get('raw');
-        
+
         if (raw.latest) {
             headerEl.text('Today\'s Battle');
         } else {

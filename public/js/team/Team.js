@@ -1,3 +1,3 @@
-var Team = Backbone.Collection.extend({
+module.exports = Backbone.Collection.extend({
     model: Hero
 });

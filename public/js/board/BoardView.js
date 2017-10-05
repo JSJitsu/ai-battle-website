@@ -1,6 +1,6 @@
 /* globals _,Backbone,$,BoardTileView */
 /* exported BoardView */
-var BoardView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
     tagName: 'section',
     className: 'battle-map',
     initialize: function (config) {

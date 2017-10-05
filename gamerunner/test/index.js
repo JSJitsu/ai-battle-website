@@ -1,6 +1,5 @@
-/* global projects, describe, it, expect, should */
+/* global describe, it */
 const chai = require('chai');
-const should = chai.should();
 const expect = chai.expect;
 const spies = require('chai-spies');
 
