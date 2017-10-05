@@ -17,7 +17,7 @@ function initiateCodeRequest (fileType) {
 
     console.log('About to retrieve user code from Github...');
 
-    // TODO: swap below query to not inculed disbaled accounts
+    // TODO: use the below query to start ignoring disabled accounts
     // const q = "SELECT * FROM player WHERE disabled = false";
     const q = "SELECT * FROM player";
     db.query(q, function (err, users) {
@@ -116,8 +116,9 @@ function retrieveCode (users, category) {
                  * number of failures.
                  */
                 if (response.statusCode === 404) {
-                    console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
                     return disableUser(user, `missing_${category}`);
+                } else {
+                    console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
                 }
             }
         });
@@ -144,7 +145,9 @@ function disableUser ({ github_id }, error) {
 function getUser (id) {
   return new Promise((res, rej) => {
       db.query(`SELECT * FROM player WHERE github_id = ${id}`, function (err, user) {
-          if (err) { return rej(err); }
+          if (err) {
+            return rej(err);
+          }
           return res(user);
       });
   });
@@ -156,7 +159,9 @@ function getUser (id) {
  * @return {Bool}      - True if same day, False if different days
  */
 function sameDay (date) {
-    if (!date) return false;
+    if (!date) {
+      return false;
+    }
     const [update] = date.toISOString().split('T');
     const [current] = new Date().toISOString().split('T');
     return  (update === current);
@@ -176,11 +181,11 @@ function updateDisableValues (user, error, success) {
     const values = success ? [false, 0, null, user.githud_id] : [disabled, disabledCount, error, user.github_id];
     db.update(q, values, (err, update) => {
         count--;
-        if (err) {
-            throw err;
-        }
         if (count === 0) {
             db.end();
+        }
+        if (err) {
+            throw err;
         }
         return;
     });
