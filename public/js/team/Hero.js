@@ -1,2 +1,2 @@
-var Hero = Backbone.Model.extend({
+Backbone.Model.extend({
 });

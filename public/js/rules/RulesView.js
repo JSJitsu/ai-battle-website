@@ -1,4 +1,4 @@
-var RulesView = Backbone.View.extend({
+Backbone.View.extend({
   
     initialize: function (){
         this.viewing = {};

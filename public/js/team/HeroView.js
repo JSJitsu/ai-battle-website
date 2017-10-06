@@ -1,6 +1,6 @@
 /* globals Backbone */
 /* exported HeroView */
-var HeroView = Backbone.View.extend({
+Backbone.View.extend({
     className: 'list-group-item list-group-item-info score-info',
     tagName: 'li',
     initialize: function () {

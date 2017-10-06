@@ -1,6 +1,6 @@
 /* globals Backbone,HeroView,_ */
 /* exported TeamView */
-var TeamView = Backbone.View.extend({
+Backbone.View.extend({
     className: 'list-group',
     tagName: 'div',
     render: function () {
