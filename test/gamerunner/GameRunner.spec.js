@@ -8,7 +8,7 @@ chai.use(spies);
 
 describe('Test GameRunner', function () {
 
-    const gameRunner = require('../game_logic/GameRunner.js');
+    const gameRunner = require('../../gamerunner/game_logic/GameRunner.js');
 
     it ('can be instantiated', function () {
         expect(new gameRunner()).to.be.an.instanceOf(gameRunner);
