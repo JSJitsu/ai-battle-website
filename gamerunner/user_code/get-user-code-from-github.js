@@ -42,8 +42,8 @@ function initiateCodeRequest (fileType) {
 
 function retrieveCode (users, category) {
 
-    count++;
     users.forEach(function (user, i) {
+        count++;
         const githubHandle = user.github_login;
         const codeRepo = user.code_repo;
 
@@ -130,21 +130,23 @@ function retrieveCode (users, category) {
  * @param  {Number} id    - the users github_id
  * @param  {String} error - The error for disable_message
  */
-function disableUser ({ github_id }, error) {
-    return getUser(github_id)
-        .then(([user]) => !sameDay(user.last_update_date) ? updateDisableValues(user, error) : false )
+function disableUser ({ github_login }, error) {
+    return getUser(github_login)
+        .then(([user]) => {
+            !sameDay(user.last_update_date) ? updateDisableValues(user, error) : (count--, false );
+        })
         .catch(e => console.warn(e));
 }
 
 /**
  * Get the user from the db in case the last_update_date has been updated
- * @param  {Number} id   - the users github_id
+ * @param  {Number} username - the users github_id
  * @retrun {Object} user - the newly updated user object
  * @retrun {Error}  err  - error
  */
-function getUser (id) {
+function getUser (username) {
   return new Promise((res, rej) => {
-      db.query(`SELECT * FROM player WHERE github_id = ${id}`, function (err, user) {
+      db.query(`SELECT * FROM player WHERE github_login = '${username}'`, function (err, user) {
           if (err) {
             return rej(err);
           }
@@ -160,7 +162,7 @@ function getUser (id) {
  */
 function sameDay (date) {
     if (!date) {
-      return false;
+        return false;
     }
     const [update] = date.toISOString().split('T');
     const [current] = new Date().toISOString().split('T');
