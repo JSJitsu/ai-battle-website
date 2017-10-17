@@ -66,7 +66,6 @@ function retrieveCode (users, category) {
 
         // Sends the request for each user's hero.js and helper.js file to the github API
         request(options, function (error, response, body) {
-            console.log(`Saving code for ${githubHandle} / ${category}`);
 
             if (error) {
                 console.warn('Error sending request!');
@@ -108,6 +107,7 @@ function retrieveCode (users, category) {
                         console.error(`Error writing file: ${filePath}`);
                         console.error(err);
                     }
+                    console.log(`Saving code for ${githubHandle} / ${category}`);
                     return updateDisableValues(user, error, true);
                 });
             } else {
@@ -116,6 +116,7 @@ function retrieveCode (users, category) {
                  * number of failures.
                  */
                 if (response.statusCode === 404) {
+                    console.log(`${user.github_login} is missing ${category}.js`);
                     return disableUser(user, `missing_${category}`);
                 } else {
                     console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
@@ -177,10 +178,10 @@ function sameDay (date) {
  */
 function updateDisableValues (user, error, success) {
     const date = success ? 'last_update_date = null' : 'last_update_date = localtimestamp';
-    const q = `UPDATE player SET disabled = $1, disabled_count = $2, disabled_message = $3, ${date} WHERE github_id = $4`;
+    const q = `UPDATE player SET disabled = $1, disabled_count = $2, disabled_message = $3, ${date} WHERE github_login = $4`;
     const disabled = user.disabled_count >= 2 ? true : false;
     const disabledCount = ++user.disabled_count;
-    const values = success ? [false, 0, null, user.githud_id] : [disabled, disabledCount, error, user.github_id];
+    const values = success ? [false, 0, null, user.github_login] : [disabled, disabledCount, error, user.github_login];
     db.update(q, values, (err, update) => {
         count--;
         if (count === 0) {
