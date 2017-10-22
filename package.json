@@ -26,6 +26,7 @@
     "body-parser": "^1.6.2",
     "express": "^4.7.2",
     "express-session": "^1.7.4",
+    "knex": "^0.13.0",
     "morgan": "^1.7.0",
     "passport": "^0.3.0",
     "passport-github": "^1.0.0",
@@ -53,6 +54,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-spa": "^0.2.2",
     "gulp-uglify": "^2.0.0",
+    "knex": "^0.13.0",
     "minimist": "^1.2.0",
     "mocha": "^1.21.5",
     "request": "^2.40.0"
