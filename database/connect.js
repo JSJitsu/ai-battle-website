@@ -11,6 +11,6 @@ if (!dbConf) {
 }
 
 let dbUri = `postgresql://${dbConf.user}:${dbConf.password}@${dbConf.address}/${dbConf.name}`;
-let db = require('pg-db')(dbUri);
+let helperDbConnection = require('pg-db')(dbUri);
 
-module.exports = db;
+module.exports = helperDbConnection;

@@ -5,10 +5,12 @@ module.exports = {
     application: {
         /**
          * Used to get a bearing on where to save and retrieve user code.
-         *
+         * If this file moves to another directory, than the value must be
+         * reviewed to return the correct path. Since it's in the root dir,
+         * it will provide the correct root path to the application.
          * @type {String}
          */
-        rootDirectory: '.',
+        rootDirectory: __dirname,
 
         /**
          * The port on which the website should run.
