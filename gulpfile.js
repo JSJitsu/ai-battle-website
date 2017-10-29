@@ -26,7 +26,7 @@ gulp.task('build', ['sass'], function () {
                 },
                 js: function (files) {
                     return files
-                        .pipe(uglify())
+                        // .pipe(uglify())
                         .pipe(concat('build/app.js'))
                         .pipe(rev());
                 }
