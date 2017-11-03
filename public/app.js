@@ -36,3 +36,14 @@ app.leaderboardView = new LeaderboardView({ model: app.leaderboard });
 $('#leaderboard div.container').append(app.leaderboardView.$el);
 
 new BattleList({ el: '.game-list' });
+
+$("a[data-href]").click(function(e) {
+    e.preventDefault();
+    switch ($(this).attr("data-href")) {
+        // Fixes #page-top from breaking game on refresh
+        case "#page-top":
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            break;
+    }
+    return false;
+});

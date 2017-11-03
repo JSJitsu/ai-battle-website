@@ -2,87 +2,86 @@
  * Run this file to generate a test battle which will be added to the database.
  */
 
-var LiveGameRunner = require('./game_logic/LiveGameRunner.js'),
-    GameRunner = require('./game_logic/GameRunner.js'),
-    testGameRunner = new LiveGameRunner(),
-    Q = require('q');
+const LiveGameRunner = require('./game_logic/LiveGameRunner.js');
+const GameRunner = require('./game_logic/GameRunner.js');
+const Q = require('q');
 
-testGameRunner.runGames = function () {
-    var self = testGameRunner,
-        players = [];
+class TestGameRunner extends LiveGameRunner {
+    runGames () {
+        const players = [];
 
-    console.log('Setting up to run a test game. The results will be stored in the database.');
+        console.log('Setting up to run a test game. The results will be stored in the database.');
 
-    let names = [
-        'Lyn',
-        'Eliwood',
-        'Hector',
-        'Sain',
-        'Kent',
-        'Marcus',
-        'Lowen',
-        'Isadora',
-        'Wallace',
-        'Oswin',
-        'Wil',
-        'Rebecca',
-        'Louise',
-        'Rath',
-        'Florina',
-        'Fiora',
-        'Farina',
-        'Heath',
-        'Vaida',
-        'Erk',
-        'Pent',
-        'Nino',
-        'Serra',
-        'Lucius'
-    ];
+        const names = [
+            'Lyn',
+            'Eliwood',
+            'Hector',
+            'Sain',
+            'Kent',
+            'Marcus',
+            'Lowen',
+            'Isadora',
+            'Wallace',
+            'Oswin',
+            'Wil',
+            'Rebecca',
+            'Louise',
+            'Rath',
+            'Florina',
+            'Fiora',
+            'Farina',
+            'Heath',
+            'Vaida',
+            'Erk',
+            'Pent',
+            'Nino',
+            'Serra',
+            'Lucius'
+        ];
 
-    for (var i = 0; i < names.length; i++) {
-        players.push({
-            github_login: names[i]
+        for (let i = 0; i < names.length; i++) {
+            players.push({
+                github_login: names[i]
+            });
+        }
+
+        const runner = new GameRunner(this.database);
+        const games = runner.planGames(players);
+
+        const game = games[0];
+        game.gameNumber = 0;
+
+        // Replace the hero brain that uses player files with this simpleton.
+        runner.runHeroBrain = function () {
+            const choices = [
+                'North',
+                'South',
+                'East',
+                'West'
+            ];
+
+            return choices[Math.floor(Math.random() * choices.length)];
+        };
+
+        let gameResult = runner.runGame(game);
+
+        return Q.fcall(function () {
+            return runner.saveGame(gameResult).then(function () {
+                console.log(`Game saved with id ${gameResult.gameId}.`);
+            });
         });
     }
 
-    let runner = new GameRunner(self.database);
-    let games = runner.planGames(players);
+    updateAndSaveAllHeroStats () {
+        return Q.fcall(function () { return true; });
+    }
 
-    let game = games[0];
-    game.gameNumber = 0;
+    run () {
+        this.runGames()
+            .catch(this.showErrors)
+            .finally(this.closeDatabase);
+    }
+}
 
-  // Replace the hero brain that uses player files with this simpleton.
-    runner.runHeroBrain = function () {
-        var choices = [
-            'North',
-            'South',
-            'East',
-            'West'
-        ];
-
-        return choices[Math.floor(Math.random() * choices.length)];
-    };
-
-    let gameResult = runner.runGame(game);
-
-    return Q.fcall(function () {
-        return runner.saveGame(gameResult).then(function () {
-            console.log(`Game saved with id ${gameResult.gameId}.`);
-        });
-    });
-};
-
-testGameRunner.updateAndSaveAllHeroStats = function () {
-    return Q.fcall(function () { return true; });
-};
-
-testGameRunner.run = function () {
-    var self = testGameRunner;
-
-    self.runGames()
-    .catch(self.showErrors)
-    .finally(self.closeDatabase);
-};
-
+const testGameRunner = new TestGameRunner();
 testGameRunner.run();
