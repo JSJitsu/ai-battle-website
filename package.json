@@ -30,8 +30,8 @@
     "passport": "0.3.0",
     "passport-github": "1.0.0",
     "passport-github2": "0.1.10",
-    "pg": "4.5.1",
-    "pg-db": "1.0.2",
+    "pg": "^4.5.7",
+    "pg-db": "^1.1.0",
     "q": "1.0.1"
   },
   "devDependencies": {
