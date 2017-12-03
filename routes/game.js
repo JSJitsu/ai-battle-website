@@ -8,7 +8,7 @@ const dbHelper = new (require('../database/helper.js'))(db);
 /**
  * Retrieves the latest game or the game with the given id.
  */
-router.get('(/:id)?', function (req, res) {
+router.get('/(:id)?', function (req, res) {
     let gameId = Number.parseInt(req.params.id, 10);
     let latest = false;
     let query;
