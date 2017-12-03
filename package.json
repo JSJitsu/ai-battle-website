@@ -22,13 +22,11 @@
   "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
     "better-console": "0.2.4",
-    "blanket": "1.1.6",
     "body-parser": "1.6.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "morgan": "^1.9.0",
     "passport": "0.3.0",
-    "passport-github": "1.0.0",
     "passport-github2": "0.1.10",
     "pg": "^4.5.7",
     "pg-db": "^1.1.0",
@@ -56,10 +54,5 @@
     "minimist": "1.2.0",
     "mocha": "1.21.5",
     "request": "2.40.0"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "server.js"
-    }
   }
 }
