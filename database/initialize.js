@@ -9,7 +9,11 @@ let sql = `
         avatar_url varchar(100),
         code_repo varchar(100) DEFAULT 'hero-starter',
         code_branch varchar(100) DEFAULT 'master',
-        joined_at timestamp
+        joined_at timestamp,
+        disabled boolean NOT NULL DEFAULT false,
+        disabled_count smallint NOT NULL DEFAULT 0,
+        disabled_message varchar(20) DEFAULT NULL,
+        last_update_date timestamp
     );
     CREATE TABLE game (
         id bigserial UNIQUE,
