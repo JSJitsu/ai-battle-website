@@ -1,0 +1,595 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+body {
+  color: #ebebeb;
+  background-color: #2b3e50;
+}
+
+main.container {
+  padding-top: 20px;
+}
+
+nav,
+footer {
+  background: #272727;
+}
+
+nav.h-nav {
+  box-shadow: 0 0 10px #000000;
+  font-size: 12px;
+  left: 0;
+  margin-bottom: 21px;
+  height: 60px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1030;
+}
+
+nav.h-nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+nav.h-nav ul li a {
+  display: inline-block;
+  padding: 16px 10px;
+}
+
+nav.h-nav li a:hover,
+nav.h-nav li a:focus {
+  color: #ebebeb;
+  background-color: #485563;
+}
+
+h1, h2 {
+  font-size: 32px;
+  background-color: #1f2933;
+  padding: 0.5em;
+  font-family: "Press Start 2P";
+  text-align: center;
+}
+
+h1.title {
+  text-transform: uppercase;
+  font-size: 1.3em;
+  line-height: 4em;
+  padding: 0 2em;
+  display: inline-block;
+  background-color: transparent;
+}
+
+h3 {
+  text-transform: uppercase;
+  font: 700 18px Montserrat;
+  padding-bottom: 20px;
+}
+
+recent-battles div ul li {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+}
+
+a {
+  color: #428BCA;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #ec68ec;
+}
+
+a:active, a:hover, a:focus {
+  color: #eee;
+}
+
+footer {
+  background: #272727;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+table td.accounting,
+table th.accounting {
+  text-align: right;
+}
+
+table th,
+table td {
+  border-color: #1f2933;
+}
+
+table tr:hover td {
+  background-color: #9b4dca;
+}
+
+select {
+  color: #ebebeb;
+}
+
+select:hover {
+  border-color: #428BCA;
+}
+
+/**
+ * BELOW THIS LINE NEEDS TO BE EVALUATED
+ */
+
+.info-list {
+  font: 15px Montserrat; }
+  .info-list li {
+    padding: 10px; }
+
+.info-settings {
+  padding-top: 20px; }
+
+.ft {
+  font-size: 3px; }
+
+.submitRepo {
+  color: white;
+  width: 10rem;
+  margin-bottom: -5px; }
+  .submitRepo:hover {
+    color: #18bc9c; }
+
+.fb_iframe_widget {
+  display: block !important; }
+
+.nav-buttons {
+  margin: 0 auto;
+  max-width: 55rem; }
+
+#inputRepo {
+  width: 23vw; }
+
+.user-options {
+  margin-top: 25px !important;
+  background: #2c3e50; }
+  .user-options:active {
+    background: none; }
+  .user-options li a {
+    color: #FFF; }
+    .user-options li a:hover {
+      background: none; }
+
+.btn-github {
+  width: 19rem;
+  text-align: center !important;
+  margin: auto; }
+  .btn-github .fa-github {
+    border-right: none; }
+
+.user-options-shrink {
+  margin-top: 5px !important; }
+
+.navbar-default {
+  background: #2b3e50;
+  box-shadow: 0 0 10px #000000; }
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: #1a242f; }
+
+.navbar-nav .btn-github {
+  width: auto;
+  font-size: 12px; }
+
+.leaderboard-table, .scaling-table {
+  width: auto;
+  color: #eaeaea; }
+
+.leaderboard-table {
+  text-align: center;
+  width: 60vw; }
+
+.scaling-table td {
+  text-align: left;
+  width: 150px; }
+
+.leaderboard-headers th, .scaling-headers th {
+  text-align: center; }
+
+.center-column-2 tr td:nth-child(2) {
+  text-align: center; }
+
+.leaderboard-time-param {
+  margin: 0 25px 25px 0; }
+
+.leaderboard-data {
+  width: 33%; }
+
+.leaderboard-rank {
+  width: 6vw; }
+
+.leaderboard-name {
+  width: 26vw; }
+
+.leaderboard-damage {
+  width: 26vw; }
+
+.scaling-table td {
+  padding: 0 20px; }
+
+.repoInput {
+  margin-top: 10px; }
+
+.logoutButton {
+  margin-top: 40px; }
+
+#inputRepo {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px; }
+
+.userViewTabs {
+  width: 31vw;
+  margin: 0 auto; }
+
+.leaderViewTabs {
+  width: 31vw;
+  margin: 0 auto;
+  background-color: white; }
+
+.rulesViewTabs {
+  width: 28vw;
+  margin-left: auto;
+  margin-right: auto; }
+
+.form-control-feedback {
+  color: #06C20A !important;
+  margin-top: 5px; }
+
+.centered {
+  display: block;
+  text-align: -webkit-center;
+  text-align: -moz-center; }
+
+.game-tips {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ebebeb; }
+
+#replay.battle-space {
+  position: relative;
+  min-height: 1094px; }
+
+.spinner {
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 250px;
+  height: 180px;
+  width: 180px; }
+
+.announce {
+  position: absolute;
+  top: 8vw;
+  width: 100%;
+  height: 5vw;
+  background-color: #27e833;
+  border: 4px solid black; }
+
+.knight {
+  z-index: 1; }
+
+
+
+a.btn {
+  font-weight: bold; }
+
+a.btn:hover,
+.success a:active,
+.success a:hover,
+.success a:focus,
+footer a:hover {
+  color: #d9edf7 !important; }
+
+.team-name {
+  padding: 0 0 0 4px;
+  font-size: 16pt; }
+
+.team-diamonds {
+  padding: 5px 4px;
+  background-color: #555;
+  color: #ddd; }
+
+.success .team-info a:focus, .success .team-info a:hover {
+  color: #2C3E50 !important; }
+
+.engineer-social a {
+  text-decoration: none; }
+
+.body-holder {
+  width: 97%;
+  width: 1060px;
+  margin: 0 auto; }
+
+.outer {
+  position: relative; }
+
+.turn {
+  font-size: 12px;
+  font-family: "Press Start 2P";
+  left: 14%;
+  bottom: 17%;
+  position: absolute; }
+
+.score-info {
+  padding: 4px; }
+
+.battle-map-message {
+  width: 100%;
+  background-color: rgba(44, 44, 44, 0.8);
+  position: absolute;
+  top: 350px;
+  z-index: 1;
+  font-size: 2em;
+  text-align: center;
+  font-family: "Press Start 2P";
+  padding: 0.5em;
+  display: none; }
+
+.messages {
+  top: 2vw;
+  width: 100%;
+  font-size: 21px;
+  height: 30px;
+  color: white;
+  text-align: center;
+  font-family: "Press Start 2P"; }
+
+.team-info {
+  top: 0;
+  position: absolute;
+  width: 140px; }
+
+.diamond-display {
+  max-height: 2vw; }
+
+.t-blue {
+  right: 0; }
+
+.t-red {
+  left: 0; }
+
+.stat-names {
+  word-spacing: 1.7rem; }
+
+.dead-info {
+  color: red; }
+
+.range-bar {
+  margin: 0 auto;
+  width: 420px; }
+
+.range-handle {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  background-size: 39px;
+  background-image: url(../img/blue_sword.png);
+  background-position: 0; }
+
+.range-min, .range-max {
+  color: #ddd; }
+
+.play-controls {
+  position: relative;
+  text-align: center;
+  border: solid 5px white;
+  border-radius: 15px;
+  width: 150px;
+  margin: 20px auto; }
+  .play-controls .glyphicon {
+    font-size: 2em;
+    margin: 8% 8%; }
+  .play-controls .glyphicon:hover {
+    cursor: pointer;
+    color: #aaa; }
+
+.hero-header a {
+  font-weight: 700;
+  color: #31708f;
+  width: 75px;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  top: 7px; }
+
+.hero-header .indicator {
+  position: initial;
+  margin-right: 5px !important;
+  display: inline-block;
+  line-height: 10px; }
+
+.t-red .list-group-item {
+  background: #a00; }
+  .t-red .list-group-item a {
+    color: #faa; }
+
+.list-group-item-danger, .t-red .list-group-item-danger {
+  background: #333; }
+
+.battle-map {
+  display: table;
+  bottom: 0;
+  margin: 0% auto;
+  position: relative;
+  width: 768px;
+  height: 768px; }
+
+.tile-row {
+  display: table-row; }
+
+.battle-tile {
+  display: table-cell;
+  width: 64px;
+  height: 64px;
+  border: 1px dotted #10380d;
+  position: relative;
+  background: url(../img/grass_square.gif);
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle; }
+
+.sprite {
+  vertical-align: top;
+  width: 32px;
+  height: 32px; }
+
+.lifebar {
+  position: absolute;
+  width: 6px;
+  height: 40px;
+  display: block;
+  top: 12px;
+  left: 8px;
+  background: #2e2e2e; }
+
+.life-capacity {
+  height: 90%;
+  width: 4px;
+  bottom: 1px;
+  left: 1px;
+  background: red;
+  position: absolute; }
+
+.indicator {
+  position: absolute;
+  right: 4px;
+  top: 38px;
+  color: #fff;
+  font-size: 6px;
+  font-family: "Press Start 2P";
+  padding: 2px 2px 2px 3px;
+  border: solid 1px #fff; }
+
+.user-arrow {
+  position: absolute;
+  margin-left: -27px;
+  color: #ff0;
+  text-shadow: 0px 1px 0px #000;
+  opacity: .8;
+  font-size: 1.3em;
+  margin-top: -5px;
+  animation-duration: 0.8s;
+  animation-name: bob;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; }
+
+@keyframes bob {
+  from {
+    margin-top: -5px; }
+  to {
+    margin-top: -2px; } }
+
+.team-red {
+  background: #a00; }
+
+.team-blue {
+  background: #00a; }
+
+.fainted {
+  animation: deathflash 2s linear infinite alternate; }
+
+@keyframes deathflash {
+  from {
+    filter: invert(0%);
+    -webkit-filter: invert(0%); }
+  to {
+    filter: invert(90%);
+    -webkit-filter: invert(90%); } }
+
+.img-team {
+  max-height: 201px;
+  height: 201px;
+  width: 201px; }
+
+#team .portfolio-item .portfolio-link {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  max-width: 400px; }
+
+#team .portfolio-item .portfolio-link .caption {
+  position: absolute;
+  width: 201px;
+  height: 100%;
+  opacity: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  transition: all ease .5s; }
+
+#team .portfolio-item .portfolio-link .caption:hover {
+  opacity: 1; }
+
+#team .portfolio-item .portfolio-link .caption .caption-content {
+  position: absolute;
+  top: 17%;
+  width: 14vw;
+  height: 20px;
+  margin-top: -12px;
+  text-align: center;
+  color: #fff; }
+  #team .portfolio-item .portfolio-link .caption .caption-content p {
+    font-size: 1em;
+    position: relative;
+    width: 200px;
+    bottom: 20px; }
+
+.role {
+  text-align: center;
+  padding: 20px; }
+
+.engineer {
+  background: #2c3e50;
+  color: white;
+  height: 61px;
+  line-height: 50px;
+  position: relative;
+  bottom: 10px;
+  width: 201px;
+  text-align: center;
+  border-bottom: 10px solid #2980b9; }
+
+.engineer-social {
+  background: #272727;
+  height: 52px;
+  text-align: center;
+  line-height: 55px;
+  position: relative;
+  bottom: 20px;
+  width: 201px;
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.3); }
+  .engineer-social i {
+    font-size: 2em;
+    letter-spacing: 23px;
+    position: relative;
+    left: 10px; }
+
+.asuza {
+  background-image: url(https://s.gravatar.com/avatar/a875a2757ecef742ee15950e21ba9441?s=201); }
+
+.natedsaint {
+  background-image: url(https://www.gravatar.com/avatar/539755ce3ebeec9b1a299ebc8fea2f8e?s=201&d=identicon&r=PG); }
+
+.jaredsartin {
+  background-image: url(https://s.gravatar.com/avatar/eca6a30157569c5a522f406240de6977?s=201); }
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("../lib/bootstrap/fonts/glyphicons-halflings-regular.woff"); }

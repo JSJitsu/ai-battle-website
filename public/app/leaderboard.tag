@@ -1,9 +1,5 @@
 <leaderboard>
   <h2>Leaderboard</h2>
-  <select name="time" onchange={ onCategoryChange } ref="statTime">
-    <option value="lifetime">Overall</option>
-    <option value="today">Today</option>
-  </select>
   <label for="leaderboard-category">sorted by</label>
   <select id="leaderboard-category" name="category" onchange={ onCategoryChange } ref="statCategory">
     <option value="games_won">Wins</option>
@@ -17,21 +13,21 @@
       <tr>
         <th>Rank</th>
         <th>Player</th>
-        <th>Wins</th>
-        <th>Kills</th>
-        <th>Souls</th>
-        <th>Diamonds</th>
-        <th>Healer</th>
+        <th class="accounting">Wins</th>
+        <th class="accounting">Kills</th>
+        <th class="accounting">Souls</th>
+        <th class="accounting">Diamonds</th>
+        <th class="accounting">Healer</th>
       </tr>
     </thead>
     <tr each={ stat, i in stats }>
       <td>{ i + 1 }</td>
       <td>{ stat.github_login }</td>
-      <td>{ stat.games_won }</td>
-      <td>{ stat.kills }</td>
-      <td>{ stat.graves_taken }</td>
-      <td>{ stat.diamonds_earned }</td>
-      <td>{ stat.health_given }</td>
+      <td class="accounting">{ stat.games_won }</td>
+      <td class="accounting">{ stat.kills }</td>
+      <td class="accounting">{ stat.graves_taken }</td>
+      <td class="accounting">{ stat.diamonds_earned }</td>
+      <td class="accounting">{ stat.health_given }</td>
     </tr>
   </table>
 

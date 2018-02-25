@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="./css/screen.css">
   </head>
   <body>
+
+    <parallax></parallax>
+
     <main class="container">
         <nav class="h-nav">
             <a class="navigation-title" href="https://jsfight.club/"><h1 class="title">JavaScript Fight Club</h1></a>
@@ -42,9 +45,11 @@
                 <li class="navigation-item"><a class="navigation-link">Leaderboard</a></li>
                 <li class="navigation-item"><a class="navigation-link">How to Play</a></li>
                 <li class="navigation-item"><a class="navigation-link">Log in with GitHub</a></li>
-                <li class="navigation-item"><a class="navigation-link">About Us</a></li>
+                <li class="navigation-item"><a class="navigation-link">About</a></li>
             </ul>
         </nav>
+
+
         <!-- mount point -->
         <battle></battle>
         <recent-battles></recent-battles>
@@ -52,6 +57,7 @@
         <leaderboard></leaderboard>
 
         <!-- inlined tag definition -->
+        <script type="riot/tag" data-src="app/parallax.tag"></script>
         <script type="riot/tag" data-src="app/leaderboard.tag"></script>
         <script type="riot/tag" data-src="app/recent-battles.tag"></script>
         <script type="riot/tag" data-src="app/instructions.tag"></script>
@@ -62,9 +68,20 @@
         <script type="text/javascript" src="lib/riot/riot+compiler.js"></script>
 
     </main>
+    <footer>
+        <p>Questions or comments? <a href="https://github.com/JSJitsu/ai-battle-website/issues">Contact Us</a></p>
+        <p>You can support our server by getting your own at <a target="vultr" href="https://www.vultr.com/?ref=6961809-3B">Vultr.com</a>
+          <br>
+          By hosting your projects through them, we get credits that help pay for the costs of this game. We appreciate your support!
+        </p>
+        <p>Brought to life from the ashes of javascriptbattle.com</p>
+    </footer>
     <!-- mount normally -->
     <script>
       riot.mount('*');
     </script>
+    <script src="//static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">try{ clicky.init(101059811); }catch(e){}</script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101059811ns.gif"></p></noscript>
   </body>
 </html>
