@@ -22,7 +22,6 @@ coverage
 build/
 public/dist/
 public/js/game-engine.js
-public/index.html
 
 # Dependency directories
 node_modules/
