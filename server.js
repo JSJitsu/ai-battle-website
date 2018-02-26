@@ -65,17 +65,9 @@ function startServer () {
     app.use('/api/leaderboard', require('./routes/leaderboard'));
 
     // Serve up files in public folder
-    app.use('/', express.static(__dirname + '/public'));
-
-    // must serve up ejs files individually for Azure to accept in deployment
-    app.get('/ejs_templates/:ejsTemplate', function (req, res) {
-        // file server
-        res.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-
-        res.end(fs.readFileSync(__dirname+'/public/ejs_templates/' +  req.params.ejsTemplate + '.ejs'));
-    });
+    app.use('/', express.static(__dirname + '/public', {
+        extensions: ['html']
+    }));
 
     // Add github authentication
     if (options.useGithubApp) {

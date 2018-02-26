@@ -12,7 +12,7 @@ main.container {
 
 nav,
 footer {
-  background: #272727;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 nav.h-nav {
@@ -31,17 +31,21 @@ nav.h-nav ul {
   display: flex;
   flex-direction: row;
   list-style: none;
+  margin-top: 1rem;
 }
 
 nav.h-nav ul li a {
   display: inline-block;
-  padding: 16px 10px;
+  padding: 10px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+  text-decoration: none
 }
 
 nav.h-nav li a:hover,
 nav.h-nav li a:focus {
   color: #ebebeb;
-  background-color: #485563;
+  background-color: #1f2933;
 }
 
 h1, h2 {
@@ -50,6 +54,7 @@ h1, h2 {
   padding: 0.5em;
   font-family: "Press Start 2P";
   text-align: center;
+  margin-bottom: 0;
 }
 
 h1.title {
@@ -64,7 +69,6 @@ h1.title {
 h3 {
   text-transform: uppercase;
   font: 700 18px Montserrat;
-  padding-bottom: 20px;
 }
 
 recent-battles div ul li {
@@ -75,10 +79,15 @@ recent-battles div ul li {
 a {
   color: #428BCA;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 a:visited {
   color: #ec68ec;
+}
+
+a.navigation-title:visited {
+  color: #428BCA;
 }
 
 a:active, a:hover, a:focus {
@@ -114,6 +123,31 @@ select:hover {
   border-color: #428BCA;
 }
 
+input {
+  color: #ebebeb;
+  border-color: #808080 !important;
+}
+
+leaderboard table {
+  max-width: 900px;
+  margin: auto;
+}
+
+ul {
+  list-style: square;
+  padding-left: 2em;
+}
+
+section {
+  padding: 2em;
+}
+
+.tip {
+  color: #aaa;
+  font-style: italic;
+  font-weight: normal;
+}
+
 /**
  * BELOW THIS LINE NEEDS TO BE EVALUATED
  */
@@ -128,126 +162,6 @@ select:hover {
 
 .ft {
   font-size: 3px; }
-
-.submitRepo {
-  color: white;
-  width: 10rem;
-  margin-bottom: -5px; }
-  .submitRepo:hover {
-    color: #18bc9c; }
-
-.fb_iframe_widget {
-  display: block !important; }
-
-.nav-buttons {
-  margin: 0 auto;
-  max-width: 55rem; }
-
-#inputRepo {
-  width: 23vw; }
-
-.user-options {
-  margin-top: 25px !important;
-  background: #2c3e50; }
-  .user-options:active {
-    background: none; }
-  .user-options li a {
-    color: #FFF; }
-    .user-options li a:hover {
-      background: none; }
-
-.btn-github {
-  width: 19rem;
-  text-align: center !important;
-  margin: auto; }
-  .btn-github .fa-github {
-    border-right: none; }
-
-.user-options-shrink {
-  margin-top: 5px !important; }
-
-.navbar-default {
-  background: #2b3e50;
-  box-shadow: 0 0 10px #000000; }
-
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  background: #1a242f; }
-
-.navbar-nav .btn-github {
-  width: auto;
-  font-size: 12px; }
-
-.leaderboard-table, .scaling-table {
-  width: auto;
-  color: #eaeaea; }
-
-.leaderboard-table {
-  text-align: center;
-  width: 60vw; }
-
-.scaling-table td {
-  text-align: left;
-  width: 150px; }
-
-.leaderboard-headers th, .scaling-headers th {
-  text-align: center; }
-
-.center-column-2 tr td:nth-child(2) {
-  text-align: center; }
-
-.leaderboard-time-param {
-  margin: 0 25px 25px 0; }
-
-.leaderboard-data {
-  width: 33%; }
-
-.leaderboard-rank {
-  width: 6vw; }
-
-.leaderboard-name {
-  width: 26vw; }
-
-.leaderboard-damage {
-  width: 26vw; }
-
-.scaling-table td {
-  padding: 0 20px; }
-
-.repoInput {
-  margin-top: 10px; }
-
-.logoutButton {
-  margin-top: 40px; }
-
-#inputRepo {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 5px; }
-
-.userViewTabs {
-  width: 31vw;
-  margin: 0 auto; }
-
-.leaderViewTabs {
-  width: 31vw;
-  margin: 0 auto;
-  background-color: white; }
-
-.rulesViewTabs {
-  width: 28vw;
-  margin-left: auto;
-  margin-right: auto; }
-
-.form-control-feedback {
-  color: #06C20A !important;
-  margin-top: 5px; }
-
-.centered {
-  display: block;
-  text-align: -webkit-center;
-  text-align: -moz-center; }
 
 .game-tips {
   text-align: center;
@@ -281,16 +195,6 @@ select:hover {
 
 
 
-a.btn {
-  font-weight: bold; }
-
-a.btn:hover,
-.success a:active,
-.success a:hover,
-.success a:focus,
-footer a:hover {
-  color: #d9edf7 !important; }
-
 .team-name {
   padding: 0 0 0 4px;
   font-size: 16pt; }
@@ -305,11 +209,6 @@ footer a:hover {
 
 .engineer-social a {
   text-decoration: none; }
-
-.body-holder {
-  width: 97%;
-  width: 1060px;
-  margin: 0 auto; }
 
 .outer {
   position: relative; }
@@ -589,7 +488,3 @@ footer a:hover {
 
 .jaredsartin {
   background-image: url(https://s.gravatar.com/avatar/eca6a30157569c5a522f406240de6977?s=201); }
-
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url("../lib/bootstrap/fonts/glyphicons-halflings-regular.woff"); }
