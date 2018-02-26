@@ -30,7 +30,6 @@
       <td class="accounting">{ stat.health_given }</td>
     </tr>
   </table>
-
   <script>
     let tag = this;
 

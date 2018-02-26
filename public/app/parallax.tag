@@ -1,7 +1,6 @@
 <parallax>
   <style>
     .parallax {
-      padding-top: 25px;
       height: 450px;
       overflow: hidden;
     }
@@ -29,7 +28,7 @@
       width: 256px;
       height: 256px;
       position: absolute;
-      bottom: -32px;
+      bottom: -57px;
       left: 64px;
       background-size: 256px;
       z-index: 90;
@@ -48,12 +47,12 @@
     }
 
   </style>
-  <section class="parallax">
-      <section class="parallax-inner" style={ bgstyles } ref="background">
+  <div class="parallax">
+      <div class="parallax-inner" style={ bgstyles } ref="background">
           <figure class="parallax-hero"></figure>
           <figure class="parallax-hero red" ref="redHero"></figure>
-      </section>
-  </section>
+      </div>
+  </div>
 
   <script>
     let tag = this;

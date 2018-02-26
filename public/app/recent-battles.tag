@@ -1,11 +1,13 @@
 <recent-battles>
   <h2>Today's Battles</h2>
-  <div each={ battle in battles }>
-    <span><a href="#game/{ battle.id }">View Battle #{ battle.id }</a></span>
-    <ul>
-      <li each={ player in battle.players }>{ player }</li>
-    </ul>
-  </div>
+  <section>
+    <div each={ battle in battles }>
+      <span><a href="#game/{ battle.id }">View Battle #{ battle.id }</a></span>
+      <ul>
+        <li each={ player in battle.players }>{ player }</li>
+      </ul>
+    </div>
+  </section>
 
   <script>
     let tag = this;
