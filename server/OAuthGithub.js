@@ -35,135 +35,12 @@ module.exports = function (app, db, dbHelper, options) {
         next();
     }
 
-    app.get('/userInfo/games', requireAuth, function (req, res) {
-        let user = req.user;
-        let username = user.github_login;
-
-        return dbHelper.getGameResultsByUsername(username).then(function (gameResults) {
-
-            user.games = gameResults || [];
-
-            user.games.forEach(function (game) {
-
-                if (!game.heroes) {
-                    game.gameResult = 'Missing Data';
-                    return;
-                }
-
-                game.gameResult = 'Second Place';
-
-                for (let hero of game.heroes) {
-                    if (hero.name === username) {
-                        if (hero.team.toString() === game.winning_team) {
-                            game.gameResult = 'Winner!';
-                            break;
-                        }
-                    }
-                }
-
-                delete game.heroes;
-            });
-
-            res.send(user);
-        });
-    });
-
-    app.get('/userInfo/stats/recent', requireAuth, function (req, res) {
-        let user = req.user;
-        let username = user.github_login;
-
-        return dbHelper.getLatestGameResultByUsername(username).then(function (gameResults) {
-            let gameResult = gameResults[0];
-
-            if (gameResult) {
-                let playerDataIndex = gameResult.players.indexOf(username);
-
-                if (playerDataIndex !== -1) {
-                    user.recent_stats = gameResult.heroes[playerDataIndex];
-
-                    if (gameResult.winning_team === user.recent_stats.team) {
-                        user.recent_stats.gameResult = 'Winner!';
-                    } else {
-                        user.recent_stats.gameResult = 'Second Place';
-                    }
-                }
-            }
-
-            // Player has not played any games yet
-            if (!user.recent_stats) {
-                user.recent_stats = {};
-            }
-
-            res.send(user);
-        });
-    });
-
-    app.get('/userInfo/stats/average', requireAuth, function (req, res) {
-        let user = req.user;
-        let username = user.github_login;
-
-        return dbHelper.getAllGameResultsByUsername(username).then(function (gameResults) {
-
-            let deaths = 0;
-            let kills = 0;
-            let kdRatio = 0;
-            let minesTaken = 0;
-            let damageGiven = 0;
-            let gravesTaken = 0;
-            let healthGiven = 0;
-            let diamondsEarned = 0;
-            let healthRecovered = 0;
-
-            gameResults.forEach(function (gameResult) {
-                let playerDataIndex = gameResult.players.indexOf(username);
-
-                if (playerDataIndex !== -1) {
-                    let stats = gameResult.heroes[playerDataIndex];
-
-                    deaths += (stats.dead ? 1 : 0);
-                    kills += stats.kills;
-                    kdRatio += (kills / (deaths || 1));
-                    minesTaken += stats.minesTaken;
-                    damageGiven += stats.damageGiven;
-                    gravesTaken += stats.gravesTaken;
-                    healthGiven += stats.healthGiven;
-                    diamondsEarned += stats.diamondsEarned;
-                    healthRecovered += stats.healthRecovered;
-                }
-            });
-
-            let totalGames = gameResults.length;
-
-            if (totalGames > 0) {
-                kills = (kills / totalGames).toFixed(2);
-                kdRatio = (kdRatio / totalGames).toFixed(2);
-                minesTaken = (minesTaken / totalGames).toFixed(2);
-                damageGiven = (damageGiven / totalGames).toFixed(2);
-                gravesTaken = (gravesTaken / totalGames).toFixed(2);
-                healthGiven = (healthGiven / totalGames).toFixed(2);
-                diamondsEarned = (diamondsEarned / totalGames).toFixed(2);
-                healthRecovered = (healthRecovered / totalGames).toFixed(2);
-            }
-
-            user.average_stats = {
-                gamesPlayed: totalGames,
-                kdRatio,
-                kills,
-                minesTaken,
-                damageGiven,
-                gravesTaken,
-                healthGiven,
-                diamondsEarned,
-                healthRecovered
-            };
-
-            res.send(user);
-        });
-    });
-
     // Makes the current user's info available
-    app.get('/userInfo', function (req, res) {
-        res.json(req.user);
+    app.get('/api/user', function (req, res) {
+        res.json(req.user || {
+            success: false,
+            message: 'Authentication required'
+        });
     });
 
     // Make the current user's code repository updatable
@@ -171,7 +48,7 @@ module.exports = function (app, db, dbHelper, options) {
         extended: false
     });
 
-    app.post('/userInfo', requireAuth, bodyParser.json(), urlEncodedBodyParser, function (req, res) {
+    app.post('/api/user', requireAuth, bodyParser.json(), urlEncodedBodyParser, function (req, res) {
 
         let user = req.user;
         let data = req.body;
