@@ -71,11 +71,6 @@ h3 {
   font: 700 18px Montserrat;
 }
 
-recent-battles div ul li {
-  display: inline-block;
-  padding: 0.1em 0.4em;
-}
-
 a {
   color: #428BCA;
   text-decoration: underline;
