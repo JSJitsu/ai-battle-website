@@ -128,29 +128,46 @@ module.exports = function (app, db, dbHelper, options) {
     let clientSecret = options.github.clientSecret || process.env.GITHUB_CLIENT_SECRET;
     let callbackURL = options.github.callbackUrl || process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
 
-    passport.use('github', new GitHubStrategy(
-        {
-            clientID: clientId,
-            clientSecret: clientSecret,
-            callbackURL: callbackURL
-        }, function (accessToken, refreshToken, profile, done) {
-            done(null, profile);
-        }
-    ));
+    if (options.github.pretendAuthAs) {
+        // Go here to login
+        app.get('/auth/github', function (req, res) {
 
-    // Go here to login
-    app.get('/auth/github', passport.authenticate('github'));
+            let randomId = Math.floor(Math.random() * 1000000);
+            let user = {
+                username: options.github.pretendAuthAs,
+                id: randomId,
+                avatar_url: `https://avatars0.githubusercontent.com/u/${randomId}?v=4`
+            };
+
+            req.login(user, function (err) {
+                return res.redirect('/');
+            });
+        });
+    } else {
+        passport.use('github', new GitHubStrategy(
+            {
+                clientID: clientId,
+                clientSecret: clientSecret,
+                callbackURL: callbackURL
+            }, function (accessToken, refreshToken, profile, done) {
+                done(null, profile);
+            }
+        ));
+
+        // Go here to login
+        app.get('/auth/github', passport.authenticate('github'));
+
+        // This is where github sends us after it finishes authenticating us
+        app.get('/auth/github/callback', passport.authenticate('github', {
+            successRedirect: '/',
+            failureRedirect: '/'
+        }));
+    }
 
     // Go here to log out
     app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
-
-    // This is where github sends us after it finishes authenticating us
-    app.get('/auth/github/callback', passport.authenticate('github', {
-        successRedirect: '/',
-        failureRedirect: '/'
-    }));
 
 };

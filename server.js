@@ -1,8 +1,6 @@
 const console = require('better-console');
 const express = require('express');
 const morgan = require('morgan');
-const fs = require('fs');
-const Q = require('q');
 
 const OAuthGithub = require('./server/OAuthGithub');
 const argv = require('minimist')(process.argv.slice(2));
@@ -25,16 +23,28 @@ db.connect(function (err) {
 
 function startServer () {
 
-    var options = {
+    let options = {
         useGithubApp: (argv.github === undefined),
         github: {
             clientId: argv['github-client-id'],
             clientSecret: argv['github-client-secret'],
-            callbackUrl: argv['github-callback-url']
+            callbackUrl: argv['github-callback-url'],
+            pretendAuthAs: argv['pretend-auth-as']
         }
     };
 
+    let showUsage = argv['help'];
+
     if (options.useGithubApp && (!options.github.clientId || !options.github.clientSecret)) {
+        showUsage = true;
+    }
+
+    if (options.github.pretendAuthAs) {
+        options.useGithubApp = true;
+        showUsage = false;
+    }
+
+    if (showUsage) {
         var usage = [
             'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [parameters]',
             '',
@@ -44,15 +54,18 @@ function startServer () {
             '  --github-client-secret  GitHub Application Client Secret',
             '        OR',
             '  --no-github             Do not connect to the GitHub application.',
+            '        OR',
+            '  --pretend-auth-as       The GitHub user to pretend to be when logging in.',
+            '                          This prevents real authentication with GitHub.',
             '',
             'Optional Parameters:',
             '',
             '  --github-callback-url   Specify the callback used for user auth.',
+            '  --help                  Show this message.',
             ''
         ].join('\n');
 
         console.log(usage);
-
         process.exit(0);
     }
 
@@ -63,6 +76,7 @@ function startServer () {
     app.use('/api/game', require('./routes/game'));
     app.use('/api/games', require('./routes/games'));
     app.use('/api/leaderboard', require('./routes/leaderboard'));
+    app.use('/api/users', require('./routes/users'));
 
     // Serve up files in public folder
     app.use('/', express.static(__dirname + '/public', {
