@@ -98,18 +98,22 @@ class Helper {
     }
 
     getPlayerLifetimeStats (username) {
+        username = this.cleanGithubLogin(username);
         return this.performQuery(`SELECT * FROM player_lifetime_stats WHERE github_login = '${username}'`);
     }
 
     getLatestGameResultByUsername (username) {
+        username = this.cleanGithubLogin(username);
         return this.performQuery(`SELECT * FROM game_results WHERE '${username}' = ANY(players) ORDER BY game_id DESC LIMIT 1`);
     }
 
     getAllGameResultsByUsername (username) {
+        username = this.cleanGithubLogin(username);
         return this.performQuery(`SELECT * FROM game_results WHERE '${username}' = ANY(players) ORDER BY game_id DESC`);
     }
 
     getGameResultsByUsername (username) {
+        username = this.cleanGithubLogin(username);
         return this.performQuery(`
             SELECT id, total_turns, played_at, winning_team, game_results.heroes
             FROM game
@@ -119,7 +123,12 @@ class Helper {
         `);
     }
 
+    cleanGithubLogin (username) {
+        return username.replace(/[^a-zA-Z0-9-]/g, '');
+    }
+
     getPlayer (username) {
+        username = this.cleanGithubLogin(username);
         return this.performQuery(`SELECT * FROM player WHERE github_login = '${username}'`);
     }
 
