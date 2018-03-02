@@ -93,6 +93,23 @@
         <td class="accounting">{ lifetime.games_lost }</td>
       </tr>
     </table>
+    <h2>All Games</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th class="accounting">Turns</th>
+          <th>Result</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tr each={ game, i in games }>
+        <td>{ (new Date(game.played_at)).toDateString() }</td>
+        <td class="accounting">{ game.total_turns }</td>
+        <td>{ game.winner ? 'Victory' : 'Defeat' }</td>
+        <td width="130"><a href="/#game/{ game.id }">View Battle</a></td>
+      </tr>
+    </table>
   </section>
   <script>
     let tag = this;
@@ -100,16 +117,25 @@
     tag.recent = {};
     tag.average = {};
     tag.lifetime = {};
+    tag.games = [];
 
     opts.user.on('login', function (data) {
       $.extend(tag, data);
       tag.fetchStats(data.github_login);
+      tag.fetchGames(data.github_login);
       tag.update();
     });
 
     tag.fetchStats = function (username) {
       $.getJSON('/api/users/' + username + '/stats', function (data) {
         $.extend(tag, data);
+        tag.update();
+      });
+    };
+
+    tag.fetchGames = function (username) {
+      $.getJSON('/api/users/' + username + '/games', function (data) {
+        tag.games = data;
         tag.update();
       });
     };
