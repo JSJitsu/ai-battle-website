@@ -53,22 +53,20 @@ module.exports = function (app, db, dbHelper, options) {
         let user = req.user;
         let data = req.body;
         let codeRepo = data.code_repo;
+        let codeBranch = data.code_branch;
 
-        if (codeRepo && typeof codeRepo === 'string') {
-            user.code_repo = data.code_repo;
+        user.code_repo = data.code_repo || 'hero-starter';
+        user.code_branch = data.code_branch || 'master';
 
-            let record = {
-                github_login: user.github_login,
-                code_repo: user.code_repo
-            };
+        let record = {
+            github_login: user.github_login,
+            code_repo: user.code_repo,
+            code_branch: user.code_branch
+        };
 
-            return dbHelper.updatePlayer(record).done(function () {
-                res.send(record);
-            });
-
-        } else {
-            res.send('user.code_repo must be a non-empty string');
-        }
+        return dbHelper.updatePlayer(record).done(function () {
+            res.send(record);
+        });
 
     });
 
@@ -104,15 +102,7 @@ module.exports = function (app, db, dbHelper, options) {
 
     passport.deserializeUser(function (githubHandle, done) {
         dbHelper.getPlayer(githubHandle).then(function (users) {
-            let user = users[0];
-
-            return dbHelper.getPlayerLifetimeStats(githubHandle).then(function (stats) {
-                if (stats[0]) {
-                    user.lifetime_stats = stats[0];
-                }
-
-                return user;
-            });
+            return users[0];
         })
         .done(
             function (user) {

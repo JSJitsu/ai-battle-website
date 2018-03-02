@@ -48,10 +48,10 @@
 
   </style>
   <div class="parallax">
-      <div class="parallax-inner" style={ bgstyles } ref="background">
-          <figure class="parallax-hero"></figure>
-          <figure class="parallax-hero red" ref="redHero"></figure>
-      </div>
+    <div class="parallax-inner" style={ bgstyles } ref="background">
+      <figure class="parallax-hero"></figure>
+      <figure class="parallax-hero red" ref="redHero"></figure>
+    </div>
   </div>
 
   <script>

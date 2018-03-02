@@ -19,14 +19,12 @@ router.get('/:github_login/games', function (req, res) {
                 return;
             }
 
-            game.gameResult = 'Second Place';
+            game.winner = false;
 
             for (let hero of game.heroes) {
                 if (hero.name === username) {
-                    if (hero.team.toString() === game.winning_team) {
-                        game.gameResult = 'Winner!';
-                        break;
-                    }
+                    game.winner = (hero.team.toString() === game.winning_team);
+                    break;
                 }
             }
 
@@ -37,89 +35,109 @@ router.get('/:github_login/games', function (req, res) {
     });
 });
 
-router.get('/:github_login/stats/recent', function (req, res) {
+router.get('/:github_login/stats/:type?', function (req, res) {
     let username = req.params.github_login;
+    let type = req.params.type;
+    let stats = {};
+    let promises = [];
 
-    return dbHelper.getLatestGameResultByUsername(username).then(function (gameResults) {
-        let gameResult = gameResults[0];
-        let stats = {};
+    if (type) {
+        statistics[type](username).then(result => res.send(result));
+    } else {
+        Q.all([
+            statistics.recent(username),
+            statistics.average(username),
+            statistics.lifetime(username)
+        ]).then(results => {
+            res.send({
+                recent: results[0],
+                average: results[1],
+                lifetime: results[2]
+            });
+        });
+    }
+});
 
-        if (gameResult) {
-            let playerDataIndex = gameResult.players.indexOf(username);
+const statistics = {
+    recent: function getRecentStats (username) {
+        return dbHelper.getLatestGameResultByUsername(username).then(function (gameResults) {
+            let gameResult = gameResults[0];
+            let stats = {};
 
-            if (playerDataIndex !== -1) {
-                stats = gameResult.heroes[playerDataIndex];
+            if (gameResult) {
+                let playerDataIndex = gameResult.players.indexOf(username);
 
-                if (gameResult.winning_team === stats.team) {
-                    stats.gameResult = 'Winner!';
-                } else {
-                    stats.gameResult = 'Second Place';
+                if (playerDataIndex !== -1) {
+                    stats = gameResult.heroes[playerDataIndex];
+                    stats.winner = (gameResult.winning_team === stats.team);
                 }
             }
-        }
 
-        res.send(stats);
-    });
-});
+            return stats;
+        });
+    },
+    average: function getAverageStats (username) {
+        return dbHelper.getAllGameResultsByUsername(username).then(function (gameResults) {
 
-router.get('/:github_login/stats/average', function (req, res) {
-    let username = req.params.github_login;
+            let deaths = 0;
+            let kills = 0;
+            let kdRatio = 0;
+            let minesTaken = 0;
+            let damageGiven = 0;
+            let gravesTaken = 0;
+            let healthGiven = 0;
+            let diamondsEarned = 0;
+            let healthRecovered = 0;
 
-    return dbHelper.getAllGameResultsByUsername(username).then(function (gameResults) {
+            gameResults.forEach(function (gameResult) {
+                let playerDataIndex = gameResult.players.indexOf(username);
 
-        let deaths = 0;
-        let kills = 0;
-        let kdRatio = 0;
-        let minesTaken = 0;
-        let damageGiven = 0;
-        let gravesTaken = 0;
-        let healthGiven = 0;
-        let diamondsEarned = 0;
-        let healthRecovered = 0;
+                if (playerDataIndex !== -1) {
+                    let stats = gameResult.heroes[playerDataIndex];
 
-        gameResults.forEach(function (gameResult) {
-            let playerDataIndex = gameResult.players.indexOf(username);
+                    deaths += (stats.dead ? 1 : 0);
+                    kills += stats.kills;
+                    kdRatio += (kills / (deaths || 1));
+                    minesTaken += stats.minesTaken;
+                    damageGiven += stats.damageGiven;
+                    gravesTaken += stats.gravesTaken;
+                    healthGiven += stats.healthGiven;
+                    diamondsEarned += stats.diamondsEarned;
+                    healthRecovered += stats.healthRecovered;
+                }
+            });
 
-            if (playerDataIndex !== -1) {
-                let stats = gameResult.heroes[playerDataIndex];
+            let totalGames = gameResults.length;
 
-                deaths += (stats.dead ? 1 : 0);
-                kills += stats.kills;
-                kdRatio += (kills / (deaths || 1));
-                minesTaken += stats.minesTaken;
-                damageGiven += stats.damageGiven;
-                gravesTaken += stats.gravesTaken;
-                healthGiven += stats.healthGiven;
-                diamondsEarned += stats.diamondsEarned;
-                healthRecovered += stats.healthRecovered;
+            if (totalGames > 0) {
+                kills = (kills / totalGames).toFixed(2);
+                kdRatio = (kdRatio / totalGames).toFixed(2);
+                minesTaken = (minesTaken / totalGames).toFixed(2);
+                damageGiven = (damageGiven / totalGames).toFixed(2);
+                gravesTaken = (gravesTaken / totalGames).toFixed(2);
+                healthGiven = (healthGiven / totalGames).toFixed(2);
+                diamondsEarned = (diamondsEarned / totalGames).toFixed(2);
+                healthRecovered = (healthRecovered / totalGames).toFixed(2);
             }
+
+            return {
+                gamesPlayed: totalGames,
+                kdRatio,
+                kills,
+                minesTaken,
+                damageGiven,
+                gravesTaken,
+                healthGiven,
+                diamondsEarned,
+                healthRecovered
+            };
         });
-
-        let totalGames = gameResults.length;
-
-        if (totalGames > 0) {
-            kills = (kills / totalGames).toFixed(2);
-            kdRatio = (kdRatio / totalGames).toFixed(2);
-            minesTaken = (minesTaken / totalGames).toFixed(2);
-            damageGiven = (damageGiven / totalGames).toFixed(2);
-            gravesTaken = (gravesTaken / totalGames).toFixed(2);
-            healthGiven = (healthGiven / totalGames).toFixed(2);
-            diamondsEarned = (diamondsEarned / totalGames).toFixed(2);
-            healthRecovered = (healthRecovered / totalGames).toFixed(2);
-        }
-
-        res.send({
-            gamesPlayed: totalGames,
-            kdRatio,
-            kills,
-            minesTaken,
-            damageGiven,
-            gravesTaken,
-            healthGiven,
-            diamondsEarned,
-            healthRecovered
+    },
+    lifetime: function getLifetimeStats (username) {
+        return dbHelper.getPlayerLifetimeStats(username).then(function (stats) {
+            return stats[0];
         });
-    });
-});
+    }
+};
 
 module.exports = router;

@@ -8,12 +8,12 @@
       <li>Note #2: If you want to change your hero code (your hero's "brain"), check out the hero-starter instructions.</li>
     </ul>
   </p>
-  <form>
+  <form method="POST" action="/api/user" onsubmit={ saveSettings } ref="settings">
     <label for="github-repo">GitHub Repository <span class="tip">(default: hero-starter)</span></label>
-    <input type="text" id="github-repo" name="code_repo" required>
+    <input type="text" id="github-repo" name="code_repo" value={ code_repo } required>
     <label for="github-branch">GitHub Branch/Ref <span class="tip">(default: master)</span></label>
-    <input type="text" id="github-branch" name="code_branch" required>
-    <button type="submit">Save</button>
+    <input type="text" id="github-branch" name="code_branch" value={ code_branch } required>
+    <button type="submit" ref="submit">Save</button>
   </form>
   </section>
   <h2>Statistics</h2>
@@ -33,44 +33,17 @@
         </tr>
       </thead>
       <tr>
-        <td>Second</td>
-        <td>Yes</td>
-        <td class="accounting">3</td>
-        <td class="accounting">220</td>
-        <td class="accounting">4</td>
-        <td class="accounting">350</td>
-        <td class="accounting">260</td>
-        <td class="accounting">1</td>
+        <td>{ recent.winner ? 'Victory' : 'Defeat' }</td>
+        <td>{ recent.dead ? 'No' : 'Yes' }</td>
+        <td class="accounting">{ recent.kills }</td>
+        <td class="accounting">{ recent.damageGiven }</td>
+        <td class="accounting">{ recent.minesTaken }</td>
+        <td class="accounting">{ recent.diamondsEarned }</td>
+        <td class="accounting">{ recent.healthRecovered }</td>
+        <td class="accounting">{ recent.gravesTaken }</td>
       </tr>
     </table>
-    <h3>Lifetime</h3>
-    <table>
-      <thead>
-        <tr>
-          <th class="accounting">Kills</th>
-          <th class="accounting">Deaths</th>
-          <th class="accounting">Damage Dealt</th>
-          <th class="accounting">Mines Captured</th>
-          <th class="accounting">Diamonds Earned</th>
-          <th class="accounting">Health Recovered</th>
-          <th class="accounting">Souls Absorbed</th>
-          <th class="accounting">Wins</th>
-          <th class="accounting">Losses</th>
-        </tr>
-      </thead>
-      <tr>
-        <td class="accounting">3</td>
-        <td class="accounting">220</td>
-        <td class="accounting">4</td>
-        <td class="accounting">350</td>
-        <td class="accounting">260</td>
-        <td class="accounting">1</td>
-        <td class="accounting">3</td>
-        <td class="accounting">220</td>
-        <td class="accounting">4</td>
-      </tr>
-    </table>
-    <h3>Average (422 Games)</h3>
+    <h3>Average <span class="tip">({ average.gamesPlayed } Games)</span></h3>
     <table>
       <thead>
         <tr>
@@ -84,17 +57,87 @@
         </tr>
       </thead>
       <tr>
-        <td class="accounting">3</td>
-        <td class="accounting">220</td>
-        <td class="accounting">4</td>
-        <td class="accounting">350</td>
-        <td class="accounting">260</td>
-        <td class="accounting">1</td>
-        <td class="accounting">3</td>
+        <td class="accounting">{ average.kills }</td>
+        <td class="accounting">{ average.kdRatio }</td>
+        <td class="accounting">{ average.damageGiven }</td>
+        <td class="accounting">{ average.minesTaken }</td>
+        <td class="accounting">{ average.diamondsEarned }</td>
+        <td class="accounting">{ average.healthRecovered }</td>
+        <td class="accounting">{ average.gravesTaken }</td>
+      </tr>
+    </table>
+    <h3>Lifetime <span class="tip">({ average.gamesPlayed } Games)</span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th class="accounting">Kills</th>
+          <th class="accounting">Deaths</th>
+          <th class="accounting">Damage Dealt</th>
+          <th class="accounting">Mines Captured</th>
+          <th class="accounting">Diamonds Earned</th>
+          <th class="accounting">Health Recovered</th>
+          <th class="accounting">Souls Absorbed</th>
+          <th class="accounting">Victories</th>
+          <th class="accounting">Defeats</th>
+        </tr>
+      </thead>
+      <tr>
+        <td class="accounting">{ lifetime.kills }</td>
+        <td class="accounting">{ lifetime.deaths }</td>
+        <td class="accounting">{ lifetime.damage_given }</td>
+        <td class="accounting">{ lifetime.mines_taken }</td>
+        <td class="accounting">{ lifetime.diamonds_earned }</td>
+        <td class="accounting">{ lifetime.health_recovered }</td>
+        <td class="accounting">{ lifetime.graves_taken }</td>
+        <td class="accounting">{ lifetime.games_won }</td>
+        <td class="accounting">{ lifetime.games_lost }</td>
       </tr>
     </table>
   </section>
   <script>
     let tag = this;
+
+    tag.recent = {};
+    tag.average = {};
+    tag.lifetime = {};
+
+    opts.user.on('login', function (data) {
+      $.extend(tag, data);
+      tag.fetchStats(data.github_login);
+      tag.update();
+    });
+
+    tag.fetchStats = function (username) {
+      $.getJSON('/api/users/' + username + '/stats', function (data) {
+        $.extend(tag, data);
+        tag.update();
+      });
+    };
+
+    tag.saveSettings = function (event) {
+      event.preventDefault();
+
+      let $form = $(tag.refs.settings);
+      let $button = $(tag.refs.submit);
+      let values = $form.serialize();
+      let action = $form.attr('action');
+
+      $button
+        .attr('disabled', true)
+        .text('Saving...');
+
+      $.post(action, values, function (response, status) {
+        setTimeout(function () {
+          $button.text('Saved!');
+
+          setTimeout(function () {
+            $button
+              .blur()
+              .removeAttr('disabled')
+              .text('Save');
+          }, 1000);
+        }, 1000);
+      });
+    }
   </script>
 </account>

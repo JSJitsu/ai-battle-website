@@ -16,17 +16,21 @@
       margin-bottom: 0.5em;
     }
 
+    section {
+      padding: 0.5em;
+    }
+
     .battles {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .battle {
-      width: 32%;
+      width: 30%;
       background-color: #243341;
       margin-bottom: 1em;
       padding: 0.5em;
+      margin: 0.5em;
     }
 
   </style>
