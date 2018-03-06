@@ -24,7 +24,7 @@ db.connect(function (err) {
 function startServer () {
 
     let options = {
-        useGithubApp: (argv.github === undefined),
+        useGithubApp: (argv.github !== false),
         github: {
             clientId: argv['github-client-id'],
             clientSecret: argv['github-client-secret'],
@@ -41,6 +41,8 @@ function startServer () {
 
     if (options.github.pretendAuthAs) {
         options.useGithubApp = true;
+        showUsage = false;
+    } else if (options.useGithubApp) {
         showUsage = false;
     }
 

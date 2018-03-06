@@ -7,6 +7,7 @@ user.login = function (params) {
 };
 
 riot.compile(function () {
+  route.start();
   // here tags are compiled and riot.mount works synchronously
   var tags = riot.mount('*', { user: user });
 
