@@ -25,12 +25,9 @@ public/js/game-engine.js
 
 # Dependency directories
 node_modules/
-public/lib/
-bower_components
 config.js
 gamerunner/user_code/helpers/*.js
 gamerunner/user_code/hero/*.js
-yarn.lock
 
 # Vagrant
 .vagrant
