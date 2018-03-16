@@ -118,13 +118,13 @@ module.exports = function (app, db, dbHelper, options) {
     let clientSecret = options.github.clientSecret || process.env.GITHUB_CLIENT_SECRET;
     let callbackURL = options.github.callbackUrl || process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/auth/github/callback';
 
-    if (options.github.pretendAuthAs) {
+    if (options.pretendAuthAs) {
         // Go here to login
         app.get('/auth/github', function (req, res) {
 
             let randomId = Math.floor(Math.random() * 1000000);
             let user = {
-                username: options.github.pretendAuthAs,
+                username: options.pretendAuthAs,
                 id: randomId,
                 avatar_url: `https://avatars0.githubusercontent.com/u/${randomId}?v=4`
             };

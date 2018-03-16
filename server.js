@@ -24,26 +24,19 @@ db.connect(function (err) {
 function startServer () {
 
     let options = {
-        useGithubApp: (argv.github !== false),
+        useGithub: false,
+        pretendAuthAs: argv['pretend-auth-as'],
         github: {
             clientId: argv['github-client-id'],
             clientSecret: argv['github-client-secret'],
-            callbackUrl: argv['github-callback-url'],
-            pretendAuthAs: argv['pretend-auth-as']
+            callbackUrl: argv['github-callback-url']
         }
     };
 
     let showUsage = argv['help'];
 
-    if (options.useGithubApp && (!options.github.clientId || !options.github.clientSecret)) {
-        showUsage = true;
-    }
-
-    if (options.github.pretendAuthAs) {
-        options.useGithubApp = true;
-        showUsage = false;
-    } else if (options.useGithubApp) {
-        showUsage = false;
+    if (options.github.clientId && options.github.clientSecret) {
+        options.useGithub = true;
     }
 
     if (showUsage) {
@@ -54,8 +47,6 @@ function startServer () {
             '',
             '  --github-client-id      GitHub Application Client ID',
             '  --github-client-secret  GitHub Application Client Secret',
-            '        OR',
-            '  --no-github             Do not connect to the GitHub application.',
             '        OR',
             '  --pretend-auth-as       The GitHub user to pretend to be when logging in.',
             '                          This prevents real authentication with GitHub.',
@@ -69,6 +60,10 @@ function startServer () {
 
         console.log(usage);
         process.exit(0);
+    }
+
+    if (options.useGithub === false && !options.pretendAuthAs) {
+        console.warn('No real or test authentication with GitHub will be used. Re-run this script with --help for more information.');
     }
 
     const app = express();
@@ -86,7 +81,7 @@ function startServer () {
     }));
 
     // Add github authentication
-    if (options.useGithubApp) {
+    if (options.useGithub || options.pretendAuthAs) {
         OAuthGithub(app, db, dbHelper, options);
     }
 
