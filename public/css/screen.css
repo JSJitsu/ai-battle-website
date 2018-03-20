@@ -134,6 +134,10 @@ input {
   border-color: #808080 !important;
 }
 
+input[type=range] {
+  margin: 0;
+}
+
 leaderboard table {
   max-width: 900px;
   margin: auto;
