@@ -3,6 +3,7 @@
 
     .battle-board {
       overflow: hidden;
+      position: relative;
     }
 
     .battle-field,
@@ -10,23 +11,53 @@
       display: flex;
     }
 
-    .battle-field > .team-blue {
+    .battle-field > .roster-blue {
       order: 1;
       width: 140px;
     }
     .battle-field > .battle-board {
       order: 2;
     }
-    .battle-field > .team-red {
+    .battle-field > .roster-red {
       order: 3;
       width: 140px;
     }
 
-    ul {
-      display: flex;
-      flex-direction: row;
+    .battle-field > .roster-blue .player-alive {
+      background-color: #151f7d;
+    }
+
+    .battle-field > .roster-red .player-alive {
+      background-color: #6a1f28;
+    }
+
+    .player-dead {
+      opacity: 0.6;
+    }
+
+    .roster h3 {
+      margin: 0;
+      padding: 0.3em;
+    }
+
+    .roster a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .roster a:hover,
+    .roster a:focus,
+    .roster a:active {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    ul,
+    li {
       list-style: none;
-      margin-top: 1rem;
+      margin: 0;
+      padding: 0.2em;
     }
 
     .battle-tile {
@@ -56,6 +87,7 @@
 
     .battle-turn {
       display: flex;
+      padding: 0.4em 0;
     }
 
     .fainted {
@@ -70,15 +102,24 @@
       background: #a00;
     }
 
+    .diamond-count {
+      padding: 0 1.4em;
+    }
+
+    .diamond-total {
+      font-weight: bold;
+    }
+
     .indicator {
       position: absolute;
       right: 4px;
       top: 38px;
       color: #fff;
-      font-size: 6px;
+      font-size: 8px;
       font-family: "Press Start 2P";
-      padding: 2px 2px 2px 3px;
+      padding: 0 2px 0 3px;
       border: solid 1px #fff;
+      opacity: 0.8;
     }
 
     @keyframes deathflash {
@@ -95,13 +136,14 @@
     .end-message {
       width: 100%;
       background-color: rgba(44, 44, 44, 0.8);
-      position: relative;
-      top: 400px;
+      position: absolute;
+      top: 50%;
       z-index: 4;
       font-size: 2em;
       text-align: center;
       font-family: "Press Start 2P";
       padding: 0.5em;
+      transform: translateY(-50%);
     }
 
     .battle-turn .turn:first-child {
@@ -109,7 +151,7 @@
     }
 
     .turn {
-      font-size: 12px;
+      font-size: 16px;
       font-family: "Press Start 2P";
       flex: 1;
       padding: 0 1em;
@@ -124,18 +166,18 @@
       top: 2vw;
       width: 100%;
       font-size: 21px;
-      height: 30px;
       color: white;
       text-align: center;
       font-family: "Press Start 2P";
+      padding: 0.3em 0;
     }
 
     .tile-name {
       position: absolute;
-      color: #fff;
-      font-size: 6px;
+      color: #ffffffd0;
+      font-size: 8px;
       font-family: "Press Start 2P";
-      padding: 2px 2px 2px 3px;
+      padding: 0 3px;
       border: solid 1px #ffffff80;
       width: 62px;
       z-index: 2;
@@ -144,14 +186,18 @@
   </style>
   <h2>{ title }</h2>
   <div class="battle-field" if={ game }>
-    <div class={ 'team-blue': i === 0, 'team-red': i === 1 } each={ team, i in game.teams }>
+    <div class={ 'roster-blue': i === 0, 'roster-red': i === 1, roster: true } each={ team, i in game.teams }>
       <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
-      <ul each={ player in team }>
-        <li><a href="https://github.com/{ player.name }">{ player.name }</a> { player.health > 0 ? player.health + 'HP' : '💀' }</li>
+      <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
+      <ul>
+        <li each={ player in team } class={ player.health <= 0 ? 'player-dead' : 'player-alive' }>
+          { player.health <= 0 ? '💀 ' : '' }<a href="https://github.com/{ player.name }">{ player.name }</a>
+          <br><span class="diamond-count">💎 { player.diamondsEarned }</span>
+        </li>
       </ul>
     </div>
     <div class="battle-board">
-      <div class="messages">{ game.killMessage || game.attackMessage }</div>
+      <div class="messages">{ game.killMessage || game.attackMessage || '&nbsp;' }</div>
       <div class="end-message" if={ game.ended }>
         { game.winningTeam === 0 ? 'Blue' : 'Red' } Team Wins!
       </div>
@@ -340,6 +386,8 @@
       tag.maxTurn = tag.battle.events.length;
       tag.isLatest = tag.latest;
       tag.game = createGame(tag.initialMap);
+
+      console.debug(tag);
 
       tag.update();
     }
