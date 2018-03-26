@@ -2,9 +2,31 @@
   <style>
 
     .battle-board {
+      overflow: hidden;
+    }
+
+    .battle-field,
+    .battle-row {
+      display: flex;
+    }
+
+    .battle-field > .team-blue {
+      order: 1;
+      width: 140px;
+    }
+    .battle-field > .battle-board {
+      order: 2;
+    }
+    .battle-field > .team-red {
+      order: 3;
+      width: 140px;
+    }
+
+    ul {
       display: flex;
       flex-direction: row;
-      overflow: hidden;
+      list-style: none;
+      margin-top: 1rem;
     }
 
     .battle-tile {
@@ -13,6 +35,7 @@
       background: url(../img/grass_square.gif);
       border: 1px dotted #10380d80;
       position: relative;
+      text-align: center;
     }
 
     .battle-tile .small-tile {
@@ -23,16 +46,78 @@
       z-index: 1;
     }
 
+    .battle-tile.scenery img {
+      max-height: 100%;
+    }
+
+    .battle-controls {
+      text-align: center;
+    }
+
+    .battle-turn {
+      display: flex;
+    }
+
+    .fainted {
+      animation: deathflash 2s linear infinite alternate;
+    }
+
+    .team-blue {
+      background: #00a;
+    }
+
+    .team-red {
+      background: #a00;
+    }
+
+    .indicator {
+      position: absolute;
+      right: 4px;
+      top: 38px;
+      color: #fff;
+      font-size: 6px;
+      font-family: "Press Start 2P";
+      padding: 2px 2px 2px 3px;
+      border: solid 1px #fff;
+    }
+
+    @keyframes deathflash {
+      from {
+        filter: invert(0%);
+        -webkit-filter: invert(0%);
+      }
+      to {
+        filter: invert(90%);
+        -webkit-filter: invert(90%);
+      }
+    }
+
     .end-message {
       width: 100%;
       background-color: rgba(44, 44, 44, 0.8);
-      position: absolute;
-      top: 350px;
-      z-index: 1;
+      position: relative;
+      top: 400px;
+      z-index: 4;
       font-size: 2em;
       text-align: center;
       font-family: "Press Start 2P";
       padding: 0.5em;
+    }
+
+    .battle-turn .turn:first-child {
+      text-align: right;
+    }
+
+    .turn {
+      font-size: 12px;
+      font-family: "Press Start 2P";
+      flex: 1;
+      padding: 0 1em;
+      text-align: left;
+    }
+
+    .slider {
+      width: 400px;
     }
 
     .messages {
@@ -58,34 +143,60 @@
 
   </style>
   <h2>{ title }</h2>
-  <div class="messages">{ game.killMessage || game.attackMessage }</div>
-  <div class="battle-board" ref="battle_canvas" if={ battle }>
-    <div class="end-message" if={ game.ended }>
-      Some team won!
+  <div class="battle-field" if={ game }>
+    <div class={ 'team-blue': i === 0, 'team-red': i === 1 } each={ team, i in game.teams }>
+      <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
+      <ul each={ player in team }>
+        <li><a href="https://github.com/{ player.name }">{ player.name }</a> { player.health > 0 ? player.health + 'HP' : '💀' }</li>
+      </ul>
     </div>
-    <div class="battle-row" each={ row, i in game.board.tiles }>
-      <div class="battle-tile { tile.type === 'Impassable' ? 'scenery' : '' }" each={ tile, j in row }>
-        <img src="img/tree.png" if={ tile.subType === 'Tree' }>
-        <img class="small-tile" src="img/diamond_mine.png" if={ tile.subType === 'DiamondMine' }>
-        <img class="small-tile" src="img/healing_well.gif" if={ tile.subType === 'HealthWell' }>
-        <div if={ tile.type === 'Hero' } class="tile-name" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);">{tile.name}</div>
-        <img class="small-tile" src="img/blue_knight.gif" if={ tile.subType === 'BlackKnight' }>
-        <img class="small-tile" src="img/red_knight.gif" if={ tile.subType === 'Adventurer' }>
+    <div class="battle-board">
+      <div class="messages">{ game.killMessage || game.attackMessage }</div>
+      <div class="end-message" if={ game.ended }>
+        { game.winningTeam === 0 ? 'Blue' : 'Red' } Team Wins!
+      </div>
+      <div class="battle-row" each={ row, y in game.board.tiles } no-reorder>
+        <div class="battle-tile { tile.type === 'Impassable' ? 'scenery' : '' }" each={ tile, x in row } no-reorder>
+          <img src="img/tree.png" if={ tile.subType === 'Tree' }>
+          <virtual if={ tile.subType === 'DiamondMine' }>
+            <img class="small-tile" src="img/diamond_mine.png" if={ !tile.owner }>
+            <virtual if={ tile.owner && tile.owner.team === 0 }>
+              <img class="small-tile" src="img/diamond_mine_blue.gif" title={ 'Owned by ' + tile.owner.name }>
+              <span class="indicator team-blue" title={ 'Owned by ' + tile.owner.name }>{ tile.owner.name.substring(0, 2) }<span>
+            </virtual>
+            <virtual if={ tile.owner && tile.owner.team === 1 }>
+              <img class="small-tile" src="img/diamond_mine_red.gif" title={ 'Owned by ' + tile.owner.name }>
+              <span class="indicator team-red" title={ 'Owned by ' + tile.owner.name }>{ tile.owner.name.substring(0, 2) }<span>
+            </virtual>
+          </virtual>
+          <img class="small-tile" src="img/healing_well.gif" if={ tile.subType === 'HealthWell' }>
+          <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);">{ game.heroes[tile.id].name }</div>
+          <img class="small-tile" src="img/blue_knight.gif" if={ tile.subType === 'BlackKnight' }>
+          <img class="small-tile" src="img/red_knight.gif" if={ tile.subType === 'Adventurer' }>
+          <img class="small-tile fainted" src="img/blue_knight_fainted.gif" if={ tile.subType === 'BlueFainted' }>
+          <img class="small-tile fainted" src="img/red_knight_fainted.gif" if={ tile.subType === 'RedFainted' }>
+        </div>
       </div>
     </div>
   </div>
-  <div class="battle-controls">
-    Turn: { game.turn }
-    <input type="range" min="0" max={ game.maxTurn } value={ game.turn } oninput={ jumpToTurn }>
-    <a class="stop-game" onclick={ stopGame }>⏹ Stop</a>
-    <a class="play-pause-game" onclick={ toggleAutoPlay }>
-      <virtual if={ ticker }>⏸ Pause</virtual>
-      <virtual if={ !ticker }>⏵ Play</virtual>
-    </a>
+  <div class="battle-controls" if={ game }>
+    <div class="battle-turn">
+      <span class="turn">Turn: { game.turn }</span>
+      <input type="range" class="slider" min="0" value="0" ref="slider" max={ game.maxTurn } oninput={ jumpToTurnFromInput }>
+      <span class="turn">{ game.maxTurn }</span>
+    </div>
+    <div>
+      <button class="stop-game" onclick={ stopGame }>⏹ Stop</button>
+      <button class="play-pause-game" onclick={ toggleAutoPlay }>
+        <virtual if={ ticker }>⏸ Pause</virtual>
+        <virtual if={ !ticker }>⏵ Play</virtual>
+      </button>
+    </div>
   </div>
   <script>
     let tag = this;
-    let gameSpeed = 500;
+    let gameSpeed = 400;
+    let sliderBufferDelay = 10;
 
     route('/game/*', function (id) {
       fetchGame(id);
@@ -148,6 +259,11 @@
       tag.jumpToTurn(0);
     }
 
+    jumpToTurnFromInput (input) {
+      input.preventUpdate = true;
+      tag.jumpToTurn(parseInt(input.target.value, 10));
+    }
+
     /**
      * @public
      *
@@ -160,11 +276,6 @@
      *     The game class
      */
     jumpToTurn (turn) {
-      if (typeof turn !== 'number') {
-        turn.preventUpdate = true;
-        turn = parseInt(turn.target.value, 10);
-      }
-
       let initialMap = tag.initialMap;
       let events = tag.events;
       let game = createGame(initialMap);
@@ -211,6 +322,7 @@
         game.handleHeroTurn(heroAction);
 
         if (skipUpdate !== true) {
+          tag.refs.slider.value = turn;
           tag.update();
         }
       }

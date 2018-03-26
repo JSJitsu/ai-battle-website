@@ -39,7 +39,7 @@ nav.h-nav ul li a {
   padding: 10px 10px;
   border-radius: 3px;
   margin-right: 10px;
-  text-decoration: none
+  text-decoration: none;
 }
 
 nav.h-nav li a:hover,
