@@ -13,6 +13,7 @@
     },
     "globals": {
         "$": true,
-        "riot": true
+        "riot": true,
+        "route": true
     }
 }

@@ -11,7 +11,5 @@ riot.compile(function () {
   // here tags are compiled and riot.mount works synchronously
   var tags = riot.mount('*', { user: user });
 
-  console.debug(tags);
-
   user.login();
 });
