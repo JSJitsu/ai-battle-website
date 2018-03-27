@@ -181,6 +181,8 @@
       border: solid 1px #ffffff80;
       width: 62px;
       z-index: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
   </style>
@@ -216,7 +218,7 @@
             </virtual>
           </virtual>
           <img class="small-tile" src="img/healing_well.gif" if={ tile.subType === 'HealthWell' }>
-          <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);">{ game.heroes[tile.id].name }</div>
+          <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);" title={ game.heroes[tile.id].name }>{ game.heroes[tile.id].name }</div>
           <img class="small-tile" src="img/blue_knight.gif" if={ tile.subType === 'BlackKnight' }>
           <img class="small-tile" src="img/red_knight.gif" if={ tile.subType === 'Adventurer' }>
           <img class="small-tile fainted" src="img/blue_knight_fainted.gif" if={ tile.subType === 'BlueFainted' }>
