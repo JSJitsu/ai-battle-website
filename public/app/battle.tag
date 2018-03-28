@@ -254,6 +254,30 @@
       $.getJSON(`api/game/${id}`, loadGame);
     }
 
+    function loadGame (data) {
+      tag.gameId = data.id;
+      tag.title = `Battle #${data.id}`;
+      tag.battle = data;
+
+      tag.boardHeight = tag.battle.initial_map.length;
+      tag.boardWidth = tag.battle.initial_map[0].length;
+      tag.initialMap = tag.battle.initial_map;
+      tag.events = tag.battle.events;
+      tag.maxTurn = tag.battle.events.length;
+      tag.isLatest = tag.latest;
+      tag.game = createGame(tag.initialMap);
+
+      tag.update();
+    }
+
+    tag.on('before-mount', function (e) {
+      if (location.hash.indexOf('game') > -1) {
+        route.exec();
+      } else {
+        $.getJSON('api/game', loadGame);
+      }
+    });
+
     /**
      * Creates a new game using the initial map.
      * @param  {Object} map
@@ -382,26 +406,6 @@
         }
       }
     };
-
-    function loadGame (data) {
-      tag.gameId = data.id;
-      tag.title = `Battle #${data.id}`;
-      tag.battle = data;
-
-      tag.boardHeight = tag.battle.initial_map.length;
-      tag.boardWidth = tag.battle.initial_map[0].length;
-      tag.initialMap = tag.battle.initial_map;
-      tag.events = tag.battle.events;
-      tag.maxTurn = tag.battle.events.length;
-      tag.isLatest = tag.latest;
-      tag.game = createGame(tag.initialMap);
-
-      tag.update();
-    }
-
-    tag.on('before-mount', function (e) {
-      $.getJSON('api/game', loadGame);
-    });
 
   </script>
 </battle>
