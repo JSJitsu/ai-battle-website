@@ -267,6 +267,8 @@
       tag.isLatest = tag.latest;
       tag.game = createGame(tag.initialMap);
 
+      tag.refs.slider.value = 0;
+
       tag.update();
     }
 
