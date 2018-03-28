@@ -165,7 +165,7 @@
     .messages {
       top: 2vw;
       width: 100%;
-      font-size: 21px;
+      font-size: 16px;
       color: white;
       text-align: center;
       font-family: "Press Start 2P";
