@@ -396,8 +396,6 @@
       tag.isLatest = tag.latest;
       tag.game = createGame(tag.initialMap);
 
-      console.debug(tag);
-
       tag.update();
     }
 
