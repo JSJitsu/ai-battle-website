@@ -187,3 +187,12 @@ button:active {
   transform: translateY(0.2em);
   box-shadow: 0 0 0.1em #222;
 }
+
+.current-user,
+.current-user a {
+  color: #ffff78 !important;
+}
+
+.tile-name.current-user {
+  border-color: #ffff78;
+}

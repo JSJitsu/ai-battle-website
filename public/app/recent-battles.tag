@@ -39,13 +39,20 @@
     <div class="battle" each={ battle in battles }>
       <h3><a href="#game/{ battle.id }">Battle #{ battle.id }</a></h3>
       <ul>
-        <li each={ player in battle.players }>{ player }</li>
+        <li each={ player in battle.players } class={ user.getCurrentUserClass(player) }>{ player }</li>
       </ul>
     </div>
   </section>
 
   <script>
     let tag = this;
+
+    /**
+     * Updates the tag so any user-specific UI elements can be displayed.
+     */
+    user.on('login', function () {
+      tag.update();
+    });
 
     tag.on('before-mount', function (e) {
       $.getJSON('/api/games/latest', function (data) {

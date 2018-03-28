@@ -20,7 +20,7 @@
         <th class="accounting">Healer</th>
       </tr>
     </thead>
-    <tr each={ stat, i in stats }>
+    <tr each={ stat, i in stats } class={ user.getCurrentUserClass(stat.github_login) }>
       <td>{ i + 1 }</td>
       <td>{ stat.github_login }</td>
       <td class="accounting">{ stat.games_won }</td>
@@ -32,6 +32,13 @@
   </table>
   <script>
     let tag = this;
+
+    /**
+     * Updates the tag so any user-specific UI elements can be displayed.
+     */
+    user.on('login', function () {
+      tag.update();
+    });
 
     onCategoryChange () {
       updateStats();
