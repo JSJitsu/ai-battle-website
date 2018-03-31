@@ -25,6 +25,7 @@
     "body-parser": "^1.6.2",
     "express": "^4.7.2",
     "express-session": "^1.7.4",
+    "knex": "^0.13.0",
     "milligram": "^1.3.0",
     "morgan": "^1.7.0",
     "passport": "^0.3.0",
@@ -47,6 +48,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.4.1",
+    "knex": "^0.13.0",
     "minimist": "^1.2.0",
     "request": "^2.40.0"
   }

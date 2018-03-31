@@ -5,20 +5,28 @@ const morgan = require('morgan');
 const OAuthGithub = require('./server/OAuthGithub');
 const argv = require('minimist')(process.argv.slice(2));
 const config = require('./config');
-const db = require('./database/connect.js');
-const dbHelper = new (require('./database/helper.js'))(db);
+const db = require('./database/knex');
 
-// Test the database connection
-db.connect(function (err) {
-    if (err) {
-        console.error('Unable to connect to database!');
-        console.error(err.message);
+// This helper should be refactored.
+const helperDbConnection = require('./database/connect');
+const dbHelper = new (require('./database/helper.js'))(helperDbConnection);
 
-        process.exit(1);
-        db.end();
-    }
-
-    startServer();
+// Test the database connection. Knex still doesn't have a very good way to
+// do that. So, this check have to stay this way for a while until they improve
+// the lib.
+db.raw('select 1+1 as result').then( () => {
+    // Apply migrations.
+    db.migrate.latest()
+    .then( () => {
+        return console.log('Latest migrations applied');
+    })
+    .then ( () => {
+        startServer();
+    });
+})
+.catch(err => {
+    console.error('Error setting up the database');
+    console.error(err.message);
 });
 
 function startServer () {
