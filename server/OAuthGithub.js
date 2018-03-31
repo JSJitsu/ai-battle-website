@@ -6,12 +6,12 @@ let session = require('express-session');
 let pgSession = require('connect-pg-simple')(session);
 let bodyParser = require('body-parser');
 
-module.exports = function (app, db, dbHelper, options) {
+module.exports = function (app, db, dbHelper, config, options) {
 
     app.use(
         session({
             store: new pgSession({
-                conString: db.config
+                conObject: db.client.connectionSettings
             }),
             secret: process.env.SESSION_SECRET || 'ilovejavascriptbattle',
             resave: false,

@@ -90,7 +90,7 @@ function startServer () {
 
     // Add github authentication
     if (options.useGithub || options.pretendAuthAs) {
-        OAuthGithub(app, db, dbHelper, options);
+        OAuthGithub(app, db, dbHelper, config, options);
     }
 
     let port = process.env.PORT || config.application.port;
