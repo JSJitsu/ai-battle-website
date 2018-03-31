@@ -15,7 +15,7 @@ router.get('(/:id)?', function (req, res) {
         query = db.select('*').from('game').where('id', gameId);
     } else {
         latest = true;
-        query = db.select('*').from('game').orderBy('id', 'desc');
+        query = db.select('*').from('game').orderBy('id', 'desc').limit(1);
     }
 
     return query
