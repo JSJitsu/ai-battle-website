@@ -1,8 +1,6 @@
 const console = require('better-console');
 const express = require('express');
 const morgan = require('morgan');
-const fs = require('fs');
-const Q = require('q');
 
 const OAuthGithub = require('./server/OAuthGithub');
 const argv = require('minimist')(process.argv.slice(2));
@@ -33,8 +31,9 @@ db.raw('select 1+1 as result').then( () => {
 
 function startServer () {
 
-    var options = {
-        useGithubApp: (argv.github === undefined),
+    let options = {
+        useGithub: false,
+        pretendAuthAs: argv['pretend-auth-as'],
         github: {
             clientId: argv['github-client-id'],
             clientSecret: argv['github-client-secret'],
@@ -42,7 +41,13 @@ function startServer () {
         }
     };
 
-    if (options.useGithubApp && (!options.github.clientId || !options.github.clientSecret)) {
+    let showUsage = argv['help'];
+
+    if (options.github.clientId && options.github.clientSecret) {
+        options.useGithub = true;
+    }
+
+    if (showUsage) {
         var usage = [
             'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [parameters]',
             '',
@@ -51,17 +56,22 @@ function startServer () {
             '  --github-client-id      GitHub Application Client ID',
             '  --github-client-secret  GitHub Application Client Secret',
             '        OR',
-            '  --no-github             Do not connect to the GitHub application.',
+            '  --pretend-auth-as       The GitHub user to pretend to be when logging in.',
+            '                          This prevents real authentication with GitHub.',
             '',
             'Optional Parameters:',
             '',
             '  --github-callback-url   Specify the callback used for user auth.',
+            '  --help                  Show this message.',
             ''
         ].join('\n');
 
         console.log(usage);
-
         process.exit(0);
+    }
+
+    if (options.useGithub === false && !options.pretendAuthAs) {
+        console.warn('No real or test authentication with GitHub will be used. Re-run this script with --help for more information.');
     }
 
     const app = express();
@@ -71,22 +81,15 @@ function startServer () {
     app.use('/api/game', require('./routes/game'));
     app.use('/api/games', require('./routes/games'));
     app.use('/api/leaderboard', require('./routes/leaderboard'));
+    app.use('/api/users', require('./routes/users'));
 
     // Serve up files in public folder
-    app.use('/', express.static(__dirname + '/public'));
-
-    // must serve up ejs files individually for Azure to accept in deployment
-    app.get('/ejs_templates/:ejsTemplate', function (req, res) {
-        // file server
-        res.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-
-        res.end(fs.readFileSync(__dirname+'/public/ejs_templates/' +  req.params.ejsTemplate + '.ejs'));
-    });
+    app.use('/', express.static(__dirname + '/public', {
+        extensions: ['html']
+    }));
 
     // Add github authentication
-    if (options.useGithubApp) {
+    if (options.useGithub || options.pretendAuthAs) {
         OAuthGithub(app, db, dbHelper, options);
     }
 
