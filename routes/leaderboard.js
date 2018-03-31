@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Q = require('q');
 
-const db = require('../database/connect.js');
-const dbHelper = new (require('../database/helper.js'))(db);
+const db = require('../database/knex');
 
 /**
  * Retrieves the leaderboard data for the specified time period and stat.
@@ -25,7 +23,7 @@ router.get('/:timePeriod/:stat', function (req, res) {
         return;
     }
 
-    return Q.ninvoke(db, 'query', `SELECT * FROM player_lifetime_stats ORDER BY ${chosenStat} DESC LIMIT 20`)
+    return db.select('*').from('player_lifetime_stats').orderBy(chosenStat, 'desc').limit(20)
         .then(function (stats) {
             if (stats) {
                 res.status(200).send({

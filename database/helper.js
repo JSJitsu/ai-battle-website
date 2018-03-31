@@ -1,126 +1,40 @@
 'use strict';
 
-var Q = require('q');
-
 class Helper {
 
     constructor (database) {
-        this.database = database;
-        this.convertCamelCaseToUnderscore = true;
-    }
-
-    buildSqlParts (table, values) {
-
-        var namedParams = [],
-            combined = [],
-            columns;
-
-        columns = Object.keys(values);
-
-        columns.forEach(function (key) {
-            namedParams.push(`:${key}`);
-        });
-
-        if (this.convertCamelCaseToUnderscore) {
-            columns = columns.map(this.camelCaseToUnderscore);
-        }
-
-        for (let i = 0; i < columns.length; i++) {
-            combined.push(`${columns[i]} = ${namedParams[i]}`);
-        }
-
-        columns = columns.join(', ');
-        namedParams = namedParams.join(', ');
-        combined = combined.join(', ');
-
-        return {
-            columns: columns,
-            namedParams: namedParams,
-            combined: combined
-        };
-    }
-
-    camelCaseToUnderscore (text) {
-        return text.replace(/([A-Z])/,"_$1").toLowerCase();
-    }
-
-    updateSql (table, values, where) {
-        var parts = this.buildSqlParts(table, values),
-            sql;
-
-        sql = `UPDATE ${table} SET ${parts.combined} WHERE ${where}`;
-
-        return sql;
-    }
-
-    insertSql (table, values, primaryKey) {
-        var parts = this.buildSqlParts(table, values),
-            sql;
-
-        primaryKey = primaryKey || 'id';
-
-        sql = `INSERT INTO ${table} (${parts.columns}) VALUES (${parts.namedParams}) RETURNING ${primaryKey}`;
-
-        return sql;
-    }
-
-    upsertSql (table, values, primaryKey) {
-        let parts = this.buildSqlParts(table, values);
-
-        primaryKey = primaryKey || 'id';
-
-        return `
-            INSERT INTO ${table} (${parts.columns})
-            VALUES (${parts.namedParams})
-            ON CONFLICT (${primaryKey})
-            DO UPDATE SET ${parts.combined}
-        `;
-    }
-
-    performQuery (query) {
-        return Q.ninvoke(this.database, 'query', query).catch(this.errorHandler);
-    }
-
-    performUpdate (query, record) {
-        return Q.ninvoke(this.database, 'query', query, record).catch(this.errorHandler);
+        this.db = database;
     }
 
     errorHandler (error) {
         console.error(error);
     }
 
-    getFirstResult (results) {
-        return results[0];
-    }
-
     getAllPlayerLifetimeStats () {
-        return this.performQuery("SELECT * FROM player_lifetime_stats");
+        return this.db.select('*').from('player_lifetime_stats');
     }
 
     getPlayerLifetimeStats (username) {
         username = this.cleanGithubLogin(username);
-        return this.performQuery(`SELECT * FROM player_lifetime_stats WHERE github_login = '${username}'`);
+        return this.db.select('*').from('player_lifetime_stats').where('github_login', username);
     }
 
     getLatestGameResultByUsername (username) {
-        username = this.cleanGithubLogin(username);
-        return this.performQuery(`SELECT * FROM game_results WHERE '${username}' = ANY(players) ORDER BY game_id DESC LIMIT 1`);
+        return this.getAllGameResultsByUsername(username).limit(1);
     }
 
     getAllGameResultsByUsername (username) {
         username = this.cleanGithubLogin(username);
-        return this.performQuery(`SELECT * FROM game_results WHERE '${username}' = ANY(players) ORDER BY game_id DESC`);
+        return this.db.select('*').from('game_results').whereRaw('? = ANY(players)', [username]).orderBy('game_id', 'desc').limit(1);
     }
 
     getGameResultsByUsername (username) {
         username = this.cleanGithubLogin(username);
-        return this.performQuery(`
-            SELECT id, total_turns, played_at, winning_team, game_results.heroes
-            FROM game
-            LEFT JOIN game_results ON game.id = game_results.game_id
-            WHERE '${username}' = ANY(game.players)
-            ORDER BY id DESC
-        `);
+        return this.db.select('game.id', 'total_turns', 'played_at', 'winning_team', 'game_results.heroes')
+            .from('game')
+            .leftJoin('game_results', 'game.id', 'game_results.game_id')
+            .whereRaw('? = ANY(game.players)', [username])
+            .orderBy('id', 'desc');
     }
 
     cleanGithubLogin (username) {
@@ -129,19 +43,15 @@ class Helper {
 
     getPlayer (username) {
         username = this.cleanGithubLogin(username);
-        return this.performQuery(`SELECT * FROM player WHERE github_login = '${username}'`);
+        return this.db.select('*').from('player').where('github_login', username);
     }
 
     updatePlayer (record) {
-        let updateSql = this.updateSql('player', record, `github_login = '${record.github_login}'`);
-
-        return this.performUpdate(updateSql, record);
+        return this.db('player').where('github_login', record.github_login).update(record);
     }
 
     insertPlayer (record) {
-        let insertSql = this.insertSql('player', record, 'github_login');
-
-        return this.performUpdate(insertSql, record);
+        return this.db('player').insert(record);
     }
 
 }

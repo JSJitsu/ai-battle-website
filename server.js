@@ -6,10 +6,7 @@ const OAuthGithub = require('./server/OAuthGithub');
 const argv = require('minimist')(process.argv.slice(2));
 const config = require('./config');
 const db = require('./database/knex');
-
-// This helper should be refactored.
-const helperDbConnection = require('./database/connect');
-const dbHelper = new (require('./database/helper.js'))(helperDbConnection);
+const dbHelper = new (require('./database/helper.js'))(db);
 
 // Test the database connection. Knex still doesn't have a very good way to
 // do that. So, this check have to stay this way for a while until they improve

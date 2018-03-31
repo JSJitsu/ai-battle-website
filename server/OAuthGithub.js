@@ -92,7 +92,9 @@ module.exports = function (app, db, dbHelper, config, options) {
                     joined_at: new Date()
                 };
 
-                return dbHelper.insertPlayer(record).then(dbHelper.getFirstResult);
+                return dbHelper.insertPlayer(record).then(results => {
+                    return results[0];
+                });
             }
 
         }).then(function (user) {

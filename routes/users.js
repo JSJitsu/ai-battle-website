@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Q = require('q');
 
-const db = require('../database/connect.js');
+const db = require('../database/knex');
 const dbHelper = new (require('../database/helper.js'))(db);
 
 router.get('/:github_login/games', function (req, res) {

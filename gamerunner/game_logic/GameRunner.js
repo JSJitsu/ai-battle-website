@@ -5,7 +5,7 @@ const vm = require('vm');
 const Q = require('q');
 const GameEngine = require('ai-battle-engine');
 const engine = new GameEngine();
-const db = require('../../database/connect.js');
+const db = require('../../database/knex');
 const dbHelper = new (require('../../database/helper.js'))(db);
 
 /**
@@ -170,7 +170,7 @@ class GameRunner {
 
         if (!this.users.length) {
             console.log('No users. Quitting.');
-            db.end();
+            db.destroy();
             return false;
         }
 
@@ -178,7 +178,7 @@ class GameRunner {
 
         if (!games.length) {
             console.log('No games planned. Quitting.');
-            db.end();
+            db.destroy();
             return false;
         }
 
@@ -205,41 +205,36 @@ class GameRunner {
     saveGame (game) {
         console.log('Saving game ' + game.gameNumber);
 
-        const heroes = this.scrubHeroes(game.heroes);
-        const players = this.getPlayers(game.heroes);
-        const initialMap = game.board.initialTiles;
+        let heroes = this.scrubHeroes(game.heroes);
+        let players = this.getPlayers(game.heroes);
+        let initialMap = game.board.initialTiles;
 
         // This data is necessary to start the game
-        const record = {
-            totalTurns: game.maxTurn,
-            playedAt: new Date(),
+        let record = {
+            total_turns: game.maxTurn,
+            played_at: new Date(),
             players: players,
             heroes: JSON.stringify(heroes),
-            initialMap: JSON.stringify(initialMap)
+            initial_map: JSON.stringify(initialMap)
         };
 
-        const insertSql = dbHelper.insertSql('game', record);
-
-        return Q.ninvoke(db, 'query', insertSql, record).then(results => {
-            const gameId = results[0].id;
-            const inserts = [];
+        return db('game').insert(record, 'id').then(gameIds => {
+            let gameId = gameIds[0];
+            let gameEvents = [];
 
             game.gameId = gameId;
 
             // This data is necessary to replay the game
             game.events.forEach(function (turn, index) {
-                inserts.push(Q.ninvoke(db, 'update',
-                    `INSERT INTO game_events (
-          game_id,
-          turn,
-          actor,
-          action
-        ) VALUES ($1, $2, $3, $4)`,
-                    [gameId, index].concat(turn)
-                ));
+                gameEvents.push({
+                    game_id: gameId,
+                    turn: index,
+                    actor: turn[0],
+                    action: turn[1]
+                });
             });
 
-            return Q.all(inserts);
+            return db('game_events').insert(gameEvents, 'game_id');
         })
         .catch(err => {
             console.log(err.stack);
@@ -337,15 +332,13 @@ class GameRunner {
 
         // This data is necessary to start the game
         const record = {
-            gameId: game.gameId,
-            winningTeam: game.winningTeam,
+            game_id: game.gameId,
+            winning_team: game.winningTeam,
             players: players,
             heroes: JSON.stringify(heroes)
         };
 
-        const insertSql = dbHelper.insertSql('game_results', record, 'game_id');
-
-        return Q.ninvoke(db, 'query', insertSql, record);
+        return db('game_results').insert(record, 'game_id');
     }
 
     /**
@@ -399,13 +392,11 @@ class GameRunner {
 
         if (insert) {
             console.info(`  Storing new statistics for ${githubHandle}`);
+            return db('player_lifetime_stats').insert(stats);
         } else {
             console.info(`  Updating statistics for ${githubHandle}`);
+            return db('player_lifetime_stats').where('github_login', githubHandle).update(stats);
         }
-
-        const sql = dbHelper.upsertSql('player_lifetime_stats', stats, `github_login`);
-
-        return Q.ninvoke(db, 'query', sql, stats);
     }
 }
 
