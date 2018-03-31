@@ -41,6 +41,7 @@ function retrieveCode (users, category) {
 
         const githubHandle = user.github_login;
         const codeRepo = user.code_repo;
+        const codeBranch = user.code_branch;
 
         if (!githubHandle || !codeRepo) {
             console.warn('Skipping bad user record:', user);
@@ -49,7 +50,7 @@ function retrieveCode (users, category) {
 
         const options = {
             // Saves the URL at which the code can be found
-            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js`,
+            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js?ref=${codeBranch}`,
             qs: {
                 client_id: config.github.appKey,
                 client_secret: config.github.appSecret,

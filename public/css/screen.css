@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+body {
+  color: #ebebeb;
+  background-color: #2b3e50;
+}
+
+main.container {
+  padding-top: 20px;
+}
+
+nav,
+footer {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+nav.h-nav {
+  box-shadow: 0 0 10px #000000;
+  font-size: 12px;
+  left: 0;
+  margin-bottom: 21px;
+  height: 60px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1030;
+}
+
+nav.h-nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+nav.h-nav ul li a {
+  display: inline-block;
+  padding: 10px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+nav.h-nav li a:hover,
+nav.h-nav li a:focus {
+  color: #ebebeb;
+  background-color: #1f2933;
+}
+
+h1, h2 {
+  font-size: 32px;
+  background-color: #1f2933;
+  padding: 0.5em;
+  font-family: "Press Start 2P";
+  text-align: center;
+  margin-bottom: 0;
+}
+
+h1.title {
+  text-transform: uppercase;
+  font-size: 1.3em;
+  line-height: 4em;
+  padding: 0 2em;
+  display: inline-block;
+  background-color: transparent;
+}
+
+h3 {
+  text-transform: uppercase;
+  font: 700 18px Montserrat;
+}
+
+a {
+  color: #428BCA;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:visited {
+  color: #ec68ec;
+}
+
+a.navigation-title:visited {
+  color: #428BCA;
+}
+
+a:active, a:hover, a:focus {
+  color: #eee;
+}
+
+footer {
+  background: #272727;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+table td.accounting,
+table th.accounting {
+  text-align: right;
+}
+
+table th,
+table td {
+  border-color: #1f2933;
+}
+
+table tr:hover td {
+  background-color: #34485c;
+  border-color: #ddddf4;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  padding-left: 1em;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+  padding-right: 1em;
+}
+
+select {
+  color: #ebebeb;
+}
+
+select:hover {
+  border-color: #428BCA;
+}
+
+input {
+  color: #ebebeb;
+  border-color: #808080 !important;
+}
+
+input[type=range] {
+  margin: 0;
+}
+
+leaderboard table {
+  max-width: 900px;
+  margin: auto;
+}
+
+ul {
+  list-style: square;
+  padding-left: 2em;
+}
+
+section {
+  padding: 2em;
+}
+
+.tip {
+  color: #aaa;
+  font-style: italic;
+  font-weight: normal;
+}
+
+button,
+button:hover,
+button:active,
+button:focus,
+button[disabled],
+button[disabled]:hover,
+button[disabled]:focus {
+  background-color: #ddddf4;
+  color: #1f2933;
+  border: 0.3em solid #a4a7ba;
+  line-height: 1em;
+  font-size: 0.8em;
+  transition-duration: 0.3s;
+  box-shadow: 0 0.2em 0.2em #222;
+}
+
+button[disabled] {
+  opacity: 0.7;
+}
+
+button:focus {
+  border-color: #428BCA;
+}
+
+button:hover,
+button:active {
+  transform: translateY(0.2em);
+  box-shadow: 0 0 0.1em #222;
+}
+
+.current-user,
+.current-user a {
+  color: #ffff78 !important;
+}
+
+.tile-name.current-user {
+  border-color: #ffff78;
+}
