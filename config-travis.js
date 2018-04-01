@@ -10,7 +10,7 @@ module.exports = {
         user: 'postgres',
         password: '',
         address: '127.0.0.1',
-        name: 'jsfightclub'
+        name: 'travis_ci_test'
     },
     github: {
         appName: '',
