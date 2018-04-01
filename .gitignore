@@ -20,19 +20,18 @@ coverage
 
 # Compiled Dirs
 build/
-public/css/
 public/dist/
 public/js/game-engine.js
-public/index.html
 
 # Dependency directories
 node_modules/
-public/lib/
-bower_components
 config.js
 gamerunner/user_code/helpers/*.js
 gamerunner/user_code/hero/*.js
-yarn.lock
 
 # Vagrant
 .vagrant
+
+# Sublime
+*.sublime-project
+*.sublime-workspace

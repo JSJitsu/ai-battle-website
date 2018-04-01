@@ -1,13 +1,10 @@
-const Q = require('q');
 const GameRunner = require('./GameRunner.js');
-const db = require('../../database/connect.js');
-
-Q.longStackSupport = true;
+const db = require('../../database/knex');
 
 class LiveGameRunner {
 
     getUserRecords () {
-        return Q.ninvoke(db, 'query', "SELECT * FROM player");
+        return db.select('*').from('player');
     }
 
     runGames (users) {
@@ -23,7 +20,7 @@ class LiveGameRunner {
     }
 
     closeDatabase () {
-        db.end();
+        db.destroy();
         console.log('Database connection ended.');
     }
 

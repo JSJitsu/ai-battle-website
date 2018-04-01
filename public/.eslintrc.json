@@ -8,15 +8,12 @@
     "parserOptions": {
         "ecmaVersion": 5
     },
+    "rules": {
+        "indent": ["error", 2]
+    },
     "globals": {
-        "EJS": true,
         "$": true,
-        "_": true,
-        "Backbone": true,
-        "Hero": true,
-        "BoardView": true,
-        "TeamView": true,
-        "Powerange": true,
-        "app": true
+        "riot": true,
+        "route": true
     }
 }

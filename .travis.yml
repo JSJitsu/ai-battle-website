@@ -1,5 +1,12 @@
 language: node_js
 node_js:
   - "6"
+addons:
+  postgresql: "9.5"
+services:
+  - postgresql
+before_install:
+  - cp ./config-travis.js ./config.js
 before_script:
-  - cp ./config-template.js ./config.js
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - node ./node_modules/.bin/knex migrate:latest --knexfile=./database/config/knexfile.js

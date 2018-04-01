@@ -3,7 +3,7 @@ const request = require('request');
 const fs = require('fs');
 const path = require('path');
 const config = require('../../config.js');
-const db = require('../../database/connect.js');
+const db = require('../../database/knex');
 
 if (!config || !config.github || !config.github.appKey || !config.github.appSecret || !config.github.appName) {
     console.error('Missing github configuration needed to retrieve user code. Check config.js.');
@@ -14,13 +14,8 @@ function initiateCodeRequest (fileType) {
 
     console.log('About to retrieve user code from Github...');
 
-    db.query("SELECT * FROM player", function (err, users) {
-        if (err) {
-            throw err;
-        }
-
-        db.end();
-
+    db.select('*').from('player').then(users => {
+        db.destroy();
         if (!users.length) {
             console.warn('No users were found in the database, so user code could not be retrieved from Github.');
         } else {
@@ -32,6 +27,10 @@ function initiateCodeRequest (fileType) {
             retrieveCode(users, 'helpers');
         }
 
+    })
+    .catch(function (err) {
+        console.error(err);
+        throw err;
     });
 }
 
@@ -41,6 +40,7 @@ function retrieveCode (users, category) {
 
         const githubHandle = user.github_login;
         const codeRepo = user.code_repo;
+        const codeBranch = user.code_branch;
 
         if (!githubHandle || !codeRepo) {
             console.warn('Skipping bad user record:', user);
@@ -49,7 +49,7 @@ function retrieveCode (users, category) {
 
         const options = {
             // Saves the URL at which the code can be found
-            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js`,
+            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js?ref=${codeBranch}`,
             qs: {
                 client_id: config.github.appKey,
                 client_secret: config.github.appSecret,

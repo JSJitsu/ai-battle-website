@@ -19,14 +19,6 @@ To work on this application, you must have the following installed:
 
 ### Initial Setup
 
-#### Database Setup
-
-Run the following command and carefully follow the prompts to install PostgreSQL, create a user, and give that user permission to modify the `jsfightclub` database. Simply read the output to know what to do at each step.
-
-```sh
-database/setup-postgres.sh
-```
-
 #### Configuration
 
 Next, copy the config file template so you can configure the application. This file will not be tracked, so you don't have to worry about accidentally committing your passwords and such.
@@ -43,13 +35,23 @@ The most important pieces of information to add to  _config.js_ are the database
 npm install
 bower install
 ```
+#### Database Setup
 
-#### Add Database Tables
+Run the following command and carefully follow the prompts to install PostgreSQL, create a user, and give that user permission to modify the `jsfightclub` database. Simply read the output to know what to do at each step.
 
 ```sh
-database/initialize.js
-psql jsfightclub < ./node_modules/connect-pg-simple/table.sql
+database/setup-postgres.sh
 ```
+
+Run migrations manually:
+
+```sh
+$ knex migrate:latest --knexfile ./database/config/knexfile.js
+```
+
+From this point onwards, everytime you start the server it will run migrations.
+
+This way, you'll always have your changes applied automatically to database once the server starts.
 
 ### Running a Battle
 
@@ -83,3 +85,26 @@ Once it's running, you can navigate to http://localhost:8080/ to view the site. 
 
 ### Changing the Website
 You can view the "dev build" of the site at _dev.html_ while the built version will be accessible from _index.html_. There are no pre-compilation steps for doing development via _dev.html_. Once you're happy with the dev version of the site, re-build it using `npm run build` and verify that your changes are alive and well in the built version.
+
+### Change Database Scheme
+
+You need to do is to create a
+new Knex migration.
+
+To create a new Knex migration:
+
+```sh
+$ knex migrate:make migration_name ./database/config/knexfile.js
+```
+Example:
+
+Suppose you want to add the column 'foo' to 'players' table:
+
+```sh
+$ knex migrate:make add_foo_to_players ./database/config/knexfile.js
+```
+
+The migration file will be created under ```database/migrations```.
+
+IMPORTANT: Always add the up and down changes to the Knex migration file. This is what
+will allow easy rollbacks in case something goes wrong.

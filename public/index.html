@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" property="og:description" content="A daily artificial intelligence challenge that anyone can join by simply submitting Javascript with GitHub">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Javascript Fight Club</title>
+
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAABMElEQVQ4y42SPU7DQBCFP0e5AihSJDc0uOICSbGVD+DUdk9LM1JqJJ8gVRRpcwuqLTgBlWloXCE4xFDtZncdA0/aZmbfmzc/BaBcUPA/BM4CwFqLcy5O6MwDUOcc1loAlgDDMADgnMMYoz5ZlmVS1hijzjnGcQwcb1lFhKqqKMsSYwy5iDGGmNz3PUAR9zwr0nXdVXI+NAXIRXxrGTlwF3GPIkLf9wzDwDiOfrAJ2cc8lvl+vIiIxIPFbyvHghlcc+LdzB6HiCigx9Mm7D6PWWvjm5iKHPa1Nrt1InI8bbTZrfWwr/8mPzWr8FFEgoM8F69CAQ77mo/3N76/Pjm/EoYYz6Tdws3tirv7Bx6fXy6VvcV2m9587MDH2i15i9NAdlyTmC8IaBF9TC7sFyR/fwD0cOnmZ6jiuAAAAABJRU5ErkJggg=="/>
+
+    <meta property="og:title" content="Javascript Fight Club" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jsfight.club/" />
+    <meta property="og:image" content="https://jsfight.club/img/jsfightclub_og.png" />
+    <meta property="og:description" content="Control your hero with either a pre-defined function from our repo or your own submitted function against the competition."/>
+    <meta property="og:site_name" content="Javascript Fight Club"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://jsfight.club/">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Javascript Fight Club">
+    <meta name="twitter:description" content="Control your hero with either a pre-defined function from our repo or your own submitted function against the competition.">
+    <meta name="twitter:image" content="https://jsfight.club/img/jsfightclub_tc.png">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="lib/milligram.min.css">
+
+    <!-- JS Fight Club CSS -->
+    <link rel="stylesheet" href="./css/screen.css">
+  </head>
+  <body>
+
+    <parallax></parallax>
+
+    <main class="container">
+      <!-- mount point -->
+      <navigation></navigation>
+      <battle id="battle"></battle>
+      <recent-battles></recent-battles>
+      <leaderboard id="leaderboard"></leaderboard>
+      <instructions id="instructions"></instructions>
+
+      <!-- inlined tag definition -->
+      <script type="riot/tag" data-src="app/battle.tag"></script>
+      <script type="riot/tag" data-src="app/instructions.tag"></script>
+      <script type="riot/tag" data-src="app/leaderboard.tag"></script>
+      <script type="riot/tag" data-src="app/navigation.tag"></script>
+      <script type="riot/tag" data-src="app/parallax.tag"></script>
+      <script type="riot/tag" data-src="app/recent-battles.tag"></script>
+
+      <script src="js/game-engine.js"></script>
+
+      <!-- include riot.js and the compiler -->
+      <script type="text/javascript" src="lib/zepto.min.js"></script>
+      <script type="text/javascript" src="lib/riot+compiler.min.js"></script>
+      <script type="text/javascript" src="lib/route.min.js"></script>
+      <script type="text/javascript" src="app/application.js"></script>
+
+      <script type="text/javascript">
+        (function () {
+          var date = new Date();
+          if (date.getMonth() === 3 && date.getDate() === 1) {
+            $('head').append(`<style>
+              .battle-board { transform: rotate(180deg); }
+              </style>`);
+          }
+        })();
+      </script>
+
+    </main>
+    <footer>
+      <p>Questions or comments? <a href="https://github.com/JSJitsu/ai-battle-website/issues">Contact Us</a></p>
+      <p>You can support our server by getting your own at <a target="vultr" href="https://www.vultr.com/?ref=6961809-3B">Vultr.com</a>
+        <br>
+        By hosting your projects through them, we get credits that help pay for the costs of this game. We appreciate your support!
+      </p>
+      <p>Brought to life from the ashes of javascriptbattle.com</p>
+    </footer>
+    <script src="//static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">try{ clicky.init(101059811); }catch(e){}</script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101059811ns.gif"></p></noscript>
+  </body>
+</html>
