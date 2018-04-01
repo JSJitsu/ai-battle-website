@@ -1,4 +1,4 @@
-var NavbarView = Backbone.View.extend({
+Backbone.View.extend({
 
     initialize: function (){
         var view = this;

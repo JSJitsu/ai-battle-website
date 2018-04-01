@@ -3,7 +3,6 @@ const router = express.Router();
 const Q = require('q');
 
 const db = require('../database/connect.js');
-const dbHelper = new (require('../database/helper.js'))(db);
 
 /**
  * Retrieves the latest game or the game with the given id.

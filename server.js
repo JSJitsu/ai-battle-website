@@ -2,7 +2,6 @@ const console = require('better-console');
 const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
-const Q = require('q');
 
 const OAuthGithub = require('./server/OAuthGithub');
 const argv = require('minimist')(process.argv.slice(2));

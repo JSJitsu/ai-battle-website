@@ -1,5 +1,4 @@
-var UserView = Backbone.View.extend({
-
+Backbone.View.extend({
     initialize: function () {
         var view = this;
 
@@ -49,13 +48,13 @@ var UserView = Backbone.View.extend({
         $(activeEvent.target).addClass('active');
     },
 
-    showSettings: function (event) {
+    showSettings: function () {
         this.$el.find('#userview-contents').html(
             new EJS({ url: '/ejs_templates/settings' }).render(this.model)
         );
     },
 
-    showGames: function (event) {
+    showGames: function () {
         var me = this;
 
         me.model.fetchGames(function () {
@@ -65,7 +64,7 @@ var UserView = Backbone.View.extend({
         });
     },
 
-    showRecent: function (event) {
+    showRecent: function () {
         var me = this;
 
         me.model.fetchRecent(function () {
@@ -75,7 +74,7 @@ var UserView = Backbone.View.extend({
         });
     },
 
-    showLifetime: function (event) {
+    showLifetime: function () {
         this.$el.find('#userview-contents').html(
             new EJS({ url: '/ejs_templates/lifetime' }).render(this.model.get('lifetime_stats'))
         );
