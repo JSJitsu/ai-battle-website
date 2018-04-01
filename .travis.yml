@@ -5,6 +5,7 @@ addons:
   postgresql: "9.5"
 services:
   - postgresql
+before_install:
+  - cp ./config-travis.js ./config.js
 before_script:
   - node ./node_modules/.bin/knex migrate:latest --knexfile=./database/config/knexfile.js
-  - cp ./config-travis.js ./config.js
