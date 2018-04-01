@@ -73,7 +73,7 @@ function startServer () {
 
     const app = express();
 
-    app.use(morgan('dev'));
+    app.use(morgan('combined'));
 
     app.use('/api/game', require('./routes/game'));
     app.use('/api/games', require('./routes/games'));
