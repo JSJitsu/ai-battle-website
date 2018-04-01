@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Q = require('q');
 
-const db = require('../database/connect.js');
-const dbHelper = new (require('../database/helper.js'))(db);
+const db = require('../database/knex');
 
 /**
  * Retrieves the latest game or the game with the given id.
@@ -14,18 +12,18 @@ router.get('(/:id)?', function (req, res) {
     let query;
 
     if (Number.isInteger(gameId) && gameId > 0) {
-        query = `SELECT * FROM game WHERE id = ${gameId}`;
+        query = db.select('*').from('game').where('id', gameId);
     } else {
         latest = true;
-        query = "SELECT * FROM game ORDER BY id DESC LIMIT 1";
+        query = db.select('*').from('game').orderBy('id', 'desc').limit(1);
     }
 
-    return Q.ninvoke(db, 'query', query)
+    return query
         .then(function (games) {
             var game = games.shift();
 
             if (game) {
-                return Q.ninvoke(db, 'query', `SELECT turn, actor, action FROM game_events WHERE game_id = ${game.id} ORDER BY turn ASC`)
+                return db.select('turn', 'actor', 'action').from('game_events').where('game_id', game.id).orderBy('turn', 'asc')
                     .then(function (gameEvents) {
                         game.events = gameEvents;
 
