@@ -83,4 +83,13 @@ describe('Test GameRunner', function () {
 
     });
 
+    after('cleanup', function () {
+        // Find a better way to get around the following error that occurs when
+        // a setTimeout is not added: Unhandled rejection Error: aborted
+        setTimeout(function () {
+            const gr = new gameRunner();
+            return gr.closeDatabase();
+        }, 1000);
+    });
+
 });

@@ -398,6 +398,10 @@ class GameRunner {
             return db('player_lifetime_stats').where('github_login', githubHandle).update(stats);
         }
     }
+
+    closeDatabase () {
+        return db.destroy();
+    }
 }
 
 module.exports = GameRunner;
