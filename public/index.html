@@ -61,6 +61,17 @@
       <script type="text/javascript" src="lib/route.min.js"></script>
       <script type="text/javascript" src="app/application.js"></script>
 
+      <script type="text/javascript">
+        (function () {
+          var date = new Date();
+          if (date.getMonth() === 3 && date.getDate() === 1) {
+            $('head').append(`<style>
+              .battle-board { transform: rotate(180deg); }
+              </style>`);
+          }
+        })();
+      </script>
+
     </main>
     <footer>
       <p>Questions or comments? <a href="https://github.com/JSJitsu/ai-battle-website/issues">Contact Us</a></p>
