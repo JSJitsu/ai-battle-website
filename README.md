@@ -1,61 +1,38 @@
 [![Build Status](https://travis-ci.org/JSJitsu/ai-battle-website.svg?branch=master)](https://travis-ci.org/JSJitsu/ai-battle-website)
+
 # Javascript Fight Club
 
-This repository contains the code that powers the website. By forking this, you will be able to develop the site code, or use real (github player ai code) or test (just local versions of those scripts) data to generate a battle.
+This repository contains the code that runs the website. By forking this, you will be able to develop the site, use real (GitHub player AI code), or use test data to generate a battle.
 
 ## Playing The Game
+
 Visit [https://jsfight.club](https://jsfight.club) to play the game. You do not need a copy of this repo to play.
 
 ## Development
 
-Initial set-up can be avoided by using the provided Vagrant environment. See the [Vagrant website](https://www.vagrantup.com/) for more information. If you're already set up with Vagrant, run `vagrant up`, then `vagrant ssh`, and navigate to the _/vagrant_ directory. Once you're there, you can skip down to [Dependency Installation](#dependency-installation) for initial set-up.
+### Via Docker (recommended)
 
-### Requirements
-
-To work on this application, you must have the following installed:
-
-- [Node.js](http://nodejs.org/) 6.x minimum
-- [PostgreSQL](http://www.postgresql.org/) 9.5 minimum
-
-### Initial Setup
-
-#### Configuration
-
-Next, copy the config file template so you can configure the application. This file will not be tracked, so you don't have to worry about accidentally committing your passwords and such.
+See the [Docker website](https://www.docker.com/community-edition) for more information.
 
 ```sh
-cp config-template.js config.js
+docker build -t ai-battle-website .
+docker run -it -v $(pwd):/app -p 8080:8080 ai-battle-website
 ```
 
-The most important pieces of information to add to  _config.js_ are the database user and database password. Everything else can be skipped for now.
+Once inside, running `./docker-startup.sh` will get everything started. It should start the PostgreSQL service, install npm modules, create the database and tables, run a test game, and start the web server. Access the site at http://localhost:8080/.
 
-#### Dependency Installation
+### Via Vagrant (might be outdated)
 
-```sh
-npm install
-bower install
+See the [Vagrant website](https://www.vagrantup.com/) for more information.
+
 ```
-#### Database Setup
-
-Run the following command and carefully follow the prompts to install PostgreSQL, create a user, and give that user permission to modify the `jsfightclub` database. Simply read the output to know what to do at each step.
-
-```sh
-database/setup-postgres.sh
+vagrant up
+vagrant ssh
 ```
 
-Run migrations manually:
-
-```sh
-$ knex migrate:latest --knexfile ./database/config/knexfile.js
-```
-
-From this point onwards, everytime you start the server it will run migrations.
-
-This way, you'll always have your changes applied automatically to database once the server starts.
+Then, navigate to the _/vagrant_ directory.
 
 ### Running a Battle
-
-Running battles does not require the web server in order to run.
 
 To run a test battle:
 
@@ -65,37 +42,36 @@ node gamerunner/run-test-game.js
 
 ### Starting the Web Server
 
-The website is not built automatically, but you can do so via the following command:
-
 ```sh
-npm run build
+yarn run build
 ```
 
-You must build one time before starting the server in order to provide the game engine to the browser. After that, it is only necessary after making changes.
+You must build one time before starting the server in order to provide the game engine to the browser.
 
-To start the server without connecting to Github, run:
+To start the server without connecting to GitHub, run:
 
 ```sh
-node server.js --no-github
+node server.js
 ```
 
-You can also run `node server.js` with no options to show the help screen.
+Run `node server.js --help` for additional start-up options.
 
 Once it's running, you can navigate to http://localhost:8080/ to view the site. (if you're using the Vagrant environment, navigate to http://localhost:4000/ instead)
 
 ### Changing the Website
-You can view the "dev build" of the site at _dev.html_ while the built version will be accessible from _index.html_. There are no pre-compilation steps for doing development via _dev.html_. Once you're happy with the dev version of the site, re-build it using `npm run build` and verify that your changes are alive and well in the built version.
 
-### Change Database Scheme
+There are currently no build steps, so once the server is up and running, only changing the website UI files is enough to see the changes. When making changes to the server, it will need to be restarted each time.
 
-You need to do is to create a
-new Knex migration.
+### Changing the Database Schema
+
+Database changes and queries are handled by [http://knexjs.org/](Knex.js).
 
 To create a new Knex migration:
 
 ```sh
 $ knex migrate:make migration_name ./database/config/knexfile.js
 ```
+
 Example:
 
 Suppose you want to add the column 'foo' to 'players' table:
@@ -104,7 +80,6 @@ Suppose you want to add the column 'foo' to 'players' table:
 $ knex migrate:make add_foo_to_players ./database/config/knexfile.js
 ```
 
-The migration file will be created under ```database/migrations```.
+The migration file will be created under _./database/migrations_.
 
-IMPORTANT: Always add the up and down changes to the Knex migration file. This is what
-will allow easy rollbacks in case something goes wrong.
+IMPORTANT: Always add the up and down changes to the Knex migration file. This is what will allow easy rollbacks in case something goes wrong.
