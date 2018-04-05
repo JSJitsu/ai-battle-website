@@ -4,7 +4,7 @@ const db = require('../../database/knex');
 class LiveGameRunner {
 
     getUserRecords () {
-        return db.select('*').from('player');
+        return db.select('*').from('player').where('enabled', true);
     }
 
     runGames (users) {

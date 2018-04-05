@@ -14,7 +14,7 @@ function initiateCodeRequest (fileType) {
 
     console.log('About to retrieve user code from Github...');
 
-    db.select('*').from('player').then(users => {
+    db.select('*').from('player').where('enabled', true).then(users => {
         db.destroy();
         if (!users.length) {
             console.warn('No users were found in the database, so user code could not be retrieved from Github.');
