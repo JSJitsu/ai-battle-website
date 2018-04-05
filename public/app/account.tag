@@ -1,20 +1,36 @@
 <account>
   <h2>My Account</h2>
-  <section>
-  <p>
-    You are signed up for the next JavaScript Battle. We will pull your code from the GitHub repository listed below, which you may change at any time (we will pull your most up-to-date code from your GitHub account before each battle).
-    <ul>
-      <li>Note #1: If you have not already forked our hero-starter repository, <a href="https://github.com/JSJitsu/hero-starter" target="_blank">click here</a> and click "Fork" in the top right. If you don't do this, we won't be able to find your hero code, so your hero will just stand still for the entire battle!</li>
-      <li>Note #2: If you want to change your hero code (your hero's "brain"), check out the hero-starter instructions.</li>
-    </ul>
-  </p>
-  <form method="POST" action="/api/user" onsubmit={ saveSettings } ref="settings">
-    <label for="github-repo">GitHub Repository <span class="tip">(default: hero-starter)</span></label>
-    <input type="text" id="github-repo" name="code_repo" value={ code_repo } required>
-    <label for="github-branch">GitHub Branch/Ref <span class="tip">(default: master)</span></label>
-    <input type="text" id="github-branch" name="code_branch" value={ code_branch } required>
-    <button type="submit" ref="submit">Save</button>
-  </form>
+  <section if={ enabled === true }>
+    <p>
+      You are signed up for the next JavaScript Battle. We will pull your code from the GitHub repository listed below, which you may change at any time (we will pull your most up-to-date code from your GitHub account before each battle).
+      <ul>
+        <li>Note #1: If you have not already forked our hero-starter repository, <a href="https://github.com/JSJitsu/hero-starter" target="_blank">click here</a> and click "Fork" in the top right. If you don't do this, we won't be able to find your hero code, so your hero will just stand still for the entire battle!</li>
+        <li>Note #2: If you want to change your hero code (your hero's "brain"), check out the hero-starter instructions.</li>
+      </ul>
+    </p>
+    <form method="POST" action="/api/user" onsubmit={ saveSettings } ref="settings">
+      <label for="github-repo">GitHub Repository <span class="tip">(default: hero-starter)</span></label>
+      <input type="text" id="github-repo" name="code_repo" value={ code_repo } required>
+      <label for="github-branch">GitHub Branch/Ref <span class="tip">(default: master)</span></label>
+      <input type="text" id="github-branch" name="code_branch" value={ code_branch } required>
+      <button type="submit" ref="submit">Save</button>
+    </form>
+    <p>
+      Disabling your account will prevent your hero from partaking in battle. It can be re-enabled at any time.
+    </p>
+    <form method="POST" action="/api/user" onsubmit={ freezeAccount }>
+      <input type="hidden" name="enabled" value="false">
+      <button type="submit">Disable Account</button>
+    </form>
+  </section>
+  <section if={ enabled === false }>
+    <p>
+      Your account is currently disabled. Your information will remain intact, and your hero will avoid battle until it has been restored.
+    </p>
+    <form method="POST" action="/api/user" onsubmit={ thawAccount }>
+      <input type="hidden" name="enabled" value="true">
+      <button type="submit">Enable Account</button>
+    </form>
   </section>
   <h2>Statistics</h2>
   <section>
@@ -141,28 +157,55 @@
     };
 
     tag.saveSettings = function (event) {
+      return tag.handleSubmitForm(event, 'Saving...');
+    }
+
+    tag.thawAccount = function (event) {
+      return tag.handleSubmitForm(event, 'Thawing...');
+    }
+
+    tag.freezeAccount = function (event) {
+      return tag.handleSubmitForm(event, 'Freezing...');
+    }
+
+    tag.handleSubmitForm = function (event, savingText) {
       event.preventDefault();
 
-      let $form = $(tag.refs.settings);
-      let $button = $(tag.refs.submit);
+      let $form = $(event.target);
+      let $button = $form.find('button[type="submit"]');
+      let buttonText = $button.text();
       let values = $form.serialize();
       let action = $form.attr('action');
 
       $button
         .attr('disabled', true)
-        .text('Saving...');
+        .text(savingText);
 
       $.post(action, values, function (response, status) {
-        setTimeout(function () {
-          $button.text('Saved!');
+        if (response.github_login) {
+          $.extend(tag, response);
+
+          setTimeout(function () {
+            $button.text('Saved!');
+            tag.update();
+
+            setTimeout(function () {
+              $button
+                .blur()
+                .removeAttr('disabled')
+                .text(buttonText);
+            }, 1000);
+          }, 1000);
+        } else {
+          $button.text('An error occurred');
 
           setTimeout(function () {
             $button
               .blur()
               .removeAttr('disabled')
-              .text('Save');
+              .text(buttonText);
           }, 1000);
-        }, 1000);
+        }
       });
     }
   </script>

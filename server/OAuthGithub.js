@@ -58,13 +58,20 @@ module.exports = function (app, db, dbHelper, config, options) {
         user.code_repo = data.code_repo || 'hero-starter';
         user.code_branch = data.code_branch || 'master';
 
+        if (data.enabled === "false") {
+            user.enabled = false;
+        } else {
+            user.enabled = true;
+        }
+
         let record = {
             github_login: user.github_login,
             code_repo: user.code_repo,
-            code_branch: user.code_branch
+            code_branch: user.code_branch,
+            enabled: user.enabled
         };
 
-        return dbHelper.updatePlayer(record).done(function () {
+        return dbHelper.updatePlayer(record).then(function () {
             res.send(record);
         });
 
