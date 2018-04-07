@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "npm run lint; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha \"test/**/*.spec.js\"",
-    "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/js/ public/app/",
+    "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/app/",
     "start": "node server.js",
-    "build-engine": "browserify ./node_modules/ai-battle-engine/index.js --standalone GameEngine > public/js/game-engine.js",
+    "build-engine": "browserify ./node_modules/ai-battle-engine/index.js --standalone GameEngine > public/lib/game-engine.js",
     "build": "npm run build-engine"
   },
   "repository": {
