@@ -206,17 +206,9 @@
       <div class="battle-row" each={ row, y in game.board.tiles } no-reorder>
         <div class="battle-tile { tile.type === 'Impassable' ? 'scenery' : '' }" each={ tile, x in row } no-reorder>
           <img src="img/tree.png" if={ tile.subType === 'Tree' }>
-          <virtual if={ tile.subType === 'DiamondMine' }>
-            <img class="small-tile" src="img/diamond_mine.png" if={ !tile.owner }>
-            <virtual if={ tile.owner && tile.owner.team === 0 }>
-              <img class="small-tile" src="img/diamond_mine_blue.gif" title={ 'Owned by ' + tile.owner.name }>
-              <span class="indicator team-blue" title={ 'Owned by ' + tile.owner.name }>{ tile.owner.name.substring(0, 2) }<span>
-            </virtual>
-            <virtual if={ tile.owner && tile.owner.team === 1 }>
-              <img class="small-tile" src="img/diamond_mine_red.gif" title={ 'Owned by ' + tile.owner.name }>
-              <span class="indicator team-red" title={ 'Owned by ' + tile.owner.name }>{ tile.owner.name.substring(0, 2) }<span>
-            </virtual>
-          </virtual>
+          <img class="small-tile" src="img/diamond_mine.png" if={ tile.subType === 'DiamondMine' && !tile.owner }>
+          <img class="small-tile" src="{ tile.owner.team === 0 ? 'img/diamond_mine_blue.gif' : 'img/diamond_mine_red.gif' }" title={ 'Owned by ' + tile.owner.name } if={ tile.subType === 'DiamondMine' && tile.owner }>
+          <span class="indicator { tile.owner.team === 0 ? 'team-blue' : 'team-red' }" title={ 'Owned by ' + tile.owner.name } if={ tile.subType === 'DiamondMine' && tile.owner }>{ tile.owner.name.substring(0, 2) }</span>
           <img class="small-tile" src="img/healing_well.gif" if={ tile.subType === 'HealthWell' }>
           <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name { user.getCurrentUserClass(game.heroes[tile.id].name) }" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);" title={ game.heroes[tile.id].name }>{ game.heroes[tile.id].name }</div>
           <img class="small-tile" src="img/blue_knight.gif" if={ tile.subType === 'BlackKnight' }>
