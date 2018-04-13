@@ -69,7 +69,7 @@ const statistics = {
 
                 if (playerDataIndex !== -1) {
                     stats = gameResult.heroes[playerDataIndex];
-                    stats.winner = (gameResult.winning_team === stats.team);
+                    stats.winner = (gameResult.winning_team === stats.team.toString());
                 }
             }
 
