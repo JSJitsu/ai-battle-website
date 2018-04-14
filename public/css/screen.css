@@ -10,8 +10,16 @@ main.container {
   padding-top: 20px;
 }
 
+@media screen and (max-width: 600px) {
+  main.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 nav,
-footer {
+footer,
+.navigation-list--active {
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -27,11 +35,58 @@ nav.h-nav {
   z-index: 1030;
 }
 
+.nav-list-toggler {
+  display: none;
+  float: right;
+  height: 100%;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .nav-list-toggler {
+    display: block;
+  }
+}
+
+.nav-list-toggler__icon {
+  font-size: 36px;
+  line-height: 0;
+  padding: 18px 18px 0 18px;
+  color: #428BCA;
+}
+
+@media screen and (max-width: 500px) {
+  .nav-list-toggler__icon {
+    padding: 18px 9px 0 9px;
+  }
+}
+
 nav.h-nav ul {
   display: flex;
   flex-direction: row;
   list-style: none;
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  nav.h-nav ul {
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  nav.h-nav ul {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-top: 0;
+    flex-direction: column;
+    box-shadow: 0 0 10px #000000;
+  }
+
+  nav.h-nav ul.navigation-list--active {
+    display: flex;
+  }
 }
 
 nav.h-nav ul li a {
@@ -64,6 +119,14 @@ h1.title {
   padding: 0 2em;
   display: inline-block;
   background-color: transparent;
+}
+
+@media screen and (max-width: 500px) {
+  .navigation-title .title {
+    font-size: 1em;
+    line-height: 5em;
+    padding: 0 1em;
+  }
 }
 
 h3 {

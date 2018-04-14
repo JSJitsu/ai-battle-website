@@ -11,6 +11,37 @@
       display: flex;
     }
 
+    @media screen and (max-width: 600px) {
+      .battle-field {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+      }
+
+      .roster ul {
+        display: none;
+      }
+
+      .roster:focus ul {
+        display: block;
+      }
+
+      .roster {
+        grid-row: 1 / span 1;
+        position: relative;
+      }
+
+      .roster ul {
+        position: absolute;
+        z-index: 5;
+      }
+
+      .battle-board {
+        grid-column: 1 / -1;
+        grid-row: 2 / span 1;
+      }
+    }
+
     .battle-field > .roster-blue {
       order: 1;
       width: 140px;
@@ -188,7 +219,7 @@
   </style>
   <h2>{ title }</h2>
   <div class="battle-field" if={ game }>
-    <div class={ 'roster-blue': i === 0, 'roster-red': i === 1, roster: true } each={ team, i in game.teams }>
+    <div class={ 'roster-blue': i === 0, 'roster-red': i === 1, roster: true } each={ team, i in game.teams } tabindex="0">
       <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
       <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
       <ul>
