@@ -40,9 +40,9 @@ async function retrieveAllCode (users) {
 
         let promise = users.reduce((prev, user) => {
             return prev.then(() => {
-                retrieveUserCode(user, 'hero');
+                return retrieveUserCode(user, 'hero');
             }).then(() => {
-                retrieveUserCode(user, 'helpers');
+                return retrieveUserCode(user, 'helpers');
             });
         }, Promise.resolve());
 
