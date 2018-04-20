@@ -38,18 +38,15 @@ async function retrieveAllCode (users) {
 
     return new Promise((resolve, reject) => {
 
-        Promise.all(
-            // Use the user data to make an array of Promises
-            users.map(user => {
-                return retrieveUserCode(user, 'hero');
-            })
-        ).then(() => {
-            Promise.all(
-                users.map(user => {
-                    return retrieveUserCode(user, 'helpers');
-                })
-            ).then(resolve);
-        });
+        let promise = users.reduce((prev, user) => {
+            return prev.then(() => {
+                retrieveUserCode(user, 'hero');
+            }).then(() => {
+                retrieveUserCode(user, 'helpers');
+            });
+        }, Promise.resolve());
+
+        promise.then(resolve);
 
     });
 }
