@@ -22,7 +22,7 @@ ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin \
 RUN apt-get update && apt-get install -y curl wget ack-grep fish git vim \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
-    && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
+    && curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
