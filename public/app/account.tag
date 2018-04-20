@@ -26,6 +26,8 @@
   <section if={ enabled === false }>
     <p>
       Your account is currently disabled. Your information will remain intact, and your hero will avoid battle until it has been restored.
+
+      <p if={ disable_reason }>Reason: { disable_reason }</p>
     </p>
     <form method="POST" action="/api/user" onsubmit={ thawAccount }>
       <input type="hidden" name="enabled" value="true">

@@ -20,7 +20,7 @@ class LiveGameRunner {
     }
 
     closeDatabase () {
-        db.destroy();
+        process.exit();
         console.log('Database connection ended.');
     }
 
