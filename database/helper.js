@@ -25,7 +25,7 @@ class Helper {
 
     getAllGameResultsByUsername (username) {
         username = this.cleanGithubLogin(username);
-        return this.db.select('*').from('game_results').whereRaw('? = ANY(players)', [username]).orderBy('game_id', 'desc').limit(1);
+        return this.db.select('*').from('game_results').whereRaw('? = ANY(players)', [username]).orderBy('game_id', 'desc');
     }
 
     getGameResultsByUsername (username) {
