@@ -32,6 +32,10 @@
         position: relative;
       }
 
+      .roster-blue {
+        margin: auto 0 auto auto;
+      }
+
       .roster ul {
         position: absolute;
         z-index: 5;
@@ -179,6 +183,25 @@
       padding: 0.4em 0;
     }
 
+    @media screen and (max-width: 576px) {
+      .battle-turn {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        justify-items: center;
+        padding-bottom: 1em;
+      }
+
+      .turn {
+        grid-row: 1 / span 1;
+      }
+
+      .slider {
+        grid-column: 1 / -1;
+        grid-row: 2 / span 1;
+      }
+    }
+
     .fainted {
       animation: deathflash 2s linear infinite alternate;
     }
@@ -275,6 +298,7 @@
 
     .battle-turn .turn:first-child {
       text-align: right;
+      white-space: nowrap;
     }
 
     .turn {
@@ -289,6 +313,18 @@
       width: 400px;
     }
 
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px)  {
+      .slider {
+        width: 300px;
+      }
+    }
+
+    @media screen and (min-width: 577px) and (max-width: 696px), (max-width: 384px)  {
+      .slider {
+        width: 200px;
+      }
+    }
+
     .messages {
       top: 2vw;
       width: 100%;
@@ -297,6 +333,27 @@
       text-align: center;
       font-family: "Press Start 2P";
       padding: 0.3em 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media screen and (max-width: 480px) {
+      .messages {
+        font-size: small;
+      }
+    }
+
+    @media screen and (max-width: 384px) {
+      .messages {
+        font-size: x-small;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .messages {
+        font-size: xx-small;
+      }
     }
 
     .tile-name {
