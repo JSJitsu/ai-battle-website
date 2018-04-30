@@ -111,7 +111,7 @@
       margin: 16px;
     }
 
-    @media screen and (max-width: 888px) {
+    @media screen and (max-width: 1048px) {
       .battle-tile {
         width: 56px;
         height: 56px;
@@ -122,7 +122,7 @@
       }
     }
 
-    @media screen and (max-width: 792px), (max-width: 576px) {
+    @media screen and (max-width: 888px), (max-width: 600px) {
       .battle-tile {
         width: 48px;
         height: 48px;
@@ -133,7 +133,7 @@
       }
     }
 
-    @media screen and (max-width: 696px), (max-width: 480px) {
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
       .battle-tile {
         width: 40px;
         height: 40px;
@@ -144,7 +144,7 @@
       }
     }
 
-    @media screen and (max-width: 600px), (max-width: 384px) {
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
       .battle-tile {
         width: 32px;
         height: 32px;
@@ -211,21 +211,21 @@
       opacity: 0.8;
     }
 
-    @media screen and (max-width: 888px) {
+    @media screen and (max-width: 1048px) {
       .indicator {
         bottom: 7px;
         padding: 0 2px;
       }
     }
 
-    @media screen and (max-width: 792px), (max-width: 576px) {
+    @media screen and (max-width: 888px), (max-width: 600px) {
       .indicator {
         right: 3px;
         bottom: 5px;
       }
     }
 
-    @media screen and (max-width: 696px), (max-width: 480px) {
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
       .indicator {
         right: 2px;
         bottom: 3px;
@@ -233,7 +233,7 @@
       }
     }
 
-    @media screen and (max-width: 600px), (max-width: 384px) {
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
       .indicator {
         right: 1px;
         bottom: 1px;
@@ -312,27 +312,27 @@
       text-overflow: ellipsis;
     }
 
-    @media screen and (max-width: 888px) {
+    @media screen and (max-width: 1048px) {
       .tile-name {
         padding: 0 2px;
         width: 54px;
       }
     }
 
-    @media screen and (max-width: 792px), (max-width: 576px) {
+    @media screen and (max-width: 888px), (max-width: 600px) {
       .tile-name {
         width: 46px;
       }
     }
 
-    @media screen and (max-width: 696px), (max-width: 480px) {
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
       .tile-name {
         padding: 0 1px;
         width: 38px;
       }
     }
 
-    @media screen and (max-width: 600px), (max-width: 384px) {
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
       .tile-name {
         width: 30px;
         text-overflow: clip;
