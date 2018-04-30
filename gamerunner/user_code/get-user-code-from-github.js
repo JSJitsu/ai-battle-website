@@ -1,5 +1,5 @@
 const console = require('better-console');
-const request = require('request');
+const request = require('request-promise-native');
 const fs = require('fs');
 const path = require('path');
 const config = require('../../config.js');
@@ -10,110 +10,190 @@ if (!config || !config.github || !config.github.appKey || !config.github.appSecr
     process.exit(1);
 }
 
-function initiateCodeRequest (fileType) {
+console.log('Fetching list of users from the database.');
 
-    console.log('About to retrieve user code from Github...');
+const NETWORK_ERROR = 'Code fetch error';
+const MISSING_CODE = 'Missing code';
 
-    db.select('*').from('player').where('enabled', true).then(users => {
-        db.destroy();
-        if (!users.length) {
-            console.warn('No users were found in the database, so user code could not be retrieved from Github.');
-        } else {
-            /**
-             * @todo Get hero and helper code for a single user at the same time rather than getting
-             * all of the hero code and then all of the helper code.
-             */
-            retrieveCode(users, 'hero');
-            retrieveCode(users, 'helpers');
-        }
+(async () => {
 
-    })
-    .catch(function (err) {
-        console.error(err);
-        throw err;
+    let users = await db.select('*').from('player');
+
+    if (!users.length) {
+        console.warn('No users found in the database.');
+        process.exit();
+    }
+
+    await retrieveAllCode(users);
+
+    console.log('Done fetching user code.');
+
+    // Allow updates to complete
+    process.exit();
+})();
+
+async function retrieveAllCode (users) {
+
+    console.log(`About to retrieve code for ${users.length} users!`);
+
+    return new Promise((resolve, reject) => {
+
+        let promise = users.reduce((prev, user) => {
+            return prev.then(() => {
+                return retrieveUserCode(user, 'hero');
+            }).then(() => {
+                return retrieveUserCode(user, 'helpers');
+            });
+        }, Promise.resolve());
+
+        promise.then(resolve);
+
     });
 }
 
-function retrieveCode (users, category) {
+function shouldRetrieveUserCode (user) {
 
-    users.forEach(function (user) {
+    if (!user.github_login || !user.code_repo || user.disabledNow) {
 
-        const githubHandle = user.github_login;
-        const codeRepo = user.code_repo;
-        const codeBranch = user.code_branch;
+        return false;
 
-        if (!githubHandle || !codeRepo) {
-            console.warn('Skipping bad user record:', user);
-            return;
+    } else if (user.enabled === false) {
+
+        if (user.disable_reason !== MISSING_CODE && user.disable_reason !== NETWORK_ERROR) {
+            return false
         }
 
-        const options = {
-            // Saves the URL at which the code can be found
-            url: `https://api.github.com/repos/${githubHandle}/${codeRepo}/contents/${category}.js?ref=${codeBranch}`,
-            qs: {
-                client_id: config.github.appKey,
-                client_secret: config.github.appSecret,
-            },
-            headers: {
-                'User-Agent': config.github.appName
-            }
+    }
+
+    return true;
+}
+
+async function retrieveUserCode (user, category) {
+
+    const githubHandle = user.github_login;
+    const codeRepo = user.code_repo;
+    const codeBranch = user.code_branch;
+
+    if (!shouldRetrieveUserCode(user)) {
+        console.warn(`Skipping user ${githubHandle}.`);
+        return;
+    }
+
+    let codeRequest = request({
+        // Saves the URL at which the code can be found
+        url: `https://api.github.com/repos/${githubHandle}/${user.code_repo}/contents/${category}.js?ref=${codeBranch}`,
+        json: true,
+        timeout: 10000,
+        qs: {
+            client_id: config.github.appKey,
+            client_secret: config.github.appSecret,
+        },
+        headers: {
+            'User-Agent': config.github.appName
+        }
+    });
+
+    try {
+
+        console.log(`Fetching code for ${githubHandle} / ${category}`);
+
+        await codeRequest;
+        handleGithubResponse(codeRequest, user, category);
+
+    } catch (e) {
+
+        let statusCode = codeRequest.response && codeRequest.response.statusCode || 0;
+        let newValues = {
+            enabled: false,
+            disable_reason: NETWORK_ERROR
         };
 
-        // Sends the request for each user's hero.js and helper.js file to the github API
-        request(options, function (error, response, body) {
-            console.log(`Saving code for ${githubHandle} / ${category}`);
+        if (statusCode === 404) {
+            newValues.disable_reason = MISSING_CODE;
+        }
 
-            if (error) {
-                console.warn('Error sending request!');
-                console.warn(error);
-                return;
+        user.disabledNow = true;
+
+        return db('player')
+        .where('github_login', githubHandle)
+        .update(newValues)
+        .then((updateCount) => {
+            if (updateCount) {
+                console.warn(`..temporarily disabling ${githubHandle} due to a ${statusCode} response.`);
             }
-
-            // If everything is ok, save the file
-            if (response.statusCode === 200) {
-                // Get response as JSON
-                const info = JSON.parse(body);
-
-                if (info.size > 65536) {
-                    console.warn(`${githubHandle} script size of ${info.size} is larger than 64k`);
-                    return;
-                }
-
-                // Set up buffer to write file
-                const buffer = new Buffer(info.content, 'base64');
-
-                // Convert buffer to long string
-                const usersCode = buffer.toString('utf8');
-
-                const filePath = path.resolve(__dirname, category, `${githubHandle}_${category}.js`);
-
-                const directory = path.dirname(filePath);
-
-                // See if our target directory exists and create it if it doesn't
-                try {
-                    fs.statSync(directory);
-                } catch (e) {
-                    console.log('Making directory', directory);
-                    fs.mkdirSync(directory);
-                }
-
-                // Write the file to a predefined folder and file name
-                fs.writeFile(filePath, usersCode, function (err) {
-                    if (err) {
-                        console.error(`Error writing file: ${filePath}`);
-                        console.error(err);
-                    }
-                });
-            } else {
-                /**
-                 * @todo Detect 404 responses and have the ability to prune dead accounts after a certain
-                 * number of failures.
-                 */
-                console.warn('Unexpected response code:', response.statusCode, 'from', options.url, 'with message', body);
-            }
+        })
+        .catch(error => {
+            console.error(error);
         });
-    });
+
+    }
+
 }
 
+function handleGithubResponse (req, user, category) {
 
-initiateCodeRequest();
+    let response = req.response;
+    let githubHandle = user.github_login;
+
+    let info = response.body;
+
+    if (info.size > 65536) {
+        console.warn(`..${githubHandle} script size of ${info.size} is larger than 64k`);
+        return;
+    }
+
+    // "content" contains the user's code
+    const buffer = new Buffer(info.content, 'base64');
+    const usersCode = buffer.toString('utf8');
+
+    // Decide where to save the code
+    const filePath = path.resolve(__dirname, category, `${githubHandle}_${category}.js`);
+    const directory = path.dirname(filePath);
+
+    // See if our target directory exists and create it if it doesn't
+    try {
+
+        fs.statSync(directory);
+
+    } catch (e) {
+
+        console.log('..creating directory', directory);
+        fs.mkdirSync(directory);
+
+    }
+
+    // Save the code
+    try {
+
+        fs.writeFileSync(filePath, usersCode);
+
+        console.log(`..saving ${category} code for`, githubHandle);
+
+        if (user.disable_reason === MISSING_CODE || user.disable_reason === NETWORK_ERROR) {
+
+            // Re-activate a user if they were disabled due to missing code.
+            return db('player')
+            .where('github_login', githubHandle)
+            .update({
+                enabled: true,
+                disable_reason: null
+            })
+            .then((updateCount) => {
+                if (updateCount) {
+                    console.log('..re-enabling player', githubHandle);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        }
+
+    } catch (e) {
+
+        console.error(`..error writing file "${filePath}"`);
+        console.error(err);
+
+    }
+
+}

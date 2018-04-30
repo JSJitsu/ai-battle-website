@@ -34,14 +34,15 @@ module.exports = {
 
     production: {
         client: 'postgresql',
+        evictionRunIntervalMillis: 20000,
         connection: {
             database: config.database.name,
             user: config.database.user,
             password: config.database.password
         },
         pool: {
-            min: 2,
-            max: 10
+            min: 3,
+            max: 15
         },
         migrations: {
             directory: config.application.rootDirectory + '/database/migrations'

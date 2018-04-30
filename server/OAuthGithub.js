@@ -105,7 +105,7 @@ module.exports = function (app, db, dbHelper, config, options) {
             }
 
         }).then(function (user) {
-            done(null, user.github_login);
+            done(null, githubData.username);
         });
     });
 
