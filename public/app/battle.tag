@@ -9,6 +9,7 @@
     .battle-field,
     .battle-row {
       display: flex;
+      justify-content: center;
     }
 
     @media screen and (max-width: 600px) {
@@ -63,7 +64,7 @@
     }
 
     .player-dead {
-      opacity: 0.6;
+      background-color: #2b3e50;
     }
 
     .roster h3 {
@@ -84,6 +85,12 @@
       text-decoration: underline;
     }
 
+    @media screen and (max-width: 1048px) {
+      .roster {
+        width: 108px;
+      }
+    }
+
     ul,
     li {
       list-style: none;
@@ -102,6 +109,57 @@
 
     .battle-tile .small-tile {
       margin: 16px;
+    }
+
+    @media screen and (max-width: 888px) {
+      .battle-tile {
+        width: 56px;
+        height: 56px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 12px;
+      }
+    }
+
+    @media screen and (max-width: 792px), (max-width: 576px) {
+      .battle-tile {
+        width: 48px;
+        height: 48px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 8px;
+      }
+    }
+
+    @media screen and (max-width: 696px), (max-width: 480px) {
+      .battle-tile {
+        width: 40px;
+        height: 40px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 4px;
+      }
+    }
+
+    @media screen and (max-width: 600px), (max-width: 384px) {
+      .battle-tile {
+        width: 32px;
+        height: 32px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 0;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .battle-tile {
+        width: 24px;
+        height: 24px;
+      }
     }
 
     .battle-tile.scenery {
@@ -144,13 +202,51 @@
     .indicator {
       position: absolute;
       right: 4px;
-      top: 38px;
+      bottom: 9px;
       color: #fff;
       font-size: 8px;
       font-family: "Press Start 2P";
       padding: 0 2px 0 3px;
       border: solid 1px #fff;
       opacity: 0.8;
+    }
+
+    @media screen and (max-width: 888px) {
+      .indicator {
+        bottom: 7px;
+        padding: 0 2px;
+      }
+    }
+
+    @media screen and (max-width: 792px), (max-width: 576px) {
+      .indicator {
+        right: 3px;
+        bottom: 5px;
+      }
+    }
+
+    @media screen and (max-width: 696px), (max-width: 480px) {
+      .indicator {
+        right: 2px;
+        bottom: 3px;
+        padding: 0 1px;
+      }
+    }
+
+    @media screen and (max-width: 600px), (max-width: 384px) {
+      .indicator {
+        right: 1px;
+        bottom: 1px;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .indicator {
+        right: 0;
+        bottom: 0;
+        font-size: 7px;
+        padding: 0;
+      }
     }
 
     @keyframes deathflash {
@@ -214,6 +310,41 @@
       z-index: 2;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    @media screen and (max-width: 888px) {
+      .tile-name {
+        padding: 0 2px;
+        width: 54px;
+      }
+    }
+
+    @media screen and (max-width: 792px), (max-width: 576px) {
+      .tile-name {
+        width: 46px;
+      }
+    }
+
+    @media screen and (max-width: 696px), (max-width: 480px) {
+      .tile-name {
+        padding: 0 1px;
+        width: 38px;
+      }
+    }
+
+    @media screen and (max-width: 600px), (max-width: 384px) {
+      .tile-name {
+        width: 30px;
+        text-overflow: clip;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .tile-name {
+        font-size: 7px;
+        padding: 0;
+        width: 22px;
+      }
     }
 
   </style>
