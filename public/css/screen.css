@@ -136,6 +136,24 @@ h1, h2 {
   margin-bottom: 0;
 }
 
+@media screen and (max-width: 480px) {
+  h1, h2 {
+    font-size: x-large;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  h1, h2 {
+    font-size: larger;
+  }
+}
+
+@media screen and (max-width: 288px) {
+  h1, h2 {
+    font-size: large;
+  }
+}
+
 h1.title {
   text-transform: uppercase;
   font-size: 1.3em;
