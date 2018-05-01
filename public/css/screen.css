@@ -18,8 +18,7 @@ main.container {
 }
 
 nav,
-footer,
-.navigation-list--active {
+footer {
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -42,7 +41,7 @@ nav.h-nav {
   cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 812px) {
   .nav-list-toggler {
     display: block;
   }
@@ -74,7 +73,7 @@ nav.h-nav ul {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 812px) {
   nav.h-nav ul {
     display: none;
     position: absolute;
@@ -86,6 +85,7 @@ nav.h-nav ul {
 
   nav.h-nav ul.navigation-list--active {
     display: flex;
+    background: rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -101,6 +101,30 @@ nav.h-nav li a:hover,
 nav.h-nav li a:focus {
   color: #ebebeb;
   background-color: #1f2933;
+}
+
+.navigation-link {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 889px) and (max-width: 1048px) {
+  .navigation-link {
+    max-width: 150px;
+  }
+}
+
+@media screen and (min-width: 813px) and (max-width: 888px) {
+  .navigation-link {
+    max-width: 100px;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .navigation-link {
+    max-width: 90vw;
+  }
 }
 
 h1, h2 {
@@ -126,6 +150,13 @@ h1.title {
     font-size: 1em;
     line-height: 5em;
     padding: 0 1em;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .navigation-title .title {
+    font-size: 0.9em;
+    line-height: 5.5em;
   }
 }
 
