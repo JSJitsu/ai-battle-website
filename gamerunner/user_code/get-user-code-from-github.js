@@ -24,15 +24,18 @@ const MISSING_CODE = 'Missing code';
         process.exit();
     }
 
-    await retrieveAllCode(users);
+    db.transaction(async function (trx) {
+        let promise = await retrieveAllCode(users, trx);
 
-    console.log('Done fetching user code.');
+        console.log('Done fetching user code.');
 
-    // Allow updates to complete
-    process.exit();
+        // Allow updates to complete
+        process.exit();
+    });
+
 })();
 
-async function retrieveAllCode (users) {
+async function retrieveAllCode (users, trx) {
 
     console.log(`About to retrieve code for ${users.length} users!`);
 
@@ -46,7 +49,16 @@ async function retrieveAllCode (users) {
             });
         }, Promise.resolve());
 
-        promise.then(resolve);
+        promise.then(() => {
+            console.log('Updating the database.');
+            trx.commit();
+            resolve();
+        })
+        .catch(() => {
+            console.warn('Rolling back changes to the database.');
+            trx.rollback();
+            reject();
+        });
 
     });
 }
