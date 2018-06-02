@@ -217,10 +217,12 @@ footer {
   padding: 1.2rem 1.5rem;
 }
 
+.hero-stats__attribute,
 .statistics__item--attribute {
   font-weight: bold;
 }
 
+.leaderboard__hero:hover,
 .statistics:hover .statistics__item--value {
   background-color: #34485c;
   border-color: #ddddf4;
