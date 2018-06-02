@@ -208,6 +208,28 @@ footer {
   text-align: center;
 }
 
+.statistics {
+  margin-bottom: 2.5rem;
+}
+
+.statistics__item {
+  border-bottom: 0.1rem solid #1f2933;
+  padding: 1.2rem 1.5rem;
+}
+
+.statistics__item--attribute {
+  font-weight: bold;
+}
+
+.statistics:hover .statistics__item--value {
+  background-color: #34485c;
+  border-color: #ddddf4;
+}
+
+.accounting {
+  text-align: right;
+}
+
 table td.accounting,
 table th.accounting {
   text-align: right;
