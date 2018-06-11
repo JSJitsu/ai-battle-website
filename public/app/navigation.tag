@@ -2,9 +2,9 @@
   <nav class="h-nav">
     <a class="navigation-title" href="/"><h1 class="title">JavaScript Fight Club</h1></a>
     <div class="nav-list-toggler" onclick={ toggleNavList }>
-      <div class="nav-list-toggler__icon">...</div>
+      <div>...</div>
     </div>
-    <ul class={ 'navigation-list': true, 'navigation-list--active': isNavListActive, 'float-right': true }>
+    <ul class={ 'navigation-list': true, 'navigation-list-active': isNavListActive, 'float-right': true }>
       <li class="navigation-item"><a class="navigation-link" href="/#battle">Battle</a></li>
       <li class="navigation-item"><a class="navigation-link" href="/#leaderboard">Leaderboard</a></li>
       <li class="navigation-item"><a class="navigation-link" href="/#instructions">How to Play</a></li>

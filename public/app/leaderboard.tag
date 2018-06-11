@@ -16,11 +16,8 @@
       }
     }
 
-    .leaderboard__hero {
-      border-bottom: 0.1rem solid #1f2933;
-    }
-
     .hero-stats {
+      border-bottom: 0.1rem solid #1f2933;
       display: grid;
       grid-template-columns: repeat(4, auto);
       grid-template-rows: repeat(5, auto);
@@ -32,64 +29,64 @@
         "lv lv ha hv";
     }
 
-    .hero-stats__item {
+    .hero-stats > div {
       padding: 1.2rem 1.5rem;
     }
 
-    .hero-stats__rank {
+    .stat-rank {
       grid-area: ra;
     }
 
-    .hero-stats__rank-value {
+    .stat-rank-value {
       grid-area: rv;
     }
 
-    .hero-stats__login {
+    .stat-login {
       grid-area: la;
     }
 
-    .hero-stats__login-value {
+    .stat-login-value {
       grid-area: lv;
       word-break: break-all;
     }
 
-    .hero-stats__wins {
+    .stat-wins {
       grid-area: wa;
     }
 
-    .hero-stats__wins-value {
+    .stat-wins-value {
       grid-area: wv;
     }
 
-    .hero-stats__kills {
+    .stat-kills {
       grid-area: ka;
     }
 
-    .hero-stats__kills-value {
+    .stat-kills-value {
       grid-area: kv;
     }
 
-    .hero-stats__souls {
+    .stat-souls {
       grid-area: sa;
     }
 
-    .hero-stats__souls-value {
+    .stat-souls-value {
       grid-area: sv;
     }
 
-    .hero-stats__diamonds {
+    .stat-diamonds {
       grid-area: da;
     }
 
-    .hero-stats__diamonds-value {
+    .stat-diamonds-value {
       grid-area: dv;
     }
 
-    .hero-stats__healed {
+    .stat-healed {
       grid-area: ha;
     }
 
-    .hero-stats__healed-value {
+    .stat-healed-value {
       grid-area: hv;
     }
 
@@ -127,21 +124,21 @@
     </tr>
   </table>
   <div class="leaderboard">
-    <div each={ stat, i in stats } class="leaderboard__hero  hero-stats  { user.getCurrentUserClass(stat.github_login) }">
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__rank">Rank</div>
-      <div class="hero-stats__item  hero-stats__rank-value">{ i + 1 }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__login">Player</div>
-      <div class="hero-stats__item  hero-stats__login-value">{ stat.github_login }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__wins">Wins</div>
-      <div class="hero-stats__item  hero-stats__wins-value  accounting">{ stat.games_won }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__kills">Kills</div>
-      <div class="hero-stats__item  hero-stats__kills-value  accounting">{ stat.kills }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__souls">Souls</div>
-      <div class="hero-stats__item  hero-stats__souls-value  accounting">{ stat.graves_taken }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__diamonds">Diamonds</div>
-      <div class="hero-stats__item  hero-stats__diamonds-value  accounting">{ stat.diamonds_earned }</div>
-      <div class="hero-stats__item  hero-stats__attribute  hero-stats__healed">Healer</div>
-      <div class="hero-stats__item  hero-stats__healed-value  accounting">{ stat.health_given }</div>
+    <div each={ stat, i in stats } class="hero-stats { user.getCurrentUserClass(stat.github_login) }">
+      <div class="stat-rank bold">Rank</div>
+      <div class="stat-rank-value">{ i + 1 }</div>
+      <div class="stat-login bold">Player</div>
+      <div class="stat-login-value">{ stat.github_login }</div>
+      <div class="stat-wins bold">Wins</div>
+      <div class="stat-wins-value accounting">{ stat.games_won }</div>
+      <div class="stat-kills bold">Kills</div>
+      <div class="stat-kills-value accounting">{ stat.kills }</div>
+      <div class="stat-souls bold">Souls</div>
+      <div class="stat-souls-value accounting">{ stat.graves_taken }</div>
+      <div class="stat-diamonds bold">Diamonds</div>
+      <div class="stat-diamonds-value accounting">{ stat.diamonds_earned }</div>
+      <div class="stat-healed bold">Healer</div>
+      <div class="stat-healed-value accounting">{ stat.health_given }</div>
     </div>
   </div>
 
