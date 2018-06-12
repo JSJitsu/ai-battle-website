@@ -10,6 +10,13 @@ main.container {
   padding-top: 20px;
 }
 
+@media screen and (max-width: 600px) {
+  main.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 nav,
 footer {
   background: rgba(0, 0, 0, 0.8);
@@ -27,11 +34,59 @@ nav.h-nav {
   z-index: 1030;
 }
 
+.nav-list-toggler {
+  display: none;
+  float: right;
+  height: 100%;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 812px) {
+  .nav-list-toggler {
+    display: block;
+  }
+}
+
+.nav-list-toggler > div {
+  font-size: 36px;
+  line-height: 0;
+  padding: 18px 18px 0 18px;
+  color: #428BCA;
+}
+
+@media screen and (max-width: 500px) {
+  .nav-list-toggler > div {
+    padding: 18px 9px 0 9px;
+  }
+}
+
 nav.h-nav ul {
   display: flex;
   flex-direction: row;
   list-style: none;
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  nav.h-nav ul {
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  nav.h-nav ul {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-top: 0;
+    flex-direction: column;
+    box-shadow: 0 0 10px #000000;
+  }
+
+  nav.h-nav ul.navigation-list-active {
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+  }
 }
 
 nav.h-nav ul li a {
@@ -48,6 +103,30 @@ nav.h-nav li a:focus {
   background-color: #1f2933;
 }
 
+.navigation-link {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 889px) and (max-width: 1048px) {
+  .navigation-link {
+    max-width: 150px;
+  }
+}
+
+@media screen and (min-width: 813px) and (max-width: 888px) {
+  .navigation-link {
+    max-width: 100px;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .navigation-link {
+    max-width: 90vw;
+  }
+}
+
 h1, h2 {
   font-size: 32px;
   background-color: #1f2933;
@@ -57,6 +136,24 @@ h1, h2 {
   margin-bottom: 0;
 }
 
+@media screen and (max-width: 480px) {
+  h1, h2 {
+    font-size: x-large;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  h1, h2 {
+    font-size: larger;
+  }
+}
+
+@media screen and (max-width: 288px) {
+  h1, h2 {
+    font-size: large;
+  }
+}
+
 h1.title {
   text-transform: uppercase;
   font-size: 1.3em;
@@ -64,6 +161,21 @@ h1.title {
   padding: 0 2em;
   display: inline-block;
   background-color: transparent;
+}
+
+@media screen and (max-width: 500px) {
+  .navigation-title .title {
+    font-size: 1em;
+    line-height: 5em;
+    padding: 0 1em;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .navigation-title .title {
+    font-size: 0.9em;
+    line-height: 5.5em;
+  }
 }
 
 h3 {
@@ -94,6 +206,29 @@ footer {
   padding: 20px;
   margin-top: 20px;
   text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.statistics {
+  margin-bottom: 2.5rem;
+}
+
+.statistics > div {
+  border-bottom: 0.1rem solid #1f2933;
+  padding: 1.2rem 1.5rem;
+}
+
+.hero-stats:hover,
+.statistics:hover .stat-value {
+  background-color: #34485c;
+  border-color: #ddddf4;
+}
+
+.accounting {
+  text-align: right;
 }
 
 table td.accounting,

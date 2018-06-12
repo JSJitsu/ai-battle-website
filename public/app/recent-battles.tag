@@ -33,6 +33,18 @@
       margin: 0.5em;
     }
 
+    @media screen and (max-width: 600px) {
+      .battle {
+        width: 45%;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .battle {
+        width: 100%;
+      }
+    }
+
   </style>
   <h2>Today's Battles</h2>
   <section class="battles">

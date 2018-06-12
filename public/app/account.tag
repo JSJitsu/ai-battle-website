@@ -1,4 +1,51 @@
 <account>
+  <style>
+
+    .stats-recent {
+      display: grid;
+      grid-template-columns: repeat(8, auto);
+      grid-template-rows: repeat(2, auto);
+    }
+
+    @media screen and (max-width: 812px) {
+      .stats-recent {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(8, auto);
+        grid-auto-flow: column;
+        text-align: right;
+      }
+    }
+
+    .stats-average {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      grid-template-rows: repeat(2, auto);
+    }
+
+    @media screen and (max-width: 812px) {
+      .stats-average {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(7, auto);
+        grid-auto-flow: column;
+      }
+    }
+
+    .stats-lifetime {
+      display: grid;
+      grid-template-columns: repeat(9, auto);
+      grid-template-rows: repeat(2, auto);
+    }
+
+    @media screen and (max-width: 900px) {
+      .stats-lifetime {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(9, auto);
+        grid-auto-flow: column;
+      }
+    }
+
+  </style>
+
   <h2>My Account</h2>
   <section if={ enabled === true }>
     <p>
@@ -37,80 +84,65 @@
   <h2>Statistics</h2>
   <section>
     <h3>Recent</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Result</th>
-          <th>Survived</th>
-          <th class="accounting">Kills</th>
-          <th class="accounting">Damage Dealt</th>
-          <th class="accounting">Mines Captured</th>
-          <th class="accounting">Diamonds Earned</th>
-          <th class="accounting">Health Recovered</th>
-          <th class="accounting">Souls Absorbed</th>
-        </tr>
-      </thead>
-      <tr>
-        <td>{ recent.winner ? 'Victory' : 'Defeat' }</td>
-        <td>{ recent.dead ? 'No' : 'Yes' }</td>
-        <td class="accounting">{ recent.kills }</td>
-        <td class="accounting">{ recent.damageGiven }</td>
-        <td class="accounting">{ recent.minesTaken }</td>
-        <td class="accounting">{ recent.diamondsEarned }</td>
-        <td class="accounting">{ recent.healthRecovered }</td>
-        <td class="accounting">{ recent.gravesTaken }</td>
-      </tr>
-    </table>
+    <div class="statistics stats-recent">
+      <div class="bold">Result</div>
+      <div class="bold">Survived</div>
+      <div class="bold accounting">Kills</div>
+      <div class="bold accounting">Damage Dealt</div>
+      <div class="bold accounting">Mines Captured</div>
+      <div class="bold accounting">Diamonds Earned</div>
+      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Souls Absorbed</div>
+
+      <div class="stat-value">{ recent.winner ? 'Victory' : 'Defeat' }</div>
+      <div class="stat-value">{ recent.dead ? 'No' : 'Yes' }</div>
+      <div class="stat-value accounting">{ recent.kills }</div>
+      <div class="stat-value accounting">{ recent.damageGiven }</div>
+      <div class="stat-value accounting">{ recent.minesTaken }</div>
+      <div class="stat-value accounting">{ recent.diamondsEarned }</div>
+      <div class="stat-value accounting">{ recent.healthRecovered }</div>
+      <div class="stat-value accounting">{ recent.gravesTaken }</div>
+    </div>
     <h3>Average <span class="tip">({ average.gamesPlayed } Games)</span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th class="accounting">Kills</th>
-          <th class="accounting">Kill/Death Ratio</th>
-          <th class="accounting">Damage Dealt</th>
-          <th class="accounting">Mines Captured</th>
-          <th class="accounting">Diamonds Earned</th>
-          <th class="accounting">Health Recovered</th>
-          <th class="accounting">Souls Absorbed</th>
-        </tr>
-      </thead>
-      <tr>
-        <td class="accounting">{ average.kills }</td>
-        <td class="accounting">{ average.kdRatio }</td>
-        <td class="accounting">{ average.damageGiven }</td>
-        <td class="accounting">{ average.minesTaken }</td>
-        <td class="accounting">{ average.diamondsEarned }</td>
-        <td class="accounting">{ average.healthRecovered }</td>
-        <td class="accounting">{ average.gravesTaken }</td>
-      </tr>
-    </table>
+    <div class="statistics stats-average">
+      <div class="bold accounting">Kills</div>
+      <div class="bold accounting">Kill/Death Ratio</div>
+      <div class="bold accounting">Damage Dealt</div>
+      <div class="bold accounting">Mines Captured</div>
+      <div class="bold accounting">Diamonds Earned</div>
+      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Souls Absorbed</div>
+
+      <div class="stat-value accounting">{ average.kills }</div>
+      <div class="stat-value accounting">{ average.kdRatio }</div>
+      <div class="stat-value accounting">{ average.damageGiven }</div>
+      <div class="stat-value accounting">{ average.minesTaken }</div>
+      <div class="stat-value accounting">{ average.diamondsEarned }</div>
+      <div class="stat-value accounting">{ average.healthRecovered }</div>
+      <div class="stat-value accounting">{ average.gravesTaken }</div>
+    </div>
     <h3>Lifetime <span class="tip">({ average.gamesPlayed } Games)</span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th class="accounting">Kills</th>
-          <th class="accounting">Deaths</th>
-          <th class="accounting">Damage Dealt</th>
-          <th class="accounting">Mines Captured</th>
-          <th class="accounting">Diamonds Earned</th>
-          <th class="accounting">Health Recovered</th>
-          <th class="accounting">Souls Absorbed</th>
-          <th class="accounting">Victories</th>
-          <th class="accounting">Defeats</th>
-        </tr>
-      </thead>
-      <tr>
-        <td class="accounting">{ lifetime.kills }</td>
-        <td class="accounting">{ lifetime.deaths }</td>
-        <td class="accounting">{ lifetime.damage_given }</td>
-        <td class="accounting">{ lifetime.mines_taken }</td>
-        <td class="accounting">{ lifetime.diamonds_earned }</td>
-        <td class="accounting">{ lifetime.health_recovered }</td>
-        <td class="accounting">{ lifetime.graves_taken }</td>
-        <td class="accounting">{ lifetime.games_won }</td>
-        <td class="accounting">{ lifetime.games_lost }</td>
-      </tr>
-    </table>
+    <div class="statistics stats-lifetime">
+      <div class="bold accounting">Kills</div>
+      <div class="bold accounting">Deaths</div>
+      <div class="bold accounting">Damage Dealt</div>
+      <div class="bold accounting">Mines Captured</div>
+      <div class="bold accounting">Diamonds Earned</div>
+      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Souls Absorbed</div>
+      <div class="bold accounting">Victories</div>
+      <div class="bold accounting">Defeats</div>
+
+      <div class="stat-value accounting">{ lifetime.kills }</div>
+      <div class="stat-value accounting">{ lifetime.deaths }</div>
+      <div class="stat-value accounting">{ lifetime.damage_given }</div>
+      <div class="stat-value accounting">{ lifetime.mines_taken }</div>
+      <div class="stat-value accounting">{ lifetime.diamonds_earned }</div>
+      <div class="stat-value accounting">{ lifetime.health_recovered }</div>
+      <div class="stat-value accounting">{ lifetime.graves_taken }</div>
+      <div class="stat-value accounting">{ lifetime.games_won }</div>
+      <div class="stat-value accounting">{ lifetime.games_lost }</div>
+    </div>
     <h2>All Games</h2>
     <table>
       <thead>

@@ -9,6 +9,42 @@
     .battle-field,
     .battle-row {
       display: flex;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      .battle-field {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+      }
+
+      .roster ul {
+        display: none;
+      }
+
+      .roster:focus ul {
+        display: block;
+      }
+
+      .roster {
+        grid-row: 1 / span 1;
+        position: relative;
+      }
+
+      .roster-blue {
+        margin: auto 0 auto auto;
+      }
+
+      .roster ul {
+        position: absolute;
+        z-index: 5;
+      }
+
+      .battle-board {
+        grid-column: 1 / -1;
+        grid-row: 2 / span 1;
+      }
     }
 
     .battle-field > .roster-blue {
@@ -32,7 +68,7 @@
     }
 
     .player-dead {
-      opacity: 0.6;
+      background-color: #2b3e50;
     }
 
     .roster h3 {
@@ -51,6 +87,12 @@
     .roster a:active {
       color: #fff;
       text-decoration: underline;
+    }
+
+    @media screen and (max-width: 1048px) {
+      .roster {
+        width: 108px;
+      }
     }
 
     ul,
@@ -73,6 +115,57 @@
       margin: 16px;
     }
 
+    @media screen and (max-width: 1048px) {
+      .battle-tile {
+        width: 56px;
+        height: 56px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 12px;
+      }
+    }
+
+    @media screen and (max-width: 888px), (max-width: 600px) {
+      .battle-tile {
+        width: 48px;
+        height: 48px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 8px;
+      }
+    }
+
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
+      .battle-tile {
+        width: 40px;
+        height: 40px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 4px;
+      }
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
+      .battle-tile {
+        width: 32px;
+        height: 32px;
+      }
+
+      .battle-tile .small-tile {
+        margin: 0;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .battle-tile {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
     .battle-tile.scenery {
       z-index: 1;
     }
@@ -88,6 +181,25 @@
     .battle-turn {
       display: flex;
       padding: 0.4em 0;
+    }
+
+    @media screen and (max-width: 576px) {
+      .battle-turn {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        justify-items: center;
+        padding-bottom: 1em;
+      }
+
+      .turn {
+        grid-row: 1 / span 1;
+      }
+
+      .slider {
+        grid-column: 1 / -1;
+        grid-row: 2 / span 1;
+      }
     }
 
     .fainted {
@@ -113,13 +225,51 @@
     .indicator {
       position: absolute;
       right: 4px;
-      top: 38px;
+      bottom: 9px;
       color: #fff;
       font-size: 8px;
       font-family: "Press Start 2P";
       padding: 0 2px 0 3px;
       border: solid 1px #fff;
       opacity: 0.8;
+    }
+
+    @media screen and (max-width: 1048px) {
+      .indicator {
+        bottom: 7px;
+        padding: 0 2px;
+      }
+    }
+
+    @media screen and (max-width: 888px), (max-width: 600px) {
+      .indicator {
+        right: 3px;
+        bottom: 5px;
+      }
+    }
+
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
+      .indicator {
+        right: 2px;
+        bottom: 3px;
+        padding: 0 1px;
+      }
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
+      .indicator {
+        right: 1px;
+        bottom: 1px;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .indicator {
+        right: 0;
+        bottom: 0;
+        font-size: 7px;
+        padding: 0;
+      }
     }
 
     @keyframes deathflash {
@@ -148,6 +298,7 @@
 
     .battle-turn .turn:first-child {
       text-align: right;
+      white-space: nowrap;
     }
 
     .turn {
@@ -162,6 +313,18 @@
       width: 400px;
     }
 
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px)  {
+      .slider {
+        width: 300px;
+      }
+    }
+
+    @media screen and (min-width: 577px) and (max-width: 696px), (max-width: 384px)  {
+      .slider {
+        width: 200px;
+      }
+    }
+
     .messages {
       top: 2vw;
       width: 100%;
@@ -170,6 +333,27 @@
       text-align: center;
       font-family: "Press Start 2P";
       padding: 0.3em 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media screen and (max-width: 480px) {
+      .messages {
+        font-size: small;
+      }
+    }
+
+    @media screen and (max-width: 384px) {
+      .messages {
+        font-size: x-small;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .messages {
+        font-size: xx-small;
+      }
     }
 
     .tile-name {
@@ -185,10 +369,45 @@
       text-overflow: ellipsis;
     }
 
+    @media screen and (max-width: 1048px) {
+      .tile-name {
+        padding: 0 2px;
+        width: 54px;
+      }
+    }
+
+    @media screen and (max-width: 888px), (max-width: 600px) {
+      .tile-name {
+        width: 46px;
+      }
+    }
+
+    @media screen and (min-width: 697px) and (max-width: 792px), (max-width: 480px) {
+      .tile-name {
+        padding: 0 1px;
+        width: 38px;
+      }
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 696px), (max-width: 384px) {
+      .tile-name {
+        width: 30px;
+        text-overflow: clip;
+      }
+    }
+
+    @media screen and (max-width: 288px) {
+      .tile-name {
+        font-size: 7px;
+        padding: 0;
+        width: 22px;
+      }
+    }
+
   </style>
   <h2>{ title }</h2>
   <div class="battle-field" if={ game }>
-    <div class={ 'roster-blue': i === 0, 'roster-red': i === 1, roster: true } each={ team, i in game.teams }>
+    <div class={ 'roster-blue': i === 0, 'roster-red': i === 1, roster: true } each={ team, i in game.teams } tabindex="0">
       <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
       <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
       <ul>
