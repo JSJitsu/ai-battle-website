@@ -264,6 +264,10 @@ select:hover {
   border-color: #428BCA;
 }
 
+option {
+  color: #2b3e50;
+}
+
 input {
   color: #ebebeb;
   border-color: #808080 !important;
