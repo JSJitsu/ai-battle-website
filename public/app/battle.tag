@@ -100,6 +100,10 @@
       list-style: none;
       margin: 0;
       padding: 0.2em;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     .battle-tile {
@@ -412,7 +416,7 @@
       <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
       <ul>
         <li each={ player in team } class={ (player.health <= 0 ? 'player-dead' : 'player-alive') + ' ' + user.getCurrentUserClass(player.name) }>
-          { player.health <= 0 ? '💀 ' : '' }<a href="https://github.com/{ player.name }">{ player.name }</a>
+          { player.health <= 0 ? '💀 ' : '' }<a href="https://github.com/{ player.name }" title={ player.name }>{ player.name }</a>
           <br><span class="diamond-count">💎 { player.diamondsEarned }</span>
         </li>
       </ul>
