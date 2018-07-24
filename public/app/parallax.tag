@@ -85,10 +85,17 @@
     };
 
     window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) {
+        return;
+      }
+
       let smallerOffset = Math.round(window.scrollY / 4);
 
       tag.refs.background.style['background-position-y'] = -(smallerOffset + 520) + 'px';
       tag.refs.redHero.style.bottom = (smallerOffset + 64) + 'px';
+    }, {
+      capture: false,
+      passive: true
     });
 
   </script>
