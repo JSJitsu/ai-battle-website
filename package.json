@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
-    "better-console": "^0.2.4",
+    "better-console": "^1.0.1",
     "body-parser": "^1.6.2",
     "connect-pg-simple": "^4.2.1",
     "express": "^4.7.2",
@@ -31,7 +31,7 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.0",
     "passport-github2": "^0.1.10",
-    "pg": "^7.4.1",
+    "pg": "^7.4.3",
     "pg-db": "^1.0.2",
     "q": "^1.0.1",
     "request-promise-native": "^1.0.5",
