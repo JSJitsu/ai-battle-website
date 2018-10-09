@@ -454,11 +454,19 @@
         <virtual if={ ticker }>⏸ Pause</virtual>
         <virtual if={ !ticker }>⏵ Play</virtual>
       </button>
+      <button onclick={ adjustSpeed }>
+        <virtual if={ isSpeed(0) }>Speed 1x</virtual>
+        <virtual if={ isSpeed(1) }>Speed 2x</virtual>
+        <virtual if={ isSpeed(2) }>Speed 4x</virtual>
+        <virtual if={ isSpeed(3) }>Speed 8x</virtual>
+        <virtual if={ isSpeed(4) }>Speed 16x</virtual>
+      </button>
     </div>
   </div>
   <script>
     let tag = this;
-    let gameSpeed = 400;
+    let speedRate = 0;
+    let gameSpeeds = [400, 200, 100, 50, 25];
     let sliderBufferDelay = 10;
 
     route('/game/*', function (id) {
@@ -590,7 +598,7 @@
 
     toggleAutoPlay () {
       if (!tag.ticker) {
-        tag.ticker = setInterval(tag.nextTurn, gameSpeed);
+        tag.ticker = setInterval(tag.nextTurn, gameSpeeds[speedRate]);
       } else {
         tag.stopAutoPlay();
       }
@@ -600,6 +608,20 @@
       if (tag.ticker) {
         clearInterval(tag.ticker);
         tag.ticker = null;
+      }
+    }
+
+    isSpeed (speed) {
+      return speedRate === speed;
+    }
+
+    adjustSpeed () {
+      // Cycles from 0 to gameSpeeds.length and back to 0
+      speedRate = (speedRate + 1) % gameSpeeds.length;
+      // Currently running
+      if (tag.ticker) {
+        clearInterval(tag.ticker);
+        tag.ticker = setInterval(tag.nextTurn, gameSpeeds[speedRate]);
       }
     }
 
