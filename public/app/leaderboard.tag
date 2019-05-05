@@ -160,7 +160,17 @@
       let category = tag.isMounted ? tag.refs.statCategory.value : 'games_won';
 
       $.getJSON(`/api/leaderboard/lifetime/${category}`, function (data) {
-        tag.stats = data.stats;
+        const intlNumber = new Intl.NumberFormat();
+        tag.stats = data.stats.map(stat => {
+          stat.games_won = intlNumber.format(stat.games_won);
+          stat.kills = intlNumber.format(stat.kills);
+          stat.graves_taken = intlNumber.format(stat.graves_taken);
+          stat.diamonds_earned = intlNumber.format(stat.diamonds_earned);
+          stat.health_given = intlNumber.format(stat.health_given);
+
+          return stat;
+        });
+
         tag.update();
       });
     }
