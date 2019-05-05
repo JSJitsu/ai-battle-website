@@ -42,15 +42,13 @@
       <navigation></navigation>
       <account></account>
 
-      <!-- inlined tag definition -->
-      <script type="riot/tag" data-src="app/account.tag"></script>
-      <script type="riot/tag" data-src="app/navigation.tag"></script>
-      <script type="riot/tag" data-src="app/parallax.tag"></script>
-
       <!-- include riot.js and the compiler -->
       <script type="text/javascript" src="lib/zepto.min.js"></script>
       <script type="text/javascript" src="lib/riot+compiler.min.js"></script>
       <script type="text/javascript" src="lib/route.min.js"></script>
+      <!-- inlined tag definition -->
+      <script type="text/javascript" src="build/all-tags.js"></script>
+      <!-- application start-up -->
       <script type="text/javascript" src="app/application.js"></script>
 
     </main>

@@ -21,6 +21,8 @@ docker run -it -v $(pwd):/app -p 8080:8080 ai-battle-website
 
 Once inside, running `./docker-startup.sh` will get everything started. It should start the PostgreSQL service, install npm modules, create the database and tables, run a test game, and start the web server. Access the site at http://localhost:8080/.
 
+If you make changes to any _.tag_ files, they will need to be built again using `yarn run compile-tags` before the changes appear.
+
 ### Via Vagrant (might be outdated)
 
 See the [Vagrant website](https://www.vagrantup.com/) for more information.

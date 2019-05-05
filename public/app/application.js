@@ -11,10 +11,10 @@ user.getCurrentUserClass = function (test) {
   return (user.name === test ? 'current-user' : '');
 };
 
-riot.compile(function () {
+// riot.compile(function () {
   route.start();
   // here tags are compiled and riot.mount works synchronously
   var tags = riot.mount('*', { user: user });
 
   user.login();
-});
+// });

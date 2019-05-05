@@ -45,20 +45,16 @@
       <leaderboard id="leaderboard"></leaderboard>
       <instructions id="instructions"></instructions>
 
-      <!-- inlined tag definition -->
-      <script type="riot/tag" data-src="app/battle.tag"></script>
-      <script type="riot/tag" data-src="app/instructions.tag"></script>
-      <script type="riot/tag" data-src="app/leaderboard.tag"></script>
-      <script type="riot/tag" data-src="app/navigation.tag"></script>
-      <script type="riot/tag" data-src="app/parallax.tag"></script>
-      <script type="riot/tag" data-src="app/recent-battles.tag"></script>
 
       <script src="lib/game-engine.js"></script>
 
       <!-- include riot.js and the compiler -->
       <script type="text/javascript" src="lib/zepto.min.js"></script>
-      <script type="text/javascript" src="lib/riot+compiler.min.js"></script>
+      <script type="text/javascript" src="lib/riot.min.js"></script>
       <script type="text/javascript" src="lib/route.min.js"></script>
+      <!-- inlined tag definition -->
+      <script type="text/javascript" src="build/all-tags.js"></script>
+      <!-- application start-up -->
       <script type="text/javascript" src="app/application.js"></script>
 
       <script type="text/javascript">

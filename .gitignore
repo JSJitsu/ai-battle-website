@@ -12,6 +12,7 @@ coverage
 
 # Compiled Dirs
 public/lib/game-engine.js
+public/build
 
 # Dependency directories
 node_modules/
