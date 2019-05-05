@@ -161,6 +161,7 @@
 
       $.getJSON(`/api/leaderboard/lifetime/${category}`, function (data) {
         const intlNumber = new Intl.NumberFormat();
+
         tag.stats = data.stats.map(stat => {
           stat.games_won = intlNumber.format(stat.games_won);
           stat.kills = intlNumber.format(stat.kills);

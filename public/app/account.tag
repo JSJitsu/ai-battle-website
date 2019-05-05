@@ -180,6 +180,22 @@
 
     tag.fetchStats = function (username) {
       $.getJSON('/api/users/' + username + '/stats', function (data) {
+
+        const intlNumber = new Intl.NumberFormat();
+        let stats = data.lifetime;
+
+        if (stats) {
+          stats.damage_given = intlNumber.format(stats.damage_given);
+          stats.damage_taken = intlNumber.format(stats.damage_taken);
+          stats.deaths = intlNumber.format(stats.deaths);
+          stats.diamonds_earned = intlNumber.format(stats.diamonds_earned);
+          stats.games_lost = intlNumber.format(stats.games_lost);
+          stats.games_won = intlNumber.format(stats.games_won);
+          stats.graves_taken = intlNumber.format(stats.graves_taken);
+          stats.health_given = intlNumber.format(stats.health_given);
+          stats.health_recovered = intlNumber.format(stats.health_recovered);
+        }
+
         $.extend(tag, data);
         tag.update();
       });
@@ -187,7 +203,14 @@
 
     tag.fetchGames = function (username) {
       $.getJSON('/api/users/' + username + '/games', function (data) {
-        tag.games = data;
+        const intlNumber = new Intl.NumberFormat();
+
+        tag.games = data.map(game => {
+          game.total_turns = intlNumber.format(game.total_turns);
+
+          return game;
+        });
+
         tag.update();
       });
     };
