@@ -82,7 +82,7 @@
     </form>
   </section>
   <h2>Statistics</h2>
-  <section>
+  <section if={ games && games.length }>
     <h3>Recent</h3>
     <div class="statistics stats-recent">
       <div class="bold">Result</div>
@@ -161,13 +161,15 @@
       </tr>
     </table>
   </section>
+  <section if={ games && !games.length }>
+    More information will appear here after your first battle.
+  </section>
   <script>
     let tag = this;
 
     tag.recent = {};
     tag.average = {};
     tag.lifetime = {};
-    tag.games = [];
 
     opts.user.on('login', function (data) {
       $.extend(tag, data);
