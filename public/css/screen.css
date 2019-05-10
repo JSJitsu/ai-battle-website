@@ -340,8 +340,8 @@ button:active {
   box-shadow: 0 0 3px 1px #fff;
 }
 
-.focus-user,
-.focus-user a {
+.battle-tile .focus-user,
+.battle-tile .focus-user a {
   color: #7bff78 !important;
 }
 

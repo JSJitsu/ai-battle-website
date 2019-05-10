@@ -63,7 +63,8 @@
       background-color: #151f7d;
     }
 
-    .battle-field > .roster-blue .player-alive:hover {
+    .battle-field > .roster-blue .player-alive:hover,
+    .battle-field > .roster-blue .player-alive.focus-user {
       background-color: #1e2cb6;
     }
 
@@ -71,7 +72,8 @@
       background-color: #6a1f28;
     }
 
-    .battle-field > .roster-red .player-alive:hover {
+    .battle-field > .roster-red .player-alive:hover,
+    .battle-field > .roster-red .player-alive.focus-user {
       background-color: #a7303e;
     }
 
@@ -423,7 +425,7 @@
       <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
       <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
       <ul>
-        <li each={ player in team } class={ (player.health <= 0 ? 'player-dead' : 'player-alive') + ' ' + user.getCurrentUserClass(player.name) } onclick={ setFocusedPlayer } onmouseover={ highlightPlayer } onmouseout={ dehighlightPlayer }>
+        <li each={ player in team } class={ (player.health <= 0 ? 'player-dead' : 'player-alive') + ' ' + user.getCurrentUserClass(player.name) + ' ' + getFocusOnPlayerClass(player.name) } onclick={ setFocusedPlayer } onmouseover={ highlightPlayer } onmouseout={ dehighlightPlayer }>
           { player.health <= 0 ? '💀 ' : '' }<a href="https://github.com/{ player.name }" title={ player.name }>{ player.name }</a>
           <br><span class="diamond-count">💎 { player.diamondsEarned }</span>
         </li>
