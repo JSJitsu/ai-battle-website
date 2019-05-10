@@ -335,3 +335,16 @@ button:active {
 .tile-name.current-user {
   border-color: #ffff78;
 }
+
+.tile-name.hover-user {
+  box-shadow: 0 0 3px 1px #fff;
+}
+
+.focus-user,
+.focus-user a {
+  color: #7bff78 !important;
+}
+
+.tile-name.focus-user {
+  border-color: #7bff78;
+}

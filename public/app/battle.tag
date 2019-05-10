@@ -63,8 +63,16 @@
       background-color: #151f7d;
     }
 
+    .battle-field > .roster-blue .player-alive:hover {
+      background-color: #1e2cb6;
+    }
+
     .battle-field > .roster-red .player-alive {
       background-color: #6a1f28;
+    }
+
+    .battle-field > .roster-red .player-alive:hover {
+      background-color: #a7303e;
     }
 
     .player-dead {
@@ -415,7 +423,7 @@
       <h3>{ i === 0 ? 'Blue' : 'Red' } Team</h3>
       <span class="diamond-count diamond-total">💎 { game.totalTeamDiamonds[i] }</span>
       <ul>
-        <li each={ player in team } class={ (player.health <= 0 ? 'player-dead' : 'player-alive') + ' ' + user.getCurrentUserClass(player.name) }>
+        <li each={ player in team } class={ (player.health <= 0 ? 'player-dead' : 'player-alive') + ' ' + user.getCurrentUserClass(player.name) } onclick={ setFocusedPlayer } onmouseover={ highlightPlayer } onmouseout={ dehighlightPlayer }>
           { player.health <= 0 ? '💀 ' : '' }<a href="https://github.com/{ player.name }" title={ player.name }>{ player.name }</a>
           <br><span class="diamond-count">💎 { player.diamondsEarned }</span>
         </li>
@@ -433,7 +441,7 @@
           <img class="small-tile" src="{ tile.owner.team === 0 ? 'img/diamond_mine_blue.gif' : 'img/diamond_mine_red.gif' }" title={ 'Owned by ' + tile.owner.name } if={ tile.subType === 'DiamondMine' && tile.owner }>
           <span class="indicator { tile.owner.team === 0 ? 'team-blue' : 'team-red' }" title={ 'Owned by ' + tile.owner.name } if={ tile.subType === 'DiamondMine' && tile.owner }>{ tile.owner.name.substring(0, 2) }</span>
           <img class="small-tile" src="img/healing_well.gif" if={ tile.subType === 'HealthWell' }>
-          <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name { user.getCurrentUserClass(game.heroes[tile.id].name) }" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);" title={ game.heroes[tile.id].name }>{ game.heroes[tile.id].name }</div>
+          <div if={ tile.type === 'Hero' || tile.subType === 'BlueFainted' || tile.subType === 'RedFainted' } class="tile-name { user.getCurrentUserClass(game.heroes[tile.id].name) } { getFocusOnPlayerClass(game.heroes[tile.id].name) }" style="background: linear-gradient(to right, hsl({ tile.health * 1.2 }, 40%, 30%) 0%, hsl({ tile.health * 1.2 }, 80%, 30%) { tile.health }%, #ffffff40 0%);" title={ game.heroes[tile.id].name }>{ game.heroes[tile.id].name }</div>
           <img class="small-tile" src="img/blue_knight.gif" if={ tile.subType === 'BlackKnight' }>
           <img class="small-tile" src="img/red_knight.gif" if={ tile.subType === 'Adventurer' }>
           <img class="small-tile fainted" src="img/blue_knight_fainted.gif" if={ tile.subType === 'BlueFainted' }>
@@ -561,6 +569,30 @@
     jumpToTurnFromInput (input) {
       input.preventUpdate = true;
       tag.jumpToTurn(parseInt(input.target.value, 10));
+    }
+
+    getFocusOnPlayerClass (playerName) {
+      if (playerName === tag.hoverOnPlayer) {
+        return 'hover-user';
+      } else if (playerName === tag.focusOnPlayer) {
+        return 'focus-user';
+      }
+    }
+
+    highlightPlayer (event) {
+      tag.hoverOnPlayer = event.item.player.name;
+    }
+
+    dehighlightPlayer (event) {
+      tag.hoverOnPlayer = null;
+    }
+
+    setFocusedPlayer (event) {
+      if (tag.focusOnPlayer === event.item.player.name) {
+        tag.focusOnPlayer = null;
+      } else {
+        tag.focusOnPlayer = event.item.player.name;
+      }
     }
 
     /**
