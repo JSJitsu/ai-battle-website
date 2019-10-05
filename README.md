@@ -15,6 +15,7 @@ Visit [https://jsfight.club](https://jsfight.club) to play the game. You do not 
 See the [Docker website](https://www.docker.com/community-edition) for more information.
 
 ```sh
+cp config-template.js config.js
 docker build -t ai-battle-website .
 docker run -it -v $(pwd):/app -p 8080:8080 ai-battle-website
 ```
