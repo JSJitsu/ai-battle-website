@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  ai-battle-website:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - USER=vagrant
+    command: ./docker-startup.sh
