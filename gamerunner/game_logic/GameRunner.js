@@ -151,7 +151,7 @@ class GameRunner {
             const result = sandbox.moveResult;
 
             if (typeof result === "string" && result.length <= 10) {
-                if (allowed.hasOwnProperty(result)) {
+                if (Object.prototype.hasOwnProperty.call(allowed, result)) {
                     return allowed[result];
                 } else {
                     console.warn(`Invalid move (${result}) by ${githubHandle}`);
@@ -236,15 +236,15 @@ class GameRunner {
 
             return db('game_events').insert(gameEvents, 'game_id');
         })
-        .catch(err => {
-            console.log(err.stack);
-        })
-        .then(results => {
-            return this.updateAndSaveAllHeroStats(game);
-        })
-        .then(() => {
-            return this.saveGameResults(game);
-        });
+            .catch(err => {
+                console.log(err.stack);
+            })
+            .then(results => {
+                return this.updateAndSaveAllHeroStats(game);
+            })
+            .then(() => {
+                return this.saveGameResults(game);
+            });
     }
 
     /**

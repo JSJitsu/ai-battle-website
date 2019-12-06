@@ -113,14 +113,14 @@ module.exports = function (app, db, dbHelper, config, options) {
         dbHelper.getPlayer(githubHandle).then(function (users) {
             return users[0];
         })
-        .done(
-            function (user) {
-                done(null, user);
-            },
-            function (err) {
-                console.error(err);
-            }
-        );
+            .done(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    console.error(err);
+                }
+            );
     });
 
     let clientId = options.github.clientId || process.env.GITHUB_CLIENT_ID;

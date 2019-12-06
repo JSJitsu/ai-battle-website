@@ -1,5 +1,5 @@
-
-exports.up = function (knex, Promise) {
+/* global Promise */
+exports.up = function (knex) {
     return Promise.all([
         // Table player
         knex.schema.createTable('player', (table) => {
@@ -57,7 +57,7 @@ exports.up = function (knex, Promise) {
     ]);
 };
 
-exports.down = function (knex, Promise) {
+exports.down = function (knex) {
     return Promise.all([
         knex.schema.dropTableIfExists('player'),
         knex.raw('DROP TABLE IF EXISTS game_results CASCADE'),

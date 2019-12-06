@@ -24,16 +24,16 @@ let sql = `
 `;
 
 db.raw(sql).
-then( () => {
-    console.log('All database tables destroyed.');
-})
-.then( () => {
-    return db.migrate.latest().then( () => {
-        console.log('Database reset completed.');
-        process.exit();
+    then( () => {
+        console.log('All database tables destroyed.');
+    })
+    .then( () => {
+        return db.migrate.latest().then( () => {
+            console.log('Database reset completed.');
+            process.exit();
+        });
+    })
+    .catch(err => {
+        console.error('Error destroying all database tables');
+        console.error(err.message);
     });
-})
-.catch(err => {
-    console.error('Error destroying all database tables');
-    console.error(err.message);
-});
