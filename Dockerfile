@@ -1,7 +1,4 @@
-
-# Pull base image.
-# trusty
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Set proxy server, replace host:port with values for your servers
 # ENV http_proxy http://10.4.119.1:3128
@@ -19,10 +16,10 @@ ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin \
     PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
 
 # Install.
-RUN apt-get update && apt-get install -y curl wget ack-grep fish git vim \
+RUN apt-get update && apt-get install -y curl wget ack-grep fish git vim sudo \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-    && echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
-    && curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
+    && echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
+    && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
