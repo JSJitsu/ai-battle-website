@@ -1,5 +1,5 @@
-
-exports.up = function (knex, Promise) {
+/* global Promise */
+exports.up = function (knex) {
     return Promise.all([
         // Add foo to player table
         knex.schema.table('player', (table) => {
@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
     ]);
 };
 
-exports.down = function (knex, Promise) {
+exports.down = function (knex) {
     return Promise.all([
         // Drop foo from player table
         knex.schema.table('player', (table) => {

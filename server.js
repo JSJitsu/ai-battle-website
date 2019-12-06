@@ -14,17 +14,17 @@ const dbHelper = new (require('./database/helper.js'))(db);
 db.raw('select 1+1 as result').then( () => {
     // Apply migrations.
     db.migrate.latest()
-    .then( () => {
-        return console.log('Latest migrations applied');
-    })
-    .then ( () => {
-        startServer();
-    });
+        .then( () => {
+            return console.log('Latest migrations applied');
+        })
+        .then ( () => {
+            startServer();
+        });
 })
-.catch(err => {
-    console.error('Error setting up the database');
-    console.error(err.message);
-});
+    .catch(err => {
+        console.error('Error setting up the database');
+        console.error(err.message);
+    });
 
 function startServer () {
 
