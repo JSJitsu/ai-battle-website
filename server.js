@@ -1,4 +1,5 @@
 const console = require('better-console');
+const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -74,6 +75,7 @@ function startServer () {
     const app = express();
 
     app.use(morgan('combined'));
+    app.use(compression());
 
     app.use('/api/game', require('./routes/game'));
     app.use('/api/games', require('./routes/games'));
