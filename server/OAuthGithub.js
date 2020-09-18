@@ -83,7 +83,7 @@ module.exports = function (app, db, dbHelper, config, options) {
      * @param  {Object} githubData Github user data
      * @param  {Function} done Callback to serialize the user data.
      */
-    passport.serializeUser(function (githubData, done) {
+    passport.serializeUser(function (req, githubData, done) {
         dbHelper.getPlayer(githubData.username).then(function (users) {
 
             let user = users[0];
@@ -109,7 +109,7 @@ module.exports = function (app, db, dbHelper, config, options) {
         });
     });
 
-    passport.deserializeUser(function (githubHandle, done) {
+    passport.deserializeUser(function (req, githubHandle, done) {
         dbHelper.getPlayer(githubHandle).then(function (users) {
             return users[0];
         })
