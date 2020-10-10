@@ -26,3 +26,6 @@ gamerunner/user_code/hero/*.js
 # Sublime
 *.sublime-project
 *.sublime-workspace
+
+# editors
+.idea
