@@ -1,0 +1,420 @@
+openapi: "3.0.0"
+info:
+  title: Javascript Fight Club
+  version: 1.0.0
+paths:
+  /api/game/:
+    get:
+      summary: Retrieves the lastst game
+      responses:
+        '200':
+          $ref: '#/components/responses/GameResponse'
+
+  /api/game/{id}:
+    get:
+      summary: Retrieves a game with the given id.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GameId'
+      responses:
+        '200':
+          $ref: '#/components/responses/GameResponse'
+
+  /api/games/latest:
+    get:
+      summary: Retruns the `latest` game
+      responses:
+        '200':
+          $ref: '#/components/responses/LatestGameResponse'
+
+  /api/leaderboard/{timePeriod}/{stat}:
+    get:
+      parameters:
+      - in: path
+        name: timePeriod
+        required: true
+        schema:
+          type: string
+          default: lifetime
+      - $ref: '#/components/parameters/Stat'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/LeaderboardResponses'
+        '400':
+          $ref: '#/components/responses/400BadRequestResponse'
+        '500':
+          $ref: '#/components/responses/500InternalServerErrorResponse'
+
+  /api/users/{githubLogin}/games:
+    get:
+      description: Fetch the games for the github user
+      parameters:
+      - $ref: '#/components/parameters/GitHubLogin'
+      responses:
+        '200':
+          $ref: '#/components/responses/GameResponse'
+
+  /api/users/{githubLogin}/stats/{stat}:
+    get:
+      description: get the Stat for a github user name
+      parameters:
+      - $ref: '#/components/parameters/GitHubLogin'
+      - $ref: '#/components/parameters/Stat'
+      responses:
+        '200':
+          $ref: '#/components/responses/GameResponse'
+
+components:
+  parameters:
+    GitHubLogin:
+      type: string
+      in: path
+      name: githubLogin
+      required: true
+    Stat:
+      in: path
+      name: stat
+      required: true
+      schema:
+        $ref: '#/components/schemas/Stats'
+  
+  responses:
+    VersionResponse:
+      description: Version response object
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Version"
+    LatestGameResponse:
+      description: Latest Game response object
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LatestGame"
+    GameResponse:
+      description: Game Response object
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: "#/components/schemas/Game"
+              - type: object
+                properties:
+                  noData:
+                    type: boolean
+                    default: true
+
+    LeaderboardResponses:
+      description: Variations for leaderboard responses
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Leaderboards"
+
+    400BadRequestResponse:
+      description: 400 Response
+      content:
+        application/json:
+          schema:
+            type: string
+    500InternalServerErrorResponse:
+      description: 500 Response
+      content:
+        application/json:
+          schema:
+            type: string
+
+  headers:
+    X-Request-Id:
+      required: true
+      description: unique ID for the request
+      schema:
+        $ref: '#/components/schemas/XRequestId'
+
+  schemas:
+    GameId:
+      type: number
+
+    Leaderboards:
+      description: Pick one of the possible leaderboard types to return
+      type: array
+      items:
+        $ref: "#/components/schemas/LeaderboardItem"
+
+    LeaderboardItem:
+      type: object
+      properties:
+        id:
+          type: number
+        github_login:
+          type: string
+        kills:
+          type: string
+          example: '5'
+        deaths:
+          type: string
+          example: '0'
+        damage_given:
+          type: string # why not a number?
+          example: '80'
+        damage_taken:
+          type: string # again, and for these all, why not a number?
+          example: '0'
+        mines_taken:
+          type: 'string'
+        diamonds_earned:
+          type: string
+        health_given:
+          type: string
+        health_recovered:
+          type: string
+        graves_taken:
+          type: string
+        games_won:
+          type: string
+        games_lost:
+          type: string
+
+
+
+
+    LatestGame:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+          players:
+            type: array
+            items:
+              $ref: "#/components/schemas/Name"
+
+    Game:
+      type: object
+      properties:
+
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/Event"
+        heros:
+          type: array
+          items:
+            $ref: "#/components/schemas/Hero"
+        id:
+          $ref: "#/components/schemas/GameId"
+        initial_map:
+          description: This is an array of arrays, to define the 12x12 grid of the game. Each cell is a MapObject.
+          type: array
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/MapObject"
+        latest:
+          type: boolean
+          description: Is the latest game? #todo - clarify
+        played_at:
+            type: string
+            format: datetime
+        players:
+          type: array
+          items:
+            $ref: "#/components/schemas/Name"
+        total_turns:
+          type: number
+          minimum: 0
+          nullable: false
+    Hero:
+      type: object
+      description: The Hero's in a game
+      required:
+        - id
+        - name
+        - team
+      properties:
+        id:
+          type: number
+          description: ID of the Hero
+          minimum: 1
+          nullable: false
+        name:
+          $ref: "#/components/schemas/Name"
+        team:
+          type: number
+          enum:
+            - 0
+            - 1
+
+    Name:
+      type: string
+      description: Name of the Player or Hero
+      nullable: false
+      minLength: 1
+
+    Event:
+      description: An event in the game
+      type: object
+      required:
+        - turn
+        - actor
+        - action
+      properties:
+        turn:
+          type: number
+        actor:
+          type: number
+        action:
+          $ref: "#/components/schemas/Action"
+
+    Action:
+      description: An action in an event
+      type: string
+      enum:
+        - North
+        - East
+        - South
+        - West
+        - Stay
+
+    MapObject:
+      type: object
+      oneOf:
+        - $ref: "#/components/schemas/SimpleMapObject"
+        - $ref: "#/components/schemas/HeroMapObject"
+
+    SimpleMapObject:
+      type: object
+      required:
+        - type
+        - subType
+        - distanceFromLeft
+        - distanceFromTop
+      properties:
+        id:
+          type: number
+          nullable: false
+        type:
+          $ref: "#/components/schemas/Type"
+        subType:
+          $ref: "#/components/schemas/SubType"
+        distanceFromLeft:
+          $ref: "#/components/schemas/DistanceFromLeft"
+        distanceFromRight:
+          $ref: "#/components/schemas/DistanceFromTop"
+
+    HeroMapObject:
+      type: object
+      properties:
+        id:
+          type: number
+        team:
+          type: number
+        type:
+          $ref: "#/components/schemas/Type"
+        subType:
+          $ref: "#/components/schemas/SubType"
+        name:
+          $ref: "#/components/schemas/Name"
+        damageDone:
+          type: number
+          minimum: 0
+          nullable: false
+        dead:
+          type: boolean
+          default: false
+        diamondsEarned:
+          type: number
+          minimum: 0
+        distanceFromLef:
+          $ref: "#/components/schemas/DistanceFromLeft"
+        distanceFromTop:
+          $ref: "#/components/schemas/DistanceFromTop"
+        gravesRobbed:
+          type: number
+        health:
+          type: number
+        healthGiven:
+          type: number
+        healthRecovered:
+          type: number
+        heroesKilled:
+          type: array
+          items:
+            type: number
+            description: Id of the hero killed
+        lastActiveTurn:
+          type: number
+        mineCount:
+          type: number
+        minesCaptured:
+          type: number
+        minesOwned:
+          type: object # How do you define { 1: 1, 3, 3 } in openapi? #todo: work that out
+        won:
+          type: boolean
+          default: false
+
+    DistanceFromLeft:
+      type: number
+      description: How far the object is from the left
+      minimum: 0
+    DistanceFromTop:
+      type: number
+      description: How far the object is from the top
+      minimum: 0
+
+    Type:
+      type: string
+      enum:
+        - Unoccupied
+        - SpawnPoint
+        - Impassable
+        - Hero
+        - HealthWell
+        - DiamondMine
+    SubType:
+      type: string
+      enum:
+        - Unoccupied
+        - SpawnPoint-0
+        - SpawnPoint-1 // #todo: check this is right
+        - Tree
+        - BlackKnight
+        - Adventurer
+        - HealthWell
+        - RedFainted
+        - BlueFainted
+        - Fainted
+        - DiamondMine
+
+    Stats:
+      type: string
+      enum:
+      - games_won
+      - kills
+      - graves_taken
+      - diamonds_earned
+      - health_given
+    Version:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        version:
+          type: string
+          example: 1.23.45
+          pattern: \d\.\d\.\d
+
+    XRequestId:
+      description: unique ID for the request
+      type: string
+      format: uuid
