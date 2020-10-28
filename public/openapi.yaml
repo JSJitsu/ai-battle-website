@@ -71,7 +71,6 @@ paths:
 components:
   parameters:
     GitHubLogin:
-      type: string
       in: path
       name: githubLogin
       required: true
@@ -124,6 +123,7 @@ components:
         application/json:
           schema:
             type: string
+
     500InternalServerErrorResponse:
       description: 500 Response
       content:
@@ -140,7 +140,10 @@ components:
 
   schemas:
     GameId:
-      type: number
+      oneOf:
+        - type: number
+        - type: string
+          pattern: [0-9]*
 
     Leaderboards:
       description: Pick one of the possible leaderboard types to return
@@ -182,16 +185,13 @@ components:
         games_lost:
           type: string
 
-
-
-
     LatestGame:
       type: array
       items:
         type: object
         properties:
           id:
-            type: number
+            $ref: "#/components/schemas/GameId"
           players:
             type: array
             items:
@@ -200,7 +200,6 @@ components:
     Game:
       type: object
       properties:
-
         events:
           type: array
           items:
@@ -212,15 +211,17 @@ components:
         id:
           $ref: "#/components/schemas/GameId"
         initial_map:
-          description: This is an array of arrays, to define the 12x12 grid of the game. Each cell is a MapObject.
+          description: This is an array of arrays, to define the 13x13 grid of the game. Each cell is a MapObject.
           type: array
           items:
             type: array
+            minItems: 13
+            maxItems: 13
             items:
-              $ref: "#/components/schemas/MapObject"
+              $ref: "#/components/schemas/MapObjectRow"
         latest:
           type: boolean
-          description: Is the latest game? #todo - clarify
+          description: Is the latest game? #todo - clarify what this should be for the description
         played_at:
             type: string
             format: datetime
@@ -283,6 +284,14 @@ components:
         - South
         - West
         - Stay
+
+    MapObjectRow:
+      description: Row array of Map Objects
+      type: array
+      minItems: 13
+      maxItems: 13
+      items:
+        $ref: "#/components/schemas/MapObject"
 
     MapObject:
       type: object
