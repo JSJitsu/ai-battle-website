@@ -1,11 +1,45 @@
 const console = require('better-console');
+const argv = require('minimist')(process.argv.slice(2));
+
+if (argv['help']) {
+    var usage = [
+        'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [parameters]',
+        '',
+        'Required Parameters:',
+        '',
+        '  --github-client-id      GitHub Application Client ID',
+        '  --github-client-secret  GitHub Application Client Secret',
+        '        OR',
+        '  --pretend-auth-as       The GitHub user to pretend to be when logging in.',
+        '                          This prevents real authentication with GitHub.',
+        '',
+        'Optional Parameters:',
+        '',
+        '  --github-callback-url   Specify the callback used for user auth.',
+        '  --help                  Show this message.',
+        ''
+    ].join('\n');
+
+    console.log(usage);
+    process.exit(0);
+}
+
 const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 
 const OAuthGithub = require('./server/OAuthGithub');
-const argv = require('minimist')(process.argv.slice(2));
-const config = require('./config');
+let config;
+
+try {
+    config = require('./config');
+} catch (ex) {
+    if (ex.code === 'MODULE_NOT_FOUND') {
+        console.warn(`'config.js' is missing. Copy from 'config-template.js' and update as needed.`);
+        process.exit(1);
+    }
+}
+
 const db = require('./database/knex');
 const dbHelper = new (require('./database/helper.js'))(db);
 
@@ -39,33 +73,8 @@ function startServer () {
         }
     };
 
-    let showUsage = argv['help'];
-
     if (options.github.clientId && options.github.clientSecret) {
         options.useGithub = true;
-    }
-
-    if (showUsage) {
-        var usage = [
-            'Usage: ' + process.argv[0] + ' ' + process.argv[1] + ' [parameters]',
-            '',
-            'Required Parameters:',
-            '',
-            '  --github-client-id      GitHub Application Client ID',
-            '  --github-client-secret  GitHub Application Client Secret',
-            '        OR',
-            '  --pretend-auth-as       The GitHub user to pretend to be when logging in.',
-            '                          This prevents real authentication with GitHub.',
-            '',
-            'Optional Parameters:',
-            '',
-            '  --github-callback-url   Specify the callback used for user auth.',
-            '  --help                  Show this message.',
-            ''
-        ].join('\n');
-
-        console.log(usage);
-        process.exit(0);
     }
 
     if (options.useGithub === false && !options.pretendAuthAs) {
