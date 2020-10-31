@@ -143,7 +143,7 @@ components:
       oneOf:
         - type: number
         - type: string
-          pattern: [0-9]*
+          pattern: \d
 
     Leaderboards:
       description: Pick one of the possible leaderboard types to return
