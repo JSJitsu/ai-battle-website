@@ -91,7 +91,7 @@
       <div class="bold accounting">Damage Dealt</div>
       <div class="bold accounting">Mines Captured</div>
       <div class="bold accounting">Diamonds Earned</div>
-      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Health Given</div>
       <div class="bold accounting">Souls Absorbed</div>
 
       <div class="stat-value">{ recent.winner ? 'Victory' : 'Defeat' }</div>
@@ -100,7 +100,7 @@
       <div class="stat-value accounting">{ recent.damageGiven }</div>
       <div class="stat-value accounting">{ recent.minesTaken }</div>
       <div class="stat-value accounting">{ recent.diamondsEarned }</div>
-      <div class="stat-value accounting">{ recent.healthRecovered }</div>
+      <div class="stat-value accounting">{ recent.healthGiven }</div>
       <div class="stat-value accounting">{ recent.gravesTaken }</div>
     </div>
     <h3>Average <span class="tip">({ average.gamesPlayed } Games)</span></h3>
@@ -110,7 +110,7 @@
       <div class="bold accounting">Damage Dealt</div>
       <div class="bold accounting">Mines Captured</div>
       <div class="bold accounting">Diamonds Earned</div>
-      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Health Given</div>
       <div class="bold accounting">Souls Absorbed</div>
 
       <div class="stat-value accounting">{ average.kills }</div>
@@ -118,7 +118,7 @@
       <div class="stat-value accounting">{ average.damageGiven }</div>
       <div class="stat-value accounting">{ average.minesTaken }</div>
       <div class="stat-value accounting">{ average.diamondsEarned }</div>
-      <div class="stat-value accounting">{ average.healthRecovered }</div>
+      <div class="stat-value accounting">{ average.healthGiven }</div>
       <div class="stat-value accounting">{ average.gravesTaken }</div>
     </div>
     <h3>Lifetime <span class="tip">({ average.gamesPlayed } Games)</span></h3>
@@ -128,7 +128,7 @@
       <div class="bold accounting">Damage Dealt</div>
       <div class="bold accounting">Mines Captured</div>
       <div class="bold accounting">Diamonds Earned</div>
-      <div class="bold accounting">Health Recovered</div>
+      <div class="bold accounting">Health Given</div>
       <div class="bold accounting">Souls Absorbed</div>
       <div class="bold accounting">Victories</div>
       <div class="bold accounting">Defeats</div>
@@ -138,7 +138,7 @@
       <div class="stat-value accounting">{ lifetime.damage_given }</div>
       <div class="stat-value accounting">{ lifetime.mines_taken }</div>
       <div class="stat-value accounting">{ lifetime.diamonds_earned }</div>
-      <div class="stat-value accounting">{ lifetime.health_recovered }</div>
+      <div class="stat-value accounting">{ lifetime.health_given }</div>
       <div class="stat-value accounting">{ lifetime.graves_taken }</div>
       <div class="stat-value accounting">{ lifetime.games_won }</div>
       <div class="stat-value accounting">{ lifetime.games_lost }</div>
