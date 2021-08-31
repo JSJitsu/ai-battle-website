@@ -671,7 +671,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["ai-battle-engine", [
         ["https://github.com/JSJitsu/ai-battle-engine.git#commit=52b08a5dfdd5726e41bd56515ed2811327ef1d21", {
-          "packageLocation": "./.yarn/unplugged/ai-battle-engine-https-53e00ded3c/node_modules/ai-battle-engine/",
+          "packageLocation": "./.yarn/cache/ai-battle-engine-https-53e00ded3c-d6353ca9ab.zip/node_modules/ai-battle-engine/",
           "packageDependencies": [
             ["ai-battle-engine", "https://github.com/JSJitsu/ai-battle-engine.git#commit=52b08a5dfdd5726e41bd56515ed2811327ef1d21"]
           ],

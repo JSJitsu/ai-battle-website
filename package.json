@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/JSJitsu/ai-battle-website",
   "dependencies": {
+    "ai-battle-engine": "https://github.com/JSJitsu/ai-battle-engine",
     "better-console": "^1.0.1",
     "body-parser": "^1.6.2",
     "compression": "^1.7.4",
@@ -47,7 +48,6 @@
     "zepto": "^1.2.0"
   },
   "devDependencies": {
-    "ai-battle-engine": "https://github.com/JSJitsu/ai-battle-engine",
     "browserify": "^17.0.0",
     "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
