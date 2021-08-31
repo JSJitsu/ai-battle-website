@@ -6,14 +6,9 @@ node_js:
 services:
   - postgresql
 addons:
-  postgresql: 13
-  apt:
-    packages:
-      - postgresql-13
+  postgresql: "9.5"
 before_script:
   - cp ./config-travis.js ./config.js
-  - sudo pg_ctlcluster 13 main start
 script:
-  - sleep 2
   - psql -c 'create database travis_ci_test;' -U postgres
   - yarn run migrate:latest
