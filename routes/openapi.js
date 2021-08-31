@@ -8,7 +8,7 @@ const fs = require('fs');
 // Our document is YAML, if yours is JSON, then you can just
 // `const openApiDocument = require('spec/openapi.json')`
 // instead.
-const openApiDocument = jsYaml.safeLoad(fs.readFileSync('public/openapi.yaml', 'utf-8'));
+const openApiDocument = jsYaml.load(fs.readFileSync('public/openapi.yaml', 'utf-8'));
 
 // We can enable the explorer also!
 const options = { explorer: true };

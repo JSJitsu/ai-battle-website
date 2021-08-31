@@ -5,7 +5,7 @@ const config = require('../../config');
 module.exports = {
 
     development: {
-        client: 'postgresql',
+        client: 'pg',
         connection: {
             database: config.database.name,
             user: config.database.user,
@@ -17,7 +17,7 @@ module.exports = {
     },
 
     staging: {
-        client: 'postgresql',
+        client: 'pg',
         connection: {
             database: config.database.name,
             user: config.database.user,
@@ -33,7 +33,7 @@ module.exports = {
     },
 
     production: {
-        client: 'postgresql',
+        client: 'pg',
         evictionRunIntervalMillis: 20000,
         connection: {
             database: config.database.name,

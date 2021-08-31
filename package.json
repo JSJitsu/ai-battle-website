@@ -1,15 +1,18 @@
 {
   "name": "javascript-battle-website",
-  "version": "1.0.0",
-  "description": "> Pithy project description",
+  "version": "1.1.0",
+  "description": "Runs the battle viewer and runner",
   "main": "server.js",
   "scripts": {
-    "test": "yarn run lint; ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha \"test/**/*.spec.js\"",
+    "test": "yarn run lint; nyc mocha \"test/**/*.spec.js\"",
     "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/app/",
     "start": "node server.js",
-    "build-engine": "browserify ./node_modules/ai-battle-engine/index.js --standalone GameEngine > public/lib/game-engine.js",
+    "build-engine": "yarn browserify $(yarn node -p \"require.resolve('ai-battle-engine')\") --standalone GameEngine > public/lib/game-engine.js",
     "compile-tags": "riot public/app public/build/all-tags.js",
-    "build": "yarn run build-engine; yarn run compile-tags"
+    "build": "yarn run build-engine; yarn run compile-tags",
+    "migrate:make": "knex --knexfile ./database/config/knexfile.js migrate:make",
+    "migrate:rollback": "knex --knexfile ./database/config/knexfile.js migrate:rollback --all",
+    "migrate:latest": "knex --knexfile ./database/config/knexfile.js migrate:latest"
   },
   "repository": {
     "type": "git",
@@ -28,12 +31,13 @@
     "connect-pg-simple": "^6.2.1",
     "express": "^4.7.2",
     "express-session": "^1.17.1",
-    "knex": "^0.20.3",
+    "js-yaml": "^4.1.0",
+    "knex": "^0.95.10",
     "milligram": "^1.4.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
-    "pg": "^7.4.3",
+    "pg": "^8.7.1",
     "pg-db": "^2.0.0",
     "q": "^1.0.1",
     "request-promise-native": "^1.0.9",
@@ -43,14 +47,15 @@
     "zepto": "^1.2.0"
   },
   "devDependencies": {
-    "ai-battle-engine": "git+https://github.com/JSJitsu/ai-battle-engine.git",
-    "browserify": "^16.5.2",
+    "ai-battle-engine": "https://github.com/JSJitsu/ai-battle-engine",
+    "browserify": "^17.0.0",
     "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
     "eslint": "^6.7.2",
     "istanbul": "^0.4.5",
     "minimist": "^1.2.5",
     "mocha": "^6.2.2",
+    "nyc": "^15.1.0",
     "request": "^2.88.2"
   }
 }

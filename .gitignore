@@ -9,6 +9,7 @@ pids
 
 # Coverage directory used by tools like istanbul
 coverage
+.nyc_output
 
 # Compiled Dirs
 public/lib/game-engine.js
@@ -19,6 +20,15 @@ node_modules/
 config.js
 gamerunner/user_code/helpers/*.js
 gamerunner/user_code/hero/*.js
+
+# Support for yarn zero-install
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Vagrant
 .vagrant
