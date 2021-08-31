@@ -70,10 +70,10 @@ You must build one time before starting the server in order to provide the game 
 To start the server without connecting to GitHub, run:
 
 ```sh
-node server.js
+yarn start
 ```
 
-Run `node server.js --help` for additional start-up options.
+Run `yarn start --help` for additional start-up options.
 
 Once it's running, you can navigate to http://localhost:8080/ to view the site. (if you're using the Vagrant environment, navigate to http://localhost:4000/ instead)
 
@@ -88,7 +88,7 @@ Database changes and queries are handled by [http://knexjs.org/](Knex.js).
 To create a new Knex migration:
 
 ```sh
-$ knex migrate:make migration_name ./database/config/knexfile.js
+$ yarn run migrate:make migration_name
 ```
 
 Example:
@@ -96,7 +96,7 @@ Example:
 Suppose you want to add the column 'foo' to 'players' table:
 
 ```sh
-$ knex migrate:make add_foo_to_players ./database/config/knexfile.js
+$ yarn run migrate:make add_foo_to_players
 ```
 
 The migration file will be created under _./database/migrations_.

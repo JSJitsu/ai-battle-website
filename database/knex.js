@@ -6,8 +6,5 @@ const config = require('./config/knexfile.js')[environment];
 
 const knex = require('knex')(config);
 
-// Will run everytime the server startup and will apply any pending migration
-knex.migrate.latest([config]);
-
 // Initializing Knex function with our database configs.
 module.exports = knex;

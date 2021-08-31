@@ -1,12 +1,14 @@
 language: node_js
+os: linux
+dist: bionic
 node_js:
-  - "10"
-addons:
-  postgresql: "9.5"
+  - 14
 services:
   - postgresql
-before_install:
-  - cp ./config-travis.js ./config.js
+addons:
+  postgresql: "9.5"
 before_script:
+  - cp ./config-travis.js ./config.js
+script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - node ./node_modules/.bin/knex migrate:latest --knexfile=./database/config/knexfile.js
+  - yarn run migrate:latest
