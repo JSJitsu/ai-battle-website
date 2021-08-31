@@ -10,7 +10,7 @@ addons:
       - postgresql-13
 before_script:
   - cp ./config-travis.js ./config.js
-  - pg_ctlcluster 13 main start
+  - sudo pg_ctlcluster 13 main start
 script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - yarn run migrate:latest
