@@ -1,12 +1,11 @@
 language: node_js
 node_js:
   - 14
-addons:
-  postgresql: 13
 services:
   - postgresql
-before_install:
-  - cp ./config-travis.js ./config.js
+addons:
+  postgresql: 13
 before_script:
+  - cp ./config-travis.js ./config.js
   - psql -c 'create database travis_ci_test;' -U postgres
   - yarn run migrate:latest
