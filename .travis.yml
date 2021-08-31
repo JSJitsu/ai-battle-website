@@ -4,7 +4,7 @@ node_js:
 services:
   - postgresql
 addons:
-  postgresql: 13
+  postgresql: 12
 before_script:
   - cp ./config-travis.js ./config.js
   - psql -c 'create database travis_ci_test;' -U postgres
