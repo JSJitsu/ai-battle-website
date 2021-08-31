@@ -10,5 +10,6 @@ addons:
       - postgresql-13
 before_script:
   - cp ./config-travis.js ./config.js
+script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - yarn run migrate:latest
