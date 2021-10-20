@@ -4,6 +4,7 @@
   "description": "Runs the battle viewer and runner",
   "main": "server.js",
   "scripts": {
+    "preinstall": "node script/check-package-manager.js",
     "test": "yarn run lint; nyc mocha \"test/**/*.spec.js\"",
     "lint": "eslint gamerunner/ server.js server/ routes/ database/ public/app/",
     "start": "node server.js",
