@@ -96,9 +96,9 @@ async function retrieveUserCode (user, category) {
         url: `https://api.github.com/repos/${githubHandle}/${user.code_repo}/contents/${category}.js?ref=${codeBranch}`,
         json: true,
         timeout: 10000,
-        qs: {
-            client_id: config.github.appKey,
-            client_secret: config.github.appSecret,
+        auth: {
+            user: config.github.appKey,
+            pass: config.github.appSecret,
         },
         headers: {
             'User-Agent': config.github.appName
