@@ -56,7 +56,7 @@ Then, navigate to the _/vagrant_ directory.
 To run a test battle:
 
 ```sh
-node gamerunner/run-test-game.js
+yarn node gamerunner/run-test-game.js
 ```
 
 ### Starting the Web Server
