@@ -155,7 +155,7 @@ function handleGithubResponse (req, user, category) {
     }
 
     // "content" contains the user's code
-    const buffer = new Buffer(info.content, 'base64');
+    const buffer = new Buffer.from(info.content, 'base64');
     const usersCode = buffer.toString('utf8');
 
     // Decide where to save the code
