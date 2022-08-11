@@ -1,4 +1,3 @@
-/* global Promise */
 exports.up = function (knex) {
     return Promise.all([
         // Table player

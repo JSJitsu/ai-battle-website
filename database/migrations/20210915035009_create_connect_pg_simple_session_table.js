@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
     return Promise.all([
         knex.schema.raw(`
             CREATE TABLE "session" (
@@ -15,8 +15,8 @@ exports.up = function(knex) {
     ]);
 };
 
-exports.down = function(knex) {
-  return Promise.all([
-    knex.schema.dropTableIfExists('session')
-  ])
+exports.down = function (knex) {
+    return Promise.all([
+        knex.schema.dropTableIfExists('session')
+    ]);
 };
