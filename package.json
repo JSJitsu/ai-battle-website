@@ -34,7 +34,7 @@
     "express": "^4.7.2",
     "express-session": "^1.17.1",
     "js-yaml": "^4.1.0",
-    "knex": "^0.95.10",
+    "knex": "^2.4.0",
     "milligram": "^1.4.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
