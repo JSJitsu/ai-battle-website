@@ -50,7 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:4.1.0"],
             ["knex", "virtual:74127f291417563afae4b82c2d55d703cc23817f520b5958037a580f7cb464bb45c6685daf384be7d87a118809d7b9861e088beeb0920c18658104cc52cfeaf7#npm:0.95.10"],
             ["milligram", "npm:1.4.1"],
-            ["minimist", "npm:1.2.5"],
+            ["minimist", "npm:1.2.8"],
             ["mocha", "npm:6.2.2"],
             ["morgan", "npm:1.10.0"],
             ["nyc", "npm:15.1.0"],
@@ -4637,7 +4637,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:4.1.0"],
             ["knex", "virtual:74127f291417563afae4b82c2d55d703cc23817f520b5958037a580f7cb464bb45c6685daf384be7d87a118809d7b9861e088beeb0920c18658104cc52cfeaf7#npm:0.95.10"],
             ["milligram", "npm:1.4.1"],
-            ["minimist", "npm:1.2.5"],
+            ["minimist", "npm:1.2.8"],
             ["mocha", "npm:6.2.2"],
             ["morgan", "npm:1.10.0"],
             ["nyc", "npm:15.1.0"],
@@ -5232,6 +5232,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/minimist-npm-1.2.5-ced0e1f617-86706ce5b3.zip/node_modules/minimist/",
           "packageDependencies": [
             ["minimist", "npm:1.2.5"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:1.2.8", {
+          "packageLocation": "./.yarn/cache/minimist-npm-1.2.8-d7af7b1dce-75a6d645fb.zip/node_modules/minimist/",
+          "packageDependencies": [
+            ["minimist", "npm:1.2.8"]
           ],
           "linkType": "HARD",
         }]
